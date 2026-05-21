@@ -126,6 +126,92 @@ The platform makes the following concrete contributions:
 \end{itemize}
 
 %==================================================================
+\section{Related Work}
+\label{sec:related}
+%==================================================================
+
+\subsection{Intent-Based Networking and Orchestration}
+
+Early intent-based networking (IBN) work demonstrated high-level intent
+translation using deterministic rule-based systems. Rafiq et~al.~\cite{rafiq2020}
+showed intent-driven VNF orchestration across multiple NFV platforms via
+automatic descriptor generation, while Saraiva de~Sousa et~al.~\cite{saraiva2019}
+provided a comprehensive taxonomy identifying AI integration as a key future
+direction. Coronado et~al.~\cite{coronado2022} surveyed zero-touch network
+management, establishing intent abstraction and AI-native closed loops as
+foundational pillars for 6G automation. These works confirm the orchestration
+automation paradigm but rely on deterministic rule-based translation without
+probabilistic LLM reasoning.
+
+\subsection{5G Network Exposure: CAPIF and CAMARA}
+
+Ordonez-Lucena and Dsouza~\cite{camara2022} introduced the CAMARA initiative
+for harmonised network API exposure, resolving operator-level fragmentation.
+Molina~Sanchez et~al.~\cite{molina2022} implemented the CAPIF Core Function
+as an open-source microservice aligned with 3GPP~TS~23.222, enabling standardised
+API onboarding, discovery, and security. Fragkos et~al.~\cite{nefsim2022}
+introduced NEFSim, an open experimentation platform for 3GPP NEF northbound
+APIs. Turkovic et~al.~\cite{turkovic2025} demonstrated end-to-end integration
+of CAMARA QoD and Location APIs in a real CAM testbed, measuring call-flow
+latency of 230--340~ms. Li et~al.~\cite{li2025} extended exposure from core
+networks to RAN-level capabilities via a proposed RAN Exposure Function.
+Sheoran et~al.~\cite{sheoran2021} demonstrated that AI-driven placement and
+scaling decisions outperform threshold-based autoscaling in microservice-based
+5GC deployments. While these works establish robust standardised exposure
+mechanisms, none incorporate intelligent intent translation.
+
+\subsection{LLMs for Telecom and Structured API Output}
+
+Maatouk et~al.~\cite{maatouk2025} provided one of the first structured analyses
+of LLM deployment in telecom, highlighting hallucination risks and output
+inconsistency. Lee et~al.~\cite{telagentbench2025} introduced TelAgentBench,
+benchmarking 15 LLMs across reasoning, planning, tool use, and RAG in a
+telecom service environment; thinking-enabled models consistently outperformed
+open-source alternatives and multi-turn planning tasks significantly reduced
+pass rates. Zeng et~al.~\cite{flowmind2023} demonstrated that API-grounded LLM
+prompting achieves near-perfect workflow generation accuracy in the financial
+domain, with user feedback further improving reliability. Liu et~al.~\cite{liu2024}
+benchmarked LLM structured output compliance across 13 format types, finding
+that even GPT-4 achieves an average score of only 0.40, confirming that format
+compliance is a distinct and measurable challenge separate from semantic
+correctness. Molner et~al.~\cite{aiora2025} proposed AIORA, an AI-native 6G
+orchestration architecture integrating reinforcement learning, transformers,
+and CAPIF-based API governance across edge-cloud continuum resources.
+
+\subsection{Research Gap}
+
+Existing work establishes robust exposure frameworks and confirms that LLMs
+can generate structured API workflows under controlled conditions. However,
+no prior work systematically evaluates LLM-based intent-to-API translation
+\emph{within} CAPIF-compliant 5G service exposure environments under
+telecom-specific constraints: schema conformity, semantic policy compliance,
+hallucination characterisation, and multi-run output stability.
+Table~\ref{tab:related} summarises the positioning of this work relative
+to the state of the art.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of Related Work}
+\label{tab:related}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Study} & \textbf{Telecom} & \textbf{LLM} & \textbf{Intent} &
+\textbf{API Exec.} & \textbf{Reliability} & \textbf{CAPIF} \\
+\midrule
+FlowMind~\cite{flowmind2023}          & No  & Yes     & Yes       & Generic & Limited     & No  \\
+Rafiq~\cite{rafiq2020}               & Yes & No      & Rule-based & NFV    & No          & No  \\
+TelAgentBench~\cite{telagentbench2025} & Yes & Yes    & Agentic   & BSS     & Benchmark   & No  \\
+Molina~\cite{molina2022}              & Yes & No      & No        & Yes     & No          & Yes \\
+NEFSim~\cite{nefsim2022}              & Yes & No      & No        & Yes     & No          & No  \\
+CAMARA~\cite{camara2022}              & Yes & No      & No        & Yes     & No          & Partial \\
+Zero-Touch~\cite{coronado2022}        & Yes & Partial & Abstract  & No      & Conceptual  & No  \\
+\textbf{This work}                    & Yes & Yes     & Yes       & Yes     & Empirical   & Yes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%==================================================================
 \section{System Architecture}
 \label{sec:architecture}
 %==================================================================
@@ -471,8 +557,10 @@ without execution (useful for testing and evaluation).
 
 The \texttt{orchestration\_mode} parameter controls planner selection:
 \begin{itemize}[leftmargin=1.2em]
-  \item \textbf{auto} — Attempts LLM-assisted planning if a Gemini API key
-        is configured, falls back to deterministic if the LLM fails.
+  \item \textbf{auto} — Attempts LLM-assisted planning if any LLM API key
+        is configured (\texttt{GEMINI\_API\_KEY}, \texttt{OPENAI\_API\_KEY},
+        or \texttt{ANTHROPIC\_API\_KEY}), falls back to deterministic if the
+        LLM call fails or no key is set.
   \item \textbf{deterministic} — Always uses the rule-based intent engine.
   \item \textbf{llm-assisted} — Requires a configured LLM API key; fails
         with HTTP~502 if LLM call fails.
@@ -554,31 +642,19 @@ Anthropic & \texttt{ANTHROPIC\_API\_KEY} & claude-haiku-4-5 & Anthropic \\
 \end{table}
 
 \subsubsection{Free-Tier Rate Limiter}
-For Gemini free tier (15 RPM limit), a process-wide thread-safe throttler
-enforces a minimum inter-call interval:
+A process-wide thread-safe throttler enforces a configurable minimum
+inter-call interval (default 4.5~s, yielding $\approx$13~RPM) for
+Gemini free-tier accounts (15~RPM limit). HTTP~429 responses from any
+provider fail immediately with a structured error, avoiding exponential
+backoff hangs. The interval is tunable via \texttt{GEMINI\_MIN\_INTERVAL\_S}.
 
-\begin{lstlisting}[language=Python]
-_GEMINI_MIN_INTERVAL = float(
-    os.getenv("GEMINI_MIN_INTERVAL_S", "4.5")  # ~13 RPM
-)
-
-def _gemini_throttle() -> None:
-    global _gemini_last_call
-    with _gemini_lock:
-        now = time.monotonic()
-        wait = _GEMINI_MIN_INTERVAL - (now - _gemini_last_call)
-        if wait > 0:
-            time.sleep(wait)
-        _gemini_last_call = time.monotonic()
-\end{lstlisting}
-
-HTTP 429 responses from any LLM provider fail immediately (no retry)
-with a clear error message, avoiding exponential backoff hangs.
-
-\subsection{RAG-Based API Context Engine}
+\subsection{Schema-Grounded API Context Engine (RAG)}
 
 \texttt{backend/rag\_context.py} provides real-time schema injection into
-LLM prompts. It parses CAMARA OpenAPI YAML files at runtime using PyYAML
+LLM prompts. While termed RAG for consistency with the broader literature,
+this mechanism uses deterministic YAML parsing rather than vector-based
+semantic retrieval: schema injection is exact and fully reproducible across
+runs, with no embedding model or similarity search involved. It parses CAMARA OpenAPI YAML files at runtime using PyYAML
 and extracts:
 
 \begin{itemize}[leftmargin=1.2em]
@@ -780,9 +856,9 @@ The ground-truth dataset (\texttt{datasets/ground\_truth.json}) contains
  & qos-provisioning & 10 \\
  & edge\_cases & 5 \\
 \midrule
-\multirow{3}{*}{Difficulty} & easy & $\sim$20 \\
- & medium & $\sim$20 \\
- & hard & $\sim$20 \\
+\multirow{3}{*}{Difficulty} & easy & 24 \\
+ & medium & 20 \\
+ & hard & 16 \\
 \midrule
 Language & English / Turkish & 50/50 \\
 \bottomrule
@@ -833,8 +909,6 @@ Key parameters:
         (skips already-evaluated entries by ID).
   \item \texttt{--dry-run}: Use \texttt{dry\_run=true} for all requests
         (skips live CAMARA provider calls).
-  \item \texttt{--resume}: Resume an interrupted run; already-completed
-        entries (no error) are skipped and re-loaded from the output file.
 \end{itemize}
 
 % ─────────────────────────────────────────────────────────────────
@@ -861,11 +935,13 @@ SCR  (JSON schema)         & 100.0\% & 100.0\% \\
 SVR  (telecom semantic)    & 100.0\% & 100.0\% \\
 HR   (hallucination rate)  &   0.0\% &   5.0\% \\
 SS   (stability score)     &   1.000 &   0.938 \\
-RRF  (feedback recovery)   &    N/A  &   0.0\% \\
+RRF  (feedback recovery)   &    N/A  &    N/A\textsuperscript{a} \\
 Avg.\ latency              & $<$1~ms & $\approx$3~s \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\noindent\textsuperscript{a}RRF is undefined when no initially-invalid payloads exist (SCR = 100\%); the feedback loop was not triggered in any run.
 
 \subsubsection{Breakdown by Language}
 
@@ -960,10 +1036,13 @@ Total              & 60 &  95.0\% \\
         LLM-assisted mode adds natural-language flexibility at the cost of
         3~s latency and occasional ambiguity-driven misrouting.
 
-  \item \textbf{Feedback engine was not exercised (RRF = 0\%).}
-        No LLM-generated payload required correction iterations, confirming
-        that the RAG-based schema grounding is sufficient to produce
-        valid payloads in a single pass.
+  \item \textbf{Feedback engine was not exercised (RRF = N/A).}
+        All 60 LLM-generated payloads passed schema validation on the first
+        attempt (SCR = 100\%), leaving the feedback loop with no invalid
+        payloads to recover from. RRF is therefore undefined (denominator
+        = 0) and reported as N/A rather than 0\%, confirming that the
+        RAG-based schema grounding is sufficient to produce valid payloads
+        in a single pass.
 
   \item \textbf{Language parity achieved.}
         The bilingual dataset (EN/TR) shows no statistically significant
@@ -982,8 +1061,9 @@ Total              & 60 &  95.0\% \\
   \item Docker $\geq$ 24.0 and Docker Compose $\geq$ 2.20
   \item Python 3.12 (for local dev / evaluation scripts)
   \item WSL2 (Ubuntu 22.04) on Windows, or native Linux
-  \item OpenCAPIF stack at \texttt{/home/turkad/OpenCAPIF/capif/services}
-  \item GEMINI\_API\_KEY or OPENAI\_API\_KEY (for LLM-assisted mode)
+  \item OpenCAPIF stack (path configurable via \texttt{OPENCAPIF\_DIR} in \texttt{start.sh})
+  \item At least one LLM API key: \texttt{GEMINI\_API\_KEY}, \texttt{OPENAI\_API\_KEY},
+        or \texttt{ANTHROPIC\_API\_KEY} (for LLM-assisted mode)
 \end{itemize}
 
 \subsection{Environment Configuration}
@@ -1004,7 +1084,8 @@ Copy and edit \texttt{.env}:
 \texttt{LLM\_PROVIDER} & \texttt{gemini}, \texttt{openai}, or \texttt{anthropic} \\
 \texttt{OPENAI\_API\_KEY} & OpenAI API key (alternative LLM) \\
 \texttt{GEMINI\_MIN\_INTERVAL\_S} & Rate limiter gap in seconds (default: 4.5) \\
-\texttt{MOCK\_MODE} & \texttt{false} for live; \texttt{true} for demo only \\
+\texttt{ANTHROPIC\_API\_KEY} & Anthropic API key (Claude Haiku, used for evaluation) \\
+\texttt{ANTHROPIC\_MODEL} & Anthropic model (default: claude-haiku-4-5-20251001) \\
 \texttt{ORCHESTRATION\_DEFAULT\_MODE} & \texttt{auto}, \texttt{deterministic}, \texttt{llm-assisted} \\
 \texttt{CAPIF\_BASE\_URL} & External OpenCAPIF URL (default: https://localhost) \\
 \texttt{CAPIF\_USE\_DOCKER\_NETWORK} & \texttt{true} when backend is on capif-network \\
@@ -1201,6 +1282,7 @@ POST & \texttt{/capif/publish/catalog} & Publish all catalog services to CAPIF \
     "registry_checked": true
   },
   "execution_result": { "status": "dry-run", ... },
+  "execution_results": [{ "status": "dry-run", ... }],
   "planner": {
     "strategy": "deterministic",
     "model": null,
@@ -1333,13 +1415,6 @@ Invoker certificates issued by CAPIF expire after 180 days. If onboarding
 returns a 401 error with an expired certificate message, delete
 \texttt{invoker\_details.json} and re-run onboarding.
 
-\subsection{maxAge Field Name}
-
-The CAMARA Location Retrieval spec uses \texttt{maxAge} (NOT
-\texttt{maxAgeSeconds}). All layers (models, validator, RAG context, LLM
-prompts, evaluation engine) have been updated to enforce this. Any
-integration using the old field name will fail Layer~1 validation.
-
 %==================================================================
 \section{Conclusion}
 \label{sec:conclusion}
@@ -1372,6 +1447,11 @@ reusable evaluation framework for any LLM-driven API orchestration system.
 The bilingual ground-truth dataset and the modular evaluation harness
 (\texttt{scripts/run\_evaluation.py}, \texttt{scripts/analyze\_results.py})
 are designed for reproducibility and extension by future research.
+The platform is accompanied by a suite of 65 unit tests (pytest) covering
+the intent engine, three-layer validator, and executor, achieving full
+pass rate. The platform source code, ground-truth dataset, and evaluation
+scripts are publicly available at
+\url{https://github.com/doadurak/mini-telco-platform}.
 
 Future work includes: (1)~evaluation with additional LLM providers and
 model sizes to establish cross-model reliability bounds;
@@ -1425,6 +1505,28 @@ Y.~Liu et al., ``Are LLMs Good at Structured Outputs?,''
 \bibitem{aiora2025}
 N.~Molner et al., ``AIORA: An AI-Native Multi-Stakeholder Orchestration
 Architecture for 6G Continuum,'' \emph{IEEE Network}, 2025.
+
+\bibitem{rafiq2020}
+A.~Rafiq et al., ``Intent-Based End-to-End Network Service Orchestration
+System for Multi-Platforms,'' \emph{Sustainability}, vol.~12, no.~7,
+p.~2782, 2020.
+
+\bibitem{coronado2022}
+E.~Coronado et al., ``Zero Touch Management: A Survey of Network Automation
+Solutions for 5G and 6G Networks,'' \emph{IEEE Commun.\ Surveys Tuts.},
+2022.
+
+\bibitem{saraiva2019}
+N.~F.~Saraiva de~Sousa et al., ``Network Service Orchestration: A Survey,''
+\emph{Computer Communications}, vol.~142--143, pp.~69--94, 2019.
+
+\bibitem{sheoran2021}
+A.~Sheoran et al., ``AI-Driven Provisioning in the 5G Core,''
+\emph{IEEE Internet Computing}, vol.~25, no.~2, pp.~18--26, 2021.
+
+\bibitem{li2025}
+Y.~Li, Y.~Gao, and D.~Li, ``SBA-Driven RAN Exposure Architecture for 6G
+and Ecosystem Integration,'' \emph{IEEE/CIC ICCC Workshops}, 2025.
 
 \end{thebibliography}
 
