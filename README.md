@@ -367,9 +367,9 @@ Dataset: `datasets/ground_truth.json` — 60 entries, EN/TR, easy/medium/hard
 | QoS Provisioning live calls fail (PCF unreachable) | Open | Use `dry_run: true` |
 | Gemini daily quota (1500 RPD free tier) | Operational limit | Use `--max 10` per run; resets midnight PT |
 | CAPIF cert expiry after 180 days | Operational | Delete invoker cache, re-onboard |
-| `maxAgeSeconds` (old field name) rejected | Fixed ✅ | All layers now use `maxAge` |
-| LLM 429 caused 70s hang (retry loop) | Fixed ✅ | 429 now fails fast |
-| Duration "300 seconds" parsed as 18000 s | Fixed ✅ | Seconds unit now handled correctly |
+| `maxAgeSeconds` (old field name) rejected | Fixed  | All layers now use `maxAge` |
+| LLM 429 caused 70s hang (retry loop) | Fixed  | 429 now fails fast |
+| Duration "300 seconds" parsed as 18000 s | Fixed  | Seconds unit now handled correctly |
 
 ---
 
