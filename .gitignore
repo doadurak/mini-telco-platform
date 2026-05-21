@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.so
+
+# Virtual environment
+venv/
+env/
+.env.local
+
+# Environment / secrets
+.env
+*.key
+*.pem
+*.crt
+*.p12
+
+# CAPIF runtime credentials (generated at onboarding)
+backend/capif/runtime/
+backend/capif/invoker_details.json
+backend/capif/register_auth.json
+
+# Logs
+logs/
+*.log
+
+# Datasets — keep structure, exclude large result files
+datasets/stability_results*.json
+datasets/eval_results_llm_*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.dockerignore
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Misc
+=0.40.0

@@ -1,0 +1,29 @@
+services:
+  mini-telco-backend:
+    build: .
+    container_name: mini-telco-backend-capif
+    env_file:
+      - .env
+    environment:
+      MOCK_MODE: "false"
+      CAPIF_USE_DOCKER_NETWORK: "true"
+      CAPIF_INTERNAL_BASE_URL: "https://nginx"
+      CAPIF_INTERNAL_HOSTNAME: "capifcore"
+      REGISTER_INTERNAL_BASE_URL: "https://register:8080"
+      # CAMARA providers exposed on host — reached via host-gateway
+      QOD_PROVIDER_URL: "http://host.docker.internal:8002"
+      LOCATION_PROVIDER_URL: "http://host.docker.internal:8003"
+      NEF_QOS_PROVIDER_URL: "http://host.docker.internal:8585"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8000:8000"
+    networks:
+      - default
+      - capif-network
+    restart: unless-stopped
+
+networks:
+  capif-network:
+    external: true
+    name: capif-network

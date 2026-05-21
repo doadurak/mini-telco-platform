@@ -1,0 +1,9 @@
+services:
+  mini-telco-backend:
+    build: .
+    container_name: mini-telco-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

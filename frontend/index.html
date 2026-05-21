@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Telco Orchestration Platform</title>
+  <style>
+    :root {
+      --bg: #f3efe7;
+      --panel: rgba(255, 252, 247, 0.86);
+      --panel-strong: #fffaf1;
+      --ink: #1d2430;
+      --muted: #5a6678;
+      --accent: #0f766e;
+      --accent-2: #c2410c;
+      --line: rgba(29, 36, 48, 0.12);
+      --shadow: 0 24px 70px rgba(38, 52, 70, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(194, 65, 12, 0.15), transparent 28%),
+        linear-gradient(135deg, #f8f3ea 0%, #efe6d8 100%);
+    }
+
+    .shell {
+      width: min(1380px, calc(100vw - 32px));
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: 420px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .sidebar {
+      padding: 28px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #0b5d57);
+      color: white;
+      box-shadow: 0 12px 24px rgba(15, 118, 110, 0.22);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: var(--panel-strong);
+      border-color: var(--line);
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(29, 36, 48, 0.08);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .flow {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(29, 36, 48, 0.96), rgba(29, 36, 48, 0.86));
+      color: white;
+    }
+
+    .flow h2 {
+      margin: 0 0 14px;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .flow-step:first-of-type { border-top: 0; }
+
+    .flow-index {
+      flex: 0 0 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.12);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .flow-copy strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.93rem;
+    }
+
+    .flow-copy span {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .workspace {
+      padding: 16px;
+      min-height: calc(100vh - 40px);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 12px;
+    }
+
+    .workspace-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 8px 0;
+    }
+
+    .workspace-head h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+
+    .workspace-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(194, 65, 12, 0.09);
+      color: var(--accent-2);
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(194, 65, 12, 0.12);
+    }
+
+    .swagger-frame {
+      width: 100%;
+      min-height: 780px;
+      border: 0;
+      border-radius: 24px;
+      background: white;
+      box-shadow: inset 0 0 0 1px rgba(29,36,48,0.08);
+    }
+
+    @media (max-width: 1100px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .workspace { min-height: auto; }
+      .swagger-frame { min-height: 640px; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100vw - 20px, 100%); margin: 10px auto; gap: 12px; }
+      .sidebar, .workspace { padding: 18px; }
+      .actions { grid-template-columns: 1fr; }
+      .workspace-head { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="panel sidebar">
+      <span class="eyebrow">Telco Control Plane</span>
+      <h1>Network APIs, Governed by Intent</h1>
+      <p class="lead">
+        A unified control surface for CAPIF onboarding, service discovery, AI-assisted planning,
+        policy-aware validation, and live telecom API execution from one workspace.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="/docs" target="_blank" rel="noreferrer">Launch API Console</a>
+        <a class="btn btn-secondary" href="/redoc" target="_blank" rel="noreferrer">Open Service Reference</a>
+      </div>
+
+      <div class="stack">
+        <article class="card">
+          <h3>Unified Control Surface</h3>
+          <p>
+            One product-facing entry point for CAPIF integration, service catalog inspection,
+            orchestration requests, and live API verification.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Guardrailed Execution</h3>
+          <p>
+            Every generated payload is validated before execution so malformed or unsafe requests are
+            blocked before they reach exposed network services.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Live Exposure Fabric</h3>
+          <p>
+            The platform operates across host and Docker-network deployment modes, allowing direct
+            connectivity to OpenCAPIF and provider services in lab environments.
+          </p>
+        </article>
+      </div>
+
+      <section class="flow">
+        <h2>Operator Workflow</h2>
+        <div class="flow-step">
+          <div class="flow-index">1</div>
+          <div class="flow-copy"><strong>Verify Connectivity</strong><span>Use <code>GET /capif/status</code> to confirm register and CAPIF reachability.</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-index">2</div>
+          <div class="flow-copy"><strong>Inspect Services</strong><span>Open <code>GET /catalog/services</code> to review the available CAMARA-aligned capabilities.</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-index">3</div>
+          <div class="flow-copy"><strong>Onboard the Client</strong><span>Call <code>POST /capif/invokers/onboard</code> to provision the runtime invoker identity.</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-index">4</div>
+          <div class="flow-copy"><strong>Execute Intent</strong><span>Submit <code>POST /orchestrate</code> to generate and validate an execution-ready workflow.</span></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel workspace">
+      <div class="workspace-head">
+        <div>
+          <h2>Integrated API Console</h2>
+          <p>A live embedded OpenAPI workspace for inspecting endpoints, sending requests, and reviewing platform behavior without leaving the control surface.</p>
+        </div>
+        <div class="badge-row">
+          <span class="badge">QoD</span>
+          <span class="badge">QoS Profiles</span>
+          <span class="badge">QoS Provisioning</span>
+          <span class="badge">Location Retrieval</span>
+          <span class="badge">CAPIF</span>
+        </div>
+      </div>
+      <iframe class="swagger-frame" src="/docs"></iframe>
+    </section>
+  </main>
+</body>
+</html>

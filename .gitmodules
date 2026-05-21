@@ -1,0 +1,12 @@
+[submodule "providers/NEF-QoS"]
+	path = providers/NEF-QoS
+	url = https://github.com/FRONT-research-group/NEF-QoS.git
+[submodule "providers/camara-QoD"]
+	path = providers/camara-QoD
+	url = https://github.com/FRONT-research-group/camara-QoD.git
+[submodule "providers/NEF"]
+	path = providers/NEF
+	url = https://github.com/FRONT-research-group/NEF.git
+[submodule "providers/CamaraLocationRetrieval"]
+	path = providers/CamaraLocationRetrieval
+	url = https://github.com/FRONT-research-group/CamaraLocationRetrieval.git
