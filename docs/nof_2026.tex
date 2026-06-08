@@ -200,7 +200,6 @@ logical tiers: a user-facing \emph{interface tier}, a
 \emph{control-plane tier} containing orchestration logic, a
 \emph{provider tier} hosting CAMARA API realisations, and a
 \emph{persistence tier} backed by MongoDB.
-Fig.~\ref{fig:arch} depicts the complete cloud-native deployment topology;
 Table~\ref{tab:components} summarises each component's responsibility.
 
 \begin{table}[t]
@@ -245,24 +244,8 @@ POST & \path{/capif/publish/catalog}  & Publish all catalog services \\
 \end{tabularx}
 \end{table}
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.96\textwidth]{nof_fig1_arch.png}
-  \caption{Cloud-native system architecture of the Mini Telco Orchestration
-  Platform. Tier\,1 (Operator Dashboard) submits intents via REST to
-  Tier\,2 (Control Plane), where the FastAPI backend delegates to the
-  Intent Engine (deterministic) or the two-phase LLM Planner.
-  All payloads traverse a three-layer validator (L1--L3) with bounded
-  feedback correction.
-  Tier\,3a (OpenCAPIF Core Function at ports :8084/:8080 with Vault :8200
-  and nginx :443) provides mTLS onboarding and live service discovery.
-  Tier\,3b (CAMARA Providers at :8002, :8003, :8585) hosts QoD, Location
-  Retrieval, and NEF-QoS.
-  Tier\,4 (MongoDB) persists IMSI, location, and cell-polygon records;
-  \texttt{mongo-init.js} seeds records on first deployment.
-  All containers share the \texttt{capif-network} Docker bridge.}
-  \label{fig:arch}
-\end{figure*}
+% TODO: system architecture figure — to be added later
+% \begin{figure*}[t] ... \end{figure*}
 
 \subsection{Cloud-Native Multi-Container Deployment}
 
