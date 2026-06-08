@@ -1,0 +1,1541 @@
+{
+  "summary": {
+    "mode": "llm-assisted",
+    "total_entries": 60,
+    "metrics": {
+      "IWSR": 0.9833,
+      "SCR": 1.0,
+      "SVR": 1.0,
+      "HR": 0.0167,
+      "SS": 0.9639,
+      "RRF": 1.0
+    },
+    "raw_counts": {
+      "iwsr_pass": 59,
+      "scr_pass": 60,
+      "svr_pass": 60,
+      "hallucinations": 1,
+      "feedback_attempted": 1,
+      "feedback_recovered": 1
+    },
+    "stratified_iwsr": {
+      "easy": 1.0,
+      "medium": 1.0,
+      "hard": 0.9375
+    }
+  },
+  "results": [
+    {
+      "id": "qod_en_001",
+      "intent": "Create a QoD session for +306912345678 for 20 minutes",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 1200
+      },
+      "error": null,
+      "latency_ms": 4989.6
+    },
+    {
+      "id": "qod_en_002",
+      "intent": "Boost video streaming quality for device +905551112233 for 30 minutes",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 1800
+      },
+      "error": null,
+      "latency_ms": 4097.6
+    },
+    {
+      "id": "qod_en_003",
+      "intent": "Start a 1 hour gaming session QoS boost for +34600000000",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_GAMING",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 3843.5
+    },
+    {
+      "id": "qod_en_004",
+      "intent": "Request low latency QoS session for +12025550180 for 45 minutes",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_LOW_LATENCY",
+        "duration": 2700
+      },
+      "error": null,
+      "latency_ms": 3766.2
+    },
+    {
+      "id": "qod_en_005",
+      "intent": "I need a quality-on-demand session for my video conference call at +306912345678 for 2 hours",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 7200
+      },
+      "error": null,
+      "latency_ms": 3451.4
+    },
+    {
+      "id": "qod_en_006",
+      "intent": "Temporarily boost network performance for +905551112233 during the streaming event",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 4568.2
+    },
+    {
+      "id": "qod_en_007",
+      "intent": "Apply critical communications QoS to device +34600000000 for emergency response team",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 4177.5
+    },
+    {
+      "id": "qod_en_008",
+      "intent": "Enable QoS session for live sports broadcast for +12025550180, 90 minutes, high quality",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 5400
+      },
+      "error": null,
+      "latency_ms": 3122.0
+    },
+    {
+      "id": "qod_en_009",
+      "intent": "Set up a QoD session for device +306912345678 with medium quality for 15 minutes",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 900
+      },
+      "error": null,
+      "latency_ms": 3120.0
+    },
+    {
+      "id": "qod_en_010",
+      "intent": "Give +905551112233 the best possible QoS for the next 10 minutes",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 600
+      },
+      "error": null,
+      "latency_ms": 3187.7
+    },
+    {
+      "id": "qod_tr_001",
+      "intent": "+905551112233 için 20 dakikalık QoD oturumu başlat",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 1200
+      },
+      "error": null,
+      "latency_ms": 3551.6
+    },
+    {
+      "id": "qod_tr_002",
+      "intent": "+306912345678 numaralı cihaz için video yayını kalitesini 30 dakika artır",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 1800
+      },
+      "error": null,
+      "latency_ms": 3944.9
+    },
+    {
+      "id": "qod_tr_003",
+      "intent": "+34600000000 için oyun kalitesi artırımı, 1 saat",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_GAMING",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 4051.5
+    },
+    {
+      "id": "qod_tr_004",
+      "intent": "+905551112233 için geçici kalite artışı yap, gecikmeyi azalt, 45 dk",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_LOW_LATENCY",
+        "duration": 2700
+      },
+      "error": null,
+      "latency_ms": 4288.0
+    },
+    {
+      "id": "qod_tr_005",
+      "intent": "Acil durum ekibindeki +12025550180 cihazı için kritik iletişim QoS profili uygula",
+      "language": "tr",
+      "difficulty": "hard",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": false,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": false,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 6799.0
+    },
+    {
+      "id": "qod_tr_006",
+      "intent": "+306912345678 için canlı spor yayını, yüksek kalite, 90 dakika",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 5400
+      },
+      "error": null,
+      "latency_ms": 3335.0
+    },
+    {
+      "id": "qod_tr_007",
+      "intent": "+34600000000 nolu telefon için 1 saat video konferans kalitesi aç",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 5185.7
+    },
+    {
+      "id": "qod_tr_008",
+      "intent": "+905551112233 için 15 dakika boyunca ağ kalitesini artır",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 900
+      },
+      "error": null,
+      "latency_ms": 3991.6
+    },
+    {
+      "id": "qod_tr_009",
+      "intent": "+12025550180 için oyun oynamak amacıyla ağ oturumu oluştur, 2 saat",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_GAMING",
+        "duration": 7200
+      },
+      "error": null,
+      "latency_ms": 3395.2
+    },
+    {
+      "id": "qod_tr_010",
+      "intent": "+306912345678 için QoD oturumu aç, düşük gecikme profili, 30 dakika",
+      "language": "tr",
+      "difficulty": "hard",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_LOW_LATENCY",
+        "duration": 1800
+      },
+      "error": null,
+      "latency_ms": 3825.3
+    },
+    {
+      "id": "profile_en_001",
+      "intent": "List available QoS profiles for device +306912345678",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        }
+      },
+      "error": null,
+      "latency_ms": 3234.2
+    },
+    {
+      "id": "profile_en_002",
+      "intent": "What QoS profiles are available for +905551112233?",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        }
+      },
+      "error": null,
+      "latency_ms": 3034.1
+    },
+    {
+      "id": "profile_en_003",
+      "intent": "Discover which QoS profile best suits +34600000000 for video streaming",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "name": "QOS_E_STREAMING",
+        "status": "ACTIVE"
+      },
+      "error": null,
+      "latency_ms": 3789.1
+    },
+    {
+      "id": "profile_en_004",
+      "intent": "Check all network quality profiles supported for device +12025550180",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        }
+      },
+      "error": null,
+      "latency_ms": 2997.4
+    },
+    {
+      "id": "profile_en_005",
+      "intent": "Query available QoS profiles without specifying a device",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        }
+      },
+      "error": null,
+      "latency_ms": 3297.3
+    },
+    {
+      "id": "profile_tr_001",
+      "intent": "+906912345678 için mevcut QoS profilleri listele",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+906912345678"
+        },
+        "name": "voice",
+        "status": "ACTIVE"
+      },
+      "error": null,
+      "latency_ms": 4102.7
+    },
+    {
+      "id": "profile_tr_002",
+      "intent": "+905551112233 için hangi QoS profilleri uygun?",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "name": "QOS_E",
+        "status": "ACTIVE"
+      },
+      "error": null,
+      "latency_ms": 3158.8
+    },
+    {
+      "id": "profile_tr_003",
+      "intent": "+34600000000 için en uygun QoS profili nedir?",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "name": "QOS_E",
+        "status": "ACTIVE"
+      },
+      "error": null,
+      "latency_ms": 2773.3
+    },
+    {
+      "id": "profile_tr_004",
+      "intent": "+12025550180 nolu cihaz için desteklenen ağ kalite profillerini göster",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "name": "QOS_E",
+        "status": "ACTIVE"
+      },
+      "error": null,
+      "latency_ms": 2744.5
+    },
+    {
+      "id": "profile_tr_005",
+      "intent": "Ağda mevcut tüm QoS profillerini sorgula",
+      "language": "tr",
+      "difficulty": "hard",
+      "category": "qos_profiles",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        }
+      },
+      "error": null,
+      "latency_ms": 2890.4
+    },
+    {
+      "id": "prov_en_001",
+      "intent": "Permanently assign QOS_E_STREAMING profile to device +306912345678",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 4094.8
+    },
+    {
+      "id": "prov_en_002",
+      "intent": "Provision a persistent QoS profile for +905551112233 for gaming",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_GAMING",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3373.8
+    },
+    {
+      "id": "prov_en_003",
+      "intent": "Continuously assign low latency network profile to +34600000000",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "qosProfile": "QOS_LOW_LATENCY",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 4005.5
+    },
+    {
+      "id": "prov_en_004",
+      "intent": "Assign critical communications profile indefinitely to emergency device +12025550180",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3284.4
+    },
+    {
+      "id": "prov_en_005",
+      "intent": "Create a permanent QoS assignment for +306912345678 with QOS_E profile",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "qosProfile": "QOS_E"
+      },
+      "error": null,
+      "latency_ms": 2893.7
+    },
+    {
+      "id": "prov_tr_001",
+      "intent": "+905551112233 için kalıcı video yayını QoS profili ata",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3131.6
+    },
+    {
+      "id": "prov_tr_002",
+      "intent": "+34600000000 için sürekli oyun QoS profili sağla",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "qosProfile": "QOS_GAMING",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3616.4
+    },
+    {
+      "id": "prov_tr_003",
+      "intent": "+12025550180 numaralı cihaza kalıcı olarak düşük gecikme profili ata",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_LOW_LATENCY",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3216.5
+    },
+    {
+      "id": "prov_tr_004",
+      "intent": "+306912345678 için acil iletişim QoS profilini sürekli olarak uygula",
+      "language": "tr",
+      "difficulty": "hard",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3362.7
+    },
+    {
+      "id": "prov_tr_005",
+      "intent": "+905551112233 cihazına QOS_E profili daimi olarak sağla",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "qos_provisioning",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_E",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 3373.6
+    },
+    {
+      "id": "loc_en_001",
+      "intent": "Get the current location of device +306912345678",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2441.2
+    },
+    {
+      "id": "loc_en_002",
+      "intent": "Where is device +905551112233 right now?",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2902.4
+    },
+    {
+      "id": "loc_en_003",
+      "intent": "Retrieve the last known location of +34600000000",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2720.1
+    },
+    {
+      "id": "loc_en_004",
+      "intent": "Locate device +12025550180 with freshness of 5 minutes",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "maxAge": 300
+      },
+      "error": null,
+      "latency_ms": 5208.6
+    },
+    {
+      "id": "loc_en_005",
+      "intent": "Find the geographic position of +306912345678 using cached data no older than 10 minutes",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 600
+      },
+      "error": null,
+      "latency_ms": 2588.0
+    },
+    {
+      "id": "loc_en_006",
+      "intent": "Check where +905551112233 is located using a maximum cache age of 30 minutes",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 1800
+      },
+      "error": null,
+      "latency_ms": 2404.0
+    },
+    {
+      "id": "loc_en_007",
+      "intent": "Track the location of +34600000000 now",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": true,
+      "feedback_recovered": true,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 3609.3
+    },
+    {
+      "id": "loc_en_008",
+      "intent": "I need to know the location of device with phone number +12025550180",
+      "language": "en",
+      "difficulty": "medium",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2855.8
+    },
+    {
+      "id": "loc_tr_001",
+      "intent": "+306912345678 cihazının konumunu al",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2560.1
+    },
+    {
+      "id": "loc_tr_002",
+      "intent": "+905551112233 şu an nerede?",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 4109.5
+    },
+    {
+      "id": "loc_tr_003",
+      "intent": "+34600000000 numaralı cihazın son bilinen konumunu getir",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2947.1
+    },
+    {
+      "id": "loc_tr_004",
+      "intent": "+12025550180 cihazını 5 dakikalık önbellekle konumlandır",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "maxAge": 300
+      },
+      "error": null,
+      "latency_ms": 2865.9
+    },
+    {
+      "id": "loc_tr_005",
+      "intent": "+306912345678 cihazının coğrafi konumunu bul, en fazla 10 dakikalık eski veri kabul edilir",
+      "language": "tr",
+      "difficulty": "hard",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 600
+      },
+      "error": null,
+      "latency_ms": 2746.4
+    },
+    {
+      "id": "loc_tr_006",
+      "intent": "+905551112233 nerede olduğunu öğren",
+      "language": "tr",
+      "difficulty": "easy",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2312.4
+    },
+    {
+      "id": "loc_tr_007",
+      "intent": "+34600000000 için konum sorgulama yap",
+      "language": "tr",
+      "difficulty": "medium",
+      "category": "location_retrieval",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 4068.7
+    },
+    {
+      "id": "edge_001",
+      "intent": "Boost quality for +905551112233",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "edge_case",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 3307.5
+    },
+    {
+      "id": "edge_002",
+      "intent": "+306912345678 için kalite artır",
+      "language": "tr",
+      "difficulty": "hard",
+      "category": "edge_case",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 3298.7
+    },
+    {
+      "id": "edge_003",
+      "intent": "Provide network quality improvement for device +905551112233 for a long time",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "edge_case",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 3227.3
+    },
+    {
+      "id": "edge_004",
+      "intent": "Where is +905551112233 and boost its video quality for 1 hour",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "edge_case",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 3600
+      },
+      "error": null,
+      "latency_ms": 2867.9
+    },
+    {
+      "id": "edge_005",
+      "intent": "Permanently set streaming profile for +12025550180 — no time limit needed",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "edge_case",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "sink": "https://endpoint.example.com/sink",
+        "sinkCredential": {
+          "credentialType": "ACCESSTOKEN"
+        }
+      },
+      "error": null,
+      "latency_ms": 2980.9
+    }
+  ]
+}

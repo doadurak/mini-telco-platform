@@ -53,5 +53,28 @@ Thumbs.db
 .coverage
 htmlcov/
 
+# LaTeX build artifacts
+*.aux
+*.out
+*.log
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.synctex.gz
+
+# Windows Zone.Identifier metadata
+*:Zone.Identifier
+
+# Large video files — upload to GitHub Releases instead
+videos/*.mp4
+videos/*.mov
+videos/*.avi
+videos/*.png
+
+# Empty directory markers
+.gitkeep
+
 # Misc
 =0.40.0
