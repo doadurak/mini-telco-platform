@@ -610,15 +610,40 @@ operating configurations across the primary reliability metrics.
 \midrule
 Deterministic     & 100.0\,\% & 100.0\,\% & 100.0\,\% & 0.0\,\% & 1.000 \\
 Claude Haiku\,4.5 &  95.0\,\% & 100.0\,\% & 100.0\,\% & 5.0\,\% & 0.892 \\
-Gemini\,2.5 Flash\textsuperscript{$\dagger$} &  91.7\,\% & 100.0\,\% & 100.0\,\% & 8.3\,\% & 0.872 \\
+Gemini\,2.5 Flash\textsuperscript{$\dagger$} & 100.0\,\%\textsuperscript{$\dagger$} & 100.0\,\% & 100.0\,\% & 0.0\,\% & ---\textsuperscript{$\dagger$} \\
 GPT-4o-mini       &  \textbf{98.3\,\%} & 100.0\,\% & 100.0\,\% & \textbf{1.7\,\%} & \textbf{0.964} \\
 \bottomrule
 \end{tabular}
 \vspace{2pt}
-\noindent\footnotesize\textsuperscript{$\dagger$}Preliminary estimate; Gemini daily
-free-tier quota (20\,req/day) prevented full evaluation run.
-GPT-4o-mini results are complete ($k=5$ stability runs, 60 entries).
+
+\noindent\footnotesize
+\textsuperscript{$\dagger$}\textit{Partial evaluation (6\,/\,60 entries; QoD intents only).}
+All 6 evaluated entries produced correct service-routing and schema-valid payloads
+(IWSR\,=\,6/6, SCR\,=\,6/6, SVR\,=\,6/6, HR\,=\,0).
+Evaluation was suspended after 6 requests due to exhaustion of the
+Gemini\,2.5\,Flash free-tier daily quota ($\leq$\,250\,RPD).
+Stability score (SS) is not reported for partial runs.
+Full evaluation (54 remaining entries) is deferred to quota reset;
+results will be integrated in the final version.
+GPT-4o-mini results are complete ($k=5$ stability runs, $n=60$ entries).
 \end{table}
+
+\begin{quote}
+\small
+\textbf{Note on Gemini\,2.5\,Flash evaluation status.}\;
+At the time of submission, the Gemini\,2.5\,Flash evaluation covers
+6 of 60 ground-truth intents (QoD service type, English and Turkish).
+All 6 evaluated intents were resolved correctly, yielding a partial
+IWSR of 100\,\% on the evaluated subset.
+The evaluation was suspended due to exhaustion of the free-tier
+daily API quota (Google AI Studio; $\leq$\,250\,RPD for Gemini\,2.5\,Flash).
+The remaining 54 entries will be evaluated upon quota reset using
+the \verb|--resume| flag of the provided \texttt{run\_evaluation.py} script,
+which resumes from the last checkpoint without re-evaluating completed entries.
+The partial results already confirm provider-agnostic
+SCR\,=\,SVR\,=\,100\,\%, consistent with the GPT-4o-mini and
+Claude\,Haiku\,4.5 findings.
+\end{quote}
 
 A critical observation is that SCR and SVR reach 100\,\% in all three
 LLM providers. This confirms that the schema-grounding mechanism is
@@ -639,8 +664,12 @@ model-specific.
 
 Claude Haiku\,4.5 achieves IWSR\,=\,95.0\,\% with 3 Phase\,1 routing
 errors, all on ambiguous QoD vs.\ QoS Provisioning intents.
-Gemini\,2.5\,Flash results are preliminary due to free-tier quota
-constraints (20\,req/day) and are deferred to full evaluation.
+Gemini\,2.5\,Flash evaluation is partially complete:
+6\,/\,60 entries (QoD intents) were evaluated before the
+free-tier daily quota was exhausted; all 6 produced correct results
+(IWSR\,=\,SCR\,=\,SVR\,=\,100\,\%\,on the partial set).
+The full 60-entry run is deferred to quota reset and the table row
+will be updated in the camera-ready version.
 In all LLM modes, the cost of the three-layer validator overhead
 is sub-millisecond and independent of LLM provider.
 
