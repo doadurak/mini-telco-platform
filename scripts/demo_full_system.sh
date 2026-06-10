@@ -253,34 +253,34 @@ pause 3
 header "PHASE 7 — Evaluation Results Summary"
 section "Pre-computed results (60 intents × 3 LLM providers)"
 echo ""
-python3 -c "
-import json, os
+python3 << 'PYEOF'
+import json
 
 results = {
-    'GPT-4o-mini':        'datasets/eval_results_gpt4omini.json',
-    'Claude Haiku 4.5':   'datasets/eval_results_llm_anthropic_haiku45.json',
-    'Gemini 2.5 Flash':   'datasets/eval_results_gemini25flash.json',
+    'GPT-4o-mini':       ('datasets/eval_results_gpt4omini.json',              60),
+    'Claude Haiku 4.5':  ('datasets/eval_results_llm_anthropic_haiku45.json',  60),
+    'Gemini 2.5 Flash':  ('datasets/eval_results_gemini25flash.json',            6),
 }
 
-print(f'  {\"Provider\":<22} {\"IWSR\":>7} {\"SCR\":>7} {\"SVR\":>7} {\"HR\":>7} {\"SS\":>7} {\"n\":>5}')
-print('  ' + '-'*65)
+print(f"  {'Provider':<22} {'IWSR':>7} {'SCR':>7} {'SVR':>7} {'HR':>7} {'SS':>7}  n/60")
+print('  ' + '-'*70)
 
-for name, path in results.items():
+for name, (path, n_full) in results.items():
     try:
         with open(path) as f:
             d = json.load(f)
-        m = d[\"summary\"][\"metrics\"]
-        n = d[\"summary\"][\"total_entries\"]
-        partial = \" (partial)\" if n < 60 else \"\"
-        print(f'  {name:<22} {m[\"iwsr\"]*100:>6.1f}% {m[\"scr\"]*100:>6.1f}% {m[\"svr\"]*100:>6.1f}% {m[\"hr\"]*100:>6.1f}% {m[\"ss\"]*100:>6.1f}% {n:>4}{partial}')
+        m = d['summary']['metrics']
+        n = d['summary']['total_entries']
+        note = f"  ← partial ({n}/60)" if n < 60 else ""
+        print(f"  {name:<22} {m['IWSR']*100:>6.1f}% {m['SCR']*100:>6.1f}% {m['SVR']*100:>6.1f}% {m['HR']*100:>6.1f}% {m['SS']*100:>6.1f}% {note}")
     except Exception as e:
-        print(f'  {name:<22}  (not available: {e})')
+        print(f"  {name:<22}  (not available: {e})")
 
 print()
-print('  SCR = SVR = 100% across ALL providers — schema grounding is provider-agnostic')
-print('  GPT-4o-mini leads in IWSR (98.3%) and SS (96.4%)')
-print('  Gemini: 6/60 evaluated (free-tier quota) — full run pending')
-"
+print("  ✔  SCR = SVR = 100% in all LLM-assisted configs — schema grounding is provider-agnostic")
+print("  ✔  GPT-4o-mini: best IWSR (98.3%) and stability (SS 96.4%)")
+print("  ⚠  Gemini 2.5 Flash: only 6/60 evaluated — full run deferred to quota reset")
+PYEOF
 pause 4
 
 # =============================================================================
