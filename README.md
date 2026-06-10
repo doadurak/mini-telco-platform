@@ -97,9 +97,9 @@ and deterministic telecom enforcement:
 
 ### Deterministic Planner — Routing Priority
 
-1. **Location** → keywords: `location, locate, where, gps, konum, nerede`
-2. **Provisioning** → keywords: `permanent, persist, indefinite, kalıcı, sürekli, daimi`
-3. **Profile discovery** → requires BOTH a profile noun (`profile/profil`) AND a discovery verb (`list, available, hangi, mevcut`)
+1. **Location** → keywords: `location, locate, where, gps, konum, nerede` (EN + TR)
+2. **Provisioning** → keywords: `permanent, persist, indefinite, kalıcı, sürekli, daimi` (EN + TR)
+3. **Profile discovery** → requires BOTH a profile noun (`profile/profil`) AND a discovery verb (`list, available, hangi, mevcut`) (EN + TR)
 4. **Default** → QoD session
 
 ### LLM-Assisted Planner — Two-Phase Pipeline
@@ -184,7 +184,7 @@ When LLM payload fails validation:
 
 ## Evaluation Results
 
-**Dataset:** `datasets/ground_truth.json` — 60 intents, EN/TR, easy/medium/hard difficulty.
+**Dataset:** `datasets/ground_truth.json` — 60 intents, English and Turkish, easy/medium/hard difficulty.
 
 | Model | IWSR | SCR | SVR | HR | SS | RRF | n |
 |---|---|---|---|---|---|---|---|
@@ -297,30 +297,30 @@ Complete map of all live interfaces when the full stack is running.
 
 | URL | Status | What it shows | Credentials |
 |---|---|---|---|
-| `http://localhost:8200/ui` | ✅ Working | **Vault Web UI** — PKI engine, mTLS sertifikaları (pki/, pki_int/, secret/) | Token: `dev-only-token` |
-| `http://localhost:8082` | ✅ Working | **MongoDB Express (CAPIF CCF)** — serviceapidescriptions (5 API), certs (23 TLS sert.) | admin / admin |
-| `http://localhost:8083` | ✅ Working | **MongoDB Express (Register)** — capif_users DB, onboarded invoker kayıtları | admin / admin |
+| `http://localhost:8200/ui` | ✅ Working | **Vault Web UI** — PKI engine, mTLS certificates (pki/, pki_int/, secret/) | Token: `dev-only-token` |
+| `http://localhost:8082` | ✅ Working | **MongoDB Express (CAPIF CCF)** — serviceapidescriptions (5 APIs), certs (23 TLS certs) | admin / admin |
+| `http://localhost:8083` | ✅ Working | **MongoDB Express (Register)** — capif_users DB, onboarded invoker records | admin / admin |
 | `http://localhost:8501` | ✅ Working | **robot_sim Streamlit** — OpenCAPIF conformance test dashboard | — |
 | `https://localhost:8084` | ✅ Working | **OpenCAPIF Register API** — invoker onboarding HTTP endpoint | admin / password123 |
 
-**Vault detayları (`http://localhost:8200/ui`):**
+**Vault details (`http://localhost:8200/ui`):**
 - `pki/` — Root CA
-- `pki_int/` — Intermediate CA (tüm CAPIF aktörlerinin sertifikalarını imzalar)
+- `pki_int/` — Intermediate CA (signs certificates for all CAPIF participants)
 - `secret/` — KV store
 
-**MongoDB CCF detayları (`http://localhost:8082` → DB: `capif`):**
-- `serviceapidescriptions` — 5 CAMARA API kaydı (quality-on-demand, 3gpp-monitoring-event, qos-profiles, qos-provisioning, location-retrieval)
-- `certs` — 23 TLS sertifikası (roller: invoker, AMF, AEF, APF)
-- `RegisteredInvokers` — onboarded invoker listesi
+**MongoDB CCF details (`http://localhost:8082` → DB: `capif`):**
+- `serviceapidescriptions` — 5 registered CAMARA APIs (quality-on-demand, 3gpp-monitoring-event, qos-profiles, qos-provisioning, location-retrieval)
+- `certs` — 23 TLS certificates (roles: invoker, AMF, AEF, APF)
+- `RegisteredInvokers` — list of onboarded invokers
 
-**MongoDB Register detayları (`http://localhost:8083` → DB: `capif_users`):**
-- `capif_users` — platformun invoker kaydı (INVa0745b...)
+**MongoDB Register details (`http://localhost:8083` → DB: `capif_users`):**
+- `capif_users` — platform invoker record (INVa0745b...)
 
 ---
 
 ### 🟢 CAMARA Provider Swagger UIs
 
-| URL | Status | API | Ana endpoint |
+| URL | Status | API | Main endpoint |
 |---|---|---|---|
 | `http://localhost:8002/docs` | ✅ Working | **QoD Session API** | `POST /quality-on-demand/v1/sessions` |
 | `http://localhost:8003/docs` | ✅ Working | **Location Retrieval API** | `POST /location-retrieval/v0.5/retrieve` |
@@ -329,22 +329,22 @@ Complete map of all live interfaces when the full stack is running.
 
 ---
 
-### 🟡 Platformumuz
+### 🟡 Our Platform
 
-| URL | Status | Ne gösteriyor |
+| URL | Status | What it shows |
 |---|---|---|
-| `http://localhost:8000/docs` | ✅ Working | **⭐ Ana Swagger UI** — `/orchestrate`, `/capif/*`, `/catalog/services` |
+| `http://localhost:8000/docs` | ✅ Working | **⭐ Main Swagger UI** — `/orchestrate`, `/capif/*`, `/catalog/services` |
 | `http://localhost:8000/health` | ✅ Working | `{ "status": "ok", "mockMode": false }` |
-| `http://localhost:8000/catalog/services` | ✅ Working | Startup'ta YAML'dan parse edilen CAMARA katalog |
-| `http://localhost:8000/capif/status` | ⚠️ CAPIF ağı gerekli | `invokerOnboarded: true` + cert path + invoker ID |
-| `http://localhost:8000/capif/discover` | ⚠️ CAPIF ağı gerekli | CAPIF'ten canlı API keşfi (serviceAPIDescriptions) |
+| `http://localhost:8000/catalog/services` | ✅ Working | CAMARA service catalog parsed from YAML files at startup |
+| `http://localhost:8000/capif/status` | ⚠️ Requires CAPIF network | `invokerOnboarded: true` + cert path + invoker ID |
+| `http://localhost:8000/capif/discover` | ⚠️ Requires CAPIF network | Live API discovery from CAPIF registry (serviceAPIDescriptions) |
 
-> **⚠️ Not:** `/capif/status` ve `/capif/discover` sadece `docker-compose.capif.yml` ile başlatıldığında
-> ve backend `capif-network` üzerinde olduğunda çalışır. Standalone modda timeout verir.
+> **⚠️ Note:** `/capif/status` and `/capif/discover` only work when started with `docker-compose.capif.yml`
+> and the backend container is attached to `capif-network`. In standalone mode they will timeout.
 
 ---
 
-## OpenCAPIF UIs — Detaylı Açıklama
+## OpenCAPIF UIs — Detailed Reference
 
 ### HashiCorp Vault — `http://localhost:8200/ui`
 Token: `dev-only-token`
@@ -437,7 +437,7 @@ Content-Type: application/json
 { "intent": "List available QoS profiles for +34600000000",
   "orchestration_mode": "auto", "dry_run": true }
 
-// Permanent QoS assignment (Turkish)
+// Permanent QoS assignment (Turkish-language intent — multilingual support)
 { "intent": "+905551112233 numaralı cihaza kalıcı QOS_L ata",
   "orchestration_mode": "deterministic", "dry_run": true }
 ```
@@ -585,4 +585,4 @@ mini-telco-platform/
 
 ---
 
-*Türkan Doğa Durak — CTTC, 2026*
+*Türkan Doğa Durak — CTTC / UPC, 2026*
