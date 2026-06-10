@@ -3,7 +3,7 @@
 > **AI-native, CAPIF-compliant 5G service orchestration platform** for evaluating
 > LLM-based intent-to-API translation reliability in CAMARA service exposure environments.
 >
-> Full technical documentation: [`docs/platform_technical_paper.tex`](docs/platform_technical_paper.tex)
+> Academic paper: [`docs/nof_2026.tex`](docs/nof_2026.tex) — submitted to IEEE NoF 2026.
 
 ---
 
@@ -15,12 +15,16 @@
 4. [CAPIF Integration](#capif-integration)
 5. [Validation Framework](#validation-framework)
 6. [Reliability Metrics](#reliability-metrics)
-7. [Quick Start](#quick-start)
-8. [Full Stack Startup](#full-stack-startup)
-9. [Environment Variables](#environment-variables)
-10. [API Reference](#api-reference)
-11. [Evaluation](#evaluation)
-12. [Known Issues](#known-issues)
+7. [Evaluation Results](#evaluation-results)
+8. [Quick Start](#quick-start)
+9. [Full Stack Startup](#full-stack-startup)
+10. [OpenCAPIF UIs](#opencapif-uis)
+11. [Environment Variables](#environment-variables)
+12. [API Reference](#api-reference)
+13. [Running Evaluations](#running-evaluations)
+14. [Demo Script](#demo-script)
+15. [Known Issues](#known-issues)
+16. [Project Structure](#project-structure)
 
 ---
 
@@ -105,13 +109,13 @@ and deterministic telecom enforcement:
 
 **Rate limiting:** Built-in 4.5 s inter-call throttler for Gemini free tier (15 RPM). HTTP 429 fails fast (no retry hang).
 
-**Supported providers:** `gemini` (default), `openai`, `anthropic` — set via `LLM_PROVIDER` in `.env`.
+**Supported providers:** `openai` (GPT-4o-mini), `gemini` (Gemini 2.5 Flash), `anthropic` (Claude Haiku 4.5) — set via `LLM_PROVIDER` in `.env`.
 
 ---
 
 ## CAPIF Integration
 
-Full 3GPP CAPIF (TS 23.222) API Invoker lifecycle:
+Full 3GPP CAPIF (TS 23.222) API Invoker lifecycle backed by **OpenCAPIF**:
 
 | Endpoint | Description |
 |---|---|
@@ -124,8 +128,13 @@ Full 3GPP CAPIF (TS 23.222) API Invoker lifecycle:
 
 **Onboarding flow:**
 1. HTTP Basic Auth → Register (port 8084) → JWT token
-2. CSR submission → CAPIF CA signs invoker certificate
+2. CSR submission → CAPIF CA signs invoker certificate (issued by Vault PKI)
 3. mTLS certificate stored in container for authenticated discovery
+
+**CAPIF data stores:**
+- **Vault** (port 8200) — PKI engine issues all mTLS certificates (`pki/`, `pki_int/`)
+- **MongoDB CCF** (port 8082) — `serviceapidescriptions` (5 CAMARA APIs), `certs` (23 TLS certs)
+- **MongoDB Register** (port 8083) — `capif_users` database with invoker onboarding records
 
 ---
 
@@ -173,12 +182,38 @@ When LLM payload fails validation:
 
 ---
 
+## Evaluation Results
+
+**Dataset:** `datasets/ground_truth.json` — 60 intents, EN/TR, easy/medium/hard difficulty.
+
+| Model | IWSR | SCR | SVR | HR | SS | RRF | n |
+|---|---|---|---|---|---|---|---|
+| Deterministic (baseline) | **1.000** | 1.000 | 1.000 | 0.000 | **1.000** | — | 60 |
+| GPT-4o-mini | 0.983 | **1.000** | **1.000** | 0.017 | 0.964 | **1.000** | 60 |
+| Claude Haiku 4.5 | 0.950 | **1.000** | **1.000** | 0.050 | 0.892 | 0.000 | 60 |
+| Gemini 2.5 Flash ★ | 1.000† | — | — | 0.000† | — | — | 6† |
+
+> **★** Partial evaluation (6/60 entries, QoD intents only). All 6 produced correct results.
+> Full 60-entry run pending quota reset. Use `--resume` flag (see below).
+
+**Stratified IWSR by difficulty:**
+
+| Model | Easy | Medium | Hard |
+|---|---|---|---|
+| Deterministic | 1.000 | 1.000 | 1.000 |
+| GPT-4o-mini | 1.000 | 1.000 | 0.938 |
+| Claude Haiku 4.5 | 1.000 | 1.000 | 0.813 |
+
+Result files: `datasets/eval_results_*.json`
+
+---
+
 ## Quick Start
 
 ### Local (no Docker)
 
 ```bash
-cd /home/turkad/mini-telco-platform
+cd mini-telco-platform
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -228,7 +263,7 @@ chmod +x start.sh
 
 **Startup order:**
 1. `capif-network` Docker bridge
-2. OpenCAPIF stack (nginx + capifcore + register + vault + mongo)
+2. OpenCAPIF stack (nginx :443 + capifcore + register :8084 + vault :8200 + mongo :8082/:8083)
 3. NEF Monitoring stack (port 9999)
 4. NEF-QoS / AsSessionWithQoS (port 8585)
 5. camara-QoD provider (port 8002)
@@ -238,15 +273,106 @@ chmod +x start.sh
 
 **Port map:**
 
-| Service | Port | Docs |
+| Service | Port | UI / Docs |
 |---|---|---|
 | mini-telco-backend | 8000 | http://localhost:8000/docs |
 | camara-QoD | 8002 | http://localhost:8002/docs |
 | CamaraLocationRetrieval | 8003 | http://localhost:8003/docs |
+| OpenCAPIF (nginx/TLS) | 443 | https://localhost |
 | OpenCAPIF Register | 8084 | https://localhost:8084 |
+| MongoDB Express (CCF) | 8082 | http://localhost:8082 (admin/admin) |
+| MongoDB Express (Register) | 8083 | http://localhost:8083 (admin/admin) |
+| HashiCorp Vault | 8200 | http://localhost:8200/ui (dev-only-token) |
+| robot_sim (Streamlit) | 8501 | http://localhost:8501 |
 | NEF-QoS | 8585 | http://localhost:8585/docs |
 | NEF Monitoring | 9999 | http://localhost:9999/docs |
-| OpenCAPIF (nginx/TLS) | 443 | https://localhost |
+
+---
+
+## URL Reference Map
+
+Complete map of all live interfaces when the full stack is running.
+
+### 🔵 OpenCAPIF Infrastructure
+
+| URL | Status | What it shows | Credentials |
+|---|---|---|---|
+| `http://localhost:8200/ui` | ✅ Working | **Vault Web UI** — PKI engine, mTLS sertifikaları (pki/, pki_int/, secret/) | Token: `dev-only-token` |
+| `http://localhost:8082` | ✅ Working | **MongoDB Express (CAPIF CCF)** — serviceapidescriptions (5 API), certs (23 TLS sert.) | admin / admin |
+| `http://localhost:8083` | ✅ Working | **MongoDB Express (Register)** — capif_users DB, onboarded invoker kayıtları | admin / admin |
+| `http://localhost:8501` | ✅ Working | **robot_sim Streamlit** — OpenCAPIF conformance test dashboard | — |
+| `https://localhost:8084` | ✅ Working | **OpenCAPIF Register API** — invoker onboarding HTTP endpoint | admin / password123 |
+
+**Vault detayları (`http://localhost:8200/ui`):**
+- `pki/` — Root CA
+- `pki_int/` — Intermediate CA (tüm CAPIF aktörlerinin sertifikalarını imzalar)
+- `secret/` — KV store
+
+**MongoDB CCF detayları (`http://localhost:8082` → DB: `capif`):**
+- `serviceapidescriptions` — 5 CAMARA API kaydı (quality-on-demand, 3gpp-monitoring-event, qos-profiles, qos-provisioning, location-retrieval)
+- `certs` — 23 TLS sertifikası (roller: invoker, AMF, AEF, APF)
+- `RegisteredInvokers` — onboarded invoker listesi
+
+**MongoDB Register detayları (`http://localhost:8083` → DB: `capif_users`):**
+- `capif_users` — platformun invoker kaydı (INVa0745b...)
+
+---
+
+### 🟢 CAMARA Provider Swagger UIs
+
+| URL | Status | API | Ana endpoint |
+|---|---|---|---|
+| `http://localhost:8002/docs` | ✅ Working | **QoD Session API** | `POST /quality-on-demand/v1/sessions` |
+| `http://localhost:8003/docs` | ✅ Working | **Location Retrieval API** | `POST /location-retrieval/v0.5/retrieve` |
+| `http://localhost:8585/docs` | ✅ Working | **NEF-QoS (AsSessionWithQoS)** | `POST /3gpp-as-session-with-qos/v1/{scsAsId}/subscriptions` |
+| `http://localhost:9999/docs` | ✅ Working | **NEF Backend (Monitoring)** | UE subscriptions, event monitoring |
+
+---
+
+### 🟡 Platformumuz
+
+| URL | Status | Ne gösteriyor |
+|---|---|---|
+| `http://localhost:8000/docs` | ✅ Working | **⭐ Ana Swagger UI** — `/orchestrate`, `/capif/*`, `/catalog/services` |
+| `http://localhost:8000/health` | ✅ Working | `{ "status": "ok", "mockMode": false }` |
+| `http://localhost:8000/catalog/services` | ✅ Working | Startup'ta YAML'dan parse edilen CAMARA katalog |
+| `http://localhost:8000/capif/status` | ⚠️ CAPIF ağı gerekli | `invokerOnboarded: true` + cert path + invoker ID |
+| `http://localhost:8000/capif/discover` | ⚠️ CAPIF ağı gerekli | CAPIF'ten canlı API keşfi (serviceAPIDescriptions) |
+
+> **⚠️ Not:** `/capif/status` ve `/capif/discover` sadece `docker-compose.capif.yml` ile başlatıldığında
+> ve backend `capif-network` üzerinde olduğunda çalışır. Standalone modda timeout verir.
+
+---
+
+## OpenCAPIF UIs — Detaylı Açıklama
+
+### HashiCorp Vault — `http://localhost:8200/ui`
+Token: `dev-only-token`
+
+Manages all mTLS certificates for CAPIF participants:
+- `pki/` — Root CA
+- `pki_int/` — Intermediate CA (signs invoker/AEF/APF certificates)
+- `secret/` — KV store for CAPIF secrets
+
+### MongoDB Express — CCF `http://localhost:8082`
+Credentials: `admin` / `admin`
+
+Database `capif`, key collections:
+- `serviceapidescriptions` — 5 registered CAMARA APIs (quality-on-demand, 3gpp-monitoring-event, qos-profiles, qos-provisioning, location-retrieval)
+- `certs` — 23 TLS certificates for all CAPIF roles (invoker, AMF, AEF, APF)
+- `RegisteredInvokers` — onboarded invoker list
+
+### MongoDB Express — Register `http://localhost:8083`
+Credentials: `admin` / `admin`
+
+Database `capif_users` — CAPIF user accounts and onboarded invoker records (our platform's invoker ID stored here).
+
+### robot_sim — `http://localhost:8501`
+Streamlit dashboard. OpenCAPIF conformance test runner — simulates a robot/invoker going through the full CAPIF onboarding flow and API discovery cycle.
+
+### NEF-QoS Swagger — `http://localhost:8585/docs`
+3GPP AsSessionWithQoS API v0.109.0 (OAS 3.1).
+Endpoints: `GET/POST/DELETE /3gpp-as-session-with-qos/v1/{scsAsId}/subscriptions`
 
 ---
 
@@ -256,12 +382,13 @@ chmod +x start.sh
 |---|---|---|
 | `LLM_PROVIDER` | `gemini` | `gemini`, `openai`, or `anthropic` |
 | `GEMINI_API_KEY` | — | Google Gemini API key |
-| `GEMINI_MODEL` | `gemini-2.0-flash` | Gemini model name |
+| `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini model name |
 | `GEMINI_MIN_INTERVAL_S` | `4.5` | Rate limiter inter-call gap (s) |
 | `OPENAI_API_KEY` | — | OpenAI API key |
 | `OPENAI_MODEL` | `gpt-4o-mini` | OpenAI model name |
 | `OPENAI_BASE_URL` | `https://api.openai.com/v1` | OpenAI-compatible base URL |
 | `ANTHROPIC_API_KEY` | — | Anthropic API key |
+| `ANTHROPIC_MODEL` | `claude-haiku-4-5-20251001` | Anthropic model name |
 | `MOCK_MODE` | `false` | `true` = no live provider calls |
 | `ORCHESTRATION_DEFAULT_MODE` | `auto` | Default mode for `auto` requests |
 | `LLM_TEMPERATURE` | `0.1` | LLM generation temperature |
@@ -315,6 +442,13 @@ Content-Type: application/json
   "orchestration_mode": "deterministic", "dry_run": true }
 ```
 
+### Catalog
+
+```http
+GET /catalog/services
+→ { "services": [...] }   # All registered CAMARA services
+```
+
 ### Health
 
 ```http
@@ -327,36 +461,67 @@ GET /health
 ```http
 GET /capif/discover
 → { "status": "discovered", "services": { "serviceAPIDescriptions": [...] } }
+
+GET /capif/status
+→ { "capif_connected": true, "invoker_id": "INVa0745b...", ... }
 ```
 
 ---
 
-## Evaluation
+## Running Evaluations
 
 ```bash
-# Activate venv first
 source venv/bin/activate
 
-# Deterministic baseline (fast, no API quota)
+# Deterministic baseline (fast, no API key needed)
 python scripts/run_evaluation.py \
   --mode deterministic \
   --output datasets/eval_results_deterministic.json
 
-# LLM-assisted (max 10 entries, 4.5 s delay for Gemini free tier)
-python scripts/run_evaluation.py \
-  --mode llm-single \
-  --max 10 \
-  --delay 4.5 \
-  --output datasets/eval_results_llm.json
+# GPT-4o-mini (60 entries, ~3.5 s avg latency)
+LLM_PROVIDER=openai python scripts/run_evaluation.py \
+  --mode llm-assisted --progress \
+  --output datasets/eval_results_gpt4omini.json
 
-# Resume interrupted run
-python scripts/run_evaluation.py \
-  --mode llm-assisted \
-  --resume datasets/eval_results_llm.json \
-  --delay 4.5
+# Gemini 2.5 Flash (250 RPD free-tier — use --delay 12)
+LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
+  python scripts/run_evaluation.py \
+  --mode llm-assisted --delay 12 --progress \
+  --output datasets/eval_results_gemini25flash.json
+
+# Resume interrupted Gemini run after quota reset
+LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
+  python scripts/run_evaluation.py \
+  --mode llm-assisted --delay 12 --progress \
+  --output datasets/eval_results_gemini25flash.json \
+  --resume datasets/eval_results_gemini25flash.json
+
+# Analyze results
+python scripts/analyze_results.py datasets/eval_results_gpt4omini.json
 ```
 
-Dataset: `datasets/ground_truth.json` — 60 entries, EN/TR, easy/medium/hard
+**Gemini free-tier limits:** 250 requests/day (RPD). With 2 calls per entry (plan + payload), a full 60-entry run requires 120 requests. Use `--delay 12` to stay within 5 RPM limit. Use `--resume` to continue after a quota reset without re-running completed entries.
+
+---
+
+## Demo Script
+
+A full end-to-end demo script shows all system components live:
+
+```bash
+bash scripts/demo_full_system.sh         # full demo with pauses
+bash scripts/demo_full_system.sh --fast  # skip pauses (video recording)
+```
+
+**Phases covered:**
+- Phase 0: `docker ps` — all running containers
+- Phase 1: OpenCAPIF (Vault, MongoDB, robot_sim, CAPIF status/discover)
+- Phase 2: CAMARA providers (QoD :8002, Location :8003, NEF-QoS :8585, NEF :9999)
+- Phase 3: Backend health + service catalog
+- Phase 4: Deterministic orchestration (EN + TR intents)
+- Phase 5: LLM-assisted orchestration (GPT-4o-mini)
+- Phase 6: Validator rejection demo (invalid payload)
+- Phase 7: Multi-LLM evaluation results table
 
 ---
 
@@ -365,11 +530,11 @@ Dataset: `datasets/ground_truth.json` — 60 entries, EN/TR, easy/medium/hard
 | Issue | Status | Workaround |
 |---|---|---|
 | QoS Provisioning live calls fail (PCF unreachable) | Open | Use `dry_run: true` |
-| Gemini daily quota (1500 RPD free tier) | Operational limit | Use `--max 10` per run; resets midnight PT |
+| Gemini free tier: 250 RPD limit | Operational | Use `--delay 12 --resume` across days |
 | CAPIF cert expiry after 180 days | Operational | Delete invoker cache, re-onboard |
-| `maxAgeSeconds` (old field name) rejected | Fixed  | All layers now use `maxAge` |
-| LLM 429 caused 70s hang (retry loop) | Fixed  | 429 now fails fast |
-| Duration "300 seconds" parsed as 18000 s | Fixed  | Seconds unit now handled correctly |
+| `maxAgeSeconds` (old field name) rejected | Fixed | All layers now use `maxAge` |
+| LLM 429 caused 70 s hang (retry loop) | Fixed | 429 now fails fast |
+| Duration "300 seconds" parsed as 18000 s | Fixed | Seconds unit now handled correctly |
 
 ---
 
@@ -391,10 +556,25 @@ mini-telco-platform/
 │   ├── evaluation_engine.py # IWSR/SCR/SVR/HR/SS/RRF computation
 │   └── capif/               # CAPIF onboard/discover/publish
 ├── camara-services/         # CAMARA OpenAPI YAML specs
-├── datasets/                # Ground truth + evaluation results
-├── docs/                    # Technical paper (LaTeX)
-├── providers/               # NEF / NEF-QoS / camara-QoD / CamaraLoc
-├── scripts/                 # Evaluation harness
+├── datasets/                # Ground truth (60 intents) + eval results
+│   ├── ground_truth.json
+│   ├── eval_results_deterministic.json
+│   ├── eval_results_gpt4omini.json
+│   ├── eval_results_llm_anthropic_haiku45.json
+│   └── eval_results_gemini25flash.json   # partial — 6/60
+├── docs/
+│   ├── nof_2026.tex         # IEEE NoF 2026 paper (LaTeX)
+│   └── nof_2026.pdf         # Compiled PDF
+├── providers/
+│   ├── camara-QoD/          # QoD provider (port 8002)
+│   ├── CamaraLocationRetrieval/  # Location provider (port 8003)
+│   ├── NEF-QoS/             # AsSessionWithQoS provider (port 8585)
+│   └── NEF/                 # NEF Monitoring (port 9999)
+├── scripts/
+│   ├── run_evaluation.py    # Multi-LLM evaluation harness
+│   ├── analyze_results.py   # Metrics analysis + comparison
+│   ├── demo_full_system.sh  # Full-stack video demo script
+│   └── run_stability_test.py
 ├── frontend/index.html      # Landing page
 ├── docker-compose.yml
 ├── docker-compose.capif.yml # CAPIF-network variant
