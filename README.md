@@ -3,7 +3,7 @@
 > **AI-native, CAPIF-compliant 5G service orchestration platform** for evaluating
 > LLM-based intent-to-API translation reliability in CAMARA service exposure environments.
 >
-> Academic paper: [`docs/nof_2026.tex`](docs/nof_2026.tex) — submitted to IEEE NoF 2026.
+> Academic paper: [`docs/nof_2026.tex`](docs/nof_2026.tex) 
 
 ---
 
