@@ -10,7 +10,7 @@ from backend.config import ROOT_DIR, settings
 from backend.executor import execute_step
 from backend.feedback_engine import run_correction_loop
 from backend.intent_engine import build_execution_plan
-from backend.llm_planner import LlmPlanningError, build_llm_execution_plan, correct_payload_with_feedback
+from backend.llm_planner import LlmPlanningError, build_llm_execution_plan, correct_payload_with_feedback, get_active_provider, set_llm_provider
 from backend.models import CatalogService, FeedbackMetadata, OrchestrationRequest, OrchestrationResponse, PlannerMetadata, ValidationResult
 from backend.rag_context import get_payload_schema_prompt
 from backend.routes.capif import router as capif_router
@@ -94,6 +94,22 @@ def notifications_info() -> dict:
         "description": "CAPIF test notification receiver and CAMARA provider callback webhook.",
         "status": "ready",
     }
+
+
+@app.get("/config/provider", tags=["Orchestration"])
+def get_provider() -> dict:
+    """Returns the currently active LLM provider (runtime override or env default)."""
+    return {"provider": get_active_provider()}
+
+
+@app.post("/config/provider", tags=["Orchestration"])
+def switch_provider(body: dict) -> dict:
+    """Switch the active LLM provider at runtime without restarting the container."""
+    provider = body.get("provider", "")
+    if provider not in ("openai", "anthropic", "gemini"):
+        raise HTTPException(status_code=400, detail="provider must be one of: openai, anthropic, gemini")
+    set_llm_provider(provider)
+    return {"provider": provider, "status": "switched"}
 
 
 @app.post("/orchestrate", response_model=OrchestrationResponse, tags=["Orchestration"])

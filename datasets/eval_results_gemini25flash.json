@@ -3,24 +3,25 @@
     "mode": "llm-assisted",
     "total_entries": 60,
     "metrics": {
-      "IWSR": 0.1,
-      "SCR": 0.1,
-      "SVR": 0.1,
-      "HR": 0.0,
-      "SS": 1.0,
+      "IWSR": 0.9333,
+      "SCR": 0.9833,
+      "SVR": 0.9833,
+      "HR": 0.05,
+      "SS": 0.8845,
       "RRF": 0.0
     },
     "raw_counts": {
-      "iwsr_pass": 6,
-      "scr_pass": 6,
-      "svr_pass": 6,
-      "hallucinations": 0,
+      "iwsr_pass": 56,
+      "scr_pass": 59,
+      "svr_pass": 59,
+      "hallucinations": 3,
       "feedback_attempted": 0,
       "feedback_recovered": 0
     },
     "stratified_iwsr": {
       "medium": 1.0,
-      "easy": 1.0
+      "easy": 1.0,
+      "hard": 0.8
     }
   },
   "results": [
@@ -193,34 +194,25 @@
       "difficulty": "easy",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 731.5
-    },
-    {
-      "id": "qod_en_002",
-      "intent": "Boost video streaming quality for device +905551112233 for 30 minutes",
-      "language": "en",
-      "difficulty": "easy",
-      "category": "qod_session",
-      "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
-      "feedback_attempted": false,
-      "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 5088.2
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 1200
+      },
+      "error": null,
+      "latency_ms": 0.0
     },
     {
       "id": "qod_en_003",
@@ -229,16 +221,79 @@
       "difficulty": "easy",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 372.1
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_GAMING",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 0.0
+    },
+    {
+      "id": "qod_en_008",
+      "intent": "Enable QoS session for live sports broadcast for +12025550180, 90 minutes, high quality",
+      "language": "en",
+      "difficulty": "hard",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 5400
+      },
+      "error": null,
+      "latency_ms": 0.0
+    },
+    {
+      "id": "qod_en_002",
+      "intent": "Boost video streaming quality for device +905551112233 for 30 minutes",
+      "language": "en",
+      "difficulty": "easy",
+      "category": "qod_session",
+      "mode": "llm-assisted",
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
+      "feedback_attempted": false,
+      "feedback_recovered": false,
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 1800
+      },
+      "error": null,
+      "latency_ms": 7479.1
     },
     {
       "id": "qod_en_007",
@@ -248,33 +303,20 @@
       "category": "qod_session",
       "mode": "llm-assisted",
       "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
+      "l1_passed": true,
+      "l2_passed": true,
       "iwsr": false,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 285.1
-    },
-    {
-      "id": "qod_en_008",
-      "intent": "Enable QoS session for live sports broadcast for +12025550180, 90 minutes, high quality",
-      "language": "en",
-      "difficulty": "hard",
-      "category": "qod_session",
-      "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
-      "feedback_attempted": false,
-      "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 464.8
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS"
+      },
+      "error": null,
+      "latency_ms": 7563.4
     },
     {
       "id": "qod_en_009",
@@ -283,16 +325,25 @@
       "difficulty": "easy",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 388.1
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 900
+      },
+      "error": null,
+      "latency_ms": 7817.9
     },
     {
       "id": "qod_en_010",
@@ -301,16 +352,25 @@
       "difficulty": "medium",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 337.0
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 600
+      },
+      "error": null,
+      "latency_ms": 8770.5
     },
     {
       "id": "qod_tr_001",
@@ -319,16 +379,25 @@
       "difficulty": "easy",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 341.9
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 1200
+      },
+      "error": null,
+      "latency_ms": 7778.2
     },
     {
       "id": "qod_tr_005",
@@ -338,15 +407,20 @@
       "category": "qod_session",
       "mode": "llm-assisted",
       "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
+      "l1_passed": true,
+      "l2_passed": true,
       "iwsr": false,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 571.4
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS"
+      },
+      "error": null,
+      "latency_ms": 7144.9
     },
     {
       "id": "qod_tr_006",
@@ -355,16 +429,25 @@
       "difficulty": "medium",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 513.0
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 5400
+      },
+      "error": null,
+      "latency_ms": 7688.2
     },
     {
       "id": "qod_tr_007",
@@ -373,16 +456,25 @@
       "difficulty": "medium",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 398.7
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E_STREAMING",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 8388.8
     },
     {
       "id": "qod_tr_008",
@@ -391,16 +483,25 @@
       "difficulty": "easy",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 430.1
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 900
+      },
+      "error": null,
+      "latency_ms": 8360.2
     },
     {
       "id": "qod_tr_009",
@@ -409,16 +510,25 @@
       "difficulty": "medium",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 504.8
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_GAMING",
+        "duration": 7200
+      },
+      "error": null,
+      "latency_ms": 7308.1
     },
     {
       "id": "qod_tr_010",
@@ -427,16 +537,25 @@
       "difficulty": "hard",
       "category": "qod_session",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 442.3
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_LOW_LATENCY",
+        "duration": 1800
+      },
+      "error": null,
+      "latency_ms": 8461.6
     },
     {
       "id": "profile_en_001",
@@ -445,16 +564,20 @@
       "difficulty": "easy",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 397.8
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        }
+      },
+      "error": null,
+      "latency_ms": 9857.4
     },
     {
       "id": "profile_en_002",
@@ -463,16 +586,20 @@
       "difficulty": "easy",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 848.2
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        }
+      },
+      "error": null,
+      "latency_ms": 9104.3
     },
     {
       "id": "profile_en_003",
@@ -481,16 +608,20 @@
       "difficulty": "medium",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 479.0
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        }
+      },
+      "error": null,
+      "latency_ms": 10270.7
     },
     {
       "id": "profile_en_004",
@@ -499,16 +630,20 @@
       "difficulty": "medium",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 457.2
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        }
+      },
+      "error": null,
+      "latency_ms": 7846.1
     },
     {
       "id": "profile_en_005",
@@ -517,16 +652,20 @@
       "difficulty": "hard",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 297.2
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        }
+      },
+      "error": null,
+      "latency_ms": 13073.3
     },
     {
       "id": "profile_tr_001",
@@ -535,16 +674,20 @@
       "difficulty": "easy",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 473.1
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+906912345678"
+        }
+      },
+      "error": null,
+      "latency_ms": 7145.1
     },
     {
       "id": "profile_tr_002",
@@ -553,16 +696,20 @@
       "difficulty": "easy",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 621.2
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        }
+      },
+      "error": null,
+      "latency_ms": 7412.8
     },
     {
       "id": "profile_tr_003",
@@ -571,16 +718,20 @@
       "difficulty": "medium",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 419.0
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        }
+      },
+      "error": null,
+      "latency_ms": 9829.3
     },
     {
       "id": "profile_tr_004",
@@ -589,16 +740,20 @@
       "difficulty": "medium",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 333.0
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        }
+      },
+      "error": null,
+      "latency_ms": 7438.5
     },
     {
       "id": "profile_tr_005",
@@ -607,16 +762,20 @@
       "difficulty": "hard",
       "category": "qos_profiles",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 319.4
+      "actual_service_id": "qos-profiles",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        }
+      },
+      "error": null,
+      "latency_ms": 10933.0
     },
     {
       "id": "prov_en_001",
@@ -625,16 +784,21 @@
       "difficulty": "easy",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 511.6
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "qosProfile": "QOS_E_STREAMING"
+      },
+      "error": null,
+      "latency_ms": 6967.8
     },
     {
       "id": "prov_en_002",
@@ -643,16 +807,21 @@
       "difficulty": "easy",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 309.1
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_GAMING"
+      },
+      "error": null,
+      "latency_ms": 7734.0
     },
     {
       "id": "prov_en_003",
@@ -661,16 +830,21 @@
       "difficulty": "medium",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 325.2
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "qosProfile": "QOS_LOW_LATENCY"
+      },
+      "error": null,
+      "latency_ms": 7018.1
     },
     {
       "id": "prov_en_004",
@@ -679,16 +853,21 @@
       "difficulty": "hard",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 334.1
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS"
+      },
+      "error": null,
+      "latency_ms": 6990.5
     },
     {
       "id": "prov_en_005",
@@ -697,16 +876,21 @@
       "difficulty": "medium",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 324.4
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "qosProfile": "QOS_E"
+      },
+      "error": null,
+      "latency_ms": 7181.0
     },
     {
       "id": "prov_tr_001",
@@ -715,16 +899,21 @@
       "difficulty": "easy",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 654.3
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_E_STREAMING"
+      },
+      "error": null,
+      "latency_ms": 7151.2
     },
     {
       "id": "prov_tr_002",
@@ -733,16 +922,21 @@
       "difficulty": "easy",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 346.1
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "qosProfile": "QOS_GAMING"
+      },
+      "error": null,
+      "latency_ms": 8017.0
     },
     {
       "id": "prov_tr_003",
@@ -751,16 +945,21 @@
       "difficulty": "medium",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 422.1
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_LOW_LATENCY"
+      },
+      "error": null,
+      "latency_ms": 8287.5
     },
     {
       "id": "prov_tr_004",
@@ -769,16 +968,21 @@
       "difficulty": "hard",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 328.6
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "qosProfile": "QOS_CRITICAL_COMMS"
+      },
+      "error": null,
+      "latency_ms": 7600.5
     },
     {
       "id": "prov_tr_005",
@@ -787,16 +991,21 @@
       "difficulty": "medium",
       "category": "qos_provisioning",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 223.3
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_E"
+      },
+      "error": null,
+      "latency_ms": 7341.2
     },
     {
       "id": "loc_en_001",
@@ -805,16 +1014,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 234.5
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 7117.6
     },
     {
       "id": "loc_en_002",
@@ -823,16 +1037,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 228.1
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 6496.1
     },
     {
       "id": "loc_en_003",
@@ -841,16 +1060,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 357.7
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 7066.1
     },
     {
       "id": "loc_en_004",
@@ -859,16 +1083,21 @@
       "difficulty": "medium",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 372.1
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "maxAge": 300
+      },
+      "error": null,
+      "latency_ms": 6581.8
     },
     {
       "id": "loc_en_005",
@@ -877,16 +1106,21 @@
       "difficulty": "hard",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 250.1
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 600
+      },
+      "error": null,
+      "latency_ms": 7736.6
     },
     {
       "id": "loc_en_006",
@@ -895,16 +1129,21 @@
       "difficulty": "hard",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 218.1
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 1800
+      },
+      "error": null,
+      "latency_ms": 8860.1
     },
     {
       "id": "loc_en_007",
@@ -913,16 +1152,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 404.2
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 8001.0
     },
     {
       "id": "loc_en_008",
@@ -931,16 +1175,21 @@
       "difficulty": "medium",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 596.6
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 7228.1
     },
     {
       "id": "loc_tr_001",
@@ -949,16 +1198,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 511.5
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 7427.8
     },
     {
       "id": "loc_tr_002",
@@ -967,16 +1221,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 803.5
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 7440.5
     },
     {
       "id": "loc_tr_003",
@@ -985,16 +1244,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 207.7
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 8085.7
     },
     {
       "id": "loc_tr_004",
@@ -1003,16 +1267,21 @@
       "difficulty": "medium",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 382.4
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "maxAge": 300
+      },
+      "error": null,
+      "latency_ms": 10148.9
     },
     {
       "id": "loc_tr_005",
@@ -1021,16 +1290,21 @@
       "difficulty": "hard",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 362.2
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "maxAge": 600
+      },
+      "error": null,
+      "latency_ms": 6383.7
     },
     {
       "id": "loc_tr_006",
@@ -1039,16 +1313,21 @@
       "difficulty": "easy",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 227.6
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 6950.8
     },
     {
       "id": "loc_tr_007",
@@ -1057,16 +1336,21 @@
       "difficulty": "medium",
       "category": "location_retrieval",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 242.1
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+34600000000"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 7373.0
     },
     {
       "id": "edge_001",
@@ -1075,16 +1359,25 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 252.1
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 8003.2
     },
     {
       "id": "edge_002",
@@ -1093,16 +1386,25 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 219.9
+      "actual_service_id": "qod",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+306912345678"
+        },
+        "applicationServer": {
+          "ipv4Address": "198.51.100.10"
+        },
+        "qosProfile": "QOS_E",
+        "duration": 3600
+      },
+      "error": null,
+      "latency_ms": 8891.8
     },
     {
       "id": "edge_003",
@@ -1112,15 +1414,20 @@
       "category": "edge_case",
       "mode": "llm-assisted",
       "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
+      "l1_passed": true,
+      "l2_passed": true,
       "iwsr": false,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 339.4
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "qosProfile": "QOS_E"
+      },
+      "error": null,
+      "latency_ms": 7822.5
     },
     {
       "id": "edge_004",
@@ -1137,8 +1444,8 @@
       "feedback_recovered": false,
       "actual_service_id": null,
       "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 230.6
+      "error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
+      "latency_ms": 3156.2
     },
     {
       "id": "edge_005",
@@ -1147,16 +1454,21 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: Gemini rate limit exceeded (429) — quota exhausted. Wait a minute (RPM) or until tomorrow (daily limit) before retrying.",
-      "latency_ms": 219.5
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+12025550180"
+        },
+        "qosProfile": "QOS_E_STREAMING"
+      },
+      "error": null,
+      "latency_ms": 7759.4
     }
   ]
 }

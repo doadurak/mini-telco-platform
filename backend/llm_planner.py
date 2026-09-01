@@ -52,10 +52,24 @@ def _discovery_grounding() -> tuple[bool, list[str], dict[str, Any] | None]:
     return discovered.get("status") == "discovered", names, discovered
 
 
+# Runtime provider override — set via POST /config/provider without container restart
+_llm_provider_override: str | None = None
+
+
+def set_llm_provider(provider: str) -> None:
+    global _llm_provider_override
+    _llm_provider_override = provider
+
+
+def get_active_provider() -> str:
+    return _llm_provider_override or settings.llm_provider
+
+
 def _active_model_name() -> str:
-    if settings.llm_provider == "openai":
+    p = get_active_provider()
+    if p == "openai":
         return settings.openai_model
-    if settings.llm_provider == "anthropic":
+    if p == "anthropic":
         return settings.anthropic_model
     return settings.gemini_model
 
@@ -276,9 +290,10 @@ def _call_anthropic(prompt: str) -> dict[str, Any]:
 
 
 def _call_llm(prompt: str) -> tuple[dict[str, Any], str]:
-    if settings.llm_provider == "openai":
+    p = get_active_provider()
+    if p == "openai":
         return _call_openai(prompt), "openai"
-    if settings.llm_provider == "anthropic":
+    if p == "anthropic":
         return _call_anthropic(prompt), "anthropic"
     return _call_gemini(prompt), "gemini"
 

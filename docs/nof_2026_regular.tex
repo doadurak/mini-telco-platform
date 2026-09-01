@@ -740,11 +740,10 @@ scalability bottleneck at higher loads is LLM API rate limits,
 addressable through request batching or model serving infrastructure.
 
 \textbf{Limitations.}
-GPT-4o-mini and Claude Haiku\,4.5 results are complete ($k=5$ stability
-runs, $n=60$ entries each). Gemini\,2.5\,Flash evaluation is partial
-(6\,/\,60 entries) due to free-tier API quota exhaustion; the SS metric
-is not reported for Gemini and the IWSR figure reflects only the evaluated
-subset.
+GPT-4o-mini and Claude Haiku\,4.5 results include $k=5$ stability runs
+($n=60$ entries each). Gemini\,2.5\,Flash completed 59\,/\,60 entries
+(single run; $k=5$ not performed due to API quota constraints),
+so SS\,=\,0.884 reflects a single-run estimate.
 The 60-entry dataset, while bilingual and difficulty-stratified,
 is manually crafted; ecological validity against real operator intent
 logs remains unverified.
