@@ -184,27 +184,74 @@ When LLM payload fails validation:
 
 ## Evaluation Results
 
-**Dataset:** `datasets/ground_truth.json` — 60 intents, English and Turkish, easy/medium/hard difficulty.
+### Main results — 300-entry dataset (current, reported in papers)
+
+**Dataset:** `datasets/ground_truth.json` — 300 **unique** intents (152 EN / 148 TR; 96 easy / 94 medium / 110 hard).
+Services: QoD 100, Location Retrieval 75, QoS Profiles 50, QoS Provisioning 50, ambiguous edge cases 25.
+Ground truth (expected `service_id`, `operation_id`, method and payload field checks) was hand-authored by the
+author from the CAMARA OpenAPI specs and FRONT-research-group NEF test fixtures; see `_meta.sources` in the file.
+Each model was run **once** per intent (no repeated runs are pooled into n).
 
 | Model | IWSR | SCR | SVR | HR | SS | RRF | n |
 |---|---|---|---|---|---|---|---|
-| Deterministic (baseline) | **1.000** | 1.000 | 1.000 | 0.000 | **1.000** | — | 60 |
-| GPT-4o-mini | 0.983 | **1.000** | **1.000** | 0.017 | 0.964 | **1.000** | 60 |
-| Claude Haiku 4.5 | 0.950 | **1.000** | **1.000** | 0.050 | 0.892 | 0.000 | 60 |
-| Gemini 2.5 Flash ★ | 1.000† | — | — | 0.000† | — | — | 6† |
+| Deterministic (baseline) | 0.833 | **1.000** | **1.000** | 0.167 | 0.962 | — | 300 |
+| GPT-4o-mini | **0.957** | 0.983 | 0.973 | **0.023** | **0.973** | 0.400 (2/5) | 300 |
+| Claude Haiku 4.5 | 0.947 | 0.987 | **0.987** | 0.040 | 0.925 | **0.600** (3/5) | 300 |
+| Gemini 2.5 Flash | 0.947 | 0.987 | 0.970 | 0.030 | 0.943 | 0.286 (2/7) | 300 |
 
-> **★** Partial evaluation (6/60 entries, QoD intents only). All 6 produced correct results.
-> Full 60-entry run pending quota reset. Use `--resume` flag (see below).
-
-**Stratified IWSR by difficulty:**
+**Stratified IWSR by difficulty (300 entries):**
 
 | Model | Easy | Medium | Hard |
 |---|---|---|---|
-| Deterministic | 1.000 | 1.000 | 1.000 |
-| GPT-4o-mini | 1.000 | 1.000 | 0.938 |
-| Claude Haiku 4.5 | 1.000 | 1.000 | 0.813 |
+| Deterministic | 0.823 | 0.798 | 0.873 |
+| GPT-4o-mini | 0.990 | 0.989 | 0.943 |
+| Claude Haiku 4.5 | 1.000 | 1.000 | 0.870 |
+| Gemini 2.5 Flash | 1.000 | 0.989 | 0.896 |
 
-Result files: `datasets/eval_results_*.json`
+Result files: `datasets/eval_results_*_300.json`
+
+### Scope of the evaluation (what IWSR measures)
+
+The offline benchmark (`scripts/run_evaluation.py`) runs with **`dry_run=True`**: it measures
+**intent → service selection → payload generation → L1 (schema) + L2 (telecom semantics) validation**,
+plus the bounded feedback loop. It does **not** perform the L3 CAPIF registry lookup, CAPIF discovery,
+or the mTLS provider call. A wrong-but-registered service is therefore counted against IWSR/HR by comparison
+with the ground-truth `service_id`, not by L3. Live CAPIF onboarding/discovery and mTLS execution against the
+CAMARA providers are exercised separately via the API (`dry_run: false`) and `scripts/demo_full_system.sh`.
+
+### Earlier 60-entry pilot (superseded — kept for transparency)
+
+The first 60 entries of the 300-entry set are the original pilot set (identical IDs). On that pilot the
+keyword-based deterministic planner scored IWSR 1.000, because its routing rules were written against
+those same 60 intents. The 240 added entries (paraphrases, colloquial phrasing, Turkish variants,
+multi-service ambiguity, edge cases) are outside those rules, which is why the deterministic baseline drops
+to 0.833 on the full set while the LLM planners stay ≥ 0.947. **The 300-entry numbers above supersede the pilot.**
+
+| Model (pilot, n=60) | IWSR | SCR | SVR | HR | SS | RRF | File |
+|---|---|---|---|---|---|---|---|
+| Deterministic | 1.000 | 1.000 | 1.000 | 0.000 | 1.000 | — | `eval_results_deterministic.json` |
+| GPT-4o-mini | 0.983 | 1.000 | 1.000 | 0.017 | 0.964 | 1.000 (1/1) | `eval_results_gpt4omini.json` |
+| Claude Haiku 4.5 | 0.950 | 1.000 | 1.000 | 0.050 | 0.892 | — (0 attempts) | `eval_results_llm_anthropic_haiku45.json` |
+| Gemini 2.5 Flash | 0.933 | 0.983 | 0.983 | 0.050 | 0.885 | — (0 attempts) | `eval_results_gemini25flash.json` |
+
+> An earlier README revision listed Gemini as a partial 6/60 run; that run was later completed (60/60, numbers above)
+> and then extended to 300 entries. The 300-entry LLM runs reuse the 60 pilot results via `--resume`
+> (`scripts/run_eval_300_all.sh`) and evaluate the 240 new entries.
+
+### Evaluation timeline
+
+| Date | Event |
+|---|---|
+| 2026-05-16 | 60-entry pilot result files: deterministic, Claude Haiku 4.5 |
+| 2026-05-21 | Initial public commit — already contains the fixes for the `maxAge` field name, the LLM 429 retry hang and "N seconds" duration parsing (see Known Issues) |
+| 2026-06-07/08 | 60-entry pilot: GPT-4o-mini (committed in `ab5f296`); Gemini 2.5 Flash partial 6/60 |
+| 2026-06-10 → 2026-09-02 | Gemini 2.5 Flash pilot completed to 60/60 (free-tier quota), committed in `ae8b64b` |
+| 2026-06 → 2026-09 | Dataset extended to 300 entries; 300-entry runs for all four planners (committed 2026-09-02, `ae8b64b`, `baba97d`) |
+
+Dates are taken from git history and result-file timestamps. The 240 new entries of every 300-entry run, the full
+300-entry deterministic run, and the GPT-4o-mini/Gemini pilots were produced with code that includes all three fixes.
+The Claude Haiku 4.5 pilot (first 60 entries of its 300-entry file) predates the initial public commit; re-running it
+on the current code is tracked as future work.
 
 ---
 
@@ -478,7 +525,10 @@ python scripts/run_evaluation.py \
   --mode deterministic \
   --output datasets/eval_results_deterministic.json
 
-# GPT-4o-mini (60 entries, ~3.5 s avg latency)
+# Full 300-entry run for all three LLM providers (resumes from the 60-entry pilot files)
+bash scripts/run_eval_300_all.sh
+
+# GPT-4o-mini (single provider, ~3.5 s avg latency per entry)
 LLM_PROVIDER=openai python scripts/run_evaluation.py \
   --mode llm-assisted --progress \
   --output datasets/eval_results_gpt4omini.json
@@ -500,7 +550,7 @@ LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
 python scripts/analyze_results.py datasets/eval_results_gpt4omini.json
 ```
 
-**Gemini free-tier limits:** 250 requests/day (RPD). With 2 calls per entry (plan + payload), a full 60-entry run requires 120 requests. Use `--delay 12` to stay within 5 RPM limit. Use `--resume` to continue after a quota reset without re-running completed entries.
+**Gemini free-tier limits:** 250 requests/day (RPD). With 2 calls per entry (plan + payload), a full 300-entry run requires ~600 requests (spread over several days). Use `--delay 12` to stay within 5 RPM limit. Use `--resume` to continue after a quota reset without re-running completed entries.
 
 ---
 
@@ -556,12 +606,16 @@ mini-telco-platform/
 │   ├── evaluation_engine.py # IWSR/SCR/SVR/HR/SS/RRF computation
 │   └── capif/               # CAPIF onboard/discover/publish
 ├── camara-services/         # CAMARA OpenAPI YAML specs
-├── datasets/                # Ground truth (60 intents) + eval results
+├── datasets/                # Ground truth (300 intents) + eval results
 │   ├── ground_truth.json
-│   ├── eval_results_deterministic.json
+│   ├── eval_results_deterministic_300.json            # main results (n=300)
+│   ├── eval_results_gpt4omini_300.json
+│   ├── eval_results_llm_anthropic_haiku45_300.json
+│   ├── eval_results_gemini25flash_300.json
+│   ├── eval_results_deterministic.json                # 60-entry pilot (superseded)
 │   ├── eval_results_gpt4omini.json
 │   ├── eval_results_llm_anthropic_haiku45.json
-│   └── eval_results_gemini25flash.json   # partial — 6/60
+│   └── eval_results_gemini25flash.json
 ├── docs/
 │   ├── nof_2026.tex         # IEEE NoF 2026 paper (LaTeX)
 │   └── nof_2026.pdf         # Compiled PDF

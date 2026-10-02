@@ -34,6 +34,7 @@ logs/
 # Datasets — keep structure, exclude large result files
 datasets/stability_results*.json
 datasets/eval_results_llm_*.json
+!datasets/eval_results_llm_anthropic_haiku45.json
 
 # IDE
 .vscode/
