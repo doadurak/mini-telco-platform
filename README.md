@@ -250,8 +250,11 @@ to 0.833 on the full set while the LLM planners stay ≥ 0.947. **The 300-entry 
 
 Dates are taken from git history and result-file timestamps. The 240 new entries of every 300-entry run, the full
 300-entry deterministic run, and the GPT-4o-mini/Gemini pilots were produced with code that includes all three fixes.
-The Claude Haiku 4.5 pilot (first 60 entries of its 300-entry file) predates the initial public commit; re-running it
-on the current code is tracked as future work.
+The Claude Haiku 4.5 pilot result file (first 60 entries of its 300-entry file) is dated before the initial public
+commit, so all 60-entry pilot files were scanned for symptoms of the three bugs: no payload contains `maxAgeSeconds`,
+no "N seconds" intent produced a duration of N×60, and no entry has an error or a latency above 60 s (max 26 s).
+No pilot entry is affected; the 3 Haiku pilot failures (`qod_en_007`, `qod_tr_005`, `edge_003`) are all service
+selection errors (`qos-provisioning` chosen instead of `qod`, payloads pass L1/L2), unrelated to these fixes.
 
 ---
 
