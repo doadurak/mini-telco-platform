@@ -1,0 +1,165 @@
+# 5G core testbed for the QoS southbound path:
+#   camara-QoD -> NEF-QoS (TS 29.122 AsSessionWithQoS)
+#              -> Open5GS PCF (TS 29.514 Npcf_PolicyAuthorization)
+#              -> SMF -> UPF / gNB (UERANSIM) for a registered UE PDU session.
+#
+# Open5GS 5GC (NRF, SCP, AUSF, UDM, UDR, PCF, BSF, NSSF, AMF, SMF, UPF) + UERANSIM gNB and two UEs.
+# Subscribers are provisioned by the one-shot "provision" service (see provision-subscribers.js).
+#
+# Usage: bash testbed/open5gs/up.sh   (loads the SCTP kernel module first)
+
+x-open5gs: &open5gs
+  image: gradiant/open5gs:2.7.2
+  restart: unless-stopped
+  networks: [o5gnet]
+
+services:
+  mongo5g:
+    image: mongo:6.0
+    container_name: mongo5g
+    restart: unless-stopped
+    networks:
+      o5gnet:
+        aliases: [mongo]   # the image's DB_URI default is mongodb://mongo/open5gs
+    ports:
+      - "27019:27017"      # subscriber DB for the platform's MSISDN -> UE IP resolution
+
+  provision:
+    image: mongo:6.0
+    container_name: o5g-provision
+    depends_on: [mongo5g]
+    networks: [o5gnet]
+    volumes:
+      - ./provision-subscribers.js:/provision-subscribers.js:ro
+    entrypoint: ["sh", "-c", "until mongosh --quiet --host mongo5g --eval 'db.runCommand({ping:1})' >/dev/null 2>&1; do sleep 1; done; mongosh --quiet --host mongo5g /provision-subscribers.js"]
+    restart: "no"
+
+  nrf:
+    <<: *open5gs
+    container_name: nrf
+    command: open5gs-nrfd
+
+  scp:
+    <<: *open5gs
+    container_name: scp
+    depends_on: [nrf]
+    command: open5gs-scpd
+
+  ausf:
+    <<: *open5gs
+    container_name: ausf
+    depends_on: [scp]
+    command: open5gs-ausfd
+
+  udm:
+    <<: *open5gs
+    container_name: udm
+    depends_on: [scp]
+    command: open5gs-udmd
+
+  udr:
+    <<: *open5gs
+    container_name: udr
+    depends_on: [scp, mongo5g]
+    command: open5gs-udrd
+    volumes:
+      - ./config/udr.yaml:/opt/open5gs/etc/open5gs/udr.yaml:ro
+
+  pcf:
+    <<: *open5gs
+    container_name: pcf
+    depends_on: [scp, mongo5g]
+    command: open5gs-pcfd
+    ports:
+      - "7777:7777"        # Npcf_PolicyAuthorization (h2c) for NEF-QoS
+    volumes:
+      - ./config/pcf.yaml:/opt/open5gs/etc/open5gs/pcf.yaml:ro
+
+  bsf:
+    <<: *open5gs
+    container_name: bsf
+    depends_on: [scp]
+    command: open5gs-bsfd
+
+  nssf:
+    <<: *open5gs
+    container_name: nssf
+    depends_on: [scp]
+    command: open5gs-nssfd
+
+  amf:
+    <<: *open5gs
+    container_name: amf
+    depends_on: [scp]
+    command: open5gs-amfd
+
+  smf:
+    <<: *open5gs
+    container_name: smf
+    depends_on: [scp, upf]
+    command: open5gs-smfd
+    volumes:
+      - ./config/smf.yaml:/opt/open5gs/etc/open5gs/smf.yaml:ro   # 5G only: no Diameter (Gx/Gy)
+
+  upf:
+    <<: *open5gs
+    container_name: upf
+    command: open5gs-upfd
+    user: root          # the image runs as uid 999; creating ogstun needs root
+    privileged: true
+    cap_add: [NET_ADMIN]
+    devices: ["/dev/net/tun:/dev/net/tun"]
+    environment:
+      IPV4_TUN_ADDR: 10.45.0.1/16
+      IPV4_TUN_SUBNET: 10.45.0.0/16
+      IPV6_TUN_ADDR: 2001:db8:cafe::1/48
+      ENABLE_NAT: "true"
+
+  gnb:
+    image: gradiant/ueransim:3.2.6
+    container_name: gnb
+    restart: unless-stopped
+    networks: [o5gnet]
+    depends_on: [amf]
+    command: ["gnb"]
+    volumes:
+      - ./config/gnb.yaml:/etc/ueransim/gnb.yaml:ro
+    environment:
+      MCC: "999"
+      MNC: "70"
+      TAC: "1"
+      SST: "1"
+      N2_IFACE: eth0
+      N3_IFACE: eth0
+      RADIO_IFACE: eth0
+      AMF_HOSTNAME: amf
+
+  # One UERANSIM process emulating all UEs (-n 3 -> IMSI ...001..003 on
+  # uesimtun0..2). Separate UE containers on one gNB made the simulated
+  # radio link flap and the core dropped the PDU sessions.
+  ues:
+    image: gradiant/ueransim:3.2.6
+    container_name: ues
+    restart: unless-stopped
+    networks: [o5gnet]
+    depends_on: [gnb]
+    command: ["ue", "-n", "3"]
+    privileged: true
+    cap_add: [NET_ADMIN]
+    devices: ["/dev/net/tun:/dev/net/tun"]
+    volumes:
+      - ./config/ue.yaml:/etc/ueransim/ue.yaml:ro
+    environment:
+      GNB_HOSTNAME: gnb
+      MCC: "999"
+      MNC: "70"
+      MSIN: "0000000001"
+      IMEI: "356938035643801"
+      KEY: 465B5CE8B199B49FAA5F0A2EE238A6BC
+      OPC: E8ED289DEBA952E4283B54E88E6183CA
+      APN: internet
+      SST: "1"
+
+networks:
+  o5gnet:
+    name: o5gnet

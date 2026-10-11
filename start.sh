@@ -5,6 +5,7 @@
 # Startup order:
 #   1. OpenCAPIF stack   (nginx, capifcore, register, vault, mongo_register)
 #   2. NEF stack         (mongo, nef-monitoring, test_server, core_crowler)
+#   2b. 5G core testbed  (Open5GS + UERANSIM, testbed/open5gs; PCF on host port 7777)
 #   3. NEF-QoS           (3GPP AsSessionWithQoS adapter, port 8585)
 #   4. camara-QoD        (CAMARA QoD provider, port 8002)
 #   5. CamaraLocationRetrieval (CAMARA Location provider, port 8003→8080)
@@ -106,6 +107,13 @@ else
     (cd "$NEF_DIR" && docker compose up -d 2>&1 | tail -5) && log "NEF stack started" || warn "NEF stack start had issues"
 fi
 wait_for_port "NEF monitoring" localhost 9999
+
+# 3b. 5G core testbed (Open5GS PCF/SMF/UPF + UERANSIM gNB/UEs) behind NEF-QoS.
+#     Set START_5GC=0 to skip; QoS requests then fail at the PCF (qosStatus UNAVAILABLE).
+if [[ "${START_5GC:-1}" != "0" ]]; then
+    info "Starting Open5GS + UERANSIM testbed..."
+    bash "$SCRIPT_DIR/testbed/open5gs/up.sh" 2>&1 | tail -3 && log "5G core testbed up" || warn "5G core testbed had issues"
+fi
 
 # 4. NEF-QoS
 info "Starting NEF-QoS (AsSessionWithQoS, port 8585)..."
