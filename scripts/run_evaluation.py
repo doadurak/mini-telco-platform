@@ -153,6 +153,12 @@ def main() -> None:
         help="Resume from a previous partial JSON output file (skips already-completed entries)",
     )
 
+    parser.add_argument(
+        "--no-registry",
+        action="store_true",
+        help="Skip the Layer 3 live CAPIF registry check (default: L3 is checked)",
+    )
+
     args = parser.parse_args()
     use_feedback = not args.no_feedback
 
@@ -208,6 +214,7 @@ def main() -> None:
         request_delay_s=delay,
         verbose=args.progress,
         resume_from=args.resume_from,
+        check_registry=not args.no_registry,
     )
 
     if args.json_output or args.output:
@@ -224,6 +231,8 @@ def main() -> None:
                     "service_correct": r.service_correct,
                     "l1_passed": r.l1_passed,
                     "l2_passed": r.l2_passed,
+                    "l3_passed": r.l3_passed,
+                    "registry_checked": r.registry_checked,
                     "iwsr": r.iwsr,
                     "feedback_attempted": r.feedback_attempted,
                     "feedback_recovered": r.feedback_recovered,

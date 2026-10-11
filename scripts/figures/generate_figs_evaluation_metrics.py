@@ -27,7 +27,7 @@ DOCS_DIR = os.path.join(ROOT_DIR, 'docs')
 
 # ── Load real Anthropic Haiku 4.5 results ─────────────────────────────────────
 try:
-    with open(os.path.join(ROOT_DIR, 'datasets', 'eval_results_llm_anthropic_haiku45.json')) as f:
+    with open(os.path.join(ROOT_DIR, 'datasets', 'legacy_pilot_60', 'eval_results_llm_anthropic_haiku45.json')) as f:
         _m = json.load(f)['summary']['metrics']
     IWSR, SCR, SVR, HR, SS = _m['IWSR'], _m['SCR'], _m['SVR'], _m['HR'], _m['SS']
 except Exception as e:

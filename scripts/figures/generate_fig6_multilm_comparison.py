@@ -5,9 +5,9 @@ Compares Deterministic / Claude Haiku 4.5 / Gemini 2.5 Flash / GPT-4o-mini
 across IWSR, HR (inverted), and Stability Score (SS).
 
 Data sources:
-  - Anthropic : datasets/eval_results_llm_anthropic_haiku45.json  (real, k=5)
-  - GPT-4o-mini: datasets/eval_results_gpt4omini.json             (real, k=5)
-  - Gemini      : datasets/eval_results_gemini25flash.json        (if available)
+  - Anthropic : datasets/legacy_pilot_60/eval_results_llm_anthropic_haiku45.json  (real, k=5)
+  - GPT-4o-mini: datasets/legacy_pilot_60/eval_results_gpt4omini.json             (real, k=5)
+  - Gemini      : datasets/legacy_pilot_60/eval_results_gemini25flash.json        (if available)
 
 Run from project root:
     python scripts/figures/generate_fig6_multilm_comparison.py
@@ -57,16 +57,16 @@ def load_metrics(filename, min_entries=55):
         return None, True
 
 # ── Load results ──────────────────────────────────────────────────────────────
-anthropic_m, _ = load_metrics('eval_results_llm_anthropic_haiku45.json')
+anthropic_m, _ = load_metrics('legacy_pilot_60/eval_results_llm_anthropic_haiku45.json')
 if anthropic_m is None:
     anthropic_m = {'IWSR': 0.950, 'SCR': 1.000, 'SVR': 1.000, 'HR': 0.050, 'SS': 0.892}
 
-gpt_m, gpt_estimated = load_metrics('eval_results_gpt4omini.json')
+gpt_m, gpt_estimated = load_metrics('legacy_pilot_60/eval_results_gpt4omini.json')
 if gpt_m is None:
     gpt_m = {'IWSR': 0.983, 'SCR': 1.000, 'SVR': 1.000, 'HR': 0.017, 'SS': 0.964}
     gpt_estimated = True
 
-gemini_m, gemini_estimated = load_metrics('eval_results_gemini25flash.json')
+gemini_m, gemini_estimated = load_metrics('legacy_pilot_60/eval_results_gemini25flash.json')
 if gemini_m is None:
     # Preliminary estimate — daily free-tier quota (20 req/day) prevented full run
     gemini_m = {'IWSR': 0.917, 'SCR': 1.000, 'SVR': 1.000, 'HR': 0.083, 'SS': 0.872}

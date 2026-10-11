@@ -330,44 +330,39 @@ fi
 pause 3
 
 # =============================================================================
-banner "PHASE 7 — Evaluation Results: 60 Intents × 3 LLM Providers"
+banner "PHASE 7 — Evaluation Results: 300 Intents × 4 Planners"
 
-section "Gerçek değerlendirme sonuçları"
+section "Gerçek değerlendirme sonuçları (datasets/eval_results_*_300.json)"
 python3 << 'PYEOF'
 import json, os
 
 os.chdir('/home/turkad/mini-telco-platform')
 
 results = [
-    ('Deterministic',    None,                                              60, {'IWSR':1.00,'SCR':1.00,'SVR':1.00,'HR':0.00,'SS':1.000}),
-    ('GPT-4o-mini',      'datasets/eval_results_gpt4omini.json',            60, None),
-    ('Claude Haiku 4.5', 'datasets/eval_results_llm_anthropic_haiku45.json',60, None),
-    ('Gemini 2.5 Flash', 'datasets/eval_results_gemini25flash.json',         6, None),
+    ('Deterministic',    'datasets/eval_results_deterministic_300.json'),
+    ('GPT-4o-mini',      'datasets/eval_results_gpt4omini_300.json'),
+    ('Claude Haiku 4.5', 'datasets/eval_results_llm_anthropic_haiku45_300.json'),
+    ('Gemini 2.5 Flash', 'datasets/eval_results_gemini25flash_300.json'),
 ]
 
-print(f"\n  {'Provider':<22} {'IWSR':>7} {'SCR':>7} {'SVR':>7} {'HR':>7} {'SS':>7}  Note")
+print(f"
+  {'Planner':<22} {'IWSR':>7} {'SCR':>7} {'SVR':>7} {'HR':>7} {'SS':>7}  n")
 print("  " + "─"*75)
 
-for name, path, n_total, hardcoded in results:
+for name, path in results:
     try:
-        if hardcoded:
-            m = hardcoded
-            note = ""
-        else:
-            with open(path) as f:
-                d = json.load(f)
-            m = d['summary']['metrics']
-            n = d['summary']['total_entries']
-            note = f"  ← partial {n}/60" if n < 60 else ""
-        hr_pct = m['HR']*100 if 'HR' in m else (1-m.get('IWSR',0))*100
-        print(f"  {name:<22} {m['IWSR']*100:>6.1f}% {m['SCR']*100:>6.1f}% {m['SVR']*100:>6.1f}% {m.get('HR',0)*100:>6.1f}% {m['SS']*100:>6.1f}%{note}")
+        with open(path) as f:
+            d = json.load(f)
+        m = d['summary']['metrics']
+        n = d['summary']['total_entries']
+        print(f"  {name:<22} {m['IWSR']*100:>6.1f}% {m['SCR']*100:>6.1f}% {m['SVR']*100:>6.1f}% {m['HR']*100:>6.1f}% {m['SS']:>7.3f}  {n}")
     except Exception as e:
         print(f"  {name:<22}  (file not available: {e})")
 
 print()
-print("  ✔  SCR = SVR = 100% in ALL configs  →  schema grounding is provider-agnostic")
-print("  ✔  GPT-4o-mini: best IWSR 98.3%  |  SS 96.4%")
-print("  ✔  Deterministic: IWSR 100%, zero LLM cost, sub-ms latency")
+print("  ✔  All LLM planners IWSR ≥ 94.7% vs. 83.3% for the keyword baseline on 300 unique EN/TR intents")
+print("  ✔  SS = 1 − std-dev of IWSR across easy/medium/hard strata (difficulty robustness, not repeated runs)")
+print("  ✔  Offline benchmark: L1+L2 per plan; L3 re-checked against the live CAPIF registry (datasets/l3_rescore_300.json)")
 print("  ⚠  Gemini 2.5 Flash: 6/60 evaluated  →  full run pending quota reset")
 PYEOF
 

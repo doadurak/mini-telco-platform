@@ -176,8 +176,11 @@ When LLM payload fails validation:
 | **IWSR** | `valid_plans / total_intents` | End-to-end success rate |
 | **SCR** | `l1_passes / total_plans` | JSON schema compliance |
 | **SVR** | `l2_passes / l1_passes` | Telecom semantic correctness |
-| **HR** | `wrong_service / total_plans` | Hallucinated (non-existent) service selection |
-| **SS** | `1 - (distinct_outputs-1)/runs` | Output consistency across runs |
+| **HR** | `wrong_service / total_plans` | Service selection that differs from the ground truth (incl. non-existent services) |
+| **SS** | `1 - stdev(IWSR_easy, IWSR_medium, IWSR_hard)` | Robustness across difficulty strata (not run-to-run repeatability) |
+
+Run-to-run repeatability is measured separately by `scripts/run_stability_test.py`
+(`1 - (distinct_outputs-1)/runs` over repeated runs); the SS values in the tables below are the stratified definition.
 | **RRF** | `feedback_recovered / feedback_attempted` | Correction loop effectiveness |
 
 ---
@@ -212,16 +215,24 @@ Result files: `datasets/eval_results_*_300.json`
 
 ### Scope of the evaluation (what IWSR measures)
 
-The offline benchmark (`scripts/run_evaluation.py`) runs with **`dry_run=True`**: it measures
-**intent → service selection → payload generation → L1 (schema) + L2 (telecom semantics) validation**,
-plus the bounded feedback loop. It does **not** perform the L3 CAPIF registry lookup, CAPIF discovery,
-or the mTLS provider call. A wrong-but-registered service is therefore counted against IWSR/HR by comparison
-with the ground-truth `service_id`, not by L3. Live CAPIF onboarding/discovery and mTLS execution against the
-CAMARA providers are exercised separately via the API (`dry_run: false`) and `scripts/demo_full_system.sh`.
+The offline benchmark (`scripts/run_evaluation.py`) never calls providers. It measures
+**intent → service selection → payload generation → L1 (schema) + L2 (telecom semantics) → L3 (live CAPIF registry)**,
+plus the bounded feedback loop. L3 is on by default (`--no-registry` disables it) and every result records
+`l3_passed` and `registry_checked`.
+
+The 300-entry result files above were produced before L3 was decoupled from dry-run mode, i.e. with L1+L2 only.
+`scripts/rescore_l3.py` re-validated every recorded plan against the live CAPIF registry
+([`datasets/l3_rescore_300.json`](datasets/l3_rescore_300.json)): 1,189 of 1,200 plans were checked (the other 11
+runs produced no plan), L3 rejected none, and IWSR is unchanged for all four planners.
+
+L3 confirms that the selected service is published in CAPIF; it cannot detect a wrong-but-registered service.
+Such errors count against IWSR/HR through the ground-truth `service_id`. Live CAPIF onboarding/discovery (mTLS)
+and provider execution are exercised via the API (`dry_run: false`, see [Live runs](#live-runs-on-the-5g-core-testbed)).
 
 ### Earlier 60-entry pilot (superseded — kept for transparency)
 
-The first 60 entries of the 300-entry set are the original pilot set (identical IDs). On that pilot the
+The first 60 entries of the 300-entry set are the original pilot set (identical IDs); the pilot result
+files are archived in [`datasets/legacy_pilot_60/`](datasets/legacy_pilot_60/). On that pilot the
 keyword-based deterministic planner scored IWSR 1.000, because its routing rules were written against
 those same 60 intents. The 240 added entries (paraphrases, colloquial phrasing, Turkish variants,
 multi-service ambiguity, edge cases) are outside those rules, which is why the deterministic baseline drops
@@ -229,10 +240,10 @@ to 0.833 on the full set while the LLM planners stay ≥ 0.947. **The 300-entry 
 
 | Model (pilot, n=60) | IWSR | SCR | SVR | HR | SS | RRF | File |
 |---|---|---|---|---|---|---|---|
-| Deterministic | 1.000 | 1.000 | 1.000 | 0.000 | 1.000 | — | `eval_results_deterministic.json` |
-| GPT-4o-mini | 0.983 | 1.000 | 1.000 | 0.017 | 0.964 | 1.000 (1/1) | `eval_results_gpt4omini.json` |
-| Claude Haiku 4.5 | 0.950 | 1.000 | 1.000 | 0.050 | 0.892 | — (0 attempts) | `eval_results_llm_anthropic_haiku45.json` |
-| Gemini 2.5 Flash | 0.933 | 0.983 | 0.983 | 0.050 | 0.885 | — (0 attempts) | `eval_results_gemini25flash.json` |
+| Deterministic | 1.000 | 1.000 | 1.000 | 0.000 | 1.000 | — | `legacy_pilot_60/eval_results_deterministic.json` |
+| GPT-4o-mini | 0.983 | 1.000 | 1.000 | 0.017 | 0.964 | 1.000 (1/1) | `legacy_pilot_60/eval_results_gpt4omini.json` |
+| Claude Haiku 4.5 | 0.950 | 1.000 | 1.000 | 0.050 | 0.892 | — (0 attempts) | `legacy_pilot_60/eval_results_llm_anthropic_haiku45.json` |
+| Gemini 2.5 Flash | 0.933 | 0.983 | 0.983 | 0.050 | 0.885 | — (0 attempts) | `legacy_pilot_60/eval_results_gemini25flash.json` |
 
 > An earlier README revision listed Gemini as a partial 6/60 run; that run was later completed (60/60, numbers above)
 > and then extended to 300 entries. The 300-entry LLM runs reuse the 60 pilot results via `--resume`
@@ -255,6 +266,20 @@ commit, so all 60-entry pilot files were scanned for symptoms of the three bugs:
 no "N seconds" intent produced a duration of N×60, and no entry has an error or a latency above 60 s (max 26 s).
 No pilot entry is affected; the 3 Haiku pilot failures (`qod_en_007`, `qod_tr_005`, `edge_003`) are all service
 selection errors (`qos-provisioning` chosen instead of `qod`, payloads pass L1/L2), unrelated to these fixes.
+
+### Live runs on the 5G core testbed
+
+`bash scripts/run_live_scenarios.sh` runs the demo scenarios with `dry_run: false` on all three LLM backends
+and stores every response (plan, L1–L3 verdicts, provider response, `timings_ms`) under `docs/live_runs/<date>/`.
+QoS requests go CAMARA QoD / QoS Provisioning → NEF-QoS (TS 29.122 AsSessionWithQoS) → **Open5GS PCF**
+(TS 29.514 Npcf_PolicyAuthorization), which binds the request to the UE's PDU session
+(see [testbed/open5gs](testbed/open5gs)). Before the call, the adapter resolves the phone number to the UE IP from the
+Open5GS subscriber DB and maps intent-level QoS classes (`QOS_E_STREAMING`, …) to the operator profiles NEF-QoS
+enforces (`QOS_E/S/M/L`, see `backend/qos_profiles.py`).
+
+Limits of the testbed: UERANSIM does not implement NGAP *PDU Session Resource Modify*, so the dedicated QoS flow is
+authorized and signalled by the core but not enforced on the emulated radio; location data comes from the
+FRONT-research-group NEF's emulated core data source, not from the Open5GS AMF.
 
 ---
 
@@ -526,7 +551,7 @@ source venv/bin/activate
 # Deterministic baseline (fast, no API key needed)
 python scripts/run_evaluation.py \
   --mode deterministic \
-  --output datasets/eval_results_deterministic.json
+  --output datasets/eval_results_deterministic_300.json
 
 # Full 300-entry run for all three LLM providers (resumes from the 60-entry pilot files)
 bash scripts/run_eval_300_all.sh
@@ -534,23 +559,29 @@ bash scripts/run_eval_300_all.sh
 # GPT-4o-mini (single provider, ~3.5 s avg latency per entry)
 LLM_PROVIDER=openai python scripts/run_evaluation.py \
   --mode llm-assisted --progress \
-  --output datasets/eval_results_gpt4omini.json
+  --output datasets/eval_results_gpt4omini_300.json
 
 # Gemini 2.5 Flash (250 RPD free-tier — use --delay 12)
 LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
   python scripts/run_evaluation.py \
   --mode llm-assisted --delay 12 --progress \
-  --output datasets/eval_results_gemini25flash.json
+  --output datasets/eval_results_gemini25flash_300.json
 
 # Resume interrupted Gemini run after quota reset
 LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
   python scripts/run_evaluation.py \
   --mode llm-assisted --delay 12 --progress \
-  --output datasets/eval_results_gemini25flash.json \
-  --resume datasets/eval_results_gemini25flash.json
+  --output datasets/eval_results_gemini25flash_300.json \
+  --resume datasets/eval_results_gemini25flash_300.json
+
+# Re-validate recorded plans against the live CAPIF registry (inside the backend container)
+# python scripts/rescore_l3.py datasets/eval_results_*_300.json --output datasets/l3_rescore_300.json
+
+# Live dry_run=false scenarios on the 5G core testbed
+bash scripts/run_live_scenarios.sh
 
 # Analyze results
-python scripts/analyze_results.py datasets/eval_results_gpt4omini.json
+python scripts/analyze_results.py datasets/eval_results_gpt4omini_300.json
 ```
 
 **Gemini free-tier limits:** 250 requests/day (RPD). With 2 calls per entry (plan + payload), a full 300-entry run requires ~600 requests (spread over several days). Use `--delay 12` to stay within 5 RPM limit. Use `--resume` to continue after a quota reset without re-running completed entries.
@@ -582,7 +613,11 @@ bash scripts/demo_full_system.sh --fast  # skip pauses (video recording)
 
 | Issue | Status | Workaround |
 |---|---|---|
-| QoS Provisioning live calls fail (PCF unreachable) | Open | Use `dry_run: true` |
+| QoS live calls failed: no PCF behind NEF-QoS, provider rejected semantic profiles (`QOS_E_STREAMING`) | Fixed | Open5GS PCF testbed (`testbed/open5gs`) + semantic→operator profile mapping |
+| L3 skipped whenever `dry_run: true` | Fixed | `check_registry` (default on) is independent of `dry_run` |
+| Multi-intent prompts: Phase-1 LLM returns a JSON list, planner rejects it | Open | Causes 2–5 failures per LLM in the 300-entry run |
+| UERANSIM gNB ignores NGAP PDU Session Resource Modify | Testbed limit | QoS is authorized/signalled by the core, not enforced on the emulated radio |
+| Vault (dev mode) loses PKI after Docker/WSL restart | Operational | `bash scripts/reset_capif.sh` |
 | Gemini free tier: 250 RPD limit | Operational | Use `--delay 12 --resume` across days |
 | CAPIF cert expiry after 180 days | Operational | Delete invoker cache, re-onboard |
 | `maxAgeSeconds` (old field name) rejected | Fixed | All layers now use `maxAge` |
@@ -606,6 +641,8 @@ mini-telco-platform/
 │   ├── validator.py         # 3-layer validator (L1/L2/L3)
 │   ├── feedback_engine.py   # Bounded correction loop (max 3 iter)
 │   ├── executor.py          # CAMARA provider HTTP dispatch
+│   ├── qos_profiles.py      # Semantic QoS classes -> operator profiles (NEF-QoS/PCF)
+│   ├── device_resolver.py   # MSISDN -> UE IP from the 5GC subscriber DB
 │   ├── evaluation_engine.py # IWSR/SCR/SVR/HR/SS/RRF computation
 │   └── capif/               # CAPIF onboard/discover/publish
 ├── camara-services/         # CAMARA OpenAPI YAML specs
@@ -615,13 +652,13 @@ mini-telco-platform/
 │   ├── eval_results_gpt4omini_300.json
 │   ├── eval_results_llm_anthropic_haiku45_300.json
 │   ├── eval_results_gemini25flash_300.json
-│   ├── eval_results_deterministic.json                # 60-entry pilot (superseded)
-│   ├── eval_results_gpt4omini.json
-│   ├── eval_results_llm_anthropic_haiku45.json
-│   └── eval_results_gemini25flash.json
+│   ├── l3_rescore_300.json                            # live-L3 re-validation of the recorded plans
+│   └── legacy_pilot_60/                               # 60-entry pilot (superseded)
 ├── docs/
+│   ├── wmnc_2026_demo.tex   # WMNC 2026 demo paper (LaTeX)
 │   ├── nof_2026.tex         # IEEE NoF 2026 paper (LaTeX)
-│   └── nof_2026.pdf         # Compiled PDF
+│   └── live_runs/           # Recorded dry_run=false responses (scripts/run_live_scenarios.sh)
+├── testbed/open5gs/         # Open5GS 5GC + UERANSIM gNB/UEs behind NEF-QoS
 ├── providers/
 │   ├── camara-QoD/          # QoD provider (port 8002)
 │   ├── CamaraLocationRetrieval/  # Location provider (port 8003)

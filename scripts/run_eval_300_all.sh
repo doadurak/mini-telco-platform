@@ -9,7 +9,7 @@ LLM_PROVIDER=gpt venv/bin/python scripts/run_evaluation.py \
   --mode llm-assisted \
   --json \
   --output datasets/eval_results_gpt4omini_300.json \
-  --resume datasets/eval_results_gpt4omini.json \
+  --resume datasets/legacy_pilot_60/eval_results_gpt4omini.json \
   --delay 3 \
   --progress \
   > /tmp/eval_gpt_300.log 2>&1 &
@@ -20,7 +20,7 @@ LLM_PROVIDER=anthropic venv/bin/python scripts/run_evaluation.py \
   --mode llm-assisted \
   --json \
   --output datasets/eval_results_llm_anthropic_haiku45_300.json \
-  --resume datasets/eval_results_llm_anthropic_haiku45.json \
+  --resume datasets/legacy_pilot_60/eval_results_llm_anthropic_haiku45.json \
   --delay 3 \
   --progress \
   > /tmp/eval_haiku_300.log 2>&1 &
@@ -31,7 +31,7 @@ LLM_PROVIDER=gemini venv/bin/python scripts/run_evaluation.py \
   --mode llm-assisted \
   --json \
   --output datasets/eval_results_gemini25flash_300.json \
-  --resume datasets/eval_results_gemini25flash.json \
+  --resume datasets/legacy_pilot_60/eval_results_gemini25flash.json \
   --delay 4 \
   --progress \
   > /tmp/eval_gemini_300.log 2>&1 &

@@ -12,16 +12,16 @@ Reads one or two evaluation JSON result files and produces:
 
 Usage:
   # Single file analysis
-  python scripts/analyze_results.py datasets/eval_results_deterministic.json
+  python scripts/analyze_results.py datasets/eval_results_deterministic_300.json
 
   # Comparison: deterministic vs LLM
   python scripts/analyze_results.py \
-    datasets/eval_results_deterministic.json \
+    datasets/eval_results_deterministic_300.json \
     datasets/eval_results_llm_anthropic.json
 
   # Export to CSV
   python scripts/analyze_results.py \
-    datasets/eval_results_deterministic.json \
+    datasets/eval_results_deterministic_300.json \
     datasets/eval_results_llm_anthropic.json \
     --csv datasets/comparison.csv
 """
