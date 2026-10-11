@@ -320,7 +320,8 @@ def _extract_text(response_json: dict[str, Any], provider: str) -> str:
     return text
 
 
-def _parse_json_response(text: str, context: str) -> dict[str, Any]:
+def _parse_json_response(text: str, context: str, *, allow_list: bool = False) -> dict[str, Any] | list[dict[str, Any]]:
+    """Parse a JSON object (or, with allow_list, a non-empty list of objects) from LLM output."""
     # Strip markdown code fences that some models (e.g. Claude) add around JSON
     stripped = text.strip()
     if stripped.startswith("```"):
@@ -332,9 +333,11 @@ def _parse_json_response(text: str, context: str) -> dict[str, Any]:
         stripped = "\n".join(lines).strip()
     try:
         result = json.loads(stripped)
-        if not isinstance(result, dict):
-            raise LlmPlanningError(f"{context}: expected JSON object, got {type(result).__name__}")
-        return result
+        if isinstance(result, dict):
+            return result
+        if allow_list and isinstance(result, list) and result and all(isinstance(r, dict) for r in result):
+            return result
+        raise LlmPlanningError(f"{context}: expected JSON object, got {type(result).__name__}")
     except json.JSONDecodeError as exc:
         raise LlmPlanningError(f"{context}: invalid JSON — {exc}") from exc
 
@@ -368,49 +371,53 @@ def build_llm_execution_plan(intent: str) -> tuple[list[ExecutionStep], PlannerM
 
     raw_plan_response, provider = _call_llm(planner_prompt)
     plan_text = _extract_text(raw_plan_response, provider)
-    plan = _parse_json_response(plan_text, "LLM Planner (Phase 1)")
+    # Multi-intent prompts ("where is X and boost its QoS") may yield a list of plans,
+    # one per request, in the order the intent states them; the first is the primary step.
+    parsed = _parse_json_response(plan_text, "LLM Planner (Phase 1)", allow_list=True)
+    plans = parsed if isinstance(parsed, list) else [parsed]
 
     required_plan_keys = {"service_id", "operation_id", "method", "path", "rationale"}
-    missing = required_plan_keys.difference(plan.keys())
-    if missing:
-        raise LlmPlanningError(f"LLM Planner missing keys: {sorted(missing)}")
+    for plan in plans:
+        missing = required_plan_keys.difference(plan.keys())
+        if missing:
+            raise LlmPlanningError(f"LLM Planner missing keys: {sorted(missing)}")
+        if plan["service_id"] not in CATALOG:
+            raise LlmPlanningError(f"LLM selected unsupported service '{plan['service_id']}'.")
 
-    service_id = plan["service_id"]
-    operation_id = plan["operation_id"]
+    metadata.raw_plan = {"phase1_plan": parsed}
 
-    if service_id not in CATALOG:
-        raise LlmPlanningError(f"LLM selected unsupported service '{service_id}'.")
+    # ── Phase 2: Payload Generation with Schema Context (one call per planned step) ──
+    steps: list[ExecutionStep] = []
+    payloads: list[dict[str, Any]] = []
+    for plan in plans:
+        schema_context = get_payload_schema_prompt(plan["service_id"], plan["operation_id"])
+        payload_prompt = _build_payload_prompt(
+            intent=intent,
+            service_id=plan["service_id"],
+            operation_id=plan["operation_id"],
+            method=plan["method"],
+            path=plan["path"],
+            rationale=plan["rationale"],
+            schema_context=schema_context,
+        )
 
-    metadata.raw_plan = {"phase1_plan": plan}
+        raw_payload_response, _ = _call_llm(payload_prompt)
+        payload_text = _extract_text(raw_payload_response, provider)
+        payload = _parse_json_response(payload_text, "LLM Payload Generator (Phase 2)")
+        payloads.append(payload)
 
-    # ── Phase 2: Payload Generation with Schema Context ──
-    schema_context = get_payload_schema_prompt(service_id, operation_id)
-    payload_prompt = _build_payload_prompt(
-        intent=intent,
-        service_id=service_id,
-        operation_id=operation_id,
-        method=plan["method"],
-        path=plan["path"],
-        rationale=plan["rationale"],
-        schema_context=schema_context,
-    )
+        steps.append(ExecutionStep(
+            service_id=plan["service_id"],
+            operation_id=plan["operation_id"],
+            method=plan["method"],
+            path=plan["path"],
+            payload=payload,
+            rationale=plan["rationale"],
+        ))
 
-    raw_payload_response, _ = _call_llm(payload_prompt)
-    payload_text = _extract_text(raw_payload_response, provider)
-    payload = _parse_json_response(payload_text, "LLM Payload Generator (Phase 2)")
+    metadata.raw_plan["phase2_payload"] = payloads[0] if len(payloads) == 1 else payloads
 
-    metadata.raw_plan["phase2_payload"] = payload
-
-    step = ExecutionStep(
-        service_id=service_id,
-        operation_id=operation_id,
-        method=plan["method"],
-        path=plan["path"],
-        payload=payload,
-        rationale=plan["rationale"],
-    )
-
-    return [step], metadata
+    return steps, metadata
 
 
 # ─────────────────────────────────────────────
