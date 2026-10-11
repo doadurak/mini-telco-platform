@@ -72,6 +72,8 @@ class Settings:
     nef_scs_as_id: str = os.getenv("NEF_SCS_AS_ID", "1")
     nef_notification_url: str = os.getenv("NEF_NOTIFICATION_URL", "http://localhost:8000/notifications")
     nef_default_ue_ipv4: str = os.getenv("NEF_DEFAULT_UE_IPV4", "10.11.11.2")
+    # 5GC subscriber DB used to resolve MSISDN -> UE IP (testbed/open5gs); empty disables it
+    subscriber_db_uri: str = os.getenv("SUBSCRIBER_DB_URI", "")
 
 
 settings = Settings()

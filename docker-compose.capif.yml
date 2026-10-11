@@ -14,6 +14,10 @@ services:
       QOD_PROVIDER_URL: "http://host.docker.internal:8002"
       LOCATION_PROVIDER_URL: "http://host.docker.internal:8003"
       NEF_QOS_PROVIDER_URL: "http://host.docker.internal:8585"
+      # NEF-QoS posts QoS notifications here; it runs in its own container
+      NEF_NOTIFICATION_URL: "http://host.docker.internal:8000/notifications"
+      # Open5GS subscriber DB (testbed/open5gs) for MSISDN -> UE IP resolution
+      SUBSCRIBER_DB_URI: "mongodb://host.docker.internal:27019/open5gs"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:

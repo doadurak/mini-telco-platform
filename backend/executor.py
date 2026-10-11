@@ -15,79 +15,35 @@ import requests
 import urllib3
 
 from backend.config import settings
+from backend.device_resolver import resolve_ue_ipv4
 from backend.models import ExecutionStep
+from backend.qos_profiles import OPERATOR_PROFILES, SEMANTIC_PROFILES, to_operator_profile
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ---------------------------------------------------------------------------
-# QoS profiles supported by this platform (matches NEF-QoS QOS_MAPPING)
-# These are returned for qos-profiles discovery requests without a network call.
+# QoS profiles advertised for qos-profiles requests (no network call).
+# Operator profiles are what NEF-QoS/PCF enforce; semantic classes are listed
+# with the operator profile they are translated to before any provider call.
 # ---------------------------------------------------------------------------
 _QOS_PROFILES: list[dict] = [
     {
-        "name": "QOS_E",
-        "description": "Basic video quality — up to 1 Mbps UL/DL",
+        "name": name,
+        "description": p["description"],
         "status": "ACTIVE",
-        "mediaType": "VIDEO",
-        "maxBandwidthDl": "1 Mbps",
-        "maxBandwidthUl": "1 Mbps",
-    },
+        "mediaType": p["mediaType"],
+        "maxBandwidthDl": p["maxBandwidth"],
+        "maxBandwidthUl": p["maxBandwidth"],
+    }
+    for name, p in OPERATOR_PROFILES.items()
+] + [
     {
-        "name": "QOS_S",
-        "description": "Standard video — up to 4 Mbps UL/DL",
+        "name": name,
+        "description": f"{p['description']} (semantic class, enforced as {p['operatorProfile']})",
         "status": "ACTIVE",
-        "mediaType": "VIDEO",
-        "maxBandwidthDl": "4 Mbps",
-        "maxBandwidthUl": "4 Mbps",
-    },
-    {
-        "name": "QOS_M",
-        "description": "Medium video — up to 8 Mbps UL/DL",
-        "status": "ACTIVE",
-        "mediaType": "VIDEO",
-        "maxBandwidthDl": "8 Mbps",
-        "maxBandwidthUl": "8 Mbps",
-    },
-    {
-        "name": "QOS_L",
-        "description": "High-quality audio — up to 20 Mbps UL/DL",
-        "status": "ACTIVE",
-        "mediaType": "AUDIO",
-        "maxBandwidthDl": "20 Mbps",
-        "maxBandwidthUl": "20 Mbps",
-    },
-    {
-        "name": "QOS_E_STREAMING",
-        "description": "Enhanced streaming — up to 3 Mbps UL/DL",
-        "status": "ACTIVE",
-        "mediaType": "VIDEO",
-        "maxBandwidthDl": "3 Mbps",
-        "maxBandwidthUl": "3 Mbps",
-    },
-    {
-        "name": "QOS_GAMING",
-        "description": "Gaming profile — optimised for low latency, up to 10 Mbps",
-        "status": "ACTIVE",
-        "mediaType": "VIDEO",
-        "maxBandwidthDl": "10 Mbps",
-        "maxBandwidthUl": "10 Mbps",
-    },
-    {
-        "name": "QOS_LOW_LATENCY",
-        "description": "Low-latency profile — mission-critical real-time traffic",
-        "status": "ACTIVE",
-        "mediaType": "VIDEO",
-        "maxBandwidthDl": "5 Mbps",
-        "maxBandwidthUl": "5 Mbps",
-    },
-    {
-        "name": "QOS_CRITICAL_COMMS",
-        "description": "Critical communications — emergency / public-safety",
-        "status": "ACTIVE",
-        "mediaType": "CONTROL",
-        "maxBandwidthDl": "2 Mbps",
-        "maxBandwidthUl": "2 Mbps",
-    },
+        "enforcedAs": p["operatorProfile"],
+    }
+    for name, p in SEMANTIC_PROFILES.items()
 ]
 
 
@@ -151,7 +107,20 @@ def _execute_qod(step: ExecutionStep) -> dict:
     Provider: FRONT-research-group/camara-QoD (port 8002)
     """
     url = f"{settings.qod_provider_url.rstrip('/')}/quality-on-demand/v1/sessions"
-    result = _provider_call("POST", url, step.payload)
+    requested_profile = step.payload.get("qosProfile")
+    body = {**step.payload, "qosProfile": to_operator_profile(requested_profile) or requested_profile}
+
+    # The PCF binds the session to the UE's PDU session by IP: resolve it from the phone number
+    device = dict(body.get("device") or {})
+    ue_ipv4 = None
+    if not device.get("ipv4Address"):
+        ue_ipv4 = resolve_ue_ipv4(device.get("phoneNumber"))
+        if ue_ipv4:
+            # No NAT between UE and core in this testbed: public == private (CAMARA DeviceIpv4Addr)
+            device["ipv4Address"] = {"publicAddress": ue_ipv4, "privateAddress": ue_ipv4}
+            body["device"] = device
+
+    result = _provider_call("POST", url, body)
 
     if result["status"] == "ok":
         data = result["data"]
@@ -160,6 +129,8 @@ def _execute_qod(step: ExecutionStep) -> dict:
             "sessionId": str(data.get("sessionId", "")),
             "qosStatus": data.get("qosStatus", "REQUESTED"),
             "qosProfile": data.get("qosProfile"),
+            "requestedQosProfile": requested_profile,
+            "resolvedUeIpv4": ue_ipv4,
             "startedAt": data.get("startedAt"),
             "expiresAt": data.get("expiresAt"),
             "duration": data.get("duration"),
@@ -208,7 +179,8 @@ def _execute_qos_provisioning(step: ExecutionStep) -> dict:
     """
     payload = step.payload
     phone: str = payload.get("device", {}).get("phoneNumber", "+34600000000")
-    qos_profile: str = payload.get("qosProfile", "QOS_E")
+    requested_profile: str = payload.get("qosProfile", "QOS_E")
+    qos_profile: str = to_operator_profile(requested_profile) or requested_profile
     scs_as_id = settings.nef_scs_as_id
 
     url = (
@@ -217,13 +189,23 @@ def _execute_qos_provisioning(step: ExecutionStep) -> dict:
     )
 
     # 3GPP TS 29.122 AsSessionWithQoS subscription body
-    # ueIpv4Addr is the UE's IP on the NEF subnet — configurable via NEF_DEFAULT_UE_IPV4
+    # ueIpv4Addr: resolved from the 5GC subscriber DB, else NEF_DEFAULT_UE_IPV4
+    ue_ipv4 = resolve_ue_ipv4(phone) or settings.nef_default_ue_ipv4
     nef_payload = {
         "msisdn": phone,
         "externalId": phone.lstrip("+") + "@domain.com",
         "notificationDestination": settings.nef_notification_url,
         "qosReference": qos_profile,
-        "ueIpv4Addr": settings.nef_default_ue_ipv4,
+        "ueIpv4Addr": ue_ipv4,
+        # Device-level provisioning covers all of the UE's traffic (the PCF needs a media flow)
+        "flowInfo": [{
+            "flowId": 1,
+            "flowDescriptions": [
+                f"permit in ip from {ue_ipv4} to any",
+                f"permit out ip from any to {ue_ipv4}",
+            ],
+        }],
+        "supportedFeatures": "12",
     }
 
     result = _provider_call("POST", url, nef_payload)
@@ -235,6 +217,8 @@ def _execute_qos_provisioning(step: ExecutionStep) -> dict:
             "assignmentId": str(data.get("subscriptionId", data.get("self", ""))),
             "assignmentStatus": "ACTIVE",
             "qosProfile": qos_profile,
+            "requestedQosProfile": requested_profile,
+            "resolvedUeIpv4": ue_ipv4,
             "device": payload.get("device"),
             "provider": {
                 "url": url,

@@ -69,6 +69,7 @@ class EntryResult:
     l1_passed: bool = False          # SCR: schema layer passed
     l2_passed: bool = False          # SVR: semantic layer passed
     l3_passed: bool = False          # registry layer passed
+    registry_checked: bool = False   # L3 actually queried the live CAPIF registry
     iwsr: bool = False               # IWSR: overall valid plan
 
     # Feedback
@@ -263,6 +264,7 @@ def evaluate_entry(
     mode: str,
     dry_run: bool = True,
     use_feedback: bool = True,
+    check_registry: bool = True,
 ) -> EntryResult:
     """Run a single ground truth entry through the orchestration pipeline."""
     from backend.executor import execute_step
@@ -315,7 +317,7 @@ def evaluate_entry(
             payload=step.payload,
             operation_id=step.operation_id,
             method=step.method,
-            skip_registry=dry_run,
+            skip_registry=not check_registry,
         )
 
         # Feedback loop (only for LLM-assisted mode)
@@ -338,7 +340,7 @@ def evaluate_entry(
                 schema_context=schema_ctx,
                 correct_fn=correct_payload_with_feedback,
                 revalidate_fn=_revalidate,
-                skip_registry=dry_run,
+                skip_registry=not check_registry,
             )
             result.feedback_attempted = fb.attempted
             result.feedback_recovered = fb.recovered
@@ -348,6 +350,7 @@ def evaluate_entry(
         result.l1_passed = validation.layer1_schema.passed
         result.l2_passed = validation.layer2_semantic.passed
         result.l3_passed = validation.layer3_registry.passed
+        result.registry_checked = validation.registry_checked
         result.iwsr = validation.valid and result.service_correct
 
     except LlmPlanningError as exc:
@@ -379,6 +382,7 @@ def run_evaluation(
     request_delay_s: float = 0.0,
     verbose: bool = False,
     resume_from: Path | None = None,
+    check_registry: bool = True,
 ) -> EvaluationReport:
     """
     Run full evaluation against the ground truth dataset.
@@ -386,7 +390,8 @@ def run_evaluation(
     Parameters
     ----------
     mode             : "deterministic" or "llm-assisted"
-    dry_run          : skip Layer 3 CAPIF registry check
+    dry_run          : never call providers (the benchmark is always offline)
+    check_registry   : run Layer 3 against the live CAPIF registry
     use_feedback     : apply feedback correction loop (llm-assisted only)
     filter_category  : optional filter (e.g. "qod_session", "location_retrieval")
     filter_language  : optional filter ("en" or "tr")
@@ -436,6 +441,8 @@ def run_evaluation(
                         service_correct=r.get("service_correct", False),
                         l1_passed=r.get("l1_passed", False),
                         l2_passed=r.get("l2_passed", False),
+                        l3_passed=r.get("l3_passed", False),
+                        registry_checked=r.get("registry_checked", False),
                         iwsr=r.get("iwsr", False),
                         feedback_attempted=r.get("feedback_attempted", False),
                         feedback_recovered=r.get("feedback_recovered", False),
@@ -453,7 +460,8 @@ def run_evaluation(
     for idx, entry in enumerate(pending, start=done_offset + 1):
         if verbose:
             print(f"  [{idx}/{total}] {entry['id']} ...", flush=True)
-        result = evaluate_entry(entry, mode=mode, dry_run=dry_run, use_feedback=use_feedback)
+        result = evaluate_entry(entry, mode=mode, dry_run=dry_run, use_feedback=use_feedback,
+                                check_registry=check_registry)
         report.add(result)
         if verbose:
             status = "OK" if result.iwsr else f"FAIL: {result.error or 'wrong service/invalid'}"

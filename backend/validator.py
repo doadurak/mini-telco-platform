@@ -27,6 +27,7 @@ from backend.models import (
     QosProvisioningPayload,
     ValidationResult,
 )
+from backend.qos_profiles import VALID_PROFILES, to_operator_profile
 from backend.service_catalog import CATALOG
 
 # ─── Telecom Policy Constants ───────────────────────────────────────────────
@@ -34,19 +35,9 @@ from backend.service_catalog import CATALOG
 # E.164: starts with +, country code 1-9, then 4-14 more digits (total 5-15)
 _E164_RE = re.compile(r"^\+[1-9][0-9]{4,14}$")
 
-# Valid QoS profile identifiers (CAMARA standard + platform-specific)
-_VALID_QOS_PROFILES: frozenset[str] = frozenset(
-    {
-        "QOS_E",
-        "QOS_S",
-        "QOS_M",
-        "QOS_L",
-        "QOS_E_STREAMING",
-        "QOS_GAMING",
-        "QOS_LOW_LATENCY",
-        "QOS_CRITICAL_COMMS",
-    }
-)
+# Valid QoS profile identifiers: operator profiles enforced by NEF-QoS/PCF plus
+# semantic classes that map onto them (see backend/qos_profiles.py)
+_VALID_QOS_PROFILES: frozenset[str] = VALID_PROFILES
 
 # QoD session duration policy (CAMARA recommended max: 86400s, platform MVP: 7200s)
 _QOD_MAX_DURATION_S = 7200
@@ -115,10 +106,10 @@ def _check_qos_profile(profile: str | None, service_id: str, issues: list[str]) 
     if profile is None:
         issues.append(f"[L2] qosProfile is required for service '{service_id}'.")
         return
-    if profile not in _VALID_QOS_PROFILES:
+    if to_operator_profile(profile) is None:
         issues.append(
-            f"[L2] qosProfile '{profile}' is not a recognised CAMARA profile. "
-            f"Valid values: {sorted(_VALID_QOS_PROFILES)}"
+            f"[L2] qosProfile '{profile}' is not supported by the QoS provider "
+            f"and maps to no operator profile. Valid values: {sorted(_VALID_QOS_PROFILES)}"
         )
 
 

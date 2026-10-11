@@ -105,7 +105,8 @@ class FeedbackMetadata(BaseModel):
 
 class OrchestrationRequest(BaseModel):
     intent: str
-    dry_run: bool = True
+    dry_run: bool = True            # skip the provider call only
+    check_registry: bool = True     # run L3 against the live CAPIF registry (also in dry-run)
     orchestration_mode: Literal["auto", "deterministic", "llm-assisted"] = "auto"
 
 
@@ -119,3 +120,5 @@ class OrchestrationResponse(BaseModel):
     execution_results: list[dict[str, Any]] = Field(default_factory=list)  # all steps
     planner: PlannerMetadata
     feedback: FeedbackMetadata = Field(default_factory=FeedbackMetadata)
+    # Per-stage wall-clock latency: planning, validation, feedback, execution, total
+    timings_ms: dict[str, float] = Field(default_factory=dict)

@@ -1,4 +1,5 @@
 import logging
+import time
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
@@ -114,6 +115,15 @@ def switch_provider(body: dict) -> dict:
 
 @app.post("/orchestrate", response_model=OrchestrationResponse, tags=["Orchestration"])
 def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
+    t_start = time.perf_counter()
+    timings: dict[str, float] = {}
+
+    def _lap(stage: str, since: float) -> float:
+        now = time.perf_counter()
+        timings[stage] = round((now - since) * 1000, 1)
+        return now
+
+    skip_registry = not request.check_registry
     requested_mode = request.orchestration_mode
     if requested_mode == "auto":
         requested_mode = settings.orchestration_default_mode
@@ -142,6 +152,7 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
     # Primary step drives validation, feedback loop, and service selection.
     # Subsequent steps are validated and executed in order; any step failure
     # is recorded in its execution_result without aborting the whole plan.
+    t = _lap("planning", t_start)
     first_step = steps[0]
     selected_service = CATALOG[first_step.service_id]
 
@@ -150,8 +161,9 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
         payload=first_step.payload,
         operation_id=first_step.operation_id,
         method=first_step.method,
-        skip_registry=request.dry_run,
+        skip_registry=skip_registry,
     )
+    t = _lap("validation", t)
 
     feedback = FeedbackMetadata()
 
@@ -175,9 +187,10 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
             schema_context=schema_context,
             correct_fn=correct_payload_with_feedback,
             revalidate_fn=_revalidate,
-            skip_registry=request.dry_run,
+            skip_registry=skip_registry,
         )
         steps = [first_step, *steps[1:]]
+    t = _lap("feedback", t)
 
     if not validation.valid:
         raise HTTPException(
@@ -189,6 +202,8 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
     execution_results: list[dict] = []
     for step in steps:
         execution_results.append(execute_step(step, dry_run=request.dry_run))
+    _lap("execution", t)
+    timings["total"] = round((time.perf_counter() - t_start) * 1000, 1)
 
     return OrchestrationResponse(
         intent=request.intent,
@@ -200,4 +215,5 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
         execution_results=execution_results,      # full multi-step results
         planner=planner,
         feedback=feedback,
+        timings_ms=timings,
     )
