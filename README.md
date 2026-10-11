@@ -198,20 +198,27 @@ Each model was run **once** per intent (no repeated runs are pooled into n).
 | Model | IWSR | SCR | SVR | HR | SS | RRF | n |
 |---|---|---|---|---|---|---|---|
 | Deterministic (baseline) | 0.833 | **1.000** | **1.000** | 0.167 | 0.962 | — | 300 |
-| GPT-4o-mini | **0.957** | 0.983 | 0.973 | **0.023** | **0.973** | 0.400 (2/5) | 300 |
-| Claude Haiku 4.5 | 0.947 | 0.987 | **0.987** | 0.040 | 0.925 | **0.600** (3/5) | 300 |
-| Gemini 2.5 Flash | 0.947 | 0.987 | 0.970 | 0.030 | 0.943 | 0.286 (2/7) | 300 |
+| GPT-4o-mini | **0.973** | **1.000** | 0.990 | **0.023** | **0.975** | 0.400 (2/5) | 300 |
+| Claude Haiku 4.5 | 0.953 | 0.993 | **0.993** | 0.040 | 0.927 | **0.600** (3/5) | 300 |
+| Gemini 2.5 Flash | 0.960 | **1.000** | 0.983 | 0.030 | 0.945 | 0.286 (2/7) | 300 |
 
 **Stratified IWSR by difficulty (300 entries):**
 
 | Model | Easy | Medium | Hard |
 |---|---|---|---|
 | Deterministic | 0.823 | 0.798 | 0.873 |
-| GPT-4o-mini | 0.990 | 0.989 | 0.943 |
-| Claude Haiku 4.5 | 1.000 | 1.000 | 0.870 |
-| Gemini 2.5 Flash | 1.000 | 0.989 | 0.896 |
+| GPT-4o-mini | 0.990 | 0.989 | 0.945 |
+| Claude Haiku 4.5 | 1.000 | 1.000 | 0.873 |
+| Gemini 2.5 Flash | 1.000 | 0.989 | 0.900 |
 
 Result files: `datasets/eval_results_*_300.json`
+
+**Re-run of 11 multi-intent entries (2026-10-11).** Prompts with two requests (e.g. *"Tell me where +81312345678 is
+and also list its available QoS profiles"*) originally ended in `LlmPlanningError: expected JSON object, got list`
+because Phase 1 returned one plan per request. The planner now accepts a list (one execution step per plan, the
+first-stated request is primary) and `scripts/rerun_failed_entries.py` re-evaluated exactly those entries
+(GPT-4o-mini 5, Claude Haiku 4.5 2, Gemini 2.5 Flash 4); all 11 now select the ground-truth primary service.
+Re-run records carry `"rerun"` and `"previous_error"` fields. Before the re-run, IWSR was 0.957 / 0.947 / 0.947.
 
 ### Scope of the evaluation (what IWSR measures)
 
@@ -222,8 +229,8 @@ plus the bounded feedback loop. L3 is on by default (`--no-registry` disables it
 
 The 300-entry result files above were produced before L3 was decoupled from dry-run mode, i.e. with L1+L2 only.
 `scripts/rescore_l3.py` re-validated every recorded plan against the live CAPIF registry
-([`datasets/l3_rescore_300.json`](datasets/l3_rescore_300.json)): 1,189 of 1,200 plans were checked (the other 11
-runs produced no plan), L3 rejected none, and IWSR is unchanged for all four planners.
+([`datasets/l3_rescore_300.json`](datasets/l3_rescore_300.json)): all 1,200 plans were checked, L3 rejected none,
+and IWSR is unchanged for all four planners. (The 11 re-run entries were evaluated with live L3 directly.)
 
 L3 confirms that the selected service is published in CAPIF; it cannot detect a wrong-but-registered service.
 Such errors count against IWSR/HR through the ground-truth `service_id`. Live CAPIF onboarding/discovery (mTLS)
@@ -236,7 +243,7 @@ files are archived in [`datasets/legacy_pilot_60/`](datasets/legacy_pilot_60/). 
 keyword-based deterministic planner scored IWSR 1.000, because its routing rules were written against
 those same 60 intents. The 240 added entries (paraphrases, colloquial phrasing, Turkish variants,
 multi-service ambiguity, edge cases) are outside those rules, which is why the deterministic baseline drops
-to 0.833 on the full set while the LLM planners stay ≥ 0.947. **The 300-entry numbers above supersede the pilot.**
+to 0.833 on the full set while the LLM planners stay ≥ 0.953. **The 300-entry numbers above supersede the pilot.**
 
 | Model (pilot, n=60) | IWSR | SCR | SVR | HR | SS | RRF | File |
 |---|---|---|---|---|---|---|---|
@@ -615,7 +622,7 @@ bash scripts/demo_full_system.sh --fast  # skip pauses (video recording)
 |---|---|---|
 | QoS live calls failed: no PCF behind NEF-QoS, provider rejected semantic profiles (`QOS_E_STREAMING`) | Fixed | Open5GS PCF testbed (`testbed/open5gs`) + semantic→operator profile mapping |
 | L3 skipped whenever `dry_run: true` | Fixed | `check_registry` (default on) is independent of `dry_run` |
-| Multi-intent prompts: Phase-1 LLM returns a JSON list, planner rejects it | Open | Causes 2–5 failures per LLM in the 300-entry run |
+| Multi-intent prompts: Phase-1 LLM returned a JSON list, planner rejected it | Fixed | Multi-step plans; the 11 affected entries were re-run |
 | UERANSIM gNB ignores NGAP PDU Session Resource Modify | Testbed limit | QoS is authorized/signalled by the core, not enforced on the emulated radio |
 | Vault (dev mode) loses PKI after Docker/WSL restart | Operational | `bash scripts/reset_capif.sh` |
 | Gemini free tier: 250 RPD limit | Operational | Use `--delay 12 --resume` across days |

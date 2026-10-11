@@ -3,17 +3,17 @@
     "mode": "llm-assisted",
     "total_entries": 300,
     "metrics": {
-      "IWSR": 0.9467,
-      "SCR": 0.9867,
-      "SVR": 0.97,
+      "IWSR": 0.96,
+      "SCR": 1.0,
+      "SVR": 0.9833,
       "HR": 0.03,
-      "SS": 0.9429,
+      "SS": 0.9451,
       "RRF": 0.2857
     },
     "raw_counts": {
-      "iwsr_pass": 284,
-      "scr_pass": 296,
-      "svr_pass": 291,
+      "iwsr_pass": 288,
+      "scr_pass": 300,
+      "svr_pass": 295,
       "hallucinations": 9,
       "feedback_attempted": 7,
       "feedback_recovered": 2
@@ -21,7 +21,7 @@
     "stratified_iwsr": {
       "medium": 0.9894,
       "easy": 1.0,
-      "hard": 0.8962
+      "hard": 0.9
     }
   },
   "results": [
@@ -1459,16 +1459,25 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
-      "latency_ms": 2667.8
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+905551112233"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 12068.7,
+      "l3_passed": true,
+      "registry_checked": true,
+      "previous_error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
+      "rerun": "2026-10-11: re-run after Phase-1 multi-intent (JSON list) support"
     },
     {
       "id": "qod_en_011",
@@ -6845,16 +6854,25 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
-      "latency_ms": 4847.1
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+81312345678"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 16457.6,
+      "l3_passed": true,
+      "registry_checked": true,
+      "previous_error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
+      "rerun": "2026-10-11: re-run after Phase-1 multi-intent (JSON list) support"
     },
     {
       "id": "edge_en_012",
@@ -6944,16 +6962,25 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
-      "latency_ms": 3081.5
+      "actual_service_id": "qos-provisioning",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+447700900000"
+        },
+        "qosProfile": "QOS_E_STREAMING"
+      },
+      "error": null,
+      "latency_ms": 14222.8,
+      "l3_passed": true,
+      "registry_checked": true,
+      "previous_error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
+      "rerun": "2026-10-11: re-run after Phase-1 multi-intent (JSON list) support"
     },
     {
       "id": "edge_tr_006",
@@ -7089,16 +7116,25 @@
       "difficulty": "hard",
       "category": "edge_case",
       "mode": "llm-assisted",
-      "service_correct": false,
-      "l1_passed": false,
-      "l2_passed": false,
-      "iwsr": false,
+      "service_correct": true,
+      "l1_passed": true,
+      "l2_passed": true,
+      "iwsr": true,
       "feedback_attempted": false,
       "feedback_recovered": false,
-      "actual_service_id": null,
-      "actual_payload": null,
-      "error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
-      "latency_ms": 2171.4
+      "actual_service_id": "location-retrieval",
+      "actual_payload": {
+        "device": {
+          "phoneNumber": "+81312345678"
+        },
+        "maxAge": 60
+      },
+      "error": null,
+      "latency_ms": 14411.0,
+      "l3_passed": true,
+      "registry_checked": true,
+      "previous_error": "LlmPlanningError: LLM Planner (Phase 1): expected JSON object, got list",
+      "rerun": "2026-10-11: re-run after Phase-1 multi-intent (JSON list) support"
     },
     {
       "id": "edge_tr_012",

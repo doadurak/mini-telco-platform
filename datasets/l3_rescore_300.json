@@ -13,30 +13,30 @@
     "file": "eval_results_gpt4omini_300.json",
     "mode": "llm-assisted",
     "entries": 300,
-    "registry_checked": 295,
+    "registry_checked": 300,
     "l3_rejections": 0,
-    "iwsr_recorded": 0.9567,
-    "iwsr_with_live_l3": 0.9567,
+    "iwsr_recorded": 0.9733,
+    "iwsr_with_live_l3": 0.9733,
     "changed_entries": []
   },
   {
     "file": "eval_results_llm_anthropic_haiku45_300.json",
     "mode": "llm-assisted",
     "entries": 300,
-    "registry_checked": 298,
+    "registry_checked": 300,
     "l3_rejections": 0,
-    "iwsr_recorded": 0.9467,
-    "iwsr_with_live_l3": 0.9467,
+    "iwsr_recorded": 0.9533,
+    "iwsr_with_live_l3": 0.9533,
     "changed_entries": []
   },
   {
     "file": "eval_results_gemini25flash_300.json",
     "mode": "llm-assisted",
     "entries": 300,
-    "registry_checked": 296,
+    "registry_checked": 300,
     "l3_rejections": 0,
-    "iwsr_recorded": 0.9467,
-    "iwsr_with_live_l3": 0.9467,
+    "iwsr_recorded": 0.96,
+    "iwsr_with_live_l3": 0.96,
     "changed_entries": []
   }
 ]
