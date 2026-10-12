@@ -65,10 +65,10 @@ and CAMARA execution down to a 3GPP PCF, all reproducible from one script.
 \label{sec:arch}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.92\columnwidth]{nof_fig1_arch.png}
-  \caption{Platform architecture. The CAPIF client onboards with a Vault-signed
-  certificate; onboarding and discovery use mTLS. Every plan passes L1--L3 before a
-  provider is called. QoS requests reach the Open5GS PCF through NEF-QoS.}
+  \includegraphics[width=\columnwidth]{fig1_architecture.pdf}
+  \caption{Platform architecture. Plans pass L1--L3 (any failure triggers at most three
+  payload corrections); L3, onboarding and discovery use CAPIF-1e over mTLS, provider
+  calls use CAMARA over HTTP.}
   \label{fig:arch}
 \end{figure}
 \textit{Planning.} A FastAPI backend exposes \texttt{POST\,/orchestrate}
@@ -84,11 +84,9 @@ applies telecom rules: E.164 numbers, profiles mappable to an operator profile,
 durations in $[1,7200]$\,s, unicast IPv4 (Semantic Validity Rate, SVR). L3 queries the
 live CAPIF registry to confirm the selected service is published, which catches
 non-existent services but not a wrong-but-registered one; the latter shows up as an
-IWSR miss against ground truth. Failures trigger a layer-tagged correction prompt
-(at most three retries).
+IWSR miss against ground truth.
 
-\textit{Execution.} CAPIF onboarding and discovery run over mTLS; the provider call
-itself is a CAMARA northbound HTTP request inside the testbed. For QoS, the adapter
+\textit{Execution.} For QoS, the adapter
 resolves the phone number to the UE's IP from the 5GC subscriber database, the CAMARA
 QoD provider forwards an AsSessionWithQoS subscription to the NEF, and the NEF creates a
 PCF application session (Npcf\_PolicyAuthorization) bound to the UE's PDU session.

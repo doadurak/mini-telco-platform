@@ -1,0 +1,285 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 252 225" width="252pt" height="225pt" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif"><title>System architecture</title>
+<defs>
+ <linearGradient id="gSilver" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#fafbfc"/><stop offset=".55" stop-color="#b7bcc3"/><stop offset="1" stop-color="#e4e7ea"/></linearGradient>
+ <linearGradient id="gSilverH" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#9ea4ac"/><stop offset=".35" stop-color="#f3f4f6"/><stop offset="1" stop-color="#8d939b"/></linearGradient>
+ <linearGradient id="gDark" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#1c1f26"/><stop offset=".5" stop-color="#454b57"/><stop offset="1" stop-color="#1c1f26"/></linearGradient>
+ <linearGradient id="gScreen" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#8cc4f2"/><stop offset="1" stop-color="#1d4c8a"/></linearGradient>
+ <linearGradient id="gChip" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#7cb7ee"/><stop offset="1" stop-color="#244f93"/></linearGradient>
+ <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#ff7a7a"/><stop offset="1" stop-color="#b80f18"/></linearGradient>
+ <linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#4cc3ad"/><stop offset="1" stop-color="#0c6450"/></linearGradient>
+ <linearGradient id="gCloud" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cdd2d8"/></linearGradient>
+ <linearGradient id="gRouter" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#174f8c"/><stop offset=".5" stop-color="#3a7fc8"/><stop offset="1" stop-color="#174f8c"/></linearGradient>
+ <radialGradient id="gSphere" cx=".35" cy=".35" r=".7">
+  <stop offset="0" stop-color="#bfe0ff"/><stop offset="1" stop-color="#1b5aa3"/></radialGradient>
+
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#33332f"/></marker>
+ <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#b3261e"/></marker>
+ <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#8a6fc0"/></marker>
+ <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#3c8a2e"/></marker>
+
+ <g id="i-monitor">
+  <rect x="1.5" y="3" width="21" height="14.5" rx="1.3" fill="#262a32"/>
+  <rect x="2.8" y="4.3" width="18.4" height="11.9" fill="url(#gScreen)"/>
+  <path d="M2.8 4.3 H13 L2.8 12.5z" fill="#fff" opacity=".2"/>
+  <path d="M10.4 17.5 h3.2 l.6 3 h-4.4z" fill="#80858f"/>
+  <rect x="6.5" y="20.3" width="11" height="1.6" rx=".8" fill="#4f545e"/>
+ </g>
+ <g id="i-server">
+  <rect x="6" y="1.5" width="12" height="21" rx="1.2" fill="url(#gDark)"/>
+  <rect x="8" y="4" width="8" height="1.5" rx=".3" fill="#8a93a2"/>
+  <rect x="8" y="6.8" width="8" height="1.5" rx=".3" fill="#8a93a2"/>
+  <circle cx="15.2" cy="10.4" r=".8" fill="#5fe07d"/>
+  <g stroke="#6d7482" stroke-width=".5">
+   <line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="14.6" x2="16" y2="14.6"/>
+   <line x1="8" y1="16.2" x2="16" y2="16.2"/><line x1="8" y1="17.8" x2="16" y2="17.8"/><line x1="8" y1="19.4" x2="16" y2="19.4"/></g>
+ </g>
+ <g id="i-cloud">
+  <path d="M6.5 19.5 h11.5 a4.3 4.3 0 0 0 .5 -8.6 a6.2 6.2 0 0 0 -11.9 -1.2 a5 5 0 0 0 -.1 9.8z" fill="url(#gCloud)" stroke="#7d838b" stroke-width=".6"/>
+  <g stroke="#2a5ea8" stroke-width=".6">
+   <line x1="10.3" y1="11.4" x2="10.3" y2="18.2"/><line x1="12" y1="11.4" x2="12" y2="18.2"/><line x1="13.7" y1="11.4" x2="13.7" y2="18.2"/>
+   <line x1="8.6" y1="13.1" x2="15.4" y2="13.1"/><line x1="8.6" y1="14.8" x2="15.4" y2="14.8"/><line x1="8.6" y1="16.5" x2="15.4" y2="16.5"/></g>
+  <rect x="9.4" y="12.2" width="5.2" height="5.2" rx=".6" fill="url(#gChip)"/>
+ </g>
+ <g id="i-funnel">
+  <path d="M2.5 4.5 h19 l-7.2 8.2 v6.8 l-4.6 2.5 v-9.3z" fill="url(#gSilver)" stroke="#646970" stroke-width=".5"/>
+  <ellipse cx="12" cy="4.5" rx="9.5" ry="1.8" fill="#e6e9ec" stroke="#646970" stroke-width=".5"/>
+ </g>
+ <g id="i-chip">
+  <g fill="#a8adb5">
+   <rect x="7" y="2" width="1.3" height="3"/><rect x="10" y="2" width="1.3" height="3"/><rect x="12.7" y="2" width="1.3" height="3"/><rect x="15.7" y="2" width="1.3" height="3"/>
+   <rect x="7" y="19" width="1.3" height="3"/><rect x="10" y="19" width="1.3" height="3"/><rect x="12.7" y="19" width="1.3" height="3"/><rect x="15.7" y="19" width="1.3" height="3"/>
+   <rect x="2" y="7" width="3" height="1.3"/><rect x="2" y="10" width="3" height="1.3"/><rect x="2" y="12.7" width="3" height="1.3"/><rect x="2" y="15.7" width="3" height="1.3"/>
+   <rect x="19" y="7" width="3" height="1.3"/><rect x="19" y="10" width="3" height="1.3"/><rect x="19" y="12.7" width="3" height="1.3"/><rect x="19" y="15.7" width="3" height="1.3"/></g>
+  <rect x="4.5" y="4.5" width="15" height="15" rx="1.8" fill="url(#gChip)" stroke="#173f78" stroke-width=".5"/>
+  <rect x="6.3" y="6.3" width="11.4" height="11.4" rx="1" fill="none" stroke="#bfe0ff" stroke-width=".4" opacity=".8"/>
+  <text x="12" y="14.4" font-size="6.2" font-weight="bold" fill="#fff" text-anchor="middle">AI</text>
+ </g>
+ <g id="i-gear">
+  <path d="M12.00 4.00 L14.05 1.70 L16.02 2.30 L16.44 5.35 L17.66 6.34 L20.73 6.17 L21.70 7.98 L19.85 10.44 L20.00 12.00 L22.30 14.05 L21.70 16.02 L18.65 16.44 L17.66 17.66 L17.83 20.73 L16.02 21.70 L13.56 19.85 L12.00 20.00 L9.95 22.30 L7.98 21.70 L7.56 18.65 L6.34 17.66 L3.27 17.83 L2.30 16.02 L4.15 13.56 L4.00 12.00 L1.70 9.95 L2.30 7.98 L5.35 7.56 L6.34 6.34 L6.17 3.27 L7.98 2.30 L10.44 4.15 Z M15.60 12 A3.6 3.6 0 1 0 8.40 12 A3.6 3.6 0 1 0 15.60 12 Z" fill="url(#gSilver)" fill-rule="evenodd" stroke="#5f646b" stroke-width=".5"/>
+ </g>
+ <g id="i-exec">
+  <path d="M12.00 4.00 L14.05 1.70 L16.02 2.30 L16.44 5.35 L17.66 6.34 L20.73 6.17 L21.70 7.98 L19.85 10.44 L20.00 12.00 L22.30 14.05 L21.70 16.02 L18.65 16.44 L17.66 17.66 L17.83 20.73 L16.02 21.70 L13.56 19.85 L12.00 20.00 L9.95 22.30 L7.98 21.70 L7.56 18.65 L6.34 17.66 L3.27 17.83 L2.30 16.02 L4.15 13.56 L4.00 12.00 L1.70 9.95 L2.30 7.98 L5.35 7.56 L6.34 6.34 L6.17 3.27 L7.98 2.30 L10.44 4.15 Z M15.60 12 A3.6 3.6 0 1 0 8.40 12 A3.6 3.6 0 1 0 15.60 12 Z" fill="url(#gSilver)" fill-rule="evenodd" stroke="#5f646b" stroke-width=".5"/>
+  <circle cx="18" cy="18" r="5.2" fill="#3c8a2e" stroke="#fff" stroke-width=".8"/>
+  <path d="M16.3 15.6 L20.6 18 L16.3 20.4z" fill="#fff"/>
+ </g>
+ <g id="i-shield">
+  <path d="M12 1.8 L20.3 4.9 V11 C20.3 16.6 16.7 20.6 12 22.2 C7.3 20.6 3.7 16.6 3.7 11 V4.9z" fill="url(#gSilver)" stroke="#555a61" stroke-width=".6"/>
+  <path d="M12 3.6 L18.6 6.1 V11 C18.6 15.6 15.8 18.9 12 20.3z" fill="#fff" opacity=".35"/>
+  <path d="M8.1 11.8 l2.7 2.8 l5.1 -5.6" fill="none" stroke="#2e8b47" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+ </g>
+ <g id="i-lock">
+  <path d="M8 11 V7.6 a4 4 0 0 1 8 0 V11" fill="none" stroke="#7c8189" stroke-width="2"/>
+  <rect x="5" y="10.5" width="14" height="11.5" rx="1.6" fill="url(#gSilver)" stroke="#5c6067" stroke-width=".5"/>
+  <circle cx="12" cy="15" r="1.5" fill="#2f3237"/><rect x="11.35" y="15" width="1.3" height="3.6" rx=".5" fill="#2f3237"/>
+ </g>
+ <g id="i-db">
+  <path d="M4.5 5 V19 a7.5 2.6 0 0 0 15 0 V5" fill="url(#gSilverH)" stroke="#5f646b" stroke-width=".5"/>
+  <path d="M4.5 9.7 a7.5 2.6 0 0 0 15 0" fill="none" stroke="#2f6fb5" stroke-width="1.1"/>
+  <path d="M4.5 14.4 a7.5 2.6 0 0 0 15 0" fill="none" stroke="#2f6fb5" stroke-width="1.1"/>
+  <ellipse cx="12" cy="5" rx="7.5" ry="2.6" fill="#eef0f3" stroke="#5f646b" stroke-width=".5"/>
+ </g>
+ <g id="i-net">
+  <g stroke="#2d3036" stroke-width=".7">
+   <line x1="12" y1="12" x2="4.5" y2="6"/><line x1="12" y1="12" x2="19.5" y2="6"/><line x1="12" y1="12" x2="4.5" y2="18"/>
+   <line x1="12" y1="12" x2="19.5" y2="18"/><line x1="4.5" y1="6" x2="12" y2="2.8"/><line x1="19.5" y1="6" x2="12" y2="2.8"/>
+   <line x1="4.5" y1="18" x2="12" y2="21.2"/><line x1="19.5" y1="18" x2="12" y2="21.2"/><line x1="4.5" y1="6" x2="4.5" y2="18"/><line x1="19.5" y1="6" x2="19.5" y2="18"/></g>
+  <g fill="url(#gSphere)" stroke="#123f75" stroke-width=".3">
+   <circle cx="4.5" cy="6" r="2"/><circle cx="19.5" cy="6" r="2"/><circle cx="4.5" cy="18" r="2"/><circle cx="19.5" cy="18" r="2"/>
+   <circle cx="12" cy="2.8" r="1.7"/><circle cx="12" cy="21.2" r="1.7"/><circle cx="12" cy="12" r="3.2"/></g>
+ </g>
+ <g id="i-tower">
+  <g stroke="#5d626a" stroke-width=".9" fill="none" stroke-linecap="round">
+   <path d="M12 7.5 L7 22.5 M12 7.5 L17 22.5"/>
+   <path d="M10.2 13 H13.8 M9 17 H15 M7.9 20.6 H16.1 M10.2 13 L15 17 M13.8 13 L9 17 M9 17 L16.1 20.6 M15 17 L7.9 20.6"/></g>
+  <g stroke="#2f6fb5" stroke-width=".95" fill="none" stroke-linecap="round">
+   <path d="M8.6 3.6 a4.6 4.6 0 0 0 0 6.2"/><path d="M15.4 3.6 a4.6 4.6 0 0 1 0 6.2"/>
+   <path d="M6.3 1.6 a7.5 7.5 0 0 0 0 10.2"/><path d="M17.7 1.6 a7.5 7.5 0 0 1 0 10.2"/></g>
+  <circle cx="12" cy="6.7" r="1.4" fill="#5d626a"/>
+ </g>
+ <g id="i-pin">
+  <path d="M12 22.5 C12 22.5 4.6 14.6 4.6 9 a7.4 7.4 0 0 1 14.8 0 C19.4 14.6 12 22.5 12 22.5z" fill="url(#gRed)" stroke="#7d0a10" stroke-width=".5"/>
+  <circle cx="12" cy="9" r="2.8" fill="#fff"/>
+ </g>
+ <g id="i-gauge">
+  <circle cx="12" cy="13" r="9.5" fill="url(#gSilver)" stroke="#5f646b" stroke-width=".5"/>
+  <circle cx="12" cy="13" r="7.6" fill="#fbfcfd"/>
+  <path d="M6.4 16.6 A6.6 6.6 0 0 1 7.6 8.4" fill="none" stroke="#3c9a4a" stroke-width="1.8"/>
+  <path d="M8.4 7.6 A6.6 6.6 0 0 1 15.6 7.6" fill="none" stroke="#e1b12c" stroke-width="1.8"/>
+  <path d="M16.4 8.4 A6.6 6.6 0 0 1 17.6 16.6" fill="none" stroke="#c9302c" stroke-width="1.8"/>
+  <line x1="12" y1="13" x2="15.6" y2="9.2" stroke="#222" stroke-width="1.1" stroke-linecap="round"/>
+  <circle cx="12" cy="13" r="1.3" fill="#222"/>
+ </g>
+ <g id="i-api">
+  <path d="M12 1.8 L20.8 6.9 V17.1 L12 22.2 L3.2 17.1 V6.9z" fill="url(#gTeal)" stroke="#084a3b" stroke-width=".5"/>
+  <text x="12" y="14.5" font-size="7" font-weight="bold" fill="#fff" text-anchor="middle">&lt;/&gt;</text>
+ </g>
+ <g id="i-policy">
+  <path d="M5 2 H15 L19.5 6.5 V22 H5z" fill="#ffffff" stroke="#4f545b" stroke-width=".6"/>
+  <path d="M15 2 V6.5 H19.5" fill="#dfe3e7" stroke="#4f545b" stroke-width=".5"/>
+  <g stroke="#9aa1aa" stroke-width=".9"><line x1="7.5" y1="9" x2="16.5" y2="9"/><line x1="7.5" y1="11.6" x2="16.5" y2="11.6"/><line x1="7.5" y1="14.2" x2="13" y2="14.2"/></g>
+  <circle cx="16.3" cy="18.3" r="3.9" fill="url(#gTeal)" stroke="#fff" stroke-width=".6"/>
+  <path d="M14.6 18.3 l1.2 1.2 l2.3 -2.4" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+ </g>
+ <g id="i-router">
+  <path d="M2.5 10 V15 a9.5 3.4 0 0 0 19 0 V10" fill="url(#gRouter)" stroke="#123c6b" stroke-width=".4"/>
+  <ellipse cx="12" cy="10" rx="9.5" ry="3.4" fill="#5b9be0" stroke="#123c6b" stroke-width=".4"/>
+  <g stroke="#fff" stroke-width=".9" fill="#fff" stroke-linecap="round">
+   <line x1="6.8" y1="8.9" x2="10.2" y2="9.7"/><path d="M6.4 8.7 l1.4 -.1 l-.6 1.1z" stroke="none"/>
+   <line x1="17.2" y1="11.1" x2="13.8" y2="10.3"/><path d="M17.6 11.3 l-1.4 .1 l.6 -1.1z" stroke="none"/>
+   <line x1="17.2" y1="8.9" x2="13.8" y2="9.7"/><path d="M17.6 8.7 l-1.4 -.1 l.6 1.1z" stroke="none"/>
+   <line x1="6.8" y1="11.1" x2="10.2" y2="10.3"/><path d="M6.4 11.3 l1.4 .1 l-.6 -1.1z" stroke="none"/></g>
+ </g>
+ <g id="i-phone">
+  <rect x="6.5" y="1.5" width="11" height="21" rx="2.2" fill="#262a32"/>
+  <rect x="7.7" y="4" width="8.6" height="14.5" rx=".4" fill="url(#gScreen)"/>
+  <circle cx="12" cy="20.4" r=".9" fill="#80858f"/>
+ </g>
+</defs>
+<rect width="252" height="225" fill="#ffffff"/><rect x="4" y="4.5" width="244" height="30" rx="2.5" fill="#8fc0da"/>
+<rect x="4" y="3" width="244" height="30" rx="2.5" fill="#e2f0f8" stroke="#8fc0da" stroke-width="0.5"/>
+<rect x="4" y="3" width="13" height="30" rx="2.5" fill="#cfc8f3"/>
+<rect x="13" y="3" width="4" height="30" fill="#cfc8f3"/>
+<text transform="translate(12.9,18.0) rotate(-90)" font-size="6.5" font-weight="bold" fill="#2a2a28" text-anchor="middle">Interface</text>
+<rect x="4" y="40.5" width="244" height="46" rx="2.5" fill="#97c788"/>
+<rect x="4" y="39" width="244" height="46" rx="2.5" fill="#e5f2df" stroke="#97c788" stroke-width="0.5"/>
+<rect x="4" y="39" width="13" height="46" rx="2.5" fill="#cfc8f3"/>
+<rect x="13" y="39" width="4" height="46" fill="#cfc8f3"/>
+<text transform="translate(12.9,62.0) rotate(-90)" font-size="6.5" font-weight="bold" fill="#2a2a28" text-anchor="middle">Orchestration</text>
+<rect x="4" y="94.5" width="244" height="34" rx="2.5" fill="#dcc47c"/>
+<rect x="4" y="93" width="244" height="34" rx="2.5" fill="#fcf3d8" stroke="#dcc47c" stroke-width="0.5"/>
+<rect x="4" y="93" width="13" height="34" rx="2.5" fill="#cfc8f3"/>
+<rect x="13" y="93" width="4" height="34" fill="#cfc8f3"/>
+<text transform="translate(12.9,110.0) rotate(-90)" font-size="6.5" font-weight="bold" fill="#2a2a28" text-anchor="middle">Validation</text>
+<rect x="4" y="138.5" width="244" height="32" rx="2.5" fill="#adb8c2"/>
+<rect x="4" y="137" width="244" height="32" rx="2.5" fill="#f1f4f7" stroke="#adb8c2" stroke-width="0.5"/>
+<rect x="4" y="137" width="13" height="32" rx="2.5" fill="#bfe6d8"/>
+<rect x="13" y="137" width="4" height="32" fill="#bfe6d8"/>
+<text transform="translate(12.9,153.0) rotate(-90)" font-size="6.5" font-weight="bold" fill="#2a2a28" text-anchor="middle">Exposure</text>
+<rect x="4" y="190.5" width="244" height="32" rx="2.5" fill="#98c9b8"/>
+<rect x="4" y="189" width="244" height="32" rx="2.5" fill="#ecf6f2" stroke="#98c9b8" stroke-width="0.5"/>
+<rect x="4" y="189" width="13" height="32" rx="2.5" fill="#bfe6d8"/>
+<rect x="13" y="189" width="4" height="32" fill="#bfe6d8"/>
+<text transform="translate(12.9,205.0) rotate(-90)" font-size="6.5" font-weight="bold" fill="#2a2a28" text-anchor="middle">5G core</text>
+<use xlink:href="#i-monitor" transform="translate(22.00,10.00) scale(0.6667)"/>
+<text x="40" y="16" font-size="6.2" font-weight="bold" fill="#22221f" text-anchor="start">Operator</text>
+<text x="40" y="23.5" font-size="5.5" font-weight="normal" fill="#3d3d39" text-anchor="start">EN/TR intent</text>
+<path d="M74.5 18 H83.5" fill="none" stroke="#3b6db3" stroke-width="0.8" marker-end="url(#a)"/>
+<use xlink:href="#i-server" transform="translate(84.00,10.00) scale(0.6667)"/>
+<text x="101" y="16" font-size="6.2" font-weight="bold" fill="#22221f" text-anchor="start">FastAPI</text>
+<text x="101" y="23.5" font-size="5.5" font-weight="normal" fill="#2d4f86" text-anchor="start">POST /orchestrate</text>
+<rect x="155.7" y="6.9" width="89" height="24" rx="3" fill="#000" opacity=".13"/>
+<rect x="155" y="6" width="89" height="24" rx="3" fill="#f7f6f2" stroke="#6c6b66" stroke-width="0.6" stroke-dasharray="2 1.2"/>
+<use xlink:href="#i-cloud" transform="translate(158.50,10.50) scale(0.6250)"/>
+<text x="176" y="16" font-size="6.2" font-weight="bold" fill="#3b3b37" text-anchor="start">LLM APIs</text>
+<text x="176" y="23.5" font-size="5.5" font-weight="normal" fill="#45453f" text-anchor="start">GPT·Claude·Gemini</text>
+<path d="M92 26 V36.5 H58 V41.5" fill="none" stroke="#3b6db3" stroke-width="0.8" marker-end="url(#a)"/>
+<path d="M200 30 V36.5 H132 V41.5" fill="none" stroke="#6c6b66" stroke-width="0.6" marker-end="url(#a)" marker-start="url(#a)" stroke-dasharray="1.6 1"/>
+<rect x="22.7" y="42.9" width="140" height="40" rx="3" fill="#000" opacity=".13"/>
+<rect x="22" y="42" width="140" height="40" rx="3" fill="#f8fcf6" stroke="#5f9a48" stroke-width="0.55"/>
+<text x="26" y="49" font-size="5.8" font-weight="bold" fill="#2c5a1f" text-anchor="start">LLM Planner</text>
+<rect x="26.7" y="52.9" width="64" height="26" rx="2" fill="#000" opacity=".13"/>
+<rect x="26" y="52" width="64" height="26" rx="2" fill="#bcdcab" stroke="#5f9a48" stroke-width="0.5"/>
+<use xlink:href="#i-funnel" transform="translate(28.00,60.00) scale(0.4167)"/>
+<text x="39.5" y="62.5" font-size="6" font-weight="bold" fill="#1f3f15" text-anchor="start">Phase 1</text>
+<text x="39.5" y="70.5" font-size="5.5" font-weight="normal" fill="#1f3f15" text-anchor="start">service selection</text>
+<rect x="94.7" y="52.9" width="64" height="26" rx="2" fill="#000" opacity=".13"/>
+<rect x="94" y="52" width="64" height="26" rx="2" fill="#bcdcab" stroke="#5f9a48" stroke-width="0.5"/>
+<use xlink:href="#i-chip" transform="translate(96.00,60.00) scale(0.4167)"/>
+<text x="107.5" y="62.5" font-size="6" font-weight="bold" fill="#1f3f15" text-anchor="start">Phase 2</text>
+<text x="107.5" y="70.5" font-size="5.5" font-weight="normal" fill="#1f3f15" text-anchor="start">payload generation</text>
+<path d="M90 65 H93.4" fill="none" stroke="#3c8a2e" stroke-width="0.9" marker-end="url(#ag)"/>
+<rect x="168.7" y="42.9" width="76" height="40" rx="3" fill="#000" opacity=".13"/>
+<rect x="168" y="42" width="76" height="40" rx="3" fill="#f8fcf6" stroke="#5f9a48" stroke-width="0.55"/>
+<use xlink:href="#i-exec" transform="translate(172.00,54.00) scale(0.6667)"/>
+<text x="190.5" y="54" font-size="6.4" font-weight="bold" fill="#1f3f15" text-anchor="start">Executor</text>
+<text x="190.5" y="63" font-size="5.5" font-weight="normal" fill="#1f3f15" text-anchor="start">QoS profile map</text>
+<text x="190.5" y="71" font-size="5.5" font-weight="normal" fill="#1f3f15" text-anchor="start">phone → UE IP</text>
+<rect x="24" y="97" width="146" height="26" rx="3" fill="#fffaf0" stroke="#b8993a" stroke-width="0.5" stroke-dasharray="1.8 1.1"/>
+<use xlink:href="#i-shield" transform="translate(29.00,103.00) scale(0.5833)"/>
+<text x="45" y="108.5" font-size="6" font-weight="bold" fill="#5b4a12" text-anchor="start">L1</text>
+<text x="45" y="115.5" font-size="5.5" font-weight="normal" fill="#5b4a12" text-anchor="start">schema</text>
+<use xlink:href="#i-shield" transform="translate(77.00,103.00) scale(0.5833)"/>
+<text x="93" y="108.5" font-size="6" font-weight="bold" fill="#5b4a12" text-anchor="start">L2</text>
+<text x="93" y="115.5" font-size="5.5" font-weight="normal" fill="#5b4a12" text-anchor="start">semantic</text>
+<use xlink:href="#i-shield" transform="translate(125.00,103.00) scale(0.5833)"/>
+<text x="141" y="108.5" font-size="6" font-weight="bold" fill="#5b4a12" text-anchor="start">L3</text>
+<text x="141" y="115.5" font-size="5.5" font-weight="normal" fill="#5b4a12" text-anchor="start">registry</text>
+<path d="M66 110 H75.5" fill="none" stroke="#33332f" stroke-width="0.7" marker-end="url(#a)"/>
+<path d="M118 110 H123.5" fill="none" stroke="#33332f" stroke-width="0.7" marker-end="url(#a)"/>
+<path d="M110 78 V88 H36 V102.3" fill="none" stroke="#3c8a2e" stroke-width="0.85" marker-end="url(#ag)"/>
+<path d="M146 97 V78.6" fill="none" stroke="#b3261e" stroke-width="0.85" marker-end="url(#ar)"/>
+<text x="149" y="90.8" font-size="5.5" font-weight="normal" fill="#b3261e" text-anchor="start" font-style="italic">any fail: ≤3 retries</text>
+<path d="M170 110 H206 V82.6" fill="none" stroke="#3c8a2e" stroke-width="0.85" marker-end="url(#ag)"/>
+<text x="188" y="107.6" font-size="5.5" font-weight="normal" fill="#2c5a1f" text-anchor="middle" font-style="italic">pass</text>
+<path d="M132 117.5 V139.5" fill="none" stroke="#8a6fc0" stroke-width="0.85" marker-end="url(#ap)" marker-start="url(#ap)"/>
+<text x="129" y="133.6" font-size="5.5" font-weight="normal" fill="#5e4a8f" text-anchor="end">CAPIF-1e · mTLS</text>
+<path d="M236 82 V139.5" fill="none" stroke="#1a9e98" stroke-width="0.85" marker-end="url(#a)"/>
+<text x="233" y="133.6" font-size="5.5" font-weight="normal" fill="#0d6f6b" text-anchor="end">CAMARA API (HTTP)</text>
+<rect x="22.7" y="140.9" width="124" height="26" rx="3" fill="#000" opacity=".13"/>
+<rect x="22" y="140" width="124" height="26" rx="3" fill="#e9e1f4" stroke="#8a6fc0" stroke-width="0.55"/>
+<text x="84" y="147.6" font-size="6" font-weight="bold" fill="#3f2f6b" text-anchor="middle">OpenCAPIF</text>
+<use xlink:href="#i-lock" transform="translate(25.50,153.00) scale(0.3750)"/>
+<text x="35.8" y="159.6" font-size="5.5" font-weight="normal" fill="#3f2f6b" text-anchor="start">Vault PKI</text>
+<use xlink:href="#i-db" transform="translate(65.50,153.00) scale(0.3750)"/>
+<text x="75.8" y="159.6" font-size="5.5" font-weight="normal" fill="#3f2f6b" text-anchor="start">MongoDB</text>
+<use xlink:href="#i-net" transform="translate(103.50,153.00) scale(0.3750)"/>
+<text x="113.8" y="159.6" font-size="5.5" font-weight="normal" fill="#3f2f6b" text-anchor="start">CCF core</text>
+<rect x="172.7" y="140.9" width="72" height="26" rx="3" fill="#000" opacity=".13"/>
+<rect x="172" y="140" width="72" height="26" rx="3" fill="#d3f1ef" stroke="#1a9e98" stroke-width="0.55"/>
+<text x="208" y="147.6" font-size="6" font-weight="bold" fill="#0b5552" text-anchor="middle">CAMARA</text>
+<use xlink:href="#i-tower" transform="translate(174.50,153.00) scale(0.3750)"/>
+<text x="184.3" y="159.6" font-size="5.5" font-weight="normal" fill="#0b5552" text-anchor="start">QoD</text>
+<use xlink:href="#i-gauge" transform="translate(197.50,153.00) scale(0.3750)"/>
+<text x="207.3" y="159.6" font-size="5.5" font-weight="normal" fill="#0b5552" text-anchor="start">QoS</text>
+<use xlink:href="#i-pin" transform="translate(220.00,153.00) scale(0.3750)"/>
+<text x="229.8" y="159.6" font-size="5.5" font-weight="normal" fill="#0b5552" text-anchor="start">Loc.</text>
+<path d="M171.6 157.5 H147" fill="none" stroke="#8a6fc0" stroke-width="0.8" marker-end="url(#ap)"/>
+<text x="159.3" y="154.2" font-size="5.5" font-weight="normal" fill="#5e4a8f" text-anchor="middle">CAPIF-4</text>
+<path d="M196 166 V177 H40 V191.5" fill="none" stroke="#33332f" stroke-width="0.75" marker-end="url(#a)"/>
+<text x="118" y="175.3" font-size="5.5" font-weight="normal" fill="#33332f" text-anchor="middle">AsSessionWithQoS</text>
+<path d="M230 166 V186.6 H72 V193.5" fill="none" stroke="#33332f" stroke-width="0.75" marker-end="url(#a)" stroke-dasharray="2.2 1.3"/>
+<text x="151" y="184.4" font-size="5.5" font-weight="normal" fill="#33332f" text-anchor="middle" font-style="italic">CAPIF-2e (JWT)</text>
+<rect x="22.7" y="192.9" width="70" height="26" rx="3" fill="#000" opacity=".13"/>
+<rect x="22" y="192" width="70" height="26" rx="3" fill="#ffffff" stroke="#0f6e56" stroke-width="0.55"/>
+<use xlink:href="#i-api" transform="translate(32.50,194.50) scale(0.3750)"/>
+<text x="37" y="209.6" font-size="6.2" font-weight="bold" fill="#084a3b" text-anchor="middle">NEF</text>
+<text x="37" y="215.6" font-size="5.5" font-weight="normal" fill="#084a3b" text-anchor="middle">TS 29.122</text>
+<rect x="56" y="194" width="33" height="22" rx="2" fill="#f6f6f3" stroke="#6c6b66" stroke-width="0.45" stroke-dasharray="1.6 1"/>
+<use xlink:href="#i-db" transform="translate(69.00,196.00) scale(0.2917)"/>
+<text x="72.5" y="208.6" font-size="5.5" font-weight="normal" fill="#45453f" text-anchor="middle">emulated</text>
+<text x="72.5" y="214.2" font-size="5.5" font-weight="normal" fill="#45453f" text-anchor="middle">location</text>
+<rect x="101.7" y="192.9" width="42" height="26" rx="3" fill="#000" opacity=".13"/>
+<rect x="101" y="192" width="42" height="26" rx="3" fill="#ffffff" stroke="#0f6e56" stroke-width="0.55"/>
+<use xlink:href="#i-policy" transform="translate(117.50,194.50) scale(0.3750)"/>
+<text x="122.0" y="209.6" font-size="6.2" font-weight="bold" fill="#084a3b" text-anchor="middle">PCF</text>
+<text x="122.0" y="215.6" font-size="5.5" font-weight="normal" fill="#084a3b" text-anchor="middle">TS 29.514</text>
+<rect x="152.7" y="192.9" width="46" height="26" rx="3" fill="#000" opacity=".13"/>
+<rect x="152" y="192" width="46" height="26" rx="3" fill="#ffffff" stroke="#0f6e56" stroke-width="0.55"/>
+<use xlink:href="#i-router" transform="translate(170.50,194.50) scale(0.3750)"/>
+<text x="175.0" y="209.6" font-size="6.2" font-weight="bold" fill="#084a3b" text-anchor="middle">SMF / UPF</text>
+<text x="175.0" y="215.6" font-size="5.5" font-weight="normal" fill="#084a3b" text-anchor="middle">QoS flow</text>
+<rect x="207.7" y="192.9" width="37" height="26" rx="3" fill="#000" opacity=".13"/>
+<rect x="207" y="192" width="37" height="26" rx="3" fill="#ffffff" stroke="#0f6e56" stroke-width="0.55"/>
+<use xlink:href="#i-tower" transform="translate(214.50,194.50) scale(0.3750)"/>
+<use xlink:href="#i-phone" transform="translate(227.75,195.55) scale(0.3125)"/>
+<text x="225.5" y="209.6" font-size="6" font-weight="bold" fill="#084a3b" text-anchor="middle">gNB + UEs</text>
+<text x="225.5" y="215.6" font-size="5.5" font-weight="normal" fill="#084a3b" text-anchor="middle">UERANSIM</text>
+<path d="M92 205.5 H100.5" fill="none" stroke="#33332f" stroke-width="0.7" marker-end="url(#a)"/>
+<text x="96.5" y="202.8" font-size="5.5" font-weight="normal" fill="#22221f" text-anchor="middle">N5</text>
+<path d="M143 205.5 H151.5" fill="none" stroke="#33332f" stroke-width="0.7" marker-end="url(#a)"/>
+<text x="147.5" y="202.8" font-size="5.5" font-weight="normal" fill="#22221f" text-anchor="middle">N7</text>
+<path d="M198 205.5 H206.5" fill="none" stroke="#33332f" stroke-width="0.7" marker-end="url(#a)"/>
+<text x="202.5" y="202.8" font-size="5.5" font-weight="normal" fill="#22221f" text-anchor="middle">N3</text></svg>
