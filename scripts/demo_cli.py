@@ -181,9 +181,9 @@ def cmd_faults(a):
 
 
 def cmd_load(a):
-    det_n, llm_n = (30, 5) if a.quick else (40, 10)
+    det_n, llm_n, llm_levels = (30, 5, "5") if a.quick else (40, 10, "1,5")
     out = sh(f"cd {ROOT} && {sys.executable} scripts/load_test.py --det-levels 1,10 --det-requests {det_n} "
-             f"--llm-levels 1,5 --llm-requests {llm_n}")
+             f"--llm-levels {llm_levels} --llm-requests {llm_n}")
     print(f"{'planner':14s} {'clients':>7s} {'ok':>6s} {'req/s':>7s} {'p50':>8s} {'p95':>8s}  L3 live")
     for l in out.splitlines():
         r = ast.literal_eval(l)  # load_test prints one dict per level

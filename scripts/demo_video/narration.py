@@ -50,6 +50,12 @@ NARRATION = {
         "Schema and telecom-rule errors are caught and repaired. "
         "Calls to unpublished APIs are blocked by the registry layer.",
     ],
+    "load": [
+        "Step six: a short load test. Every request goes through the live registry check.",
+    ],
+    "load_res": [
+        "All requests succeed. This short run shares the CPU with the screen recorder.",
+    ],
     "results": [
         "On three hundred test intents, GPT, Gemini and Claude all exceed ninety-five percent success, "
         "and the platform serves about one hundred and sixty requests per second.",

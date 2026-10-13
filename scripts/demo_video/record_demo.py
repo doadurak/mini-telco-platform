@@ -190,12 +190,12 @@ def scenes(d: Demo):
     d.sync(0.5)
     d.slide("")
 
-    d.step("STEP 1 / 5 \u00b7 Testbed")
+    d.step("STEP 1 / 6 \u00b7 Testbed")
     d.say("status")
     d.run_wait("status")
     d.sync(0.5)
 
-    d.step("STEP 2 / 5 \u00b7 Dry run")
+    d.step("STEP 2 / 6 \u00b7 Dry run")
     d.say("dry")
     blk = d.open_op("Orchestration", "orchestrate_orchestrate_post")
     d.execute(blk, {"intent": S1, "dry_run": True, "orchestration_mode": "llm-assisted"})
@@ -203,14 +203,14 @@ def scenes(d: Demo):
     d.sync(0.8)
 
     prep()
-    d.step("STEP 3 / 5 \u00b7 Live QoD on the 5G core")
+    d.step("STEP 3 / 6 \u00b7 Live QoD on the 5G core")
     d.say("live")
     d.execute(blk, {"intent": S1, "dry_run": False, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"execution_result"')
     d.say("live_res")
     d.sync(1.0)
 
-    d.step("STEP 4 / 5 \u00b7 Vague intent")
+    d.step("STEP 4 / 6 \u00b7 Vague intent")
     d.say("vague")
     d.execute(blk, {"intent": S3, "dry_run": False, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"steps"')
@@ -218,10 +218,17 @@ def scenes(d: Demo):
     d.close_op(blk)
 
     d.p.evaluate("demo.clearTerm()")
-    d.step("STEP 5 / 5 \u00b7 Fault injection")
+    d.step("STEP 5 / 6 \u00b7 Fault injection")
     d.say("faults")
     d.run_wait("faults")
     d.say("faults_res")
+    d.sync(1.0)
+
+    d.p.evaluate("demo.clearTerm()")
+    d.step("STEP 6 / 6 \u00b7 Load test")
+    d.say("load")
+    d.run_wait("load")
+    d.say("load_res")
     d.sync(1.0)
 
     d.step("")
