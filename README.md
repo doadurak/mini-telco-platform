@@ -274,6 +274,19 @@ no "N seconds" intent produced a duration of N×60, and no entry has an error or
 No pilot entry is affected; the 3 Haiku pilot failures (`qod_en_007`, `qod_tr_005`, `edge_003`) are all service
 selection errors (`qos-provisioning` chosen instead of `qod`, payloads pass L1/L2), unrelated to these fixes.
 
+### Ablations, fault injection and load test (2026-10-13)
+
+| Experiment | Script | Result file | Outcome |
+|---|---|---|---|
+| Single LLM call (no operation schema) | `run_evaluation.py --mode llm-single --no-feedback` | `datasets/eval_results_gpt4omini_single_300.json` | IWSR 77.3%, SCR 78.0% (GPT-4o-mini) |
+| No schema / field rules in Phase 2 | `run_evaluation.py --mode llm-ungrounded --no-feedback` | `datasets/eval_results_gpt4omini_ungrounded_300.json` | IWSR 16.3%, SCR 16.7%: field names are invented |
+| Two-phase planner without feedback (reference) | from `eval_results_gpt4omini_300.json` | — | IWSR 96.7% (97.3% with feedback) |
+| Per-layer fault injection (140 faults into correct plans, live L3) | `scripts/layer_fault_injection.py` | `datasets/layer_faults.json` | all caught at the target layer; feedback repairs L1 40/40, L2 79/80 in one iteration (~1.3 s), L3 0/20 (payload-only correction) |
+| Concurrency load test (`dry_run: true`, live L3) | `scripts/load_test.py` | `datasets/load_test.json` | keyword planner ≈160 req/s (p95 156 ms at 20 clients); GPT-4o-mini latency flat at ≈2.6 s, throughput 0.34→3.3 req/s from 1→10 clients |
+
+The L3 fault is simulated by removing the selected service from the CAPIF discovery response; all other faults are
+mutations of recorded correct payloads.
+
 ### Live runs on the 5G core testbed
 
 `bash scripts/run_live_scenarios.sh` runs the demo scenarios with `dry_run: false` on all three LLM backends
