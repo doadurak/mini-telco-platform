@@ -40,8 +40,7 @@ service and builds a schema-grounded payload, and a three-layer deterministic va
 UERANSIM-emulated UEs. A live request takes 2.2--4.8\,s with GPT-4o-mini or
 Claude\,Haiku\,4.5 (6.9--8.2\,s with Gemini), of which LLM planning accounts for 78--99\%.
 On 300 unique bilingual intents, the LLM planners reach an Intent-to-API Workflow Success
-Rate (IWSR) of 95.3--97.3\%, compared with 83.3\% for a keyword baseline and 16.3\% for
-GPT-4o-mini without schema grounding.
+Rate (IWSR) of 95.3--97.3\%, compared with 83.3\% for a keyword baseline.
 Code, testbed and data: \url{https://github.com/doadurak/mini-telco-platform}.
 \end{abstract}
 
@@ -52,7 +51,7 @@ CAPIF, CAMARA, intent-based networking, LLM orchestration, 5G API exposure, Open
 \section{Introduction}
 Zero-touch Beyond-5G management requires orchestration layers that translate high-level
 intents into standards-compliant API invocations~\cite{coronado2022}. 3GPP
-CAPIF~\cite{3gpp_capif} and GSMA CAMARA~\cite{camara2022} standardize how verticals
+CAPIF~\cite{3gpp_capif} and CAMARA~\cite{camara_project,camara2022} standardize how verticals
 discover and consume network capabilities, but closing the intent-to-API gap on a
 \emph{live} exposure stack remains open. OpenCAPIF~\cite{molina2022} provides exposure
 infrastructure without NL planning; Turkovic~et~al.~\cite{turkovic2025} ran live CAMARA
@@ -66,7 +65,7 @@ to a 3GPP PCF.
 \label{sec:arch}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.96\columnwidth]{fig1_architecture.pdf}
+  \includegraphics[width=0.90\columnwidth]{fig1_architecture.pdf}
   \caption{Platform architecture. Any L1--L3 failure triggers at most three payload
   corrections; CAPIF-1e runs over mTLS, provider calls over HTTP.}
   \label{fig:arch}
@@ -90,18 +89,20 @@ with the ground truth (IWSR).
 \textit{Execution:} For QoS, the adapter resolves the phone number to the UE's IP from
 the 5GC subscriber database; the CAMARA provider forwards an AsSessionWithQoS
 subscription to the NEF, which creates a PCF application session bound to the UE's PDU
-session. Location uses the NEF Monitoring Event API with emulated core data.
+session. Location uses the NEF Monitoring Event API with emulated core
+data~\cite{plastras2026}. The CAMARA and NEF services are NCSRD's open-source
+implementations~\cite{front_repos}.
 
 \section{Live Demonstration}
 \label{sec:demo}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.74\columnwidth]{fig2_live_orchestrate.png}
-  \caption{Recorded live response (S1, GPT-4o-mini, \texttt{dry\_run:false}), rendered
-  from the stored JSON in the repository (MSISDN masked).}
+  \includegraphics[width=0.64\columnwidth]{fig2_live_orchestrate.png}
+  \caption{Recorded live response (S1, GPT-4o-mini, \texttt{dry\_run:false}, MSISDN masked).}
   \label{fig:ui}
 \end{figure}
-The full stack of Fig.~\ref{fig:arch} runs on one 16\,GB host via \texttt{start.sh}. All
+The full stack of Fig.~\ref{fig:arch}, including Open5GS~\cite{open5gs} and
+UERANSIM~\cite{ueransim}, runs on one 16\,GB host via \texttt{start.sh}. All
 scenarios run with \texttt{dry\_run:false}, and their responses are in the repository.
 \textbf{S1 (QoD):} \textit{``Activate video-streaming quality for $\langle$MSISDN$\rangle$
 for the next 30 minutes''} yields \texttt{QOS\_E\_STREAMING}, 1800\,s, enforced as
@@ -133,10 +134,6 @@ Keyword baseline   & 83.3\% & 100.0\% & 100.0\% & 16.7\% & 0.962 \\
 GPT-4o-mini        & \textbf{97.3\%} & 100.0\% & 99.0\% & \textbf{2.3\%} & \textbf{0.975} \\
 Claude\,Haiku\,4.5 & 95.3\% & 99.3\% & \textbf{99.3\%} & 4.0\% & 0.927 \\
 Gemini\,2.5\,Flash & 96.0\% & 100.0\% & 98.3\% & 3.0\% & 0.945 \\
-\midrule
-\multicolumn{6}{l}{\textit{Ablations (GPT-4o-mini, no feedback loop)}} \\
-Single LLM call    & 77.3\% & 78.0\% & 77.3\% & 3.3\% & 0.949 \\
-No schema in Ph.\,2 & 16.3\% & 16.7\% & 16.7\% & 4.0\% & 0.947 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -159,7 +156,7 @@ L3 & service not published & 20/20 & 0/20 & 3.8\,s (3) \\
 The dataset holds 300 unique intents (152\,EN / 148\,TR; 96 easy, 94 medium, 110 hard):
 275 across the four services and 25 ambiguous edge cases. We derived the ground truth
 (service, operation, payload checks) from the CAMARA OpenAPI constraints and NEF test
-fixtures; it supersedes a 60-entry pilot (\texttt{datasets/legacy\_pilot\_60/}).
+fixtures; it supersedes a 60-entry pilot.
 IWSR is the share of plans that select the correct service and pass validation; HR is
 the share of wrong service selections. SS is one minus the standard deviation of IWSR
 across the three difficulty levels: it measures robustness to difficulty, not run-to-run
@@ -170,20 +167,16 @@ the baseline scores 100\%; on the 240 held-out intents it drops to 79.2\%, while
 reach 95.4--97.1\%. The 8--14 failures per LLM are mostly confusions between QoD and
 QoS\,Provisioning (as in S3), and most occur on hard intents (IWSR 87--95\%, versus
 99--100\% on easy and medium intents).
-\textit{Ablations:} without the operation's schema and field rules in Phase\,2,
-GPT-4o-mini invents field names and its SCR falls to 16.7\% (cf.\ 40\% for ungrounded
-GPT-4 in~\cite{liu2024}); without feedback, a single-call planner reaches an IWSR of
-77.3\% and our two-phase planner 96.7\%.
 \textit{Fault injection} (Table~\ref{tab:faults}): each fault is caught by its target
 layer. Feedback repairs L1/L2 faults in one iteration but not an unpublished or
 wrong-but-registered service, because it only rewrites the payload.
-\textit{Scalability and LLM APIs:} without an LLM (keyword planner, live L3 checks), a
-single backend process handles $\approx$160\,req/s (95th-percentile latency 156\,ms with
-20 concurrent clients). With GPT-4o-mini, latency stays at $\approx$2.6\,s for up to 10
-concurrent requests, and throughput grows linearly from 0.34 to 3.3\,req/s; hence the LLM
-API, not the platform, is the bottleneck. If the LLM API fails, \texttt{auto} mode falls
-back to the keyword planner. Because intents, including MSISDNs, are sent to an external
-API, production use requires pseudonymization or a self-hosted model.
+Without the schema in Phase\,2, IWSR falls to 16.3\%.
+\textit{Scalability and external LLM APIs:} with live L3 checks, one backend process
+serves $\approx$160\,req/s with the keyword planner; with GPT-4o-mini, latency stays at
+$\approx$2.6\,s for up to 10 concurrent requests, so the LLM API is the bottleneck. If it
+fails, \texttt{auto} mode falls
+back to the keyword planner. As intents (with MSISDNs) reach an external API, production
+use needs pseudonymization or a self-hosted model.
 
 {\footnotesize
 \bibliographystyle{IEEEtran}
