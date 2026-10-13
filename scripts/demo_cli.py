@@ -180,9 +180,10 @@ def cmd_faults(a):
                   f"{int(m.group(6)) / 1000:>7.1f} s")
 
 
-def cmd_load(_):
-    out = sh(f"cd {ROOT} && {sys.executable} scripts/load_test.py --det-levels 1,10 --det-requests 40 "
-             f"--llm-levels 1,5 --llm-requests 10")
+def cmd_load(a):
+    det_n, llm_n = (30, 5) if a.quick else (40, 10)
+    out = sh(f"cd {ROOT} && {sys.executable} scripts/load_test.py --det-levels 1,10 --det-requests {det_n} "
+             f"--llm-levels 1,5 --llm-requests {llm_n}")
     print(f"{'planner':14s} {'clients':>7s} {'ok':>6s} {'req/s':>7s} {'p50':>8s} {'p95':>8s}  L3 live")
     for l in out.splitlines():
         r = ast.literal_eval(l)  # load_test prints one dict per level
@@ -222,7 +223,7 @@ def main() -> None:
     sub.add_parser("core-evidence").set_defaults(fn=cmd_core_evidence)
     p = sub.add_parser("compare"); p.add_argument("scenario", choices=SCENARIOS); p.set_defaults(fn=cmd_compare)
     p = sub.add_parser("faults"); p.add_argument("--per-fault", type=int, default=2); p.set_defaults(fn=cmd_faults)
-    sub.add_parser("load").set_defaults(fn=cmd_load)
+    p = sub.add_parser("load"); p.add_argument("--quick", action="store_true"); p.set_defaults(fn=cmd_load)
     sub.add_parser("results").set_defaults(fn=cmd_results)
     a = ap.parse_args()
     a.fn(a)

@@ -1,0 +1,175 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2cm]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{array}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=black}
+\setlist{itemsep=1pt,topsep=2pt}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\ok}{\textcolor{green!50!black}{\textbf{Kapandı}}}
+\newcommand{\limited}{\textcolor{orange!80!black}{\textbf{Kapandı (sınırlı)}}}
+\newcommand{\q}[1]{\textit{``#1''}}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+\title{\textbf{CNSM 2026 Hakem Eleştirileri ve Çözümleri}\\[2pt]
+\large DEMO: From Natural Language to Live 5G API Calls\\
+\normalsize CNSM 2026 demo \#1571315592 $\rightarrow$ WMNC 2026 demo yeniden gönderimi}
+\author{Türkan Doğa Durak}
+\date{13 Ekim 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Özet}
+CNSM 2026'da dört hakemin dördü de \textit{Weak Accept (3)} verdi; konu uygunluğu tüm hakemlerce
+\q{Very relevant (4)} olarak puanlandı. Ret kararı kavramsal değil, büyük ölçüde \textbf{doğrulanabilirlik ve
+tutarlılık} sorunlarından kaynaklandı: makaledeki ``canlı'' iddiaları ile şekil/kod arasındaki çelişkiler,
+public repodaki eski sonuçlar ve değerlendirmenin kapsamının belirsizliği. Toplam 13 eleştirinin 10'u tamamen,
+3'ü sınırlamaları açıkça belirtilerek kapatıldı. Çözümlerin çoğu yalnızca metin düzeltmesi değil; kodda,
+test ortamında ve verilerde gerçek değişiklik içeriyor. Tüm kanıtlar
+\url{https://github.com/doadurak/mini-telco-platform} adresinde.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{l L l}
+\toprule
+\textbf{Hakem} & \textbf{Ana kaygı} & \textbf{Durum} \\
+\midrule
+H1 & ``Canlı'' denilen Fig.~2'de \texttt{dry\_run: true}; değerlendirmenin neyi ölçtüğü belirsiz & 4/4 \ok \\
+H2 & İlgili çalışmalarla deneysel karşılaştırma, ölçeklenebilirlik, LLM bağımlılığı, biçim & 6/6 (2'si sınırlı) \\
+H3 & Katman bazlı zorluklar; doğruluk ve gecikmeye etkisi & 1/1 \ok \\
+H4 & Public repo makaleyle çelişiyor (60-entry, Gemini 6/60, tarihsiz bug fix) & 3/3 \ok \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Hakem 1: Dry-run ile canlı yürütmenin karışması}
+\textbf{Neye itiraz etti?} Makale Fig.~2'yi ``canlı provider yanıtı ve üç doğrulama katmanı'' olarak anlatıyordu,
+ama şekildeki istekte \texttt{"dry\_run": true} vardı: \q{The authors should clarify whether this execution includes a
+provider call and a live CAPIF registry check.} Hakem ayrıca yanlış ama kayıtlı bir servisin nasıl yakalandığını ve
+300 kaydın ne olduğunu sordu.
+
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm} L l}
+\toprule
+\textbf{Eleştiri} & \textbf{Ne yaptık / kanıt} & \textbf{Durum} \\
+\midrule
+Fig.~2 \texttt{dry\_run: true} gösteriyor &
+Fig.~2, gerçek 5G core üzerinde yapılmış bir \texttt{dry\_run:false} çağrısının kayıtlı yanıtından yeniden üretildi:
+QoD HTTP~201, Open5GS PCF onayıyla \texttt{qosStatus: AVAILABLE}, \texttt{registry\_checked=true}.
+Kanıt: \texttt{docs/live\_runs/2026-10-11-5gc/}. Repodaki eski görselin aslında CAPIF bağlantısı \emph{başarısızken}
+(\texttt{mock-onboarded}) alındığı da tespit edilip değiştirildi. & \ok \\
+Provider çağrısı ve canlı CAPIF kontrolü var mı? &
+\textbf{Kodda düzeltildi:} L3 eskiden \texttt{dry\_run} açıkken atlanıyordu (\texttt{skip\_registry=dry\_run}).
+Artık L3 her zaman canlı CAPIF registry'sine soruyor (\texttt{check\_registry}). mTLS'in yalnızca CAPIF
+onboarding/discovery'de, provider çağrısının HTTP ile yapıldığı açıkça yazıldı. & \ok \\
+Yanlış ama kayıtlı servis nasıl yakalanıyor? &
+Dürüst cevap: yakalanmıyor. L3 yalnızca servisin yayınlı olduğunu kontrol eder; feedback döngüsü yalnızca
+payload'ı düzeltir. Hata enjeksiyonu bunu sayıyla gösteriyor: L3 hataları 0/20 düzeltildi. S3 senaryosu bu
+sınırı gösteren bir demo örneğine dönüştürüldü. & \ok \\
+300 kayıt, ground truth, IWSR'nin kapsamı &
+300 \emph{benzersiz} intent (152 EN / 148 TR), intent başına tek koşu, ground truth CAMARA OpenAPI kısıtları ve
+NEF test verisinden. Benchmark provider çağırmaz; kayıtlı 1.200 planın tamamı canlı L3'e karşı yeniden doğrulandı
+(0 ret). & \ok \\
+\bottomrule
+\end{tabularx}
+
+\section{Hakem 2: Karşılaştırma, ölçeklenebilirlik, sunum}
+\textbf{Neye itiraz etti?} \q{The comparison with related work is mostly qualitative and lacks experimental
+benchmarking}; demo bölümünün çok sayıda alt bölüme bölünmesi; gecikme kırılımı, ölçeklenebilirlik ve harici LLM
+API'lerine bağımlılığın yüzeysel kalması; yüzde boşlukları ve bölünen kelimeler.
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm} L l}
+\toprule
+\textbf{Eleştiri} & \textbf{Ne yaptık / kanıt} & \textbf{Durum} \\
+\midrule
+Deneysel karşılaştırma yok &
+İki ablasyon (GPT-4o-mini, 300 kayıt): \textbf{şemasız LLM IWSR \%16.3} (model alan adlarını uyduruyor;
+Liu ve ark.'nın grounding'siz GPT-4 için \%40'ı ile karşılaştırıldı), \textbf{tek çağrılı LLM \%77.3},
+bizim iki fazlı planlayıcımız \%96.7. Tablo~I'e eklendi. Harici bir sistemle doğrudan benchmark yapılmadı. & \limited \\
+Çok fazla alt bölüm & Senaryolar tek bölümde, kalın başlıklı paragraflar halinde birleştirildi. & \ok \\
+Gecikme kırılımı & Her yanıtta aşama bazlı süre: planlama toplamın \%78--99'u, doğrulama 13--27~ms. & \ok \\
+Ölçeklenebilirlik &
+Yük testi: LLM'siz platform $\approx$160~istek/s (20 istemcide p95 156~ms); GPT-4o-mini ile gecikme
+$\approx$2.6~s'de sabit, verim 0.34$\rightarrow$3.3~istek/s doğrusal. Darboğaz LLM API'si. Tek host üzerinde
+ölçüldü; dağıtık ölçekleme denenmedi. & \limited \\
+Harici LLM API bağımlılığı &
+API hatasında \texttt{auto} modu kural tabanlı planlayıcıya dönüyor (bu davranıştaki bir hata da düzeltildi:
+yalnızca Gemini anahtarı varsa çalışıyordu). MSISDN'lerin dış API'ye gittiği ve üretimde pseudonymization veya
+self-hosted model gerektiği yazıldı. & \ok \\
+Biçim tutarsızlıkları &
+\% öncesi boşluk kaldırıldı, CAMARA/OpenCAPIF artık satır sonunda bölünmüyor, aralıklarda en-dash. Derleme logu
+uyarısız. Danışmanın ``not clear sentence'' yorumu üzerine sıkıştırılmış cümleler açık hale getirildi. & \ok \\
+\bottomrule
+\end{tabularx}
+
+\section{Hakem 3: Katman bazlı zorluklar}
+\textbf{Neye itiraz etti?} \q{This demo could be expanded by preparing a few test sets to illustrate the
+difficulties encountered at the various layers \ldots\ and by presenting the impact on the accuracy and also on
+other metrics e.g., latency.}
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm} L l}
+\toprule
+\textbf{Eleştiri} & \textbf{Ne yaptık / kanıt} & \textbf{Durum} \\
+\midrule
+Katman bazlı test setleri, doğruluk ve gecikmeye etkisi &
+Doğru planlara 140 kontrollü hata enjekte edildi (Tablo~II): hepsi hedef katmanda yakalandı. Feedback L1'de
+40/40, L2'de 79/80 hatayı tek turda ($\approx$1.3~s) düzeltti; L3'te 0/20 (3 tur, $\approx$3.8~s). Ayrıca 300
+kayıtta hata türü (yanlış servis, L1/L2 reddi) ve zorluk bazlı IWSR (zor: \%87--95, kolay/orta: \%99--100)
+raporlandı. L3 hatası registry yanıtından servis çıkarılarak simüle edildi. & \ok \\
+\bottomrule
+\end{tabularx}
+
+\section{Hakem 4: Public repo ile makale arasındaki çelişki}
+\textbf{Neye itiraz etti?} En sert ve en somut eleştiri buydu. Hakem repoyu incelemiş ve
+\q{this is directly contradicted by the authors' own public repository} demişti: README'de 60 kayıtlık eski
+tabloda deterministik baseline \%100 ile LLM'lerin önündeydi, Gemini \q{partial 6/60-entry run} görünüyordu ve
+bug fix'ler veri toplama tarihine göre tarihsizdi.
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm} L l}
+\toprule
+\textbf{Eleştiri} & \textbf{Ne yaptık / kanıt} & \textbf{Durum} \\
+\midrule
+60-entry ters sıralama &
+README ve demo script'i 300 kayıtlık sonuçları gösteriyor; pilot \texttt{datasets/legacy\_pilot\_60/}
+altında arşivlendi. Çelişkinin \emph{sebebi} ölçüldü: anahtar kelime kuralları pilot için yazıldığından baseline
+pilotta 60/60, görülmemiş 240 kayıtta \%79.2; LLM'ler aynı 240 kayıtta \%95.4--97.1. & \ok \\
+Gemini 6/60 &
+Gemini'nin pilotu 60/60 tamamlanmıştı, 300/300 sonuçları da var; README ve demo script'indeki eski ifadeler
+temizlendi. & \ok \\
+Tarihsiz bug fix'ler &
+README'de git geçmişine dayalı tarihli zaman çizelgesi; pilot sonuçları üç hatanın izleri için tarandı, etkilenen
+kayıt yok. Çok-niyetli cümlelerdeki bir planlayıcı hatası da bu süreçte bulunup düzeltildi ve etkilenen 11 kayıt
+izlenebilir şekilde yeniden koşturuldu (sonuç dosyalarında \texttt{rerun} alanı). & \ok \\
+\bottomrule
+\end{tabularx}
+
+\section{Eleştirilerin ötesinde yapılan iyileştirmeler}
+\begin{itemize}
+\item \textbf{Gerçek 5G core:} Open5GS 5GC + UERANSIM (3 UE) eklendi. QoS istekleri artık
+CAMARA $\rightarrow$ NEF $\rightarrow$ Open5GS PCF zincirinde gerçekten yetkilendiriliyor (\texttt{testbed/open5gs}).
+\item \textbf{Profil uyumsuzluğu:} LLM'in ürettiği \texttt{QOS\_E\_STREAMING} gibi profilleri provider
+tanımıyordu; operatör profillerine eşleme eklendi.
+\item \textbf{Telefon numarası $\rightarrow$ UE IP çözümlemesi} 5GC abone veritabanından yapılıyor.
+\item \textbf{Yeni mimari şekli (Fig.~1)} kodla birebir doğrulandı (CAPIF-1e/mTLS, CAPIF-2e/JWT, CAPIF-4).
+\item \textbf{Yeniden üretilebilirlik:} \texttt{start.sh}, \texttt{scripts/reset\_capif.sh},
+\texttt{scripts/run\_live\_scenarios.sh}; test paketi 78/78.
+\end{itemize}
+
+\section{Açıkça belirtilen sınırlamalar}
+\begin{itemize}
+\item UERANSIM NGAP \textit{PDU Session Resource Modify} desteklemediği için QoS akışı core tarafından
+yetkilendiriliyor ama emüle radyoda uygulanmıyor.
+\item Konum verisi NEF'in emüle veri kaynağından geliyor, Open5GS AMF'den değil.
+\item Ablasyonlar yalnızca GPT-4o-mini ile, intent başına tek koşu yapıldı.
+\item Ölçeklenebilirlik tek host üzerinde ölçüldü; L3 hata enjeksiyonu simülasyon.
+\end{itemize}
+
+\end{document}

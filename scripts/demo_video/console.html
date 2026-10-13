@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>mini-telco-platform live console</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #111418;
+         font-family: "Segoe UI", Arial, sans-serif; }
+  #hdr { height: 44px; background: #0b0d10; color: #dfe3e8; display: flex; align-items: center;
+         padding: 0 18px; font-size: 18px; gap: 14px; border-bottom: 1px solid #2a2f37; }
+  #hdr .live { color: #fff; background: #d93025; border-radius: 4px; padding: 2px 9px; font-weight: 700; font-size: 15px; }
+  #hdr .r { margin-left: auto; color: #8a93a2; font-size: 16px; }
+  #main { position: absolute; top: 44px; bottom: 0; left: 0; right: 0; display: flex; }
+  #left { width: 1100px; height: 100%; border-right: 2px solid #2a2f37; background: #fff; }
+  #left iframe { width: 100%; height: 100%; border: 0; }
+  #right { flex: 1; display: flex; flex-direction: column; padding-bottom: 96px; }
+  .pane { display: flex; flex-direction: column; border-bottom: 2px solid #2a2f37; min-height: 0; }
+  .pane .t { background: #1c2027; color: #9fb3c8; font: 600 14px "Segoe UI", Arial; padding: 5px 12px; }
+  .pane pre { margin: 0; flex: 1; overflow: hidden; padding: 8px 12px; color: #d7dbe0;
+              font: 14px/1.38 Consolas, "Cascadia Mono", monospace; white-space: pre-wrap; word-break: break-all; }
+  #term { flex: 1.45; } #blog { flex: 1; } #nlog { flex: 0.85; }
+  .ok { color: #8fd18f; } .pr { color: #7cc36e; } .hl { color: #ffd166; } .dim { color: #7b8594; }
+  #sub { position: absolute; left: 0; right: 0; bottom: 0; min-height: 86px; background: rgba(0,0,0,.82);
+         color: #fff; font: 600 27px/1.35 "Segoe UI", Arial; padding: 12px 40px; text-align: center;
+         display: none; z-index: 20; }
+  #slide { position: absolute; inset: 0; background: #fff; z-index: 10; display: none; }
+</style></head>
+<body>
+<div id="hdr"><span class="live">LIVE</span><b>mini-telco-platform</b>
+  <span>running system: OpenCAPIF + CAMARA/NEF providers + Open5GS 5G core + UERANSIM</span>
+  <span class="r" id="clock"></span></div>
+<div id="main">
+  <div id="left"><iframe id="swagger" src="http://localhost:8000/docs"></iframe></div>
+  <div id="right">
+    <div class="pane" id="term"><div class="t">Terminal</div><pre id="termp"></pre></div>
+    <div class="pane" id="blog"><div class="t">docker logs -f mini-telco-backend-capif (orchestration backend)</div><pre id="blogp"></pre></div>
+    <div class="pane" id="nlog"><div class="t">docker logs -f nef-qos (NEF AsSessionWithQoS -> Open5GS PCF)</div><pre id="nlogp"></pre></div>
+  </div>
+</div>
+<div id="slide"></div>
+<div id="sub"></div>
+<script>
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const mask = s => s.replace(/\+(\d{5})\d{5}(\d{2})/g, "+$1•••••$2");
+function append(id, html, max) {
+  const p = document.getElementById(id);
+  p.insertAdjacentHTML("beforeend", html + "\n");
+  const lines = p.innerHTML.split("\n");
+  if (lines.length > max) p.innerHTML = lines.slice(lines.length - max).join("\n");
+  p.scrollTop = p.scrollHeight;
+}
+function logLine(line) {
+  let s = esc(mask(line)).replace(/^\S+\s+\S+\s+/, "");
+  if (/201|AVAILABLE|POST \/orchestrate/.test(line)) s = `<span class="hl">${s}</span>`;
+  return s;
+}
+function follow(c, id, max) {
+  const es = new EventSource(`/logs?c=${c}`);
+  es.addEventListener("line", e => append(id, logLine(JSON.parse(e.data)), max));
+}
+follow("backend", "blogp", 12);
+follow("nefqos", "nlogp", 6);
+setInterval(() => document.getElementById("clock").textContent =
+  new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC", 500);
+
+window.demo = {
+  sub(t) { const s = document.getElementById("sub"); s.style.display = t ? "block" : "none"; s.innerHTML = t || ""; },
+  slide(html) { const s = document.getElementById("slide"); s.style.display = html ? "block" : "none"; s.innerHTML = html || ""; },
+  clearTerm() { document.getElementById("termp").innerHTML = ""; },
+  run(k) {
+    return new Promise(resolve => {
+      const es = new EventSource(`/run?k=${k}`);
+      es.addEventListener("cmd", e => append("termp",
+        `<span class="pr">turkad@testbed:~/mini-telco-platform$</span> <b>${esc(JSON.parse(e.data))}</b>`, 26));
+      es.addEventListener("line", e => append("termp", esc(mask(JSON.parse(e.data))), 26));
+      es.addEventListener("end", () => { es.close(); (window.__done ||= {})[k] = true; resolve(); });
+    });
+  },
+};
+</script>
+</body></html>
