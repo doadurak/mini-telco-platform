@@ -24,28 +24,33 @@ def ok(b):
     return "PASS" if b else "FAIL"
 
 
+def mask(msisdn: str) -> str:
+    """Show only the country/operator prefix and the last two digits of an MSISDN."""
+    return msisdn[:6] + "•" * (len(msisdn) - 8) + msisdn[-2:]
+
+
+phone = step["payload"]["device"]["phoneNumber"]
+intent = d["intent"].replace(phone, mask(phone))
+t = d.get("timings_ms", {})
+
 panels = [
-    ("Request  POST /orchestrate", "#1f4e79", [
-        *[("\"intent\": \"" if i == 0 else "           ") + ln
-          for i, ln in enumerate(textwrap.wrap(d["intent"] + '"', 44))],
-        '"dry_run": false, "orchestration_mode": "llm-assisted"',
+    ('POST /orchestrate  (dry_run: false, llm-assisted)', "#1f4e79", [
+        *[("intent: \"" if i == 0 else "         ") + ln
+          for i, ln in enumerate(textwrap.wrap(intent + '"', 50))],
     ]),
     (f'Plan ({d["planner"]["model"]}) + L1-L3 validation', "#7a4b00", [
-        f'service: {step["service_id"]} / {step["operation_id"]}  ({step["method"]})',
-        *[("payload: " if i == 0 else "         ") + f'"{k}": {json.dumps(v)}'
-          for i, (k, v) in enumerate(step["payload"].items())],
-        f'L1 schema: {ok(val["layer1_schema"]["passed"])}   L2 semantic: {ok(val["layer2_semantic"]["passed"])}',
-        f'L3 CAPIF registry: {ok(val["layer3_registry"]["passed"])}  (registry_checked={str(val.get("registry_checked")).lower()})',
+        f'{step["service_id"]}/{step["operation_id"]}: qosProfile {step["payload"].get("qosProfile")}, '
+        f'duration {step["payload"].get("duration")} s',
+        f'L1 {ok(val["layer1_schema"]["passed"])}  L2 {ok(val["layer2_semantic"]["passed"])}  '
+        f'L3 {ok(val["layer3_registry"]["passed"])} (live CAPIF, registry_checked='
+        f'{str(val.get("registry_checked")).lower()})',
     ]),
     ("Execution: CAMARA QoD -> NEF -> Open5GS PCF", "#1b5e20", [
-        f'device {step["payload"]["device"]["phoneNumber"]} -> UE IP {ex.get("resolvedUeIpv4")} (5GC subscriber DB)',
-        f'profile {ex.get("requestedQosProfile")} -> enforced as {ex.get("qosProfile")}',
-        f'HTTP {prov.get("http_status")}  {prov.get("url", "").replace("http://host.docker.internal", "")}',
-        f'sessionId: {ex.get("sessionId")[:18]}...   duration: {ex.get("duration")} s',
-        f'qosStatus: {ex.get("qosStatus")}  (PCF app session bound to PDU session)',
-    ]),
-    ("Latency breakdown (ms)", "#4a4a4a", [
-        "   ".join(f"{k}: {v:.0f}" for k, v in d.get("timings_ms", {}).items() if k != "feedback"),
+        f'UE IP {ex.get("resolvedUeIpv4")} (subscriber DB); '
+        f'{ex.get("requestedQosProfile")} -> {ex.get("qosProfile")}',
+        f'HTTP {prov.get("http_status")}, qosStatus {ex.get("qosStatus")} (PCF app session)',
+        f'ms: plan {t.get("planning", 0):.0f} | valid. {t.get("validation", 0):.0f} | '
+        f'exec {t.get("execution", 0):.0f} | total {t.get("total", 0):.0f}',
     ]),
 ]
 

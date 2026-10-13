@@ -1,0 +1,86 @@
+[
+  {
+    "mode": "deterministic",
+    "concurrency": 1,
+    "requests": 60,
+    "ok": 60,
+    "registry_checked": 60,
+    "throughput_rps": 63.35,
+    "p50_ms": 16,
+    "p95_ms": 17,
+    "median_planning_ms": 0.1,
+    "median_validation_ms": 13.1
+  },
+  {
+    "mode": "deterministic",
+    "concurrency": 5,
+    "requests": 60,
+    "ok": 60,
+    "registry_checked": 60,
+    "throughput_rps": 143.11,
+    "p50_ms": 32,
+    "p95_ms": 50,
+    "median_planning_ms": 0.1,
+    "median_validation_ms": 26.9
+  },
+  {
+    "mode": "deterministic",
+    "concurrency": 10,
+    "requests": 60,
+    "ok": 60,
+    "registry_checked": 60,
+    "throughput_rps": 161.11,
+    "p50_ms": 57,
+    "p95_ms": 79,
+    "median_planning_ms": 0.1,
+    "median_validation_ms": 50.0
+  },
+  {
+    "mode": "deterministic",
+    "concurrency": 20,
+    "requests": 60,
+    "ok": 60,
+    "registry_checked": 60,
+    "throughput_rps": 164.27,
+    "p50_ms": 104,
+    "p95_ms": 156,
+    "median_planning_ms": 0.1,
+    "median_validation_ms": 97.7
+  },
+  {
+    "mode": "llm-assisted",
+    "concurrency": 1,
+    "requests": 20,
+    "ok": 20,
+    "registry_checked": 20,
+    "throughput_rps": 0.34,
+    "p50_ms": 2730,
+    "p95_ms": 3966,
+    "median_planning_ms": 2677.8,
+    "median_validation_ms": 13.8
+  },
+  {
+    "mode": "llm-assisted",
+    "concurrency": 5,
+    "requests": 20,
+    "ok": 20,
+    "registry_checked": 20,
+    "throughput_rps": 1.79,
+    "p50_ms": 2707,
+    "p95_ms": 2978,
+    "median_planning_ms": 2672.6,
+    "median_validation_ms": 13.7
+  },
+  {
+    "mode": "llm-assisted",
+    "concurrency": 10,
+    "requests": 20,
+    "ok": 20,
+    "registry_checked": 20,
+    "throughput_rps": 3.28,
+    "p50_ms": 2561,
+    "p95_ms": 3037,
+    "median_planning_ms": 2530.2,
+    "median_validation_ms": 16.1
+  }
+]
