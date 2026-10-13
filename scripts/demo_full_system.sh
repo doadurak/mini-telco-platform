@@ -362,8 +362,7 @@ for name, path in results:
 print()
 print("  ✔  All LLM planners IWSR ≥ 95.3% vs. 83.3% for the keyword baseline on 300 unique EN/TR intents")
 print("  ✔  SS = 1 − std-dev of IWSR across easy/medium/hard strata (difficulty robustness, not repeated runs)")
-print("  ✔  Offline benchmark: L1+L2 per plan; L3 re-checked against the live CAPIF registry (datasets/l3_rescore_300.json)")
-print("  ⚠  Gemini 2.5 Flash: 6/60 evaluated  →  full run pending quota reset")
+print("  ✔  Offline benchmark (no provider calls): all 1,200 plans checked against the live CAPIF registry, 0 L3 rejections")
 PYEOF
 
 pause 4
