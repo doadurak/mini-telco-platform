@@ -284,6 +284,13 @@ QoS requests go CAMARA QoD / QoS Provisioning → NEF-QoS (TS 29.122 AsSessionWi
 Open5GS subscriber DB and maps intent-level QoS classes (`QOS_E_STREAMING`, …) to the operator profiles NEF-QoS
 enforces (`QOS_E/S/M/L`, see `backend/qos_profiles.py`).
 
+Recorded runs:
+
+| Folder | State of the system | Use |
+|---|---|---|
+| `docs/live_runs/2026-10-11-5gc/` | Open5GS PCF attached, profile mapping and UE-IP resolution in place | Reported in the WMNC 2026 paper (Fig. 2, S1–S4) |
+| `docs/live_runs/2026-10-10/` | **Before** these fixes: no PCF (QoD `qosStatus: UNAVAILABLE`), semantic profiles such as `QOS_E_STREAMING` rejected by NEF-QoS (HTTP 500), S3 used a non-dataset intent | Kept unedited as the baseline that motivated the fixes; not reported as a result |
+
 Limits of the testbed: UERANSIM does not implement NGAP *PDU Session Resource Modify*, so the dedicated QoS flow is
 authorized and signalled by the core but not enforced on the emulated radio; location data comes from the
 FRONT-research-group NEF's emulated core data source, not from the Open5GS AMF.
@@ -623,6 +630,7 @@ bash scripts/demo_full_system.sh --fast  # skip pauses (video recording)
 | QoS live calls failed: no PCF behind NEF-QoS, provider rejected semantic profiles (`QOS_E_STREAMING`) | Fixed | Open5GS PCF testbed (`testbed/open5gs`) + semantic→operator profile mapping |
 | L3 skipped whenever `dry_run: true` | Fixed | `check_registry` (default on) is independent of `dry_run` |
 | Multi-intent prompts: Phase-1 LLM returned a JSON list, planner rejected it | Fixed | Multi-step plans; the 11 affected entries were re-run |
+| `auto` mode tried the LLM only when a Gemini key was set (ignored OpenAI/Anthropic) | Fixed | Checks the active provider's key; on LLM errors it falls back to the keyword planner |
 | UERANSIM gNB ignores NGAP PDU Session Resource Modify | Testbed limit | QoS is authorized/signalled by the core, not enforced on the emulated radio |
 | Vault (dev mode) loses PKI after Docker/WSL restart | Operational | `bash scripts/reset_capif.sh` |
 | Gemini free tier: 250 RPD limit | Operational | Use `--delay 12 --resume` across days |
