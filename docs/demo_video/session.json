@@ -1,0 +1,115 @@
+{
+  "recorded_at": "2026-10-13T19:45:15+03:00",
+  "host": "single 16 GB host (WSL2 + Docker Desktop)",
+  "scenes": [
+    {
+      "title": "The whole stack is live",
+      "tag": "Reviewers 1 & 4: live CAPIF, real execution",
+      "caption": "OpenCAPIF, four CAMARA/NEF providers, an Open5GS 5G core and UERANSIM UEs are running. The backend discovered the published CAMARA APIs over CAPIF (mTLS).",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py status",
+          "output": "Running containers\n  OpenCAPIF (CCF, register, Vault)    22 up\n  CAMARA / NEF providers               4 up\n  Open5GS 5GC + UERANSIM              14 up\n  Orchestration backend                1 up\n\nCAPIF discovery (invoker INVd66acc51e..., mTLS): discovered\n  - 3gpp-monitoring-event\n  - location-retrieval\n  - qos-profiles\n  - qos-provisioning\n  - quality-on-demand\n\nUE PDU sessions (UERANSIM -> Open5GS UPF)\n  uesimtun0  10.45.0.11/32\n  uesimtun1  10.45.0.10/32\n  uesimtun2  10.45.0.12/32",
+          "seconds": 0.4,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "title": "Dry-run vs. live execution",
+      "tag": "Reviewer 1: the old Fig. 2 showed dry_run: true",
+      "caption": "dry_run: true validates the plan, including the live CAPIF registry check (L3), but does not call the provider. dry_run: false executes CAMARA QoD -> NEF -> Open5GS PCF and returns AVAILABLE.",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py run s1",
+          "output": "REQUEST     intent: \"Activate video-streaming quality for +90532•••••67 for the next 30 minutes.\"\n            dry_run: true   mode: llm-assisted\nPLAN        gpt-4o-mini: qod / createSession\n            payload: {\"device\": {\"phoneNumber\": \"+90532•••••67\"}, \"applicationServer\": {\"ipv4Address\":\n                     \"198.51.100.10\"}, \"qosProfile\": \"QOS_E_STREAMING\", \"duration\": 1800}\nVALIDATION  L1 schema PASS   L2 semantic PASS   L3 CAPIF registry PASS\n            registry_checked: true  (live CAPIF discovery over mTLS)\nEXECUTION   dry-run: plan validated, provider NOT called\nTIMINGS     planning 2683 ms | validation 14 ms | execution 0 ms | total 2698 ms",
+          "seconds": 2.8,
+          "exit": 0
+        },
+        {
+          "cmd": "python scripts/demo_cli.py run s1 --live",
+          "output": "REQUEST     intent: \"Activate video-streaming quality for +90532•••••67 for the next 30 minutes.\"\n            dry_run: false   mode: llm-assisted\nPLAN        gpt-4o-mini: qod / createSession\n            payload: {\"device\": {\"phoneNumber\": \"+90532•••••67\"}, \"applicationServer\": {\"ipv4Address\":\n                     \"198.51.100.10\"}, \"qosProfile\": \"QOS_E_STREAMING\", \"duration\": 1800}\nVALIDATION  L1 schema PASS   L2 semantic PASS   L3 CAPIF registry PASS\n            registry_checked: true  (live CAPIF discovery over mTLS)\nEXECUTION   provider HTTP 201  :8002/quality-on-demand/v1/sessions\n            UE IP 10.45.0.10 (5GC subscriber DB)   profile QOS_E_STREAMING -> QOS_S\n            status: AVAILABLE\nTIMINGS     planning 3367 ms | validation 19 ms | execution 86 ms | total 3472 ms",
+          "seconds": 3.6,
+          "exit": 0
+        },
+        {
+          "cmd": "python scripts/demo_cli.py core-evidence",
+          "output": "NEF-QoS -> Open5GS PCF (Npcf_PolicyAuthorization), last 2 minutes:\n  [Northbound_apis_svc.py:77] Created subscription 0d20def6-ed3c-4df3-9111-f0a0f3b7e9bd for scsAsId=b4333c46-49c\n  [pcf_http2_requests.py:57] Response status code: 201\n\nSMF view of the UE PDU sessions:\n  imsi-999700000000001  10.45.0.10\n  imsi-999700000000002  10.45.0.11\n  imsi-999700000000003  10.45.0.12",
+          "seconds": 0.2,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "title": "Location and an ambiguous intent",
+      "tag": "Reviewer 1: Scenario 3 and wrong-but-registered services",
+      "caption": "S3 is dataset entry edge_003 (ground truth: QoD). L3 only checks that the chosen service is published, so a wrong-but-registered choice still executes: the validator guarantees well-formed calls, not intent correctness.",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py run s2 --live",
+          "output": "REQUEST     intent: \"Retrieve the current location of device +90555•••••33.\"\n            dry_run: false   mode: llm-assisted\nPLAN        gpt-4o-mini: location-retrieval / retrieveLocation\n            payload: {\"device\": {\"phoneNumber\": \"+90555•••••33\"}, \"maxAge\": 3600}\nVALIDATION  L1 schema PASS   L2 semantic PASS   L3 CAPIF registry PASS\n            registry_checked: true  (live CAPIF discovery over mTLS)\nEXECUTION   provider HTTP 200  :8003/location-retrieval/v0.5/retrieve\n            location area: POLYGON with 4 WGS-84 points\nTIMINGS     planning 2512 ms | validation 25 ms | execution 450 ms | total 2987 ms",
+          "seconds": 3.1,
+          "exit": 0
+        },
+        {
+          "cmd": "python scripts/demo_cli.py run s3 --live",
+          "output": "REQUEST     intent: \"Provide network quality improvement for device +90555•••••33 for a long time\"\n            dry_run: false   mode: llm-assisted\nPLAN        gpt-4o-mini: qos-provisioning / createQosAssignment\n            payload: {\"device\": {\"phoneNumber\": \"+90555•••••33\"}, \"qosProfile\": \"QOS_E\"}\nVALIDATION  L1 schema PASS   L2 semantic PASS   L3 CAPIF registry PASS\n            registry_checked: true  (live CAPIF discovery over mTLS)\nEXECUTION   provider HTTP 201  :8585/3gpp-as-session-with-qos/v1/1/subscriptions\n            UE IP 10.45.0.12 (5GC subscriber DB)   profile QOS_E -> QOS_E\n            status: ACTIVE\nTIMINGS     planning 2107 ms | validation 25 ms | execution 33 ms | total 2164 ms",
+          "seconds": 2.3,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "title": "Switching LLM backends at runtime",
+      "tag": "Reviewer 2: provider-agnostic planning",
+      "caption": "POST /config/provider switches GPT-4o-mini, Claude Haiku 4.5 and Gemini 2.5 Flash without a restart; all three produce the same CAMARA payload. Planning time differs per provider.",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py compare s1",
+          "output": "LLM backend                   plan   CAMARA payload (key fields)\ngpt-4o-mini                  2.7 s   qod  qosProfile=QOS_E_STREAMING  duration=1800  appServer=198.51.100.10  device=+90532•••••67\nclaude-haiku-4-5-20251001    2.6 s   qod  qosProfile=QOS_E_STREAMING  duration=1800  appServer=198.51.100.10  device=+90532•••••67\ngemini-2.5-flash             7.8 s   qod  qosProfile=QOS_E_STREAMING  duration=1800  appServer=198.51.100.10  device=+90532•••••67\n\nIdentical CAMARA payload across all three LLM backends: yes",
+          "seconds": 13.3,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "title": "Which layer catches what?",
+      "tag": "Reviewers 1 & 3: per-layer difficulties, feedback, latency",
+      "caption": "Faults are injected into correct plans. Each is caught by its target layer; the LLM feedback loop repairs L1/L2 payload faults in one iteration but cannot repair a service-level (L3) fault.",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py faults --per-fault 2",
+          "output": "Faults injected into correct plans; live L3; real LLM feedback loop (max 3 iterations)\n\nlayer fault             caught  repaired  iters  feedback\nL1    missing_field        2/2       2/2    1.0     1.6 s\nL1    wrong_type           2/2       2/2    1.0     1.4 s\nL2    bad_e164             2/2       2/2    1.0     1.5 s\nL2    duration_policy      2/2       2/2    1.0     1.2 s\nL2    unknown_profile      2/2       2/2    1.0     1.5 s\nL2    bad_ipv4             2/2       2/2    1.0     1.4 s\nL3    unpublished          2/2       0/2    3.0     4.5 s",
+          "seconds": 27.3,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "title": "Scalability and the external LLM API",
+      "tag": "Reviewer 2: latency breakdown, scalability, LLM dependency",
+      "caption": "Without the LLM the platform serves well over 100 req/s with live L3 checks; with GPT-4o-mini the latency stays at about 2.6 s while throughput scales with concurrency: the LLM API is the bottleneck.",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py load",
+          "output": "planner        clients     ok   req/s      p50      p95  L3 live\ndeterministic        1  40/40   60.8     16ms     17ms  40/40\ndeterministic       10  40/40  121.4     59ms    161ms  40/40\nllm-assisted         1  10/10    0.3   2760ms   3329ms  10/10\nllm-assisted         5  10/10    1.5   2993ms   3431ms  10/10",
+          "seconds": 35.9,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "title": "Evaluation, ablations and repository consistency",
+      "tag": "Reviewers 2 & 4: benchmarking and the 60-entry pilot",
+      "caption": "300 unique intents. The keyword rules were written for the 60-entry pilot (archived), hence 60/60 there and 190/240 on held-out intents. Without schema grounding GPT-4o-mini drops to 16.3%.",
+      "runs": [
+        {
+          "cmd": "python scripts/demo_cli.py results",
+          "output": "planner (300 unique intents)   IWSR    SCR    SVR     HR  pilot 60 held-out 240\nKeyword baseline            83.3% 100.0% 100.0%  16.7%     60/60      190/240\nGPT-4o-mini                 97.3% 100.0%  99.0%   2.3%     59/60      233/240\nClaude Haiku 4.5            95.3%  99.3%  99.3%   4.0%     57/60      229/240\nGemini 2.5 Flash            96.0% 100.0%  98.3%   3.0%     57/60      231/240\nAblation: single call       77.3%  78.0%  77.3%   3.3%     47/60      185/240\nAblation: no schema         16.3%  16.7%  16.7%   4.0%     10/60       39/240\n\nThe keyword rules were written for the 60-entry pilot (archived in datasets/legacy_pilot_60/).\nLive L3 re-validation: 1200 plans checked, 0 rejected.",
+          "seconds": 0.1,
+          "exit": 0
+        }
+      ]
+    }
+  ]
+}
