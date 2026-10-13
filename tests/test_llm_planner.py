@@ -53,6 +53,20 @@ def test_parse_list_must_hold_objects(text):
         _parse_json_response(text, "ctx", allow_list=True)
 
 
+# ─── active_llm_configured (auto-mode LLM attempt) ───────────────────────────
+
+@pytest.mark.parametrize("provider,key_attr", [
+    ("openai", "openai_api_key"), ("anthropic", "anthropic_api_key"), ("gemini", "gemini_api_key"),
+])
+def test_active_llm_configured_follows_active_provider(monkeypatch, provider, key_attr):
+    for attr in ("openai_api_key", "anthropic_api_key", "gemini_api_key"):
+        monkeypatch.setattr(llm_planner.settings, attr, "")
+    monkeypatch.setattr(llm_planner, "_llm_provider_override", provider)
+    assert not llm_planner.active_llm_configured()
+    monkeypatch.setattr(llm_planner.settings, key_attr, "key")
+    assert llm_planner.active_llm_configured()
+
+
 # ─── build_llm_execution_plan ────────────────────────────────────────────────
 
 @pytest.fixture

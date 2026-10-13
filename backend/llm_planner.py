@@ -65,6 +65,16 @@ def get_active_provider() -> str:
     return _llm_provider_override or settings.llm_provider
 
 
+def active_llm_configured() -> bool:
+    """True if the active LLM provider has an API key (auto mode only tries the LLM then)."""
+    keys = {
+        "openai": settings.openai_api_key,
+        "anthropic": settings.anthropic_api_key,
+        "gemini": settings.gemini_api_key,
+    }
+    return bool(keys.get(get_active_provider()))
+
+
 def _active_model_name() -> str:
     p = get_active_provider()
     if p == "openai":

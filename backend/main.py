@@ -11,7 +11,7 @@ from backend.config import ROOT_DIR, settings
 from backend.executor import execute_step
 from backend.feedback_engine import run_correction_loop
 from backend.intent_engine import build_execution_plan
-from backend.llm_planner import LlmPlanningError, build_llm_execution_plan, correct_payload_with_feedback, get_active_provider, set_llm_provider
+from backend.llm_planner import LlmPlanningError, active_llm_configured, build_llm_execution_plan, correct_payload_with_feedback, get_active_provider, set_llm_provider
 from backend.models import CatalogService, FeedbackMetadata, OrchestrationRequest, OrchestrationResponse, PlannerMetadata, ValidationResult
 from backend.rag_context import get_payload_schema_prompt
 from backend.routes.capif import router as capif_router
@@ -138,7 +138,7 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
     else:
         mode, steps = build_execution_plan(request.intent)
         planner = PlannerMetadata(strategy="deterministic")
-        if request.orchestration_mode == "auto" and settings.gemini_api_key:
+        if request.orchestration_mode == "auto" and active_llm_configured():
             try:
                 steps, planner = build_llm_execution_plan(request.intent)
                 mode = "llm-assisted"
