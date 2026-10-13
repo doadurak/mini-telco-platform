@@ -18,70 +18,44 @@ OUT = Path(__file__).resolve().parent / "static" / "narr"
 
 NARRATION = {
     "intro": [
-        "This is a live demo of our CAPIF-compliant, multi-LLM intent orchestration platform.",
-        "It turns a natural-language request into a validated network API call on a real 5G core.",
+        "Live demo: from a natural-language request to a validated 5G network API call.",
     ],
     "arch": [
-        "An operator writes an intent in plain English or Turkish.",
-        "A two-phase LLM planner first selects a CAMARA service, then generates its payload.",
-        "Every plan passes three validation layers: schema, telecom rules, and a live check "
-        "against the OpenCAPIF registry.",
-        "Valid plans are executed through CAMARA and the NEF, on an Open5GS core with UERANSIM devices.",
+        "A two-phase LLM planner selects a CAMARA service, then builds its payload.",
+        "Three validation layers check the schema, the telecom rules and the live OpenCAPIF registry, "
+        "before anything reaches the Open5GS core.",
     ],
     "status": [
-        "Step one: the testbed. Everything you see is running in containers.",
-        "OpenCAPIF, the CAMARA and NEF providers, the Open5GS core, and three simulated phones, "
-        "each with its own IP address.",
-    ],
-    "discover": [
-        "Step two: service discovery.",
-        "The platform is onboarded to OpenCAPIF as an invoker, and discovers the published network APIs "
-        "over mutual TLS.",
+        "Step one: the testbed. OpenCAPIF, the CAMARA and NEF providers, Open5GS, "
+        "and three simulated phones are all running.",
     ],
     "dry": [
-        "Step three: a dry run. We ask for video-streaming quality for one phone, for thirty minutes.",
-        "The LLM selects Quality on Demand and builds the CAMARA payload.",
-        "All three validation layers pass, and the registry check is live. Nothing is sent to the network yet.",
+        "Step two: a dry run. We ask for video-streaming quality for thirty minutes.",
+        "The plan passes all three layers, but nothing is sent to the network yet.",
     ],
     "live": [
-        "Step four: the same request, now live.",
-        "The provider resolves the phone's IP address from the 5G core subscriber database, "
-        "and maps streaming to an operator QoS profile.",
-        "On the right, the NEF forwards the request to the Open5GS policy control function, "
-        "which answers with 201. The session is available.",
+        "Step three: the same request, live.",
+    ],
+    "live_res": [
+        "The NEF forwards it to the Open5GS policy function, which answers 201. The session is available.",
     ],
     "vague": [
-        "Step five: a vague request. The user asks for better quality for a long time, with no duration.",
-        "The planner chooses QoS provisioning instead of a time-limited session.",
-        "The plan is validated, and the assignment becomes active on the core.",
-    ],
-    "switch": [
-        "Step six: the LLM backend can be switched at run time. Here we switch to Claude Haiku.",
-        "The same request gives the same validated CAMARA plan.",
+        "Step four: a vague request, with no duration. "
+        "The planner chooses QoS provisioning instead of a timed session.",
     ],
     "faults": [
-        "Step seven: fault injection. We break correct plans on purpose, one fault type at a time.",
+        "Step five: we inject faults into correct plans.",
     ],
     "faults_res": [
-        "Schema and telecom-rule errors are caught, and repaired by the LLM feedback loop.",
-        "A call to an unpublished API is always caught by the registry layer. It cannot be repaired, "
-        "so it is never executed.",
-    ],
-    "load": [
-        "Step eight: a short load test. Every request goes through the live registry check.",
-    ],
-    "load_res": [
-        "This run shares the CPU with the screen recorder. "
-        "The full run in the paper reaches about one hundred and sixty requests per second.",
+        "Schema and telecom-rule errors are caught and repaired. "
+        "Calls to unpublished APIs are blocked by the registry layer.",
     ],
     "results": [
-        "On three hundred test intents, the best model completes ninety-seven point three percent "
-        "of the intents correctly.",
-        "Without the two-phase design, this drops to seventy-seven percent, "
-        "and without registry grounding, to sixteen percent.",
+        "On three hundred test intents, GPT, Gemini and Claude all exceed ninety-five percent success, "
+        "and the platform serves about one hundred and sixty requests per second.",
     ],
     "end": [
-        "Thank you for watching. The code, datasets and scripts are available on GitHub.",
+        "Thank you. The code and data are on GitHub.",
     ],
 }
 

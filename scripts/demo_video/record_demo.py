@@ -184,93 +184,61 @@ def prep():
 
 def scenes(d: Demo):
     d.say("intro")
-    d.sync(1.0)
+    d.sync(0.5)
     d.slide(slide("System architecture", "", "fig1_architecture.png"))
     d.say("arch")
-    d.sync(0.8)
+    d.sync(0.5)
     d.slide("")
 
-    d.step("STEP 1 / 8 · Testbed")
+    d.step("STEP 1 / 5 \u00b7 Testbed")
     d.say("status")
     d.run_wait("status")
-    d.sync(1.0)
+    d.sync(0.5)
 
-    d.step("STEP 2 / 8 · CAPIF discovery")
-    d.say("discover")
-    blk = d.open_op("CAPIF Integration", "discover_capif_discover_get")
-    d.execute(blk)
-    d.show_response(blk, '"api_name"')
-    d.sync(1.5)
-    d.close_op(blk)
-
-    d.step("STEP 3 / 8 · Dry run")
+    d.step("STEP 2 / 5 \u00b7 Dry run")
     d.say("dry")
     blk = d.open_op("Orchestration", "orchestrate_orchestrate_post")
     d.execute(blk, {"intent": S1, "dry_run": True, "orchestration_mode": "llm-assisted"})
-    d.show_response(blk, '"steps"')
-    d.wait(5)
     d.show_response(blk, '"validation"')
-    d.sync(1.5)
+    d.sync(0.8)
 
     prep()
-    d.step("STEP 4 / 8 · Live QoD on the 5G core")
+    d.step("STEP 3 / 5 \u00b7 Live QoD on the 5G core")
     d.say("live")
     d.execute(blk, {"intent": S1, "dry_run": False, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"execution_result"')
-    d.sync(1.5)
+    d.say("live_res")
+    d.sync(1.0)
 
-    d.step("STEP 5 / 8 · Vague intent")
+    d.step("STEP 4 / 5 \u00b7 Vague intent")
     d.say("vague")
     d.execute(blk, {"intent": S3, "dry_run": False, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"steps"')
-    d.wait(6)
-    d.show_response(blk, '"execution_result"')
-    d.sync(1.5)
+    d.sync(1.0)
     d.close_op(blk)
-
-    d.step("STEP 6 / 8 · Switch LLM backend")
-    d.say("switch")
-    blk = d.open_op("Orchestration", "switch_provider_config_provider_post")
-    d.execute(blk, {"provider": "anthropic"})
-    d.show_response(blk)
-    d.wait(2)
-    d.close_op(blk)
-    blk = d.open_op("Orchestration", "orchestrate_orchestrate_post")
-    d.execute(blk, {"intent": S1, "dry_run": True, "orchestration_mode": "llm-assisted"})
-    d.show_response(blk, '"planner"')
-    d.sync(2.0)
-    d.close_op(blk)
-    api("/config/provider", {"provider": "openai"})
 
     d.p.evaluate("demo.clearTerm()")
-    d.step("STEP 7 / 8 · Fault injection")
+    d.step("STEP 5 / 5 \u00b7 Fault injection")
     d.say("faults")
     d.run_wait("faults")
     d.say("faults_res")
-    d.sync(2.0)
-
-    d.p.evaluate("demo.clearTerm()")
-    d.step("STEP 8 / 8 · Load test")
-    d.say("load")
-    d.run_wait("load")
-    d.say("load_res")
-    d.sync(2.5)
+    d.sync(1.0)
 
     d.step("")
     d.slide(slide("Results on 300 test intents",
                   "Intent-wise success: GPT-4o-mini <b>97.3%</b> &middot; Gemini 2.5 Flash 96.0% &middot; "
-                  "Claude Haiku 4.5 95.3% &middot; deterministic baseline 83.3%<br>"
+                  "Claude Haiku 4.5 95.3%<br>"
                   "Ablation: single-phase planner 77.3% &middot; no registry grounding 16.3%<br>"
                   "Fault injection: L1 40/40 &middot; L2 80/80 &middot; L3 20/20 caught<br>"
-                  "Load: ~160 req/s deterministic (10 clients) &middot; ~2.6 s per LLM-assisted plan"))
+                  "Load: ~160 req/s deterministic &middot; ~2.6 s per LLM-assisted plan"))
     d.say("results")
-    d.sync(1.0)
+    d.sync(0.8)
     d.slide(brand_slide("Thank you",
                         "From Natural Language to Live 5G API Calls",
                         "Code, datasets and scripts:<br>"
                         "<span style='color:#0b3d91'>github.com/doadurak/mini-telco-platform</span>"))
     d.say("end")
-    d.sync(2.5)
+    d.sync(2.0)
 
 
 TITLE = brand_slide("Demo: From Natural Language to Live 5G API Calls",
