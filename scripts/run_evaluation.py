@@ -77,9 +77,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--mode",
-        choices=["deterministic", "llm-assisted", "llm-single"],
+        choices=["deterministic", "llm-assisted", "llm-single", "llm-ungrounded"],
         default="deterministic",
-        help="Orchestration mode: deterministic | llm-assisted (2 API calls/entry) | llm-single (1 API call/entry, quota-efficient)",
+        help="Orchestration mode: deterministic | llm-assisted (2 API calls/entry) | llm-single (1 API call/entry) | llm-ungrounded (ablation: no schema/field rules in Phase 2)",
     )
     parser.add_argument(
         "--compare",
@@ -202,7 +202,7 @@ def main() -> None:
           f"category={args.category or 'all'}, difficulty={args.difficulty or 'all'}, "
           f"max={args.max_entries or 'all'}")
 
-    delay = args.request_delay_s if args.mode in ("llm-assisted", "llm-single") else 0.0
+    delay = args.request_delay_s if args.mode.startswith("llm") else 0.0
     report = run_evaluation(
         mode=args.mode,
         dry_run=True,

@@ -178,6 +178,25 @@ Intent:
 Generate only the payload JSON object:""".strip()
 
 
+def _build_ungrounded_payload_prompt(
+    intent: str,
+    service_id: str,
+    operation_id: str,
+    method: str,
+    path: str,
+) -> str:
+    """Ablation: payload prompt without the OpenAPI schema and without field rules."""
+    return f"""Generate the JSON request body for this CAMARA API call.
+Return JSON only, no markdown.
+
+Operation: service_id={service_id}, operation_id={operation_id}, {method} {path}
+
+Intent:
+{intent}
+
+Generate only the payload JSON object:""".strip()
+
+
 # ─────────────────────────────────────────────
 # LLM call helpers
 # ─────────────────────────────────────────────
@@ -356,11 +375,16 @@ def _parse_json_response(text: str, context: str, *, allow_list: bool = False) -
 # Main entry point
 # ─────────────────────────────────────────────
 
-def build_llm_execution_plan(intent: str) -> tuple[list[ExecutionStep], PlannerMetadata]:
+def build_llm_execution_plan(
+    intent: str, *, grounded: bool = True
+) -> tuple[list[ExecutionStep], PlannerMetadata]:
     """
     Two-phase LLM orchestration:
     Phase 1 (LLM Planner)          → selects service + operation using RAG-grounded summaries
     Phase 2 (LLM Payload Generator) → generates payload using operation-specific schema context
+
+    grounded=False is an evaluation ablation: Phase 2 gets neither the OpenAPI schema
+    nor the payload field rules.
     """
     used_discovery, discovered_names, discovered_payload = _discovery_grounding()
     rag_meta = get_rag_metadata()
@@ -400,16 +424,24 @@ def build_llm_execution_plan(intent: str) -> tuple[list[ExecutionStep], PlannerM
     steps: list[ExecutionStep] = []
     payloads: list[dict[str, Any]] = []
     for plan in plans:
-        schema_context = get_payload_schema_prompt(plan["service_id"], plan["operation_id"])
-        payload_prompt = _build_payload_prompt(
-            intent=intent,
-            service_id=plan["service_id"],
-            operation_id=plan["operation_id"],
-            method=plan["method"],
-            path=plan["path"],
-            rationale=plan["rationale"],
-            schema_context=schema_context,
-        )
+        if grounded:
+            payload_prompt = _build_payload_prompt(
+                intent=intent,
+                service_id=plan["service_id"],
+                operation_id=plan["operation_id"],
+                method=plan["method"],
+                path=plan["path"],
+                rationale=plan["rationale"],
+                schema_context=get_payload_schema_prompt(plan["service_id"], plan["operation_id"]),
+            )
+        else:
+            payload_prompt = _build_ungrounded_payload_prompt(
+                intent=intent,
+                service_id=plan["service_id"],
+                operation_id=plan["operation_id"],
+                method=plan["method"],
+                path=plan["path"],
+            )
 
         raw_payload_response, _ = _call_llm(payload_prompt)
         payload_text = _extract_text(raw_payload_response, provider)

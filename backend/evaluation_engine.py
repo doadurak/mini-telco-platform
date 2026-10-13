@@ -293,10 +293,12 @@ def evaluate_entry(
             plan_mode, steps = build_execution_plan(entry["intent"])
             step = steps[0]
             feedback_meta = None
-        elif mode in ("llm-assisted", "llm-single"):
+        elif mode in ("llm-assisted", "llm-single", "llm-ungrounded"):
             if mode == "llm-single":
                 from backend.llm_planner import build_llm_execution_plan_single_call
                 steps, planner_meta = build_llm_execution_plan_single_call(entry["intent"])
+            elif mode == "llm-ungrounded":
+                steps, planner_meta = build_llm_execution_plan(entry["intent"], grounded=False)
             else:
                 steps, planner_meta = build_llm_execution_plan(entry["intent"])
             step = steps[0]
