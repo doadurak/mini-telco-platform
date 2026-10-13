@@ -250,9 +250,9 @@ def scenes(d: Demo):
 
 TITLE = brand_slide("Demo: From Natural Language to Live 5G API Calls",
                     "A CAPIF-Compliant, Multi-LLM Intent Orchestration Platform",
-                    "IEEE WMNC 2026 &middot; Demo Track<br>"
+                    "T&uuml;rkan Do&#287;a Durak &middot; Engin Zeydan &middot; Luis Blanco<br>"
                     "<span style='font-weight:400;font-size:25px;color:#555'>"
-                    "T&uuml;rkan Do&#287;a Durak (UPC) &middot; Engin Zeydan, Luis Blanco (CTTC)</span>")
+                    "Universitat Polit&egrave;cnica de Catalunya (UPC) &middot; CTTC</span>")
 
 
 def main():
