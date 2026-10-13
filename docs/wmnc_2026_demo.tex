@@ -41,8 +41,7 @@ UERANSIM-emulated UEs. A live request takes 2.2--4.8\,s with GPT-4o-mini or
 Claude\,Haiku\,4.5 (6.9--8.2\,s with Gemini), of which LLM planning accounts for 78--99\%.
 On 300 unique bilingual intents, the LLM planners reach an Intent-to-API Workflow Success
 Rate (IWSR) of 95.3--97.3\%, compared with 83.3\% for a keyword baseline.
-Code, testbed and data: \url{https://github.com/doadurak/mini-telco-platform};
-demo video: \url{https://youtu.be/RqBGeiyCqsk}.
+Code, testbed and data: \url{https://github.com/doadurak/mini-telco-platform}.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -98,7 +97,7 @@ implementations~\cite{front_repos}.
 \label{sec:demo}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.64\columnwidth]{fig2_live_orchestrate.png}
+  \includegraphics[width=0.56\columnwidth]{fig2_live_orchestrate.png}
   \caption{Recorded live response (S1, GPT-4o-mini, \texttt{dry\_run:false}, MSISDN masked).}
   \label{fig:ui}
 \end{figure}
@@ -161,8 +160,7 @@ fixtures; it supersedes a 60-entry pilot.
 IWSR is the share of plans that select the correct service and pass validation; HR is
 the share of wrong service selections. SS is one minus the standard deviation of IWSR
 across the three difficulty levels: it measures robustness to difficulty, not run-to-run
-repeatability. Planning uses temperature 0.1, so choices on ambiguous intents can vary
-between runs (cf.\ S3). The benchmark makes no provider calls; all 1,200 recorded plans
+repeatability (at temperature 0.1, ambiguous choices can vary; cf.\ S3). The benchmark makes no provider calls; all 1,200 recorded plans
 pass the live L3 check. The keyword rules were written for the 60 pilot intents, on which
 the baseline scores 100\%; on the 240 held-out intents it drops to 79.2\%, while the LLMs
 reach 95.4--97.1\%. The 8--14 failures per LLM are mostly confusions between QoD and
@@ -178,6 +176,7 @@ $\approx$2.6\,s for up to 10 concurrent requests, so the LLM API is the bottlene
 fails, \texttt{auto} mode falls
 back to the keyword planner. As intents (with MSISDNs) reach an external API, production
 use needs pseudonymization or a self-hosted model.
+Demo video: \url{https://youtu.be/RqBGeiyCqsk}.
 
 {\footnotesize
 \bibliographystyle{IEEEtran}
