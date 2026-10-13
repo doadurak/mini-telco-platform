@@ -7,7 +7,9 @@
   #hdr { height: 44px; background: #0b0d10; color: #dfe3e8; display: flex; align-items: center;
          padding: 0 18px; font-size: 18px; gap: 14px; border-bottom: 1px solid #2a2f37; }
   #hdr .live { color: #fff; background: #d93025; border-radius: 4px; padding: 2px 9px; font-weight: 700; font-size: 15px; }
-  #hdr .r { margin-left: auto; color: #8a93a2; font-size: 16px; }
+  #step { margin-left: auto; background: #0b3d91; color: #fff; border-radius: 4px; padding: 3px 14px;
+          font-weight: 700; font-size: 18px; visibility: hidden; }
+  #hdr .r { margin-left: 18px; color: #8a93a2; font-size: 16px; }
   #main { position: absolute; top: 44px; bottom: 0; left: 0; right: 0; display: flex; }
   #left { width: 1100px; height: 100%; border-right: 2px solid #2a2f37; background: #fff; }
   #left iframe { width: 100%; height: 100%; border: 0; }
@@ -26,7 +28,7 @@
 <body>
 <div id="hdr"><span class="live">LIVE</span><b>mini-telco-platform</b>
   <span>running system: OpenCAPIF + CAMARA/NEF providers + Open5GS 5G core + UERANSIM</span>
-  <span class="r" id="clock"></span></div>
+  <span id="step"></span><span class="r" id="clock"></span></div>
 <div id="main">
   <div id="left"><iframe id="swagger" src="http://localhost:8000/docs"></iframe></div>
   <div id="right">
@@ -64,6 +66,12 @@ setInterval(() => document.getElementById("clock").textContent =
 window.demo = {
   sub(t) { const s = document.getElementById("sub"); s.style.display = t ? "block" : "none"; s.innerHTML = t || ""; },
   slide(html) { const s = document.getElementById("slide"); s.style.display = html ? "block" : "none"; s.innerHTML = html || ""; },
+  step(t) { const s = document.getElementById("step"); s.style.visibility = t ? "visible" : "hidden"; s.textContent = t || ""; },
+  say(lines, durs, gap) {
+    let t = 0;
+    lines.forEach((l, i) => { setTimeout(() => demo.sub(l), t * 1000); t += durs[i] + gap; });
+    setTimeout(() => demo.sub(""), (t - gap + 0.4) * 1000);
+  },
   clearTerm() { document.getElementById("termp").innerHTML = ""; },
   run(k) {
     return new Promise(resolve => {

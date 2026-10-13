@@ -4,45 +4,96 @@ Screen-record the running system for the WMNC 2026 demo video.
 
 Drives the live console (scripts/demo_video/live_console.py, http://localhost:8099) in a real
 browser: clicks through the backend's Swagger UI, runs demo commands in the terminal pane and
-shows burned-in subtitles. Nothing is mocked; every response comes from the testbed.
+shows subtitles that follow an English voice-over. Nothing is mocked; every response comes
+from the testbed.
 
-  pip install playwright            # uses the installed Microsoft Edge
+  pip install playwright edge-tts mutagen       # uses the installed Microsoft Edge
+  python scripts/demo_video/narration.py        # voice-over clips (once)
   python scripts/demo_video/record_demo.py --out demo_raw
+  python scripts/demo_video/mux_demo.py demo_raw out.mp4   # trims the start, mixes in the voice-over
 """
 from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 import urllib.request
+from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from narration import NARRATION, clip, durations  # noqa: E402
 
 CONSOLE = "http://localhost:8099"
 S1 = "Activate video-streaming quality for +905321234567 for the next 30 minutes."
 S3 = "Provide network quality improvement for device +905551112233 for a long time"
 OP = "#operations-{tag}-{op}"
+FONT = "font-family:Segoe UI,Arial,sans-serif"
+
+
+def brand_slide(title: str, subtitle: str, lines: str) -> str:
+    """Title/end card in the style of the CTTC presentation template."""
+    return (f'<div style="position:absolute;inset:0;overflow:hidden;background:#fff;{FONT}">'
+            f'<div style="position:absolute;left:0;top:0;bottom:0;width:860px;'
+            f'background:#001848 url(/static/network_bg.png) center/cover"></div>'
+            f'<div style="position:absolute;left:700px;top:-420px;width:2200px;height:1920px;'
+            f'border-radius:50%;background:#fff"></div>'
+            f'<div style="position:absolute;left:1000px;right:70px;top:150px">'
+            f'<img src="/static/cttc_logo.png" style="width:520px;margin-left:150px">'
+            f'<div style="font-size:62px;font-weight:700;line-height:1.18;color:#111;margin-top:70px">{title}</div>'
+            f'<div style="font-size:36px;font-weight:600;color:#0b3d91;margin-top:34px">{subtitle}</div>'
+            f'<div style="font-size:28px;font-weight:600;color:#333;line-height:1.55;margin-top:80px">{lines}</div>'
+            f'</div></div>')
 
 
 def slide(title: str, body: str = "", img: str = "") -> str:
-    pic = f'<img src="/static/{img}" style="max-height:780px;max-width:1700px;margin-top:18px">' if img else ""
+    pic = f'<img src="/static/{img}" style="max-height:800px;max-width:1700px;margin-top:14px">' if img else ""
     return (f'<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;'
-            f'font-family:Segoe UI,Arial;color:#1d2733;text-align:center;padding:0 120px">'
-            f'<div style="font-size:54px;font-weight:700">{title}</div>'
-            f'<div style="font-size:30px;line-height:1.5;margin-top:22px;color:#3b4a5c">{body}</div>{pic}</div>')
+            f'{FONT};color:#1d2733;text-align:center;padding:0 120px 90px">'
+            f'<div style="font-size:54px;font-weight:700;color:#0b3d91">{title}</div>'
+            f'<div style="font-size:32px;line-height:1.65;margin-top:26px;color:#2b3a4c">{body}</div>{pic}</div>')
 
 
 class Demo:
-    def __init__(self, page):
+    GAP = 0.45  # pause between sentences, seconds
+
+    def __init__(self, page, t0: float):
         self.p = page
         self.sw = page.frame_locator("#swagger")
+        self.t0 = t0
+        self.busy_until = 0.0
+        self.durs = durations()
+        self.events: list[dict] = []
 
-    def sub(self, text: str):
-        self.p.evaluate("t => demo.sub(t)", text)
+    # ── narration ──
+    def say(self, key: str):
+        """Start the voice-over of a scene (after the previous one ends); subtitles follow it."""
+        self.sync()
+        lines = NARRATION[key]
+        durs = [self.durs[clip(key, i).name] for i in range(len(lines))]
+        start = time.time() - self.t0
+        self.p.evaluate("([l, d, g]) => demo.say(l, d, g)", [lines, durs, self.GAP])
+        t = start
+        for i, d in enumerate(durs):
+            self.events.append({"clip": clip(key, i).name, "at": round(t, 3)})
+            t += d + self.GAP
+        self.busy_until = self.t0 + t
+
+    def sync(self, extra: float = 0.0):
+        """Wait until the current voice-over has finished (plus `extra` seconds)."""
+        left = self.busy_until - time.time() + extra
+        if left > 0:
+            self.p.wait_for_timeout(int(left * 1000))
+
+    def step(self, text: str):
+        self.p.evaluate("t => demo.step(t)", text)
 
     def slide(self, html: str):
         self.p.evaluate("h => demo.slide(h)", html)
 
+    # ── terminal pane ──
     def run(self, key: str):
         self.p.evaluate("k => { demo.run(k); }", key)
 
@@ -53,11 +104,13 @@ class Demo:
     def wait(self, s: float):
         self.p.wait_for_timeout(int(s * 1000))
 
+    # ── Swagger UI ──
     def open_op(self, tag: str, op: str):
         blk = self.sw.locator(OP.format(tag=tag.replace(" ", "_"), op=op))
         blk.scroll_into_view_if_needed()
         if blk.locator(".opblock-body").count() == 0:
             blk.locator(".opblock-summary").first.click()
+        blk.locator("button.try-out__btn").first.wait_for()  # the block expands asynchronously
         tri = blk.get_by_role("button", name="Try it out", exact=True)
         if tri.count():
             tri.click()
@@ -130,107 +183,101 @@ def prep():
 
 
 def scenes(d: Demo):
-    # 0:00 title
-    d.slide(slide("LLM-Assisted Multi-Layer Validated Network API Orchestration",
-                  "Live demo of the running system &mdash; WMNC 2026<br>"
-                  "OpenCAPIF &middot; CAMARA QoD / Location &middot; NEF AsSessionWithQoS &middot; "
-                  "Open5GS 5G core &middot; UERANSIM"))
-    d.wait(6)
-    d.slide(slide("Architecture", "", "fig1_architecture.png"))
-    d.sub("Natural-language intent &rarr; two-phase LLM planner &rarr; validator L1 schema / L2 telecom rules / "
-          "L3 live CAPIF registry &rarr; CAMARA / NEF &rarr; Open5GS PCF")
-    d.wait(11)
+    d.say("intro")
+    d.sync(1.0)
+    d.slide(slide("System architecture", "", "fig1_architecture.png"))
+    d.say("arch")
+    d.sync(0.8)
     d.slide("")
 
-    # status: everything is real, not mocked
-    d.sub("Reviewer concern: is the core network real? &mdash; Every component below is a running container.")
+    d.step("STEP 1 / 8 · Testbed")
+    d.say("status")
     d.run_wait("status")
-    d.wait(5)
+    d.sync(1.0)
 
-    # CAPIF discovery
-    d.sub("GET /capif/discover &mdash; the invoker discovers published network APIs from OpenCAPIF over mTLS")
+    d.step("STEP 2 / 8 · CAPIF discovery")
+    d.say("discover")
     blk = d.open_op("CAPIF Integration", "discover_capif_discover_get")
     d.execute(blk)
     d.show_response(blk, '"api_name"')
-    d.wait(7)
+    d.sync(1.5)
     d.close_op(blk)
 
-    # S1 dry run
-    d.sub("S1, dry_run = true: the plan is generated and validated by all three layers, but no provider is called")
+    d.step("STEP 3 / 8 · Dry run")
+    d.say("dry")
     blk = d.open_op("Orchestration", "orchestrate_orchestrate_post")
     d.execute(blk, {"intent": S1, "dry_run": True, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"steps"')
-    d.wait(6)
+    d.wait(5)
     d.show_response(blk, '"validation"')
-    d.sub("L1 schema &#10003;  L2 telecom rules &#10003;  L3 CAPIF registry &#10003; (registry_checked: true) "
-          "&mdash; execution: dry-run")
-    d.wait(7)
+    d.sync(1.5)
 
-    # S1 live
     prep()
-    d.sub("Same intent, dry_run = false: CAMARA QoD &rarr; NEF AsSessionWithQoS &rarr; Open5GS PCF "
-          "(watch the NEF log on the right)")
+    d.step("STEP 4 / 8 · Live QoD on the 5G core")
+    d.say("live")
     d.execute(blk, {"intent": S1, "dry_run": False, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"execution_result"')
-    d.wait(4)
-    d.sub("HTTP 201, qosStatus AVAILABLE; the UE IP 10.45.0.10 is resolved from the 5G core subscriber DB, "
-          "E_STREAMING &rarr; operator profile QOS_S; PCF answers 201")
-    d.wait(9)
+    d.sync(1.5)
 
-    # S3 live: under-specified intent
-    d.sub("S3, vague intent (&ldquo;for a long time&rdquo;): no duration is given, so the planner selects "
-          "CAMARA QoS Provisioning instead of a time-bounded QoD session")
+    d.step("STEP 5 / 8 · Vague intent")
+    d.say("vague")
     d.execute(blk, {"intent": S3, "dry_run": False, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"steps"')
-    d.wait(7)
-    d.sub("The plan passes L1/L2/L3 and is executed on the live provider for UE 10.45.0.12")
+    d.wait(6)
     d.show_response(blk, '"execution_result"')
-    d.wait(7)
+    d.sync(1.5)
     d.close_op(blk)
 
-    # provider switch
-    d.sub("POST /config/provider &mdash; switch the planner to Claude Haiku 4.5 at run time")
+    d.step("STEP 6 / 8 · Switch LLM backend")
+    d.say("switch")
     blk = d.open_op("Orchestration", "switch_provider_config_provider_post")
     d.execute(blk, {"provider": "anthropic"})
     d.show_response(blk)
-    d.wait(4)
+    d.wait(2)
     d.close_op(blk)
     blk = d.open_op("Orchestration", "orchestrate_orchestrate_post")
-    d.sub("S1 again with Claude Haiku 4.5: same validated CAMARA plan, different LLM backend")
     d.execute(blk, {"intent": S1, "dry_run": True, "orchestration_mode": "llm-assisted"})
     d.show_response(blk, '"planner"')
-    d.wait(7)
+    d.sync(2.0)
     d.close_op(blk)
-    blk = d.open_op("Orchestration", "switch_provider_config_provider_post")
-    d.execute(blk, {"provider": "openai"})
-    d.close_op(blk)
+    api("/config/provider", {"provider": "openai"})
 
-    # fault injection
     d.p.evaluate("demo.clearTerm()")
-    d.sub("Reviewer concern: what does each validator layer actually catch? &mdash; live fault injection per layer")
+    d.step("STEP 7 / 8 · Fault injection")
+    d.say("faults")
     d.run_wait("faults")
-    d.wait(8)
+    d.say("faults_res")
+    d.sync(2.0)
 
-    # load
     d.p.evaluate("demo.clearTerm()")
-    d.sub("Reviewer concern: scalability &mdash; concurrent load against the live backend (short run)")
+    d.step("STEP 8 / 8 · Load test")
+    d.say("load")
     d.run_wait("load")
-    d.sub("Every request passes live L3 discovery. Short run while screen-recording; the full run in the paper "
-          "reaches ~160 req/s deterministic, ~2.6 s per LLM-assisted plan")
-    d.wait(9)
+    d.say("load_res")
+    d.sync(2.5)
 
-    # results
-    d.slide(slide("Results on 300 intents",
-                  "IWSR: GPT-4o-mini 97.3% &middot; Gemini 2.5 Flash 96.0% &middot; Claude Haiku 4.5 95.3% "
-                  "&middot; deterministic 83.3%<br>"
-                  "Ablation: single-phase 77.3% &middot; ungrounded 16.3%<br>"
+    d.step("")
+    d.slide(slide("Results on 300 test intents",
+                  "Intent-wise success: GPT-4o-mini <b>97.3%</b> &middot; Gemini 2.5 Flash 96.0% &middot; "
+                  "Claude Haiku 4.5 95.3% &middot; deterministic baseline 83.3%<br>"
+                  "Ablation: single-phase planner 77.3% &middot; no registry grounding 16.3%<br>"
                   "Fault injection: L1 40/40 &middot; L2 80/80 &middot; L3 20/20 caught<br>"
                   "Load: ~160 req/s deterministic (10 clients) &middot; ~2.6 s per LLM-assisted plan"))
-    d.sub("")
-    d.wait(11)
-    d.slide(slide("Thank you",
-                  "Code, datasets and scripts:<br><b>github.com/doadurak/mini-telco-platform</b>"))
-    d.wait(6)
+    d.say("results")
+    d.sync(1.0)
+    d.slide(brand_slide("Thank you",
+                        "From Natural Language to Live 5G API Calls",
+                        "Code, datasets and scripts:<br>"
+                        "<span style='color:#0b3d91'>github.com/doadurak/mini-telco-platform</span>"))
+    d.say("end")
+    d.sync(2.5)
+
+
+TITLE = brand_slide("Demo: From Natural Language to Live 5G API Calls",
+                    "A CAPIF-Compliant, Multi-LLM Intent Orchestration Platform",
+                    "IEEE WMNC 2026 &middot; Demo Track<br>"
+                    "<span style='font-weight:400;font-size:25px;color:#555'>"
+                    "T&uuml;rkan Do&#287;a Durak (UPC) &middot; Engin Zeydan, Luis Blanco (CTTC)</span>")
 
 
 def main():
@@ -245,14 +292,20 @@ def main():
         ctx.add_init_script(MASK_JS)
         api("/config/provider", {"provider": "openai"})
         page = ctx.new_page()
+        t0 = time.time()  # the video starts when the page is created
         page.goto(CONSOLE)
+        page.evaluate("h => demo.slide(h)", TITLE)
         page.frame_locator("#swagger").locator(OP.format(tag="Orchestration", op="orchestrate_orchestrate_post")) \
             .wait_for(timeout=30_000)
         page.wait_for_timeout(1500)
-        t0 = time.time()
-        scenes(Demo(page))
+        trim = time.time() - t0 - 1.0  # the published video starts 1 s before the voice-over
+        d = Demo(page, t0)
+        scenes(d)
         print(f"recorded {time.time() - t0:.0f} s")
+        video = page.video
         ctx.close()
+        Path(video.path()).with_name("narration.json").write_text(
+            json.dumps({"video": Path(video.path()).name, "trim": round(trim, 3), "events": d.events}, indent=1))
         b.close()
 
 
