@@ -108,6 +108,8 @@ class OrchestrationRequest(BaseModel):
     dry_run: bool = True            # skip the provider call only
     check_registry: bool = True     # run L3 against the live CAPIF registry (also in dry-run)
     orchestration_mode: Literal["auto", "deterministic", "llm-assisted"] = "auto"
+    # A live LLM plan whose service differs from the keyword planner's is held until confirmed
+    confirm_service: bool = False
 
 
 class OrchestrationResponse(BaseModel):
@@ -122,3 +124,5 @@ class OrchestrationResponse(BaseModel):
     feedback: FeedbackMetadata = Field(default_factory=FeedbackMetadata)
     # Per-stage wall-clock latency: planning, validation, feedback, execution, total
     timings_ms: dict[str, float] = Field(default_factory=dict)
+    # LLM-assisted only: service chosen by the keyword planner for the same intent, and whether it agrees
+    service_crosscheck: dict[str, Any] = Field(default_factory=dict)

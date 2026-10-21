@@ -340,7 +340,7 @@ os.chdir('/home/turkad/mini-telco-platform')
 
 results = [
     ('Deterministic',    'datasets/eval_results_deterministic_300.json'),
-    ('GPT-4o-mini',      'datasets/eval_results_gpt4omini_300.json'),
+    ('GPT-4o-mini',      'datasets/repeats/eval_results_gpt4omini_300_run1.json'),
     ('Claude Haiku 4.5', 'datasets/eval_results_llm_anthropic_haiku45_300.json'),
     ('Gemini 2.5 Flash', 'datasets/eval_results_gemini25flash_300.json'),
 ]

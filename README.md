@@ -193,25 +193,44 @@ Run-to-run repeatability is measured separately by `scripts/run_stability_test.p
 Services: QoD 100, Location Retrieval 75, QoS Profiles 50, QoS Provisioning 50, ambiguous edge cases 25.
 Ground truth (expected `service_id`, `operation_id`, method and payload field checks) was hand-authored by the
 author from the CAMARA OpenAPI specs and FRONT-research-group NEF test fixtures; see `_meta.sources` in the file.
-Each model was run **once** per intent (no repeated runs are pooled into n).
+Each LLM planner was run **three times** on all 300 intents (temperature 0.1); the table gives the mean and,
+in brackets, the range over the runs. `scripts/summarize_runs.py` computes it and writes
+[`datasets/repeats/summary.json`](datasets/repeats/summary.json).
 
-| Model | IWSR | SCR | SVR | HR | SS | RRF | n |
-|---|---|---|---|---|---|---|---|
-| Deterministic (baseline) | 0.833 | **1.000** | **1.000** | 0.167 | 0.962 | — | 300 |
-| GPT-4o-mini | **0.973** | **1.000** | 0.990 | **0.023** | **0.975** | 0.400 (2/5) | 300 |
-| Claude Haiku 4.5 | 0.953 | 0.993 | **0.993** | 0.040 | 0.927 | **0.600** (3/5) | 300 |
-| Gemini 2.5 Flash | 0.960 | **1.000** | 0.983 | 0.030 | 0.945 | 0.286 (2/7) | 300 |
+| Planner | Runs | IWSR | Easy | Medium | Hard | Wrong service |
+|---|---|---|---|---|---|---|
+| Keyword baseline (deterministic) | 1 | 83.3% | 82.3% | 79.8% | 87.3% | 16.7% |
+| GPT-4o-mini | 3 | **96.6%** [96.3–96.7] | 100% | 97.2% [96.8–97.9] | **93.0%** [92.7–93.6] | **3.0%** [2.7–3.3] |
+| Claude Haiku 4.5 | 3 | 95.3% [95.3–95.3] | 100% | 100% | 87.3% [87.3–87.3] | 4.0% |
+| Gemini 2.5 Flash | 3 | 96.0% [95.7–96.3] | 99.3% | 99.6% | 90.0% [89.1–90.9] | 3.2% [3.0–3.7] |
+| GPT-4o-mini native function calling | 1 | 36.0% | 37.5% | 42.6% | 29.1% | 5.0% |
+| … + L1–L3 validator feedback | 1 | 96.0% | 100% | 98.9% | 90.0% | 4.0% |
 
-**Stratified IWSR by difficulty (300 entries):**
+Result files: `datasets/repeats/eval_results_{gpt4omini,haiku45,gemini25flash}_300_run*.json`
+(run 1 of Claude and Gemini is `datasets/eval_results_{llm_anthropic_haiku45,gemini25flash}_300.json`),
+the keyword baseline `datasets/eval_results_deterministic_300.json`, and the function-calling baseline
+`datasets/eval_results_gpt4omini_function_calling{,_feedback}_300.json`.
 
-| Model | Easy | Medium | Hard |
-|---|---|---|---|
-| Deterministic | 0.823 | 0.798 | 0.873 |
-| GPT-4o-mini | 0.990 | 0.989 | 0.945 |
-| Claude Haiku 4.5 | 1.000 | 1.000 | 0.873 |
-| Gemini 2.5 Flash | 1.000 | 0.989 | 0.900 |
+> **Correction (2026-10-21).** The GPT-4o-mini row of the submitted WMNC paper (IWSR 97.3%) came from a file in
+> which 240 of the 300 entries had been planned by Gemini 2.5 Flash: the run used `LLM_PROVIDER=gpt`, which the
+> planner did not recognise and silently replaced with Gemini. The planner now rejects unknown provider names, and
+> GPT-4o-mini was re-run three times. The old file is kept in [`datasets/superseded/`](datasets/superseded/).
 
-Result files: `datasets/eval_results_*_300.json`
+**Native function calling baseline** (`run_evaluation.py --mode llm-function-calling`). GPT-4o-mini gets one tool
+per CAMARA operation whose parameters are the operation's OpenAPI request schema (with the operator's QoS profile
+names), and makes one call. It picks the right service about as often as the two-phase planner (5.0% vs. 3.0% wrong),
+but omits required fields the intent does not state, such as `applicationServer`, so only 36.0% of its plans pass
+L1–L2. With the L1–L3 feedback loop it reaches 96.0%, after repairing 181 plans; the two-phase planner needs 2–3.
+
+**Service cross-check.** L1–L3 cannot see a wrong but registered service (mostly QoD vs. QoS Provisioning). In
+`POST /orchestrate`, an LLM plan whose service differs from the keyword planner's is answered with
+`execution_result.status = "held-for-confirmation"` when `dry_run` is false, until it is resent with
+`confirm_service: true`. On the nine LLM runs above this holds 75 of the 92 wrong service selections before
+execution, and 16% of the correct plans.
+
+The SS column of earlier README revisions (`1 - stdev` of IWSR across difficulty levels) is no longer reported;
+the per-difficulty IWSR is shown instead.
+
 
 **Re-run of 11 multi-intent entries (2026-10-11).** Prompts with two requests (e.g. *"Tell me where +81312345678 is
 and also list its available QoS profiles"*) originally ended in `LlmPlanningError: expected JSON object, got list`
@@ -280,8 +299,8 @@ selection errors (`qos-provisioning` chosen instead of `qod`, payloads pass L1/L
 |---|---|---|---|
 | Single LLM call (no operation schema) | `run_evaluation.py --mode llm-single --no-feedback` | `datasets/eval_results_gpt4omini_single_300.json` | IWSR 77.3%, SCR 78.0% (GPT-4o-mini) |
 | No schema / field rules in Phase 2 | `run_evaluation.py --mode llm-ungrounded --no-feedback` | `datasets/eval_results_gpt4omini_ungrounded_300.json` | IWSR 16.3%, SCR 16.7%: field names are invented |
-| Two-phase planner without feedback (reference) | from `eval_results_gpt4omini_300.json` | — | IWSR 96.7% (97.3% with feedback) |
-| Per-layer fault injection (140 faults into correct plans, live L3) | `scripts/layer_fault_injection.py` | `datasets/layer_faults.json` | all caught at the target layer; feedback repairs L1 40/40, L2 79/80 in one iteration (~1.3 s), L3 0/20 (payload-only correction) |
+| Two-phase planner (reference) | `run_evaluation.py --mode llm-assisted`, 3 runs | `datasets/repeats/eval_results_gpt4omini_300_run*.json` | IWSR 96.6% (mean of 3 runs) |
+| Per-layer fault injection (140 faults into correct recorded plans, GPT-4o-mini feedback, live L3) | `scripts/layer_fault_injection.py` | `datasets/layer_faults.json` | all caught at the target layer; feedback repairs L1 40/40, L2 79/80 in one iteration (~1.3 s), L3 0/20 (payload-only correction) |
 | Concurrency load test (`dry_run: true`, live L3) | `scripts/load_test.py` | `datasets/load_test.json` | keyword planner ≈160 req/s (p95 156 ms at 20 clients); GPT-4o-mini latency flat at ≈2.6 s, throughput 0.34→3.3 req/s from 1→10 clients |
 
 The L3 fault is simulated by removing the selected service from the CAPIF discovery response; all other faults are
@@ -583,10 +602,17 @@ python scripts/run_evaluation.py \
 # Full 300-entry run for all three LLM providers (resumes from the 60-entry pilot files)
 bash scripts/run_eval_300_all.sh
 
+# Three runs of GPT-4o-mini plus the native function-calling baseline; extra runs of Claude and Gemini
+bash scripts/run_gpt_300_x3.sh
+bash scripts/run_repeats_300.sh        # Claude Haiku 4.5, runs 2-3
+bash scripts/run_gemini_repeats.sh     # Gemini 2.5 Flash, runs 2-3 (paid tier)
+python scripts/summarize_runs.py       # Table I: mean and range over the runs
+
+# LLM_PROVIDER must be openai, anthropic or gemini; other names are rejected.
 # GPT-4o-mini (single provider, ~3.5 s avg latency per entry)
 LLM_PROVIDER=openai python scripts/run_evaluation.py \
   --mode llm-assisted --progress \
-  --output datasets/eval_results_gpt4omini_300.json
+  --output datasets/repeats/eval_results_gpt4omini_300_run1.json
 
 # Gemini 2.5 Flash (250 RPD free-tier — use --delay 12)
 LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
@@ -608,7 +634,7 @@ LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
 bash scripts/run_live_scenarios.sh
 
 # Analyze results
-python scripts/analyze_results.py datasets/eval_results_gpt4omini_300.json
+python scripts/analyze_results.py datasets/repeats/eval_results_gpt4omini_300_run1.json
 ```
 
 **Gemini free-tier limits:** 250 requests/day (RPD). With 2 calls per entry (plan + payload), a full 300-entry run requires ~600 requests (spread over several days). Use `--delay 12` to stay within 5 RPM limit. Use `--resume` to continue after a quota reset without re-running completed entries.
@@ -677,7 +703,9 @@ mini-telco-platform/
 ├── datasets/                # Ground truth (300 intents) + eval results
 │   ├── ground_truth.json
 │   ├── eval_results_deterministic_300.json            # main results (n=300)
-│   ├── eval_results_gpt4omini_300.json
+│   ├── repeats/                                       # three runs per LLM + summary.json (Table I)
+│   ├── eval_results_gpt4omini_function_calling*_300.json  # native function-calling baseline
+│   ├── superseded/                                    # mislabelled GPT-4o-mini file (see its README)
 │   ├── eval_results_llm_anthropic_haiku45_300.json
 │   ├── eval_results_gemini25flash_300.json
 │   ├── l3_rescore_300.json                            # live-L3 re-validation of the recorded plans

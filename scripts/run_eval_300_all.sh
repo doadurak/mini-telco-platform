@@ -5,7 +5,7 @@
 cd /home/turkad/mini-telco-platform
 
 echo "[$(date)] Starting GPT-4o-mini evaluation (240 new entries)..."
-LLM_PROVIDER=gpt venv/bin/python scripts/run_evaluation.py \
+LLM_PROVIDER=openai venv/bin/python scripts/run_evaluation.py \
   --mode llm-assisted \
   --json \
   --output datasets/eval_results_gpt4omini_300.json \

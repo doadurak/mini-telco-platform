@@ -40,7 +40,8 @@ from backend.rag_context import get_payload_schema_prompt  # noqa: E402
 from backend.service_catalog import CATALOG  # noqa: E402
 from backend.validator import validate_step  # noqa: E402
 
-RESULTS = Path("datasets/eval_results_gpt4omini_300.json")
+# correct plans to inject faults into (see datasets/superseded/README.md)
+RESULTS = Path("datasets/superseded/eval_results_gpt4omini_300_mixed.json")
 
 
 def _qod(fn):

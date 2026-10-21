@@ -30,6 +30,7 @@ A CAPIF-Compliant, Multi-LLM Intent Orchestration Platform}
 
 \begin{document}
 \maketitle
+{\renewcommand{\thefootnote}{}\footnotetext{\copyright\,2026 IFIP}}
 
 \begin{abstract}
 We demonstrate an open-source platform that converts free-text operator intents into
@@ -39,8 +40,9 @@ service and builds a schema-grounded payload, and a three-layer deterministic va
 (QoS) requests are authorized by the PCF of a containerized Open5GS 5G core with
 UERANSIM-emulated UEs. A live request takes 2.2--4.8\,s with GPT-4o-mini or
 Claude\,Haiku\,4.5 (6.9--8.2\,s with Gemini), of which LLM planning accounts for 78--99\%.
-On 300 unique bilingual intents, the LLM planners reach an Intent-to-API Workflow Success
-Rate (IWSR) of 95.3--97.3\%, compared with 83.3\% for a keyword baseline.
+On 300 unique bilingual intents (three runs each), the LLM planners reach an
+Intent-to-API Workflow Success Rate (IWSR) of 95.3--96.6\%, compared with 83.3\% for a
+keyword baseline and 36.0\% for native function calling.
 Code, testbed and data: \url{https://github.com/doadurak/mini-telco-platform}.
 \end{abstract}
 
@@ -78,13 +80,12 @@ injected into the prompt~\cite{flowmind2023}. Intent-level QoS classes (e.g.\
 \texttt{QOS\_E\_STREAMING}) are mapped by target bit rate to the operator profiles the
 network enforces (\texttt{QOS\_E/S/M/L}).
 
-\textit{Validation:} L1 checks the payload against its Pydantic schema; the share of
-plans that pass L1 is the Schema Compliance Rate (SCR). L2 enforces telecom rules (E.164
-numbers, QoS profiles that map to an operator profile, durations of 1--7200\,s, unicast
-IPv4); the share that pass L2 is the Semantic Validity Rate (SVR). L3 queries the live
-CAPIF registry to confirm that the selected service is published. If the planner selects
-a registered but wrong service, L3 accepts it; such errors are only detected by comparison
-with the ground truth (IWSR).
+\textit{Validation:} L1 checks the payload against its Pydantic schema; L2 enforces
+telecom rules (E.164 numbers, QoS profiles that map to an operator profile, durations of
+1--7200\,s, unicast IPv4); L3 queries the live
+CAPIF registry to confirm that the selected service is published. L1--L3 cannot detect a
+registered but wrong service; therefore, a live plan whose service differs from the one
+chosen by the keyword planner is held until the operator confirms it.
 
 \textit{Execution:} For QoS, the adapter resolves the phone number to the UE's IP from
 the 5GC subscriber database; the CAMARA provider forwards an AsSessionWithQoS
@@ -97,7 +98,7 @@ implementations~\cite{front_repos}.
 \label{sec:demo}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.56\columnwidth]{fig2_live_orchestrate.png}
+  \includegraphics[width=0.50\columnwidth]{fig2_live_orchestrate.png}
   \caption{Recorded live response (S1, GPT-4o-mini, \texttt{dry\_run:false}, MSISDN masked).}
   \label{fig:ui}
 \end{figure}
@@ -110,11 +111,10 @@ for the next 30 minutes''} yields \texttt{QOS\_E\_STREAMING}, 1800\,s, enforced 
 \texttt{AVAILABLE} (Fig.~\ref{fig:ui}).
 \textbf{S2 (Location):} the NEF returns a WGS-84 area (HTTP\,200).
 \textbf{S3 (ambiguity):} dataset entry \textit{``Provide network quality improvement for
-device $\langle$MSISDN$\rangle$ for a long time''} (ground truth: QoD). In the offline
-benchmark, GPT-4o-mini selected QoD, whereas Claude and Gemini selected QoS\,Provisioning;
-in the recorded live run, all three selected QoS\,Provisioning, which the PCF accepted
-(\texttt{ACTIVE}). Every plan passes L1--L3 and executes: the validator ensures that calls
-are well-formed and target registered services, not that the service matches the intent.
+device $\langle$MSISDN$\rangle$ for a long time''} (ground truth: QoD). All three LLMs
+select QoS\,Provisioning in every run, and the plan passes L1--L3; because the keyword
+planner selects QoD, the cross-check holds the call until it is confirmed, after which
+the PCF accepts it (\texttt{ACTIVE}).
 \textbf{S4 (backend switch):} after each \texttt{POST\,/config/provider} switch, S1
 yields identical CAMARA payloads from all three LLMs. UERANSIM lacks NGAP PDU Session Resource Modify, so the
 dedicated QoS flow is authorized by the core but not enforced on the emulated radio.
@@ -122,24 +122,27 @@ dedicated QoS flow is authorized by the core but not enforced on the emulated ra
 \section{Evaluation}
 \begin{table}[t]
 \centering
-\caption{300-entry offline evaluation (one run per intent)}
+\caption{IWSR and HR (\%), 300 intents; LLMs: mean [range], 3 runs}
 \label{tab:metrics}
 \footnotesize
-\setlength{\tabcolsep}{2.6pt}
+\setlength{\tabcolsep}{2.4pt}
 \begin{tabular}{lrrrrr}
 \toprule
-\textbf{Planner} & \textbf{IWSR} & \textbf{SCR} & \textbf{SVR} & \textbf{HR} & \textbf{SS} \\
+\textbf{Planner} & \textbf{IWSR} & \textbf{Easy} & \textbf{Med.} & \textbf{Hard} & \textbf{HR} \\
 \midrule
-Keyword baseline   & 83.3\% & 100.0\% & 100.0\% & 16.7\% & 0.962 \\
-GPT-4o-mini        & \textbf{97.3\%} & 100.0\% & 99.0\% & \textbf{2.3\%} & \textbf{0.975} \\
-Claude\,Haiku\,4.5 & 95.3\% & 99.3\% & \textbf{99.3\%} & 4.0\% & 0.927 \\
-Gemini\,2.5\,Flash & 96.0\% & 100.0\% & 98.3\% & 3.0\% & 0.945 \\
+Keyword baseline   & 83.3 & 82.3 & 79.8 & 87.3 & 16.7 \\
+GPT-4o-mini        & \textbf{96.6} {\scriptsize[96.3,\,96.7]} & 100 & 97.2 & \textbf{93.0} & \textbf{3.0} \\
+Claude\,Haiku\,4.5 & 95.3 {\scriptsize[95.3,\,95.3]} & 100 & 100 & 87.3 & 4.0 \\
+Gemini\,2.5\,Flash & 96.0 {\scriptsize[95.7,\,96.3]} & 99.3 & 99.6 & 90.0 & 3.2 \\
+\midrule
+GPT function calling & 36.0 & 37.5 & 42.6 & 29.1 & 5.0 \\
+\;+\,L1--L3 feedback & 96.0 & 100 & 98.9 & 90.0 & 4.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 \begin{table}[t]
 \centering
-\caption{Fault injection into correct GPT-4o-mini plans (live L3)}
+\caption{Fault injection into correct plans (live L3)}
 \label{tab:faults}
 \footnotesize
 \setlength{\tabcolsep}{2.6pt}
@@ -156,27 +159,28 @@ L3 & service not published & 20/20 & 0/20 & 3.8\,s (3) \\
 The dataset holds 300 unique intents (152\,EN / 148\,TR; 96 easy, 94 medium, 110 hard):
 275 across the four services and 25 ambiguous edge cases. We derived the ground truth
 (service, operation, payload checks) from the CAMARA OpenAPI constraints and NEF test
-fixtures; it supersedes a 60-entry pilot.
-IWSR is the share of plans that select the correct service and pass validation; HR is
-the share of wrong service selections. SS is one minus the standard deviation of IWSR
-across the three difficulty levels: it measures robustness to difficulty, not run-to-run
-repeatability (at temperature 0.1, ambiguous choices can vary; cf.\ S3). The benchmark makes no provider calls; all 1,200 recorded plans
-pass the live L3 check. The keyword rules were written for the 60 pilot intents, on which
-the baseline scores 100\%; on the 240 held-out intents it drops to 79.2\%, while the LLMs
-reach 95.4--97.1\%. The 8--14 failures per LLM are mostly confusions between QoD and
-QoS\,Provisioning (as in S3), and most occur on hard intents (IWSR 87--95\%, versus
-99--100\% on easy and medium intents).
-\textit{Fault injection} (Table~\ref{tab:faults}): each fault is caught by its target
-layer. Feedback repairs L1/L2 faults in one iteration but not an unpublished or
-wrong-but-registered service, because it only rewrites the payload.
-Without the schema in Phase\,2, IWSR falls to 16.3\%.
-\textit{Scalability and external LLM APIs:} with live L3 checks, one backend process
-serves $\approx$160\,req/s with the keyword planner; with GPT-4o-mini, latency stays at
-$\approx$2.6\,s for up to 10 concurrent requests, so the LLM API is the bottleneck. If it
-fails, \texttt{auto} mode falls
-back to the keyword planner. As intents (with MSISDNs) reach an external API, production
+fixtures; independent multi-annotator labelling, in particular of the 25 ambiguous
+intents, is left for future work. IWSR is the share of plans that select the correct
+service and pass validation; HR is the share of wrong service selections. Each LLM
+planner ran three times (temperature 0.1) without provider calls; every plan targets a
+published service, so L3 never rejects one. The keyword rules were written for a 60-intent
+pilot (100\% there, 79.2\% on the other 240; LLMs 95.4--96.5\%). IWSR varies by at most
+0.6 points across runs; the 10--14 failures per run are mostly QoD vs.\
+QoS\,Provisioning confusions on hard intents (as in S3). Across the nine LLM runs, the
+cross-check holds 75 of these 92 wrong selections before execution, at the cost of a
+confirmation for 16\% of correct plans.
+\textit{Native function calling} (one tool per CAMARA operation, OpenAPI schema as
+parameters) selects services almost as well (HR 5.0\%) but omits required fields that
+the intent does not state (e.g.\ \texttt{applicationServer}); our feedback loop repairs
+181 such plans (2--3 per run for the two-phase planner).
+\textit{Fault injection} (Table~\ref{tab:faults}): every fault is caught by its layer;
+GPT-4o-mini feedback repairs L1/L2 faults in one iteration but cannot fix an unpublished
+service. \textit{Scalability and LLM APIs:} with live L3, one backend process serves
+$\approx$160\,req/s with the keyword planner; with GPT-4o-mini, latency stays at
+$\approx$2.6\,s up to 10 concurrent requests, so the LLM API is the bottleneck. If it
+fails, \texttt{auto} mode uses the keyword planner. As intents (with MSISDNs) reach an external API, production
 use needs pseudonymization or a self-hosted model.
-Demo video: \url{https://youtu.be/RqBGeiyCqsk}.
+Finally, a demo video is available at \url{https://youtu.be/RiT6QGwS9Pc}.
 
 {\footnotesize
 \bibliographystyle{IEEEtran}

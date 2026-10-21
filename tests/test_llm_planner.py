@@ -117,3 +117,19 @@ def test_multi_intent_rejects_unknown_service(fake_llm):
     fake_llm(json.dumps([_LOCATION_PLAN, {**_PROFILES_PLAN, "service_id": "teleport"}]))
     with pytest.raises(LlmPlanningError, match="unsupported service 'teleport'"):
         build_llm_execution_plan("Where is +81312345678 and teleport it")
+
+
+# ─── provider names and the function-calling baseline ────────────────────────
+
+def test_unknown_provider_raises_instead_of_falling_back(monkeypatch):
+    monkeypatch.setattr(llm_planner, "_llm_provider_override", "gpt")
+    with pytest.raises(LlmPlanningError, match="Unknown LLM_PROVIDER 'gpt'"):
+        llm_planner._call_llm("prompt")
+
+
+def test_function_calling_tools_cover_catalog_with_operator_profiles():
+    tools, index = llm_planner._function_calling_tools()
+    assert set(index) == {f"{s}__{op.operation_id}" for s, svc in llm_planner.CATALOG.items() for op in svc.operations}
+    qod = next(t["function"]["parameters"] for t in tools if t["function"]["name"] == "qod__createSession")
+    assert "QOS_E_STREAMING" in qod["properties"]["qosProfile"]["enum"]
+    assert "example" not in json.dumps(qod)

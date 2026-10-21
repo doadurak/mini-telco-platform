@@ -198,10 +198,28 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
             detail={**validation.model_dump(), "feedback": feedback.model_dump()},
         )
 
+    # Service cross-check: L1-L3 cannot tell a wrong but registered service (e.g. QoD vs. QoS
+    # Provisioning). If the keyword planner picks another service, a live call waits for confirmation.
+    crosscheck: dict = {}
+    if mode == "llm-assisted":
+        keyword_service = build_execution_plan(request.intent)[1][0].service_id
+        crosscheck = {"keyword_planner_service": keyword_service,
+                      "agrees": keyword_service == first_step.service_id,
+                      "held": False}
+        if not crosscheck["agrees"] and not request.dry_run and not request.confirm_service:
+            crosscheck["held"] = True
+
     # Execute all steps; collect results
     execution_results: list[dict] = []
     for step in steps:
-        execution_results.append(execute_step(step, dry_run=request.dry_run))
+        if crosscheck.get("held"):
+            execution_results.append({
+                "status": "held-for-confirmation",
+                "reason": f"LLM selected {first_step.service_id}, keyword planner selected "
+                          f"{crosscheck['keyword_planner_service']}; resend with confirm_service=true",
+            })
+        else:
+            execution_results.append(execute_step(step, dry_run=request.dry_run))
     _lap("execution", t)
     timings["total"] = round((time.perf_counter() - t_start) * 1000, 1)
 
@@ -216,4 +234,5 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
         planner=planner,
         feedback=feedback,
         timings_ms=timings,
+        service_crosscheck=crosscheck,
     )

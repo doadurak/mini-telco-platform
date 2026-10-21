@@ -77,9 +77,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--mode",
-        choices=["deterministic", "llm-assisted", "llm-single", "llm-ungrounded"],
+        choices=["deterministic", "llm-assisted", "llm-single", "llm-ungrounded", "llm-function-calling"],
         default="deterministic",
-        help="Orchestration mode: deterministic | llm-assisted (2 API calls/entry) | llm-single (1 API call/entry) | llm-ungrounded (ablation: no schema/field rules in Phase 2)",
+        help="Orchestration mode: deterministic | llm-assisted (2 API calls/entry) | llm-single (1 API call/entry) | llm-ungrounded (ablation: no schema/field rules in Phase 2) | llm-function-calling (baseline: native OpenAI tool calling, 1 API call/entry)",
     )
     parser.add_argument(
         "--compare",

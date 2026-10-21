@@ -8,7 +8,12 @@ import requests
 from backend.capif.client import discover_services
 from backend.config import settings
 from backend.models import ExecutionStep, PlannerMetadata
-from backend.rag_context import get_all_services_summary, get_payload_schema_prompt, get_rag_metadata
+from backend.rag_context import (
+    get_all_services_summary,
+    get_payload_schema_prompt,
+    get_rag_metadata,
+    get_service_context,
+)
 from backend.service_catalog import CATALOG
 
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -324,7 +329,10 @@ def _call_llm(prompt: str) -> tuple[dict[str, Any], str]:
         return _call_openai(prompt), "openai"
     if p == "anthropic":
         return _call_anthropic(prompt), "anthropic"
-    return _call_gemini(prompt), "gemini"
+    if p == "gemini":
+        return _call_gemini(prompt), "gemini"
+    # An unknown name (e.g. "gpt") used to fall through to Gemini silently.
+    raise LlmPlanningError(f"Unknown LLM_PROVIDER '{p}' (use openai, anthropic or gemini).")
 
 
 def _extract_text(response_json: dict[str, Any], provider: str) -> str:
@@ -574,6 +582,97 @@ def build_llm_execution_plan_single_call(
         rationale=result["rationale"],
     )
 
+    return [step], metadata
+
+
+# ─────────────────────────────────────────────
+# Evaluation baseline: native function calling
+# ─────────────────────────────────────────────
+
+_SCHEMA_KEYS = ("type", "description", "enum", "format", "pattern", "minimum", "maximum", "properties", "required")
+
+
+def _to_json_schema(node: dict[str, Any]) -> dict[str, Any]:
+    """Keep only JSON-Schema keywords of an extracted OpenAPI schema node."""
+    out = {k: v for k, v in node.items() if k in _SCHEMA_KEYS and k != "properties"}
+    if "properties" in node:
+        out["properties"] = {name: _to_json_schema(sub) for name, sub in node["properties"].items()}
+    return out
+
+
+def _function_calling_tools() -> tuple[list[dict[str, Any]], dict[str, tuple[str, Any]]]:
+    """One OpenAI tool per catalog operation; parameters are the operation's OpenAPI request schema."""
+    from backend.validator import _VALID_QOS_PROFILES
+
+    tools, index = [], {}
+    for service_id, service in CATALOG.items():
+        ops = {op.get("operationId"): op for op in get_service_context(service_id).get("operations", [])}
+        for op in service.operations:
+            if op.method == "GET":
+                params = {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]}
+            else:
+                params = _to_json_schema(ops.get(op.operation_id, {}).get("requestSchema", {"type": "object"}))
+                # CAMARA leaves qosProfile a free string; give the operator's profile names, which the
+                # two-phase planner also sees in its schema context.
+                if "qosProfile" in params.get("properties", {}):
+                    params["properties"]["qosProfile"]["enum"] = sorted(_VALID_QOS_PROFILES)
+            name = f"{service_id}__{op.operation_id}"
+            index[name] = (service_id, op)
+            tools.append({"type": "function", "function": {
+                "name": name,
+                "description": f"{service.title}: {service.description} {op.summary}",
+                "parameters": params,
+            }})
+    return tools, index
+
+
+def build_function_calling_plan(intent: str) -> tuple[list[ExecutionStep], PlannerMetadata]:
+    """
+    Baseline for the evaluation: GPT's native function calling. One API call; the model picks one
+    tool (CAMARA operation) and fills its arguments from the OpenAPI schema alone, without the
+    two-phase prompts and their selection and field rules.
+    """
+    if get_active_provider() != "openai" or not settings.openai_api_key:
+        raise LlmPlanningError("Function-calling baseline needs LLM_PROVIDER=openai and OPENAI_API_KEY.")
+    tools, index = _function_calling_tools()
+
+    def _do():
+        response = requests.post(
+            f"{settings.openai_base_url.rstrip('/')}/chat/completions",
+            headers={"Authorization": f"Bearer {settings.openai_api_key}", "Content-Type": "application/json"},
+            json={
+                "model": settings.openai_model,
+                "temperature": settings.llm_temperature,
+                "tools": tools,
+                "tool_choice": "required",
+                "parallel_tool_calls": False,
+                "messages": [
+                    {"role": "system", "content": "You translate telecom operator intents into one CAMARA API call."},
+                    {"role": "user", "content": intent},
+                ],
+            },
+            timeout=settings.llm_timeout_seconds,
+        )
+        response.raise_for_status()
+        return response.json()
+
+    call = _call_with_retry(_do, "OpenAI")["choices"][0]["message"]["tool_calls"][0]["function"]
+    if call["name"] not in index:
+        raise LlmPlanningError(f"Model called unknown tool '{call['name']}'.")
+    service_id, op = index[call["name"]]
+    try:
+        payload = json.loads(call["arguments"] or "{}")
+    except json.JSONDecodeError as exc:
+        raise LlmPlanningError(f"Tool arguments are not JSON: {exc}") from exc
+    metadata = PlannerMetadata(
+        strategy="llm-assisted",
+        model=settings.openai_model,
+        used_discovery=False,
+        grounding_services=list(CATALOG.keys()),
+        raw_plan={"mode": "function-calling", "tool": call["name"]},
+    )
+    step = ExecutionStep(service_id=service_id, operation_id=op.operation_id, method=op.method,
+                         path=op.path, payload=payload, rationale="native function call")
     return [step], metadata
 
 

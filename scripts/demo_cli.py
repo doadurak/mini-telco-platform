@@ -166,9 +166,9 @@ def cmd_compare(a):
 
 def cmd_faults(a):
     c = "mini-telco-backend-capif"
-    sh(f"docker exec {c} mkdir -p /app/datasets /app/scripts")
+    sh(f"docker exec {c} mkdir -p /app/datasets/superseded /app/scripts")
     sh(f"docker cp {ROOT}/scripts/layer_fault_injection.py {c}:/app/scripts/")
-    sh(f"docker cp {ROOT}/datasets/eval_results_gpt4omini_300.json {c}:/app/datasets/")
+    sh(f"docker cp {ROOT}/datasets/superseded/eval_results_gpt4omini_300_mixed.json {c}:/app/datasets/superseded/")
     out = sh(f"docker exec -e LLM_PROVIDER=openai -w /app {c} python scripts/layer_fault_injection.py "
              f"--per-fault {a.per_fault} --seed 11")
     print("Faults injected into correct plans; live L3; real LLM feedback loop (max 3 iterations)\n")
@@ -194,7 +194,7 @@ def cmd_load(a):
 def cmd_results(_):
     ds = ROOT / "datasets"
     rows = [("Keyword baseline", "eval_results_deterministic_300.json"),
-            ("GPT-4o-mini", "eval_results_gpt4omini_300.json"),
+            ("GPT-4o-mini (run 1 of 3)", "repeats/eval_results_gpt4omini_300_run1.json"),
             ("Claude Haiku 4.5", "eval_results_llm_anthropic_haiku45_300.json"),
             ("Gemini 2.5 Flash", "eval_results_gemini25flash_300.json"),
             ("Ablation: single call", "eval_results_gpt4omini_single_300.json"),

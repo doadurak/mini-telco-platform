@@ -293,8 +293,11 @@ def evaluate_entry(
             plan_mode, steps = build_execution_plan(entry["intent"])
             step = steps[0]
             feedback_meta = None
-        elif mode in ("llm-assisted", "llm-single", "llm-ungrounded"):
-            if mode == "llm-single":
+        elif mode in ("llm-assisted", "llm-single", "llm-ungrounded", "llm-function-calling"):
+            if mode == "llm-function-calling":
+                from backend.llm_planner import build_function_calling_plan
+                steps, planner_meta = build_function_calling_plan(entry["intent"])
+            elif mode == "llm-single":
                 from backend.llm_planner import build_llm_execution_plan_single_call
                 steps, planner_meta = build_llm_execution_plan_single_call(entry["intent"])
             elif mode == "llm-ungrounded":
@@ -322,8 +325,8 @@ def evaluate_entry(
             skip_registry=not check_registry,
         )
 
-        # Feedback loop (only for LLM-assisted mode)
-        if not validation.valid and mode == "llm-assisted" and use_feedback:
+        # Feedback loop (LLM-assisted mode and the function-calling baseline)
+        if not validation.valid and mode in ("llm-assisted", "llm-function-calling") and use_feedback:
             schema_ctx = get_payload_schema_prompt(step.service_id, step.operation_id)
 
             def _revalidate(s, skip):
