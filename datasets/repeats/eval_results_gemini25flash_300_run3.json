@@ -22,7 +22,10 @@
       "easy": 0.9896,
       "medium": 1.0,
       "hard": 0.8909
-    }
+    },
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "provenance": "provider/model backfilled 2026-10-21 by scripts/backfill_provenance.py"
   },
   "results": [
     {
@@ -52,7 +55,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 5478.6
+      "latency_ms": 5478.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_002",
@@ -81,7 +86,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 5554.1
+      "latency_ms": 5554.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_003",
@@ -110,7 +117,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6334.9
+      "latency_ms": 6334.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_004",
@@ -139,7 +148,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 5794.6
+      "latency_ms": 5794.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_005",
@@ -168,7 +179,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 4056.6
+      "latency_ms": 4056.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_006",
@@ -197,7 +210,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5855.8
+      "latency_ms": 5855.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_007",
@@ -222,7 +237,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 3910.3
+      "latency_ms": 3910.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_008",
@@ -251,7 +268,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 5806.6
+      "latency_ms": 5806.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_009",
@@ -280,7 +299,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 5898.6
+      "latency_ms": 5898.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_010",
@@ -309,7 +330,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 6876.7
+      "latency_ms": 6876.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_001",
@@ -338,7 +361,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 5347.6
+      "latency_ms": 5347.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_002",
@@ -367,7 +392,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 5930.4
+      "latency_ms": 5930.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_003",
@@ -396,7 +423,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 4719.2
+      "latency_ms": 4719.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_004",
@@ -425,7 +454,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 6261.0
+      "latency_ms": 6261.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_005",
@@ -450,7 +481,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 5179.1
+      "latency_ms": 5179.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_006",
@@ -479,7 +512,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 7000.8
+      "latency_ms": 7000.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_007",
@@ -508,7 +543,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6190.2
+      "latency_ms": 6190.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_008",
@@ -537,7 +574,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 6584.7
+      "latency_ms": 6584.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_009",
@@ -566,7 +605,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 5391.8
+      "latency_ms": 5391.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_010",
@@ -595,7 +636,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 6294.4
+      "latency_ms": 6294.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_001",
@@ -619,7 +662,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7810.5
+      "latency_ms": 7810.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_002",
@@ -643,7 +688,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4726.9
+      "latency_ms": 4726.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_003",
@@ -667,7 +714,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7915.7
+      "latency_ms": 7915.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_004",
@@ -691,7 +740,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4967.5
+      "latency_ms": 4967.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_005",
@@ -711,7 +762,9 @@
       "actual_service_id": "qos-profiles",
       "actual_payload": {},
       "error": null,
-      "latency_ms": 9892.7
+      "latency_ms": 9892.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_001",
@@ -735,7 +788,9 @@
         }
       },
       "error": null,
-      "latency_ms": 8188.8
+      "latency_ms": 8188.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_002",
@@ -759,7 +814,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7689.0
+      "latency_ms": 7689.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_003",
@@ -783,7 +840,9 @@
         }
       },
       "error": null,
-      "latency_ms": 3970.8
+      "latency_ms": 3970.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_004",
@@ -807,7 +866,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5189.6
+      "latency_ms": 5189.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_005",
@@ -831,7 +892,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7336.6
+      "latency_ms": 7336.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_001",
@@ -856,7 +919,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 4265.7
+      "latency_ms": 4265.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_002",
@@ -881,7 +946,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 3988.8
+      "latency_ms": 3988.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_003",
@@ -906,7 +973,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 6311.4
+      "latency_ms": 6311.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_004",
@@ -931,7 +1000,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 5111.1
+      "latency_ms": 5111.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_005",
@@ -956,7 +1027,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5072.4
+      "latency_ms": 5072.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_001",
@@ -981,7 +1054,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 6066.1
+      "latency_ms": 6066.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_002",
@@ -1006,7 +1081,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 4350.2
+      "latency_ms": 4350.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_003",
@@ -1031,7 +1108,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 6635.3
+      "latency_ms": 6635.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_004",
@@ -1056,7 +1135,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 5320.3
+      "latency_ms": 5320.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_005",
@@ -1081,7 +1162,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 3908.6
+      "latency_ms": 3908.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_001",
@@ -1106,7 +1189,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4563.2
+      "latency_ms": 4563.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_002",
@@ -1131,7 +1216,9 @@
         "maxAge": 1
       },
       "error": null,
-      "latency_ms": 3380.2
+      "latency_ms": 3380.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_003",
@@ -1156,7 +1243,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4812.6
+      "latency_ms": 4812.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_004",
@@ -1181,7 +1270,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 3267.8
+      "latency_ms": 3267.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_005",
@@ -1206,7 +1297,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 4569.5
+      "latency_ms": 4569.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_006",
@@ -1231,7 +1324,9 @@
         "maxAge": 1800
       },
       "error": null,
-      "latency_ms": 3810.1
+      "latency_ms": 3810.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_007",
@@ -1256,7 +1351,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4710.4
+      "latency_ms": 4710.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_008",
@@ -1281,7 +1378,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4032.6
+      "latency_ms": 4032.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_001",
@@ -1306,7 +1405,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3653.0
+      "latency_ms": 3653.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_002",
@@ -1331,7 +1432,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4128.0
+      "latency_ms": 4128.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_003",
@@ -1356,7 +1459,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4605.2
+      "latency_ms": 4605.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_004",
@@ -1381,7 +1486,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 3391.2
+      "latency_ms": 3391.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_005",
@@ -1406,7 +1513,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 3225.1
+      "latency_ms": 3225.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_006",
@@ -1431,7 +1540,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4021.3
+      "latency_ms": 4021.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_007",
@@ -1456,7 +1567,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5138.7
+      "latency_ms": 5138.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_001",
@@ -1485,7 +1598,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 4970.1
+      "latency_ms": 4970.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_002",
@@ -1514,7 +1629,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6496.9
+      "latency_ms": 6496.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_003",
@@ -1539,7 +1656,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4774.0
+      "latency_ms": 4774.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_004",
@@ -1564,7 +1683,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 9986.7
+      "latency_ms": 9986.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_005",
@@ -1589,7 +1710,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 5510.5
+      "latency_ms": 5510.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_011",
@@ -1618,7 +1741,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 6132.3
+      "latency_ms": 6132.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_012",
@@ -1647,7 +1772,9 @@
         "duration": 1500
       },
       "error": null,
-      "latency_ms": 4600.3
+      "latency_ms": 4600.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_013",
@@ -1676,7 +1803,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 5096.3
+      "latency_ms": 5096.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_014",
@@ -1705,7 +1834,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 4954.6
+      "latency_ms": 4954.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_015",
@@ -1734,7 +1865,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 4450.1
+      "latency_ms": 4450.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_016",
@@ -1763,7 +1896,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5829.5
+      "latency_ms": 5829.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_017",
@@ -1792,7 +1927,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 5241.9
+      "latency_ms": 5241.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_018",
@@ -1821,7 +1958,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 5917.8
+      "latency_ms": 5917.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_019",
@@ -1850,7 +1989,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 5709.0
+      "latency_ms": 5709.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_020",
@@ -1879,7 +2020,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5100.2
+      "latency_ms": 5100.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_021",
@@ -1908,7 +2051,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 5954.0
+      "latency_ms": 5954.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_022",
@@ -1937,7 +2082,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 5205.0
+      "latency_ms": 5205.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_023",
@@ -1966,7 +2113,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 5442.9
+      "latency_ms": 5442.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_024",
@@ -1995,7 +2144,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 4508.3
+      "latency_ms": 4508.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_025",
@@ -2024,7 +2175,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5051.1
+      "latency_ms": 5051.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_026",
@@ -2053,7 +2206,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 4631.7
+      "latency_ms": 4631.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_027",
@@ -2082,7 +2237,9 @@
         "duration": 2400
       },
       "error": null,
-      "latency_ms": 5771.4
+      "latency_ms": 5771.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_028",
@@ -2111,7 +2268,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5228.2
+      "latency_ms": 5228.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_029",
@@ -2140,7 +2299,9 @@
         "duration": 2100
       },
       "error": null,
-      "latency_ms": 4833.2
+      "latency_ms": 4833.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_030",
@@ -2169,7 +2330,9 @@
         "duration": 3000
       },
       "error": null,
-      "latency_ms": 4651.3
+      "latency_ms": 4651.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_031",
@@ -2198,7 +2361,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 4132.9
+      "latency_ms": 4132.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_032",
@@ -2227,7 +2392,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5645.0
+      "latency_ms": 5645.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_033",
@@ -2256,7 +2423,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 4872.2
+      "latency_ms": 4872.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_034",
@@ -2285,7 +2454,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 6051.8
+      "latency_ms": 6051.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_035",
@@ -2310,7 +2481,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 5472.9
+      "latency_ms": 5472.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_036",
@@ -2339,7 +2512,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 4368.7
+      "latency_ms": 4368.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_037",
@@ -2368,7 +2543,9 @@
         "duration": 60
       },
       "error": null,
-      "latency_ms": 5409.4
+      "latency_ms": 5409.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_038",
@@ -2397,7 +2574,9 @@
         "duration": 120
       },
       "error": null,
-      "latency_ms": 5402.3
+      "latency_ms": 5402.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_039",
@@ -2426,7 +2605,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 4822.6
+      "latency_ms": 4822.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_040",
@@ -2455,7 +2636,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 7597.9
+      "latency_ms": 7597.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_041",
@@ -2484,7 +2667,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 7179.0
+      "latency_ms": 7179.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_042",
@@ -2509,7 +2694,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 4822.0
+      "latency_ms": 4822.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_043",
@@ -2538,7 +2725,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5452.5
+      "latency_ms": 5452.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_044",
@@ -2567,7 +2756,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5501.4
+      "latency_ms": 5501.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_045",
@@ -2596,7 +2787,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 7585.5
+      "latency_ms": 7585.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_046",
@@ -2625,7 +2818,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5253.6
+      "latency_ms": 5253.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_047",
@@ -2654,7 +2849,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 3671.5
+      "latency_ms": 3671.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_048",
@@ -2683,7 +2880,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 3902.5
+      "latency_ms": 3902.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_049",
@@ -2712,7 +2911,9 @@
         }
       },
       "error": null,
-      "latency_ms": 56260.3
+      "latency_ms": 56260.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_en_050",
@@ -2741,7 +2942,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 6394.4
+      "latency_ms": 6394.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_011",
@@ -2770,7 +2973,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 4935.4
+      "latency_ms": 4935.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_012",
@@ -2799,7 +3004,9 @@
         "duration": 1500
       },
       "error": null,
-      "latency_ms": 4193.9
+      "latency_ms": 4193.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_013",
@@ -2828,7 +3035,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 5210.1
+      "latency_ms": 5210.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_014",
@@ -2857,7 +3066,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 7298.1
+      "latency_ms": 7298.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_015",
@@ -2886,7 +3097,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 5249.3
+      "latency_ms": 5249.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_016",
@@ -2915,7 +3128,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 6005.4
+      "latency_ms": 6005.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_017",
@@ -2944,7 +3159,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 7340.3
+      "latency_ms": 7340.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_018",
@@ -2973,7 +3190,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 5669.9
+      "latency_ms": 5669.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_019",
@@ -3002,7 +3221,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 4865.8
+      "latency_ms": 4865.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_020",
@@ -3031,7 +3252,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6468.2
+      "latency_ms": 6468.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_021",
@@ -3060,7 +3283,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 6539.0
+      "latency_ms": 6539.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_022",
@@ -3089,7 +3314,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 5747.4
+      "latency_ms": 5747.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_023",
@@ -3118,7 +3345,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 3867.6
+      "latency_ms": 3867.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_024",
@@ -3147,7 +3376,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 5199.6
+      "latency_ms": 5199.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_025",
@@ -3176,7 +3407,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6041.9
+      "latency_ms": 6041.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_026",
@@ -3205,7 +3438,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 4718.8
+      "latency_ms": 4718.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_027",
@@ -3234,7 +3469,9 @@
         "duration": 2400
       },
       "error": null,
-      "latency_ms": 5170.5
+      "latency_ms": 5170.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_028",
@@ -3263,7 +3500,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5096.7
+      "latency_ms": 5096.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_029",
@@ -3292,7 +3531,9 @@
         "duration": 2100
       },
       "error": null,
-      "latency_ms": 6607.2
+      "latency_ms": 6607.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_030",
@@ -3321,7 +3562,9 @@
         "duration": 3000
       },
       "error": null,
-      "latency_ms": 4572.7
+      "latency_ms": 4572.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_031",
@@ -3350,7 +3593,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5882.7
+      "latency_ms": 5882.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_032",
@@ -3379,7 +3624,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6549.4
+      "latency_ms": 6549.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_033",
@@ -3408,7 +3655,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 3794.2
+      "latency_ms": 3794.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_034",
@@ -3437,7 +3686,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 3921.5
+      "latency_ms": 3921.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_035",
@@ -3462,7 +3713,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 5079.4
+      "latency_ms": 5079.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_036",
@@ -3491,7 +3744,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6193.0
+      "latency_ms": 6193.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_037",
@@ -3520,7 +3775,9 @@
         "duration": 60
       },
       "error": null,
-      "latency_ms": 9036.6
+      "latency_ms": 9036.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_038",
@@ -3549,7 +3806,9 @@
         "duration": 120
       },
       "error": null,
-      "latency_ms": 5972.9
+      "latency_ms": 5972.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_039",
@@ -3578,7 +3837,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6672.5
+      "latency_ms": 6672.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_040",
@@ -3603,7 +3864,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 10900.2
+      "latency_ms": 10900.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_041",
@@ -3632,7 +3895,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 8513.8
+      "latency_ms": 8513.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_042",
@@ -3657,7 +3922,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 6128.0
+      "latency_ms": 6128.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_043",
@@ -3686,7 +3953,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5721.9
+      "latency_ms": 5721.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_044",
@@ -3715,7 +3984,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5705.8
+      "latency_ms": 5705.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_045",
@@ -3740,7 +4011,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 9247.2
+      "latency_ms": 9247.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_046",
@@ -3769,7 +4042,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5659.3
+      "latency_ms": 5659.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_047",
@@ -3798,7 +4073,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 5085.0
+      "latency_ms": 5085.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_048",
@@ -3827,7 +4104,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5972.5
+      "latency_ms": 5972.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_049",
@@ -3856,7 +4135,9 @@
         }
       },
       "error": null,
-      "latency_ms": 60998.2
+      "latency_ms": 60998.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "qod_tr_050",
@@ -3885,7 +4166,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 6993.0
+      "latency_ms": 6993.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_006",
@@ -3909,7 +4192,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5481.4
+      "latency_ms": 5481.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_007",
@@ -3933,7 +4218,9 @@
         }
       },
       "error": null,
-      "latency_ms": 3651.4
+      "latency_ms": 3651.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_008",
@@ -3957,7 +4244,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7382.3
+      "latency_ms": 7382.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_009",
@@ -3981,7 +4270,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7745.0
+      "latency_ms": 7745.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_010",
@@ -4006,7 +4297,9 @@
         "name": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 5858.3
+      "latency_ms": 5858.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_011",
@@ -4030,7 +4323,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4051.3
+      "latency_ms": 4051.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_012",
@@ -4054,7 +4349,9 @@
         }
       },
       "error": null,
-      "latency_ms": 8168.3
+      "latency_ms": 8168.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_013",
@@ -4074,7 +4371,9 @@
       "actual_service_id": "qos-profiles",
       "actual_payload": {},
       "error": null,
-      "latency_ms": 27909.0
+      "latency_ms": 27909.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_014",
@@ -4099,7 +4398,9 @@
         "name": "voice"
       },
       "error": null,
-      "latency_ms": 8160.5
+      "latency_ms": 8160.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_015",
@@ -4123,7 +4424,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5089.0
+      "latency_ms": 5089.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_016",
@@ -4147,7 +4450,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4049.3
+      "latency_ms": 4049.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_017",
@@ -4171,7 +4476,9 @@
         }
       },
       "error": null,
-      "latency_ms": 6975.0
+      "latency_ms": 6975.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_018",
@@ -4195,7 +4502,9 @@
         }
       },
       "error": null,
-      "latency_ms": 8092.7
+      "latency_ms": 8092.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_019",
@@ -4220,7 +4529,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 4709.3
+      "latency_ms": 4709.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_020",
@@ -4244,7 +4555,9 @@
         }
       },
       "error": null,
-      "latency_ms": 8616.8
+      "latency_ms": 8616.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_021",
@@ -4268,7 +4581,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7146.7
+      "latency_ms": 7146.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_022",
@@ -4292,7 +4607,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4534.6
+      "latency_ms": 4534.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_023",
@@ -4316,7 +4633,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4576.9
+      "latency_ms": 4576.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_024",
@@ -4340,7 +4659,9 @@
         }
       },
       "error": null,
-      "latency_ms": 62259.2
+      "latency_ms": 62259.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_006",
@@ -4364,7 +4685,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7195.1
+      "latency_ms": 7195.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_007",
@@ -4388,7 +4711,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4881.0
+      "latency_ms": 4881.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_008",
@@ -4412,7 +4737,9 @@
         }
       },
       "error": null,
-      "latency_ms": 60730.7
+      "latency_ms": 60730.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_009",
@@ -4436,7 +4763,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4371.0
+      "latency_ms": 4371.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_010",
@@ -4461,7 +4790,9 @@
         "name": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 4607.7
+      "latency_ms": 4607.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_011",
@@ -4485,7 +4816,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5193.9
+      "latency_ms": 5193.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_012",
@@ -4509,7 +4842,9 @@
         }
       },
       "error": null,
-      "latency_ms": 8621.7
+      "latency_ms": 8621.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_013",
@@ -4534,7 +4869,9 @@
         "name": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 7757.1
+      "latency_ms": 7757.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_014",
@@ -4559,7 +4896,9 @@
         "name": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 5192.1
+      "latency_ms": 5192.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_015",
@@ -4585,7 +4924,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 5473.2
+      "latency_ms": 5473.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_016",
@@ -4609,7 +4950,9 @@
         }
       },
       "error": null,
-      "latency_ms": 8465.6
+      "latency_ms": 8465.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_017",
@@ -4633,7 +4976,9 @@
         }
       },
       "error": null,
-      "latency_ms": 11343.3
+      "latency_ms": 11343.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_018",
@@ -4657,7 +5002,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7245.8
+      "latency_ms": 7245.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_019",
@@ -4681,7 +5028,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7323.6
+      "latency_ms": 7323.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_020",
@@ -4705,7 +5054,9 @@
         }
       },
       "error": null,
-      "latency_ms": 6992.6
+      "latency_ms": 6992.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_021",
@@ -4729,7 +5080,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7977.9
+      "latency_ms": 7977.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_022",
@@ -4753,7 +5106,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5204.7
+      "latency_ms": 5204.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_023",
@@ -4777,7 +5132,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5663.8
+      "latency_ms": 5663.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_024",
@@ -4801,7 +5158,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7119.4
+      "latency_ms": 7119.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_006",
@@ -4826,7 +5185,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5740.4
+      "latency_ms": 5740.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_007",
@@ -4851,7 +5212,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4260.3
+      "latency_ms": 4260.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_008",
@@ -4876,7 +5239,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4186.9
+      "latency_ms": 4186.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_009",
@@ -4901,7 +5266,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 5025.4
+      "latency_ms": 5025.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_010",
@@ -4926,7 +5293,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 4467.3
+      "latency_ms": 4467.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_011",
@@ -4951,7 +5320,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 4358.2
+      "latency_ms": 4358.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_012",
@@ -4976,7 +5347,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4765.3
+      "latency_ms": 4765.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_013",
@@ -5001,7 +5374,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 3600.2
+      "latency_ms": 3600.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_014",
@@ -5026,7 +5401,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5474.1
+      "latency_ms": 5474.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_015",
@@ -5051,7 +5428,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5063.5
+      "latency_ms": 5063.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_016",
@@ -5076,7 +5455,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5357.7
+      "latency_ms": 5357.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_017",
@@ -5101,7 +5482,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 4344.7
+      "latency_ms": 4344.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_018",
@@ -5126,7 +5509,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4908.4
+      "latency_ms": 4908.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_019",
@@ -5151,7 +5536,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5392.4
+      "latency_ms": 5392.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_020",
@@ -5176,7 +5563,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 5186.9
+      "latency_ms": 5186.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_021",
@@ -5201,7 +5590,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 4677.2
+      "latency_ms": 4677.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_022",
@@ -5226,7 +5617,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 5012.4
+      "latency_ms": 5012.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_023",
@@ -5251,7 +5644,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 6593.6
+      "latency_ms": 6593.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_024",
@@ -5276,7 +5671,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4862.9
+      "latency_ms": 4862.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_006",
@@ -5301,7 +5698,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 6157.3
+      "latency_ms": 6157.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_007",
@@ -5326,7 +5725,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4333.6
+      "latency_ms": 4333.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_008",
@@ -5351,7 +5752,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4190.0
+      "latency_ms": 4190.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_009",
@@ -5376,7 +5779,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 5996.7
+      "latency_ms": 5996.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_010",
@@ -5401,7 +5806,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 4834.7
+      "latency_ms": 4834.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_011",
@@ -5426,7 +5833,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 5291.2
+      "latency_ms": 5291.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_012",
@@ -5451,7 +5860,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4904.2
+      "latency_ms": 4904.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_013",
@@ -5476,7 +5887,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 5146.1
+      "latency_ms": 5146.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_014",
@@ -5501,7 +5914,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4837.4
+      "latency_ms": 4837.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_015",
@@ -5526,7 +5941,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5840.2
+      "latency_ms": 5840.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_016",
@@ -5551,7 +5968,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 6547.5
+      "latency_ms": 6547.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_017",
@@ -5576,7 +5995,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 4671.9
+      "latency_ms": 4671.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_018",
@@ -5601,7 +6022,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5685.8
+      "latency_ms": 5685.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_019",
@@ -5626,7 +6049,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 6144.0
+      "latency_ms": 6144.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_020",
@@ -5651,7 +6076,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 5620.6
+      "latency_ms": 5620.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_021",
@@ -5676,7 +6103,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 5559.4
+      "latency_ms": 5559.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_022",
@@ -5701,7 +6130,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 4915.9
+      "latency_ms": 4915.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_023",
@@ -5726,7 +6157,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5012.9
+      "latency_ms": 5012.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_024",
@@ -5751,7 +6184,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5845.3
+      "latency_ms": 5845.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_010",
@@ -5776,7 +6211,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3292.1
+      "latency_ms": 3292.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_011",
@@ -5801,7 +6238,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4231.5
+      "latency_ms": 4231.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_012",
@@ -5826,7 +6265,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3452.1
+      "latency_ms": 3452.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_013",
@@ -5851,7 +6292,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4240.3
+      "latency_ms": 4240.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_014",
@@ -5876,7 +6319,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4344.5
+      "latency_ms": 4344.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_015",
@@ -5901,7 +6346,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3998.9
+      "latency_ms": 3998.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_016",
@@ -5926,7 +6373,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3734.7
+      "latency_ms": 3734.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_017",
@@ -5951,7 +6400,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3893.2
+      "latency_ms": 3893.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_018",
@@ -5976,7 +6427,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3384.2
+      "latency_ms": 3384.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_019",
@@ -6001,7 +6454,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3845.2
+      "latency_ms": 3845.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_020",
@@ -6026,7 +6481,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5955.0
+      "latency_ms": 5955.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_021",
@@ -6051,7 +6508,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4997.4
+      "latency_ms": 4997.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_022",
@@ -6076,7 +6535,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3566.3
+      "latency_ms": 3566.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_023",
@@ -6101,7 +6562,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3412.1
+      "latency_ms": 3412.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_024",
@@ -6126,7 +6589,9 @@
         "maxAge": 1
       },
       "error": null,
-      "latency_ms": 4017.5
+      "latency_ms": 4017.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_025",
@@ -6151,7 +6616,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3345.0
+      "latency_ms": 3345.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_026",
@@ -6176,7 +6643,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5085.0
+      "latency_ms": 5085.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_027",
@@ -6201,7 +6670,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4979.9
+      "latency_ms": 4979.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_028",
@@ -6226,7 +6697,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5913.6
+      "latency_ms": 5913.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_029",
@@ -6251,7 +6724,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4148.3
+      "latency_ms": 4148.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_030",
@@ -6276,7 +6751,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4327.5
+      "latency_ms": 4327.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_031",
@@ -6301,7 +6778,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4125.4
+      "latency_ms": 4125.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_032",
@@ -6326,7 +6805,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 4099.5
+      "latency_ms": 4099.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_033",
@@ -6351,7 +6832,9 @@
         "maxAge": 30
       },
       "error": null,
-      "latency_ms": 4381.6
+      "latency_ms": 4381.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_034",
@@ -6376,7 +6859,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4476.7
+      "latency_ms": 4476.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_035",
@@ -6401,7 +6886,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3918.5
+      "latency_ms": 3918.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_036",
@@ -6426,7 +6913,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 4417.3
+      "latency_ms": 4417.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_037",
@@ -6451,7 +6940,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 5855.9
+      "latency_ms": 5855.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_038",
@@ -6476,7 +6967,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5315.1
+      "latency_ms": 5315.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_en_039",
@@ -6501,7 +6994,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4587.7
+      "latency_ms": 4587.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_010",
@@ -6526,7 +7021,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3088.8
+      "latency_ms": 3088.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_011",
@@ -6551,7 +7048,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4610.7
+      "latency_ms": 4610.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_012",
@@ -6576,7 +7075,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3739.1
+      "latency_ms": 3739.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_013",
@@ -6601,7 +7102,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3982.6
+      "latency_ms": 3982.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_014",
@@ -6626,7 +7129,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3361.8
+      "latency_ms": 3361.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_015",
@@ -6651,7 +7156,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3726.5
+      "latency_ms": 3726.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_016",
@@ -6676,7 +7183,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4259.0
+      "latency_ms": 4259.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_017",
@@ -6701,7 +7210,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3207.3
+      "latency_ms": 3207.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_018",
@@ -6726,7 +7237,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4345.6
+      "latency_ms": 4345.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_019",
@@ -6751,7 +7264,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4200.5
+      "latency_ms": 4200.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_020",
@@ -6776,7 +7291,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3662.9
+      "latency_ms": 3662.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_021",
@@ -6801,7 +7318,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4404.8
+      "latency_ms": 4404.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_022",
@@ -6826,7 +7345,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4477.4
+      "latency_ms": 4477.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_023",
@@ -6851,7 +7372,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4068.8
+      "latency_ms": 4068.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_024",
@@ -6876,7 +7399,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3841.3
+      "latency_ms": 3841.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_025",
@@ -6901,7 +7426,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5373.9
+      "latency_ms": 5373.9,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_026",
@@ -6926,7 +7453,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4618.6
+      "latency_ms": 4618.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_027",
@@ -6951,7 +7480,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4485.5
+      "latency_ms": 4485.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_028",
@@ -6976,7 +7507,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4756.6
+      "latency_ms": 4756.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_029",
@@ -7001,7 +7534,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5452.7
+      "latency_ms": 5452.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_030",
@@ -7026,7 +7561,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3546.6
+      "latency_ms": 3546.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_031",
@@ -7051,7 +7588,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4768.6
+      "latency_ms": 4768.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_032",
@@ -7076,7 +7615,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 3970.7
+      "latency_ms": 3970.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_033",
@@ -7101,7 +7642,9 @@
         "maxAge": 30
       },
       "error": null,
-      "latency_ms": 3565.3
+      "latency_ms": 3565.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_034",
@@ -7126,7 +7669,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3698.1
+      "latency_ms": 3698.1,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_035",
@@ -7151,7 +7696,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4255.6
+      "latency_ms": 4255.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_036",
@@ -7176,7 +7723,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 5482.0
+      "latency_ms": 5482.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_037",
@@ -7201,7 +7750,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3829.3
+      "latency_ms": 3829.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_038",
@@ -7226,7 +7777,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 6015.4
+      "latency_ms": 6015.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "loc_tr_039",
@@ -7251,7 +7804,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 3320.6
+      "latency_ms": 3320.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_006",
@@ -7280,7 +7835,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 4739.4
+      "latency_ms": 4739.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_007",
@@ -7305,7 +7862,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4782.0
+      "latency_ms": 4782.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_008",
@@ -7334,7 +7893,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 6819.6
+      "latency_ms": 6819.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_009",
@@ -7363,7 +7924,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5433.5
+      "latency_ms": 5433.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_010",
@@ -7388,7 +7951,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 4588.4
+      "latency_ms": 4588.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_011",
@@ -7413,7 +7978,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 7441.5
+      "latency_ms": 7441.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_012",
@@ -7442,7 +8009,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5681.7
+      "latency_ms": 5681.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_013",
@@ -7471,7 +8040,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5283.8
+      "latency_ms": 5283.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_014",
@@ -7500,7 +8071,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 5738.7
+      "latency_ms": 5738.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_en_015",
@@ -7525,7 +8098,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 11040.7
+      "latency_ms": 11040.7,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_006",
@@ -7554,7 +8129,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 4314.8
+      "latency_ms": 4314.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_007",
@@ -7579,7 +8156,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 4002.4
+      "latency_ms": 4002.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_008",
@@ -7608,7 +8187,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 8599.4
+      "latency_ms": 8599.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_009",
@@ -7637,7 +8218,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4511.6
+      "latency_ms": 4511.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_010",
@@ -7662,7 +8245,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 3566.8
+      "latency_ms": 3566.8,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_011",
@@ -7687,7 +8272,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 10317.4
+      "latency_ms": 10317.4,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_012",
@@ -7716,7 +8303,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 5856.3
+      "latency_ms": 5856.3,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_013",
@@ -7745,7 +8334,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 6145.6
+      "latency_ms": 6145.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_014",
@@ -7774,7 +8365,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 6901.0
+      "latency_ms": 6901.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "edge_tr_015",
@@ -7799,7 +8392,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 8250.2
+      "latency_ms": 8250.2,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_en_025",
@@ -7823,7 +8418,9 @@
         }
       },
       "error": null,
-      "latency_ms": 7319.5
+      "latency_ms": 7319.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "profile_tr_025",
@@ -7847,7 +8444,9 @@
         }
       },
       "error": null,
-      "latency_ms": 3791.0
+      "latency_ms": 3791.0,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_en_025",
@@ -7872,7 +8471,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5046.6
+      "latency_ms": 5046.6,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     },
     {
       "id": "prov_tr_025",
@@ -7897,7 +8498,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 5552.5
+      "latency_ms": 5552.5,
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
     }
   ]
 }

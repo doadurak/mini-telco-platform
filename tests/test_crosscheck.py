@@ -51,3 +51,18 @@ def test_dry_run_is_never_held(client):
     d = _post(c, dry_run=True)
     assert d["service_crosscheck"]["agrees"] is False and d["service_crosscheck"]["held"] is False
     assert calls == [True]
+
+
+def test_live_call_refused_when_registry_unchecked(client, monkeypatch):
+    c, calls = client
+    real = main.validate_step
+
+    def unchecked(**kw):  # CAPIF unreachable: L3 passes open with registry_checked=False
+        return real(**{**kw, "skip_registry": True})
+
+    monkeypatch.setattr(main, "validate_step", unchecked)
+    body = {"intent": _INTENT, "check_registry": True, "orchestration_mode": "llm-assisted"}
+    assert c.post("/orchestrate", json={**body, "dry_run": False}).status_code == 503
+    assert calls == []
+    d = c.post("/orchestrate", json={**body, "dry_run": True}).json()
+    assert d["validation"]["registry_checked"] is False and calls == [True]

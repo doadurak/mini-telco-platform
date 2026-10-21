@@ -86,7 +86,9 @@ def _active_model_name() -> str:
         return settings.openai_model
     if p == "anthropic":
         return settings.anthropic_model
-    return settings.gemini_model
+    if p == "gemini":
+        return settings.gemini_model
+    return f"unknown-provider:{p}"
 
 
 # ─────────────────────────────────────────────

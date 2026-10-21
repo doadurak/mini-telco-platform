@@ -189,8 +189,9 @@ def _execute_qos_provisioning(step: ExecutionStep) -> dict:
     )
 
     # 3GPP TS 29.122 AsSessionWithQoS subscription body
-    # ueIpv4Addr: resolved from the 5GC subscriber DB, else NEF_DEFAULT_UE_IPV4
-    ue_ipv4 = resolve_ue_ipv4(phone) or settings.nef_default_ue_ipv4
+    # ueIpv4Addr: resolved from the 5GC subscriber DB, else NEF_DEFAULT_UE_IPV4 (reported as such)
+    resolved_ipv4 = resolve_ue_ipv4(phone)
+    ue_ipv4 = resolved_ipv4 or settings.nef_default_ue_ipv4
     nef_payload = {
         "msisdn": phone,
         "externalId": phone.lstrip("+") + "@domain.com",
@@ -218,7 +219,9 @@ def _execute_qos_provisioning(step: ExecutionStep) -> dict:
             "assignmentStatus": "ACTIVE",
             "qosProfile": qos_profile,
             "requestedQosProfile": requested_profile,
-            "resolvedUeIpv4": ue_ipv4,
+            "resolvedUeIpv4": resolved_ipv4,
+            "ueIpv4Addr": ue_ipv4,
+            "ueIpv4Source": "subscriber-db" if resolved_ipv4 else "NEF_DEFAULT_UE_IPV4",
             "device": payload.get("device"),
             "provider": {
                 "url": url,

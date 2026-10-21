@@ -212,9 +212,10 @@ the keyword baseline `datasets/eval_results_deterministic_300.json`, and the fun
 `datasets/eval_results_gpt4omini_function_calling{,_feedback}_300.json`.
 
 > **Correction (2026-10-21).** The GPT-4o-mini row of the submitted WMNC paper (IWSR 97.3%) came from a file in
-> which 240 of the 300 entries had been planned by Gemini 2.5 Flash: the run used `LLM_PROVIDER=gpt`, which the
-> planner did not recognise and silently replaced with Gemini. The planner now rejects unknown provider names, and
-> GPT-4o-mini was re-run three times. The old file is kept in [`datasets/superseded/`](datasets/superseded/).
+> which 235 of the 300 entries had been planned by Gemini 2.5 Flash: the run used `LLM_PROVIDER=gpt`, which the
+> planner did not recognise and silently replaced with Gemini. The planner now rejects unknown provider names, every
+> result records `provider` and `model`, `--resume` refuses a file from another model, and GPT-4o-mini was re-run
+> three times. The old file is kept in [`datasets/superseded/`](datasets/superseded/).
 
 **Native function calling baseline** (`run_evaluation.py --mode llm-function-calling`). GPT-4o-mini gets one tool
 per CAMARA operation whose parameters are the operation's OpenAPI request schema (with the operator's QoS profile

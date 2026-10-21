@@ -1,6 +1,8 @@
 #!/bin/bash
 # Run 300-entry evaluation for all 3 LLM providers in parallel
 # Uses --resume to skip already-evaluated entries (the original 60)
+# Historical (2026-09). --resume now refuses a file without the same "model" in its summary, and the
+# legacy pilot files carry none; see scripts/run_gpt_300_x3.sh and run_repeats_300.sh for current runs.
 
 cd /home/turkad/mini-telco-platform
 

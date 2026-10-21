@@ -22,7 +22,10 @@
       "easy": 1.0,
       "medium": 0.9681,
       "hard": 0.9364
-    }
+    },
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "provenance": "provider/model backfilled 2026-10-21 by scripts/backfill_provenance.py"
   },
   "results": [
     {
@@ -52,7 +55,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2270.4
+      "latency_ms": 2270.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_002",
@@ -81,7 +86,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2308.6
+      "latency_ms": 2308.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_003",
@@ -110,7 +117,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2618.9
+      "latency_ms": 2618.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_004",
@@ -139,7 +148,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2309.1
+      "latency_ms": 2309.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_005",
@@ -168,7 +179,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2366.1
+      "latency_ms": 2366.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_006",
@@ -197,7 +210,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2169.0
+      "latency_ms": 2169.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_007",
@@ -226,7 +241,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2381.1
+      "latency_ms": 2381.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_008",
@@ -255,7 +272,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2392.8
+      "latency_ms": 2392.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_009",
@@ -284,7 +303,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2277.7
+      "latency_ms": 2277.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_010",
@@ -313,7 +334,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2521.5
+      "latency_ms": 2521.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_001",
@@ -342,7 +365,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2486.3
+      "latency_ms": 2486.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_002",
@@ -371,7 +396,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2320.1
+      "latency_ms": 2320.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_003",
@@ -400,7 +427,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2351.3
+      "latency_ms": 2351.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_004",
@@ -429,7 +458,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2640.8
+      "latency_ms": 2640.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_005",
@@ -458,7 +489,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2331.0
+      "latency_ms": 2331.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_006",
@@ -487,7 +520,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2715.1
+      "latency_ms": 2715.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_007",
@@ -516,7 +551,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2496.9
+      "latency_ms": 2496.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_008",
@@ -545,7 +582,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2401.3
+      "latency_ms": 2401.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_009",
@@ -574,7 +613,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2626.9
+      "latency_ms": 2626.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_010",
@@ -603,7 +644,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2320.9
+      "latency_ms": 2320.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_001",
@@ -627,7 +670,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1979.8
+      "latency_ms": 1979.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_002",
@@ -651,7 +696,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1897.4
+      "latency_ms": 1897.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_003",
@@ -677,7 +724,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2134.3
+      "latency_ms": 2134.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_004",
@@ -701,7 +750,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2000.8
+      "latency_ms": 2000.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_005",
@@ -725,7 +776,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2050.2
+      "latency_ms": 2050.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_001",
@@ -749,7 +802,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1889.7
+      "latency_ms": 1889.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_002",
@@ -775,7 +830,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 1966.0
+      "latency_ms": 1966.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_003",
@@ -801,7 +858,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 1984.4
+      "latency_ms": 1984.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_004",
@@ -827,7 +886,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2132.9
+      "latency_ms": 2132.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_005",
@@ -851,7 +912,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2007.0
+      "latency_ms": 2007.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_001",
@@ -880,7 +943,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2231.6
+      "latency_ms": 2231.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_002",
@@ -909,7 +974,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2293.4
+      "latency_ms": 2293.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_003",
@@ -938,7 +1005,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2348.6
+      "latency_ms": 2348.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_004",
@@ -967,7 +1036,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2524.1
+      "latency_ms": 2524.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_005",
@@ -992,7 +1063,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2091.6
+      "latency_ms": 2091.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_001",
@@ -1021,7 +1094,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2242.1
+      "latency_ms": 2242.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_002",
@@ -1050,7 +1125,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2132.9
+      "latency_ms": 2132.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_003",
@@ -1079,7 +1156,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2065.5
+      "latency_ms": 2065.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_004",
@@ -1108,7 +1187,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2199.4
+      "latency_ms": 2199.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_005",
@@ -1137,7 +1218,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2588.7
+      "latency_ms": 2588.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_001",
@@ -1162,7 +1245,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2468.6
+      "latency_ms": 2468.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_002",
@@ -1187,7 +1272,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2173.0
+      "latency_ms": 2173.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_003",
@@ -1212,7 +1299,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2140.9
+      "latency_ms": 2140.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_004",
@@ -1237,7 +1326,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 2061.1
+      "latency_ms": 2061.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_005",
@@ -1262,7 +1353,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 2282.4
+      "latency_ms": 2282.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_006",
@@ -1287,7 +1380,9 @@
         "maxAge": 1800
       },
       "error": null,
-      "latency_ms": 2134.3
+      "latency_ms": 2134.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_007",
@@ -1312,7 +1407,9 @@
         "maxAge": 1
       },
       "error": null,
-      "latency_ms": 1847.8
+      "latency_ms": 1847.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_008",
@@ -1337,7 +1434,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2176.9
+      "latency_ms": 2176.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_001",
@@ -1362,7 +1461,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1972.4
+      "latency_ms": 1972.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_002",
@@ -1387,7 +1488,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2372.0
+      "latency_ms": 2372.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_003",
@@ -1412,7 +1515,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1957.3
+      "latency_ms": 1957.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_004",
@@ -1437,7 +1542,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 2076.0
+      "latency_ms": 2076.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_005",
@@ -1462,7 +1569,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 2096.9
+      "latency_ms": 2096.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_006",
@@ -1487,7 +1596,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2011.5
+      "latency_ms": 2011.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_007",
@@ -1512,7 +1623,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2080.8
+      "latency_ms": 2080.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_001",
@@ -1541,7 +1654,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2257.2
+      "latency_ms": 2257.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_002",
@@ -1570,7 +1685,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2323.8
+      "latency_ms": 2323.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_003",
@@ -1595,7 +1712,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 1994.6
+      "latency_ms": 1994.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_004",
@@ -1620,7 +1739,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1947.8
+      "latency_ms": 1947.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_005",
@@ -1649,7 +1770,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2943.1
+      "latency_ms": 2943.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_011",
@@ -1678,7 +1801,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2256.2
+      "latency_ms": 2256.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_012",
@@ -1707,7 +1832,9 @@
         "duration": 1500
       },
       "error": null,
-      "latency_ms": 3167.6
+      "latency_ms": 3167.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_013",
@@ -1736,7 +1863,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2206.0
+      "latency_ms": 2206.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_014",
@@ -1765,7 +1894,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2491.3
+      "latency_ms": 2491.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_015",
@@ -1794,7 +1925,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2243.0
+      "latency_ms": 2243.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_016",
@@ -1823,7 +1956,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2260.3
+      "latency_ms": 2260.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_017",
@@ -1852,7 +1987,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2136.5
+      "latency_ms": 2136.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_018",
@@ -1881,7 +2018,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2312.2
+      "latency_ms": 2312.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_019",
@@ -1910,7 +2049,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2258.4
+      "latency_ms": 2258.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_020",
@@ -1939,7 +2080,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2635.2
+      "latency_ms": 2635.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_021",
@@ -1968,7 +2111,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2207.1
+      "latency_ms": 2207.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_022",
@@ -1997,7 +2142,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2492.1
+      "latency_ms": 2492.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_023",
@@ -2026,7 +2173,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2364.4
+      "latency_ms": 2364.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_024",
@@ -2055,7 +2204,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2440.7
+      "latency_ms": 2440.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_025",
@@ -2084,7 +2235,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2256.1
+      "latency_ms": 2256.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_026",
@@ -2113,7 +2266,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2419.0
+      "latency_ms": 2419.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_027",
@@ -2142,7 +2297,9 @@
         "duration": 2400
       },
       "error": null,
-      "latency_ms": 2496.6
+      "latency_ms": 2496.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_028",
@@ -2171,7 +2328,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2254.3
+      "latency_ms": 2254.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_029",
@@ -2200,7 +2359,9 @@
         "duration": 2100
       },
       "error": null,
-      "latency_ms": 2438.9
+      "latency_ms": 2438.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_030",
@@ -2229,7 +2390,9 @@
         "duration": 3000
       },
       "error": null,
-      "latency_ms": 2100.7
+      "latency_ms": 2100.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_031",
@@ -2258,7 +2421,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2323.3
+      "latency_ms": 2323.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_032",
@@ -2287,7 +2452,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2206.9
+      "latency_ms": 2206.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_033",
@@ -2316,7 +2483,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2448.7
+      "latency_ms": 2448.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_034",
@@ -2345,7 +2514,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2589.3
+      "latency_ms": 2589.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_035",
@@ -2374,7 +2545,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2180.6
+      "latency_ms": 2180.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_036",
@@ -2403,7 +2576,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2278.5
+      "latency_ms": 2278.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_037",
@@ -2432,7 +2607,9 @@
         "duration": 60
       },
       "error": null,
-      "latency_ms": 6318.4
+      "latency_ms": 6318.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_038",
@@ -2461,7 +2638,9 @@
         "duration": 120
       },
       "error": null,
-      "latency_ms": 2471.4
+      "latency_ms": 2471.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_039",
@@ -2490,7 +2669,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2300.7
+      "latency_ms": 2300.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_040",
@@ -2519,7 +2700,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2342.9
+      "latency_ms": 2342.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_041",
@@ -2548,7 +2731,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2244.8
+      "latency_ms": 2244.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_042",
@@ -2577,7 +2762,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2240.5
+      "latency_ms": 2240.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_043",
@@ -2606,7 +2793,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2160.3
+      "latency_ms": 2160.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_044",
@@ -2635,7 +2824,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2314.5
+      "latency_ms": 2314.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_045",
@@ -2664,7 +2855,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2279.2
+      "latency_ms": 2279.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_046",
@@ -2693,7 +2886,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2358.2
+      "latency_ms": 2358.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_047",
@@ -2722,7 +2917,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2339.6
+      "latency_ms": 2339.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_048",
@@ -2751,7 +2948,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2359.0
+      "latency_ms": 2359.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_049",
@@ -2780,7 +2979,9 @@
         }
       },
       "error": null,
-      "latency_ms": 5184.6
+      "latency_ms": 5184.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_en_050",
@@ -2809,7 +3010,9 @@
         }
       },
       "error": null,
-      "latency_ms": 3807.5
+      "latency_ms": 3807.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_011",
@@ -2838,7 +3041,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2319.0
+      "latency_ms": 2319.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_012",
@@ -2867,7 +3072,9 @@
         "duration": 1500
       },
       "error": null,
-      "latency_ms": 2282.5
+      "latency_ms": 2282.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_013",
@@ -2896,7 +3103,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 3188.5
+      "latency_ms": 3188.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_014",
@@ -2925,7 +3134,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2223.1
+      "latency_ms": 2223.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_015",
@@ -2954,7 +3165,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2486.9
+      "latency_ms": 2486.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_016",
@@ -2983,7 +3196,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2244.4
+      "latency_ms": 2244.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_017",
@@ -3012,7 +3227,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2208.5
+      "latency_ms": 2208.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_018",
@@ -3041,7 +3258,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2423.9
+      "latency_ms": 2423.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_019",
@@ -3070,7 +3289,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2390.8
+      "latency_ms": 2390.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_020",
@@ -3099,7 +3320,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2305.0
+      "latency_ms": 2305.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_021",
@@ -3128,7 +3351,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2205.5
+      "latency_ms": 2205.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_022",
@@ -3157,7 +3382,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2528.7
+      "latency_ms": 2528.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_023",
@@ -3186,7 +3413,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2178.4
+      "latency_ms": 2178.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_024",
@@ -3215,7 +3444,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2277.2
+      "latency_ms": 2277.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_025",
@@ -3244,7 +3475,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2376.6
+      "latency_ms": 2376.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_026",
@@ -3273,7 +3506,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2306.8
+      "latency_ms": 2306.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_027",
@@ -3302,7 +3537,9 @@
         "duration": 2400
       },
       "error": null,
-      "latency_ms": 2489.2
+      "latency_ms": 2489.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_028",
@@ -3331,7 +3568,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2158.5
+      "latency_ms": 2158.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_029",
@@ -3360,7 +3599,9 @@
         "duration": 2100
       },
       "error": null,
-      "latency_ms": 2395.2
+      "latency_ms": 2395.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_030",
@@ -3389,7 +3630,9 @@
         "duration": 3000
       },
       "error": null,
-      "latency_ms": 2432.9
+      "latency_ms": 2432.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_031",
@@ -3418,7 +3661,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2056.3
+      "latency_ms": 2056.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_032",
@@ -3447,7 +3692,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2441.1
+      "latency_ms": 2441.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_033",
@@ -3476,7 +3723,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2593.4
+      "latency_ms": 2593.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_034",
@@ -3505,7 +3754,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2329.5
+      "latency_ms": 2329.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_035",
@@ -3530,7 +3781,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2620.9
+      "latency_ms": 2620.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_036",
@@ -3559,7 +3812,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2531.9
+      "latency_ms": 2531.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_037",
@@ -3588,7 +3843,9 @@
         "duration": 60
       },
       "error": null,
-      "latency_ms": 2568.4
+      "latency_ms": 2568.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_038",
@@ -3617,7 +3874,9 @@
         "duration": 120
       },
       "error": null,
-      "latency_ms": 2251.4
+      "latency_ms": 2251.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_039",
@@ -3646,7 +3905,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2459.7
+      "latency_ms": 2459.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_040",
@@ -3675,7 +3936,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2273.0
+      "latency_ms": 2273.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_041",
@@ -3704,7 +3967,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2335.0
+      "latency_ms": 2335.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_042",
@@ -3733,7 +3998,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2448.6
+      "latency_ms": 2448.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_043",
@@ -3762,7 +4029,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2435.1
+      "latency_ms": 2435.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_044",
@@ -3791,7 +4060,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2548.5
+      "latency_ms": 2548.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_045",
@@ -3820,7 +4091,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2349.6
+      "latency_ms": 2349.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_046",
@@ -3849,7 +4122,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2231.2
+      "latency_ms": 2231.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_047",
@@ -3878,7 +4153,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2584.6
+      "latency_ms": 2584.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_048",
@@ -3907,7 +4184,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2351.8
+      "latency_ms": 2351.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_049",
@@ -3936,7 +4215,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2405.2
+      "latency_ms": 2405.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "qod_tr_050",
@@ -3965,7 +4246,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2340.3
+      "latency_ms": 2340.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_006",
@@ -3989,7 +4272,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1974.0
+      "latency_ms": 1974.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_007",
@@ -4015,7 +4300,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2902.8
+      "latency_ms": 2902.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_008",
@@ -4041,7 +4328,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2031.8
+      "latency_ms": 2031.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_009",
@@ -4067,7 +4356,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2045.0
+      "latency_ms": 2045.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_010",
@@ -4093,7 +4384,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2301.1
+      "latency_ms": 2301.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_011",
@@ -4119,7 +4412,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2204.3
+      "latency_ms": 2204.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_012",
@@ -4145,7 +4440,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2471.5
+      "latency_ms": 2471.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_013",
@@ -4171,7 +4468,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2265.7
+      "latency_ms": 2265.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_014",
@@ -4197,7 +4496,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2374.6
+      "latency_ms": 2374.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_015",
@@ -4223,7 +4524,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 1879.1
+      "latency_ms": 1879.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_016",
@@ -4247,7 +4550,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1859.4
+      "latency_ms": 1859.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_017",
@@ -4271,7 +4576,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2043.8
+      "latency_ms": 2043.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_018",
@@ -4297,7 +4604,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2003.1
+      "latency_ms": 2003.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_019",
@@ -4321,7 +4630,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1915.0
+      "latency_ms": 1915.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_020",
@@ -4345,7 +4656,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1925.2
+      "latency_ms": 1925.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_021",
@@ -4371,7 +4684,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2081.4
+      "latency_ms": 2081.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_022",
@@ -4395,7 +4710,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2034.8
+      "latency_ms": 2034.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_023",
@@ -4421,7 +4738,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2415.2
+      "latency_ms": 2415.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_024",
@@ -4447,7 +4766,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2222.3
+      "latency_ms": 2222.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_006",
@@ -4473,7 +4794,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2150.6
+      "latency_ms": 2150.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_007",
@@ -4499,7 +4822,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 1971.0
+      "latency_ms": 1971.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_008",
@@ -4525,7 +4850,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2056.0
+      "latency_ms": 2056.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_009",
@@ -4551,7 +4878,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2016.4
+      "latency_ms": 2016.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_010",
@@ -4577,7 +4906,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 1947.9
+      "latency_ms": 1947.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_011",
@@ -4603,7 +4934,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2315.5
+      "latency_ms": 2315.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_012",
@@ -4629,7 +4962,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2405.3
+      "latency_ms": 2405.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_013",
@@ -4655,7 +4990,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2201.3
+      "latency_ms": 2201.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_014",
@@ -4681,7 +5018,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2038.4
+      "latency_ms": 2038.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_015",
@@ -4707,7 +5046,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2069.8
+      "latency_ms": 2069.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_016",
@@ -4733,7 +5074,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2021.3
+      "latency_ms": 2021.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_017",
@@ -4759,7 +5102,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2066.1
+      "latency_ms": 2066.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_018",
@@ -4785,7 +5130,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 1907.4
+      "latency_ms": 1907.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_019",
@@ -4811,7 +5158,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2434.7
+      "latency_ms": 2434.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_020",
@@ -4837,7 +5186,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2496.1
+      "latency_ms": 2496.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_021",
@@ -4863,7 +5214,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2596.3
+      "latency_ms": 2596.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_022",
@@ -4889,7 +5242,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2382.1
+      "latency_ms": 2382.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_023",
@@ -4915,7 +5270,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 3045.6
+      "latency_ms": 3045.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_024",
@@ -4941,7 +5298,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2426.8
+      "latency_ms": 2426.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_006",
@@ -4966,7 +5325,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2487.2
+      "latency_ms": 2487.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_007",
@@ -4991,7 +5352,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2721.5
+      "latency_ms": 2721.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_008",
@@ -5016,7 +5379,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 1972.6
+      "latency_ms": 1972.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_009",
@@ -5045,7 +5410,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2347.3
+      "latency_ms": 2347.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_010",
@@ -5074,7 +5441,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2330.4
+      "latency_ms": 2330.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_011",
@@ -5103,7 +5472,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2519.0
+      "latency_ms": 2519.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_012",
@@ -5128,7 +5499,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2338.0
+      "latency_ms": 2338.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_013",
@@ -5157,7 +5530,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2379.8
+      "latency_ms": 2379.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_014",
@@ -5182,7 +5557,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2045.7
+      "latency_ms": 2045.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_015",
@@ -5211,7 +5588,9 @@
         }
       },
       "error": null,
-      "latency_ms": 4746.8
+      "latency_ms": 4746.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_016",
@@ -5236,7 +5615,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2268.3
+      "latency_ms": 2268.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_017",
@@ -5265,7 +5646,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2817.5
+      "latency_ms": 2817.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_018",
@@ -5290,7 +5673,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2052.8
+      "latency_ms": 2052.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_019",
@@ -5315,7 +5700,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2385.5
+      "latency_ms": 2385.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_020",
@@ -5344,7 +5731,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2785.9
+      "latency_ms": 2785.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_021",
@@ -5373,7 +5762,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2733.8
+      "latency_ms": 2733.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_022",
@@ -5402,7 +5793,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2273.9
+      "latency_ms": 2273.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_023",
@@ -5427,7 +5820,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2046.5
+      "latency_ms": 2046.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_024",
@@ -5452,7 +5847,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2356.0
+      "latency_ms": 2356.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_006",
@@ -5477,7 +5874,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2022.6
+      "latency_ms": 2022.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_007",
@@ -5502,7 +5901,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 1889.3
+      "latency_ms": 1889.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_008",
@@ -5527,7 +5928,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2205.8
+      "latency_ms": 2205.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_009",
@@ -5556,7 +5959,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2316.0
+      "latency_ms": 2316.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_010",
@@ -5585,7 +5990,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2175.2
+      "latency_ms": 2175.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_011",
@@ -5614,7 +6021,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2384.5
+      "latency_ms": 2384.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_012",
@@ -5639,7 +6048,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2152.9
+      "latency_ms": 2152.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_013",
@@ -5668,7 +6079,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2313.7
+      "latency_ms": 2313.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_014",
@@ -5697,7 +6110,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2180.7
+      "latency_ms": 2180.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_015",
@@ -5726,7 +6141,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2576.1
+      "latency_ms": 2576.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_016",
@@ -5751,7 +6168,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2058.9
+      "latency_ms": 2058.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_017",
@@ -5780,7 +6199,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2224.3
+      "latency_ms": 2224.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_018",
@@ -5809,7 +6230,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2381.6
+      "latency_ms": 2381.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_019",
@@ -5834,7 +6257,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 1908.4
+      "latency_ms": 1908.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_020",
@@ -5863,7 +6288,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2438.3
+      "latency_ms": 2438.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_021",
@@ -5892,7 +6319,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2134.9
+      "latency_ms": 2134.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_022",
@@ -5921,7 +6350,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2435.6
+      "latency_ms": 2435.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_023",
@@ -5946,7 +6377,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2141.5
+      "latency_ms": 2141.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_024",
@@ -5971,7 +6404,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2058.0
+      "latency_ms": 2058.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_010",
@@ -5996,7 +6431,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2335.9
+      "latency_ms": 2335.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_011",
@@ -6021,7 +6458,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 2536.9
+      "latency_ms": 2536.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_012",
@@ -6046,7 +6485,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2001.4
+      "latency_ms": 2001.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_013",
@@ -6071,7 +6512,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1951.1
+      "latency_ms": 1951.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_014",
@@ -6096,7 +6539,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2164.1
+      "latency_ms": 2164.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_015",
@@ -6121,7 +6566,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1869.0
+      "latency_ms": 1869.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_016",
@@ -6146,7 +6593,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1974.1
+      "latency_ms": 1974.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_017",
@@ -6171,7 +6620,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2198.5
+      "latency_ms": 2198.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_018",
@@ -6196,7 +6647,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2126.0
+      "latency_ms": 2126.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_019",
@@ -6221,7 +6674,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2113.3
+      "latency_ms": 2113.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_020",
@@ -6246,7 +6701,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1976.4
+      "latency_ms": 1976.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_021",
@@ -6271,7 +6728,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1959.0
+      "latency_ms": 1959.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_022",
@@ -6296,7 +6755,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2076.2
+      "latency_ms": 2076.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_023",
@@ -6321,7 +6782,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2132.3
+      "latency_ms": 2132.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_024",
@@ -6346,7 +6809,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1988.9
+      "latency_ms": 1988.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_025",
@@ -6371,7 +6836,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2191.1
+      "latency_ms": 2191.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_026",
@@ -6396,7 +6863,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2225.9
+      "latency_ms": 2225.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_027",
@@ -6421,7 +6890,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1921.0
+      "latency_ms": 1921.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_028",
@@ -6446,7 +6917,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2058.0
+      "latency_ms": 2058.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_029",
@@ -6471,7 +6944,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 3508.5
+      "latency_ms": 3508.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_030",
@@ -6496,7 +6971,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2026.7
+      "latency_ms": 2026.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_031",
@@ -6521,7 +6998,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 4397.0
+      "latency_ms": 4397.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_032",
@@ -6546,7 +7025,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2723.7
+      "latency_ms": 2723.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_033",
@@ -6571,7 +7052,9 @@
         "maxAge": 30
       },
       "error": null,
-      "latency_ms": 1971.2
+      "latency_ms": 1971.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_034",
@@ -6596,7 +7079,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1981.8
+      "latency_ms": 1981.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_035",
@@ -6621,7 +7106,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2134.6
+      "latency_ms": 2134.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_036",
@@ -6646,7 +7133,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1970.4
+      "latency_ms": 1970.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_037",
@@ -6671,7 +7160,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2157.7
+      "latency_ms": 2157.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_038",
@@ -6696,7 +7187,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2310.7
+      "latency_ms": 2310.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_en_039",
@@ -6721,7 +7214,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2130.0
+      "latency_ms": 2130.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_010",
@@ -6746,7 +7241,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2109.6
+      "latency_ms": 2109.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_011",
@@ -6771,7 +7268,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1932.5
+      "latency_ms": 1932.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_012",
@@ -6796,7 +7295,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1825.4
+      "latency_ms": 1825.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_013",
@@ -6821,7 +7322,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1793.1
+      "latency_ms": 1793.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_014",
@@ -6846,7 +7349,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1824.4
+      "latency_ms": 1824.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_015",
@@ -6871,7 +7376,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1900.7
+      "latency_ms": 1900.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_016",
@@ -6896,7 +7403,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2075.7
+      "latency_ms": 2075.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_017",
@@ -6921,7 +7430,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2187.8
+      "latency_ms": 2187.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_018",
@@ -6946,7 +7457,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1917.1
+      "latency_ms": 1917.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_019",
@@ -6971,7 +7484,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2486.6
+      "latency_ms": 2486.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_020",
@@ -6996,7 +7511,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1902.6
+      "latency_ms": 1902.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_021",
@@ -7021,7 +7538,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2056.1
+      "latency_ms": 2056.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_022",
@@ -7046,7 +7565,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2017.1
+      "latency_ms": 2017.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_023",
@@ -7071,7 +7592,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1992.4
+      "latency_ms": 1992.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_024",
@@ -7096,7 +7619,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1981.8
+      "latency_ms": 1981.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_025",
@@ -7121,7 +7646,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2010.0
+      "latency_ms": 2010.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_026",
@@ -7146,7 +7673,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2129.8
+      "latency_ms": 2129.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_027",
@@ -7171,7 +7700,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2143.8
+      "latency_ms": 2143.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_028",
@@ -7196,7 +7727,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2314.6
+      "latency_ms": 2314.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_029",
@@ -7221,7 +7754,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2153.4
+      "latency_ms": 2153.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_030",
@@ -7246,7 +7781,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2220.4
+      "latency_ms": 2220.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_031",
@@ -7271,7 +7808,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1879.0
+      "latency_ms": 1879.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_032",
@@ -7296,7 +7835,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2032.4
+      "latency_ms": 2032.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_033",
@@ -7321,7 +7862,9 @@
         "maxAge": 30
       },
       "error": null,
-      "latency_ms": 2176.8
+      "latency_ms": 2176.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_034",
@@ -7346,7 +7889,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1944.7
+      "latency_ms": 1944.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_035",
@@ -7371,7 +7916,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2230.6
+      "latency_ms": 2230.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_036",
@@ -7396,7 +7943,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1954.6
+      "latency_ms": 1954.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_037",
@@ -7421,7 +7970,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1934.6
+      "latency_ms": 1934.6,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_038",
@@ -7446,7 +7997,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2023.4
+      "latency_ms": 2023.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "loc_tr_039",
@@ -7471,7 +8024,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2235.9
+      "latency_ms": 2235.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_006",
@@ -7500,7 +8055,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2275.9
+      "latency_ms": 2275.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_007",
@@ -7525,7 +8082,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2072.7
+      "latency_ms": 2072.7,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_008",
@@ -7554,7 +8113,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 3854.3
+      "latency_ms": 3854.3,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_009",
@@ -7583,7 +8144,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2398.5
+      "latency_ms": 2398.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_010",
@@ -7608,7 +8171,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2066.2
+      "latency_ms": 2066.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_011",
@@ -7633,7 +8198,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1914.2
+      "latency_ms": 1914.2,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_012",
@@ -7662,7 +8229,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2526.5
+      "latency_ms": 2526.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_013",
@@ -7691,7 +8260,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2178.4
+      "latency_ms": 2178.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_014",
@@ -7720,7 +8291,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2671.1
+      "latency_ms": 2671.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_en_015",
@@ -7749,7 +8322,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2105.8
+      "latency_ms": 2105.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_006",
@@ -7778,7 +8353,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2512.4
+      "latency_ms": 2512.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_007",
@@ -7803,7 +8380,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2208.4
+      "latency_ms": 2208.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_008",
@@ -7832,7 +8411,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 3534.8
+      "latency_ms": 3534.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_009",
@@ -7861,7 +8442,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2395.8
+      "latency_ms": 2395.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_010",
@@ -7886,7 +8469,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2036.4
+      "latency_ms": 2036.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_011",
@@ -7911,7 +8496,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1962.4
+      "latency_ms": 1962.4,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_012",
@@ -7940,7 +8527,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2294.8
+      "latency_ms": 2294.8,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_013",
@@ -7969,7 +8558,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2371.9
+      "latency_ms": 2371.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_014",
@@ -7998,7 +8589,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2198.9
+      "latency_ms": 2198.9,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "edge_tr_015",
@@ -8027,7 +8620,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2289.5
+      "latency_ms": 2289.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_en_025",
@@ -8051,7 +8646,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1976.0
+      "latency_ms": 1976.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "profile_tr_025",
@@ -8075,7 +8672,9 @@
         }
       },
       "error": null,
-      "latency_ms": 1978.5
+      "latency_ms": 1978.5,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_en_025",
@@ -8100,7 +8699,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2166.0
+      "latency_ms": 2166.0,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     },
     {
       "id": "prov_tr_025",
@@ -8125,7 +8726,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2007.1
+      "latency_ms": 2007.1,
+      "provider": "openai",
+      "model": "gpt-4o-mini"
     }
   ]
 }

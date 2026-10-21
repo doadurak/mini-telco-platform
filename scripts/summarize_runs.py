@@ -25,19 +25,25 @@ RUNS = {
 LEVELS = ("easy", "medium", "hard")
 
 
-def _results(path: Path) -> list[dict]:
+MODELS = {"Keyword baseline": "keyword-planner", "Claude Haiku 4.5": "claude-haiku-4-5-20251001",
+          "Gemini 2.5 Flash": "gemini-2.5-flash"}  # every other row is GPT-4o-mini
+
+
+def _results(path: Path, name: str) -> list[dict]:
     rows = json.loads(path.read_text(encoding="utf-8"))["results"]
     assert len(rows) == 300 and not any(r.get("error") for r in rows), path
+    model = MODELS.get(name, "gpt-4o-mini")
+    assert all(r.get("model") == model for r in rows), f"{path}: not all plans are from {model}"
     return rows
 
 
 def main() -> None:
     gt = {e["id"]: e["expected"]["service_id"]
           for e in json.loads((D / "ground_truth.json").read_text(encoding="utf-8"))["entries"]}
-    keyword = {r["id"]: r["actual_service_id"] for r in _results(RUNS["Keyword baseline"][0])}
+    keyword = {r["id"]: r["actual_service_id"] for r in _results(RUNS["Keyword baseline"][0], "Keyword baseline")}
     summary = {}
     for name, paths in RUNS.items():
-        runs = [_results(p) for p in paths]
+        runs = [_results(p, name) for p in paths]
         pct = lambda f: [100 * sum(map(f, rows)) / len(rows) for rows in runs]  # noqa: E731
         row = {"runs": len(runs),
                "IWSR": pct(lambda r: r["iwsr"]),

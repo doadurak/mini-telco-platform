@@ -35,7 +35,8 @@ def _one(intent: str, mode: str) -> dict:
         ok, body = False, {}
     return {"ok": ok, "client_ms": (time.perf_counter() - t0) * 1000,
             "timings": body.get("timings_ms", {}),
-            "registry_checked": body.get("validation", {}).get("registry_checked", False)}
+            "registry_checked": body.get("validation", {}).get("registry_checked", False),
+            "model": body.get("planner", {}).get("model")}
 
 
 def _pct(xs, p):
@@ -55,6 +56,8 @@ def run_level(intents, mode, concurrency, n):
     val = [r["timings"].get("validation", 0) for r in ok]
     return {
         "mode": mode, "concurrency": concurrency, "requests": n, "ok": len(ok),
+        # the backend's active LLM can be switched at run time (/config/provider): record it
+        "models": sorted({r["model"] for r in ok if r["model"]}),
         "registry_checked": sum(r["registry_checked"] for r in ok),
         "throughput_rps": round(len(ok) / wall, 2),
         "p50_ms": round(_pct(lat, 50)), "p95_ms": round(_pct(lat, 95)),
@@ -70,7 +73,10 @@ def main() -> None:
     ap.add_argument("--llm-levels", default="1,5,10")
     ap.add_argument("--llm-requests", type=int, default=20)
     ap.add_argument("--output", type=Path)
+    ap.add_argument("--provider", default="openai", choices=["openai", "anthropic", "gemini"])
     args = ap.parse_args()
+    requests.post(API.replace("/orchestrate", "/config/provider"), json={"provider": args.provider},
+                  timeout=10).raise_for_status()
 
     entries = json.loads(Path("datasets/ground_truth.json").read_text(encoding="utf-8"))["entries"]
     intents = [e["intent"] for e in entries if e["category"] != "edge_case"]

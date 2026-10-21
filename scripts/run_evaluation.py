@@ -31,6 +31,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from backend.evaluation_engine import (
     EvaluationReport,
     compare_modes,
+    planner_identity,
     run_evaluation,
 )
 
@@ -201,8 +202,10 @@ def main() -> None:
     print(f"Running evaluation: mode={args.mode}, lang={args.lang or 'all'}, "
           f"category={args.category or 'all'}, difficulty={args.difficulty or 'all'}, "
           f"max={args.max_entries or 'all'}")
+    provider, model = planner_identity(args.mode)
+    print(f"Planner: provider={provider}, model={model}", flush=True)
 
-    delay = args.request_delay_s if args.mode.startswith("llm") else 0.0
+    delay =args.request_delay_s if args.mode.startswith("llm") else 0.0
     report = run_evaluation(
         mode=args.mode,
         dry_run=True,
@@ -240,6 +243,9 @@ def main() -> None:
                     "actual_payload": r.actual_payload,
                     "error": r.error,
                     "latency_ms": round(r.latency_ms, 1),
+                    "provider": r.provider,
+                    "model": r.model,
+                    "used_discovery": r.used_discovery,
                 }
                 for r in report.results
             ],
@@ -252,6 +258,13 @@ def main() -> None:
             print(out)
     else:
         _print_report(report, verbose=args.verbose)
+
+    errors = report.summary()["errors"]
+    if errors:
+        # API errors (e.g. 429 quota) count as failures and would silently lower IWSR
+        print(f"WARNING: {errors} of {report.total} entries ended in an error; the run is not a valid result.",
+              file=sys.stderr)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

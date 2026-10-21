@@ -1,9 +1,10 @@
 # Superseded results
 
 `eval_results_gpt4omini_300_mixed.json` was reported as GPT-4o-mini in the WMNC submission (IWSR 97.3%).
-Only the 60 pilot entries and the 11 re-run multi-intent entries were planned by GPT-4o-mini: the other
-240 were run with `LLM_PROVIDER=gpt`, which the planner did not recognise and silently replaced with
-Gemini 2.5 Flash (215 of these payloads are identical to `eval_results_gemini25flash_300.json`).
+Only 65 entries were planned by GPT-4o-mini (the 60 pilot entries and 5 multi-intent entries re-run on
+2026-10-11); the other 235 were run with `LLM_PROVIDER=gpt`, which the planner did not recognise and
+silently replaced with Gemini 2.5 Flash. Each result now carries `provider` and `model`
+(`scripts/backfill_provenance.py`).
 The planner now rejects unknown provider names.
 
 The GPT-4o-mini results are now `datasets/repeats/eval_results_gpt4omini_300_run{1,2,3}.json`

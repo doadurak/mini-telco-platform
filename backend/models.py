@@ -93,6 +93,7 @@ class FeedbackIteration(BaseModel):
     issues: list[str]
     corrected_payload: dict[str, Any] | None = None
     validation_passed: bool = False
+    error: str | None = None          # the correction call itself failed (API error, bad JSON)
 
 
 class FeedbackMetadata(BaseModel):

@@ -22,7 +22,10 @@
       "easy": 1.0,
       "medium": 1.0,
       "hard": 0.8727
-    }
+    },
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5-20251001",
+    "provenance": "provider/model backfilled 2026-10-21 by scripts/backfill_provenance.py"
   },
   "results": [
     {
@@ -52,7 +55,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2554.6
+      "latency_ms": 2554.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_002",
@@ -81,7 +86,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2338.3
+      "latency_ms": 2338.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_003",
@@ -110,7 +117,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2425.9
+      "latency_ms": 2425.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_004",
@@ -139,7 +148,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2416.6
+      "latency_ms": 2416.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_005",
@@ -168,7 +179,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2465.1
+      "latency_ms": 2465.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_006",
@@ -197,7 +210,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2627.5
+      "latency_ms": 2627.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_007",
@@ -222,7 +237,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2199.4
+      "latency_ms": 2199.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_008",
@@ -251,7 +268,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2547.0
+      "latency_ms": 2547.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_009",
@@ -280,7 +299,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2412.6
+      "latency_ms": 2412.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_010",
@@ -309,7 +330,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2359.0
+      "latency_ms": 2359.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_001",
@@ -338,7 +361,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2435.4
+      "latency_ms": 2435.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_002",
@@ -367,7 +392,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2561.7
+      "latency_ms": 2561.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_003",
@@ -396,7 +423,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2501.6
+      "latency_ms": 2501.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_004",
@@ -425,7 +454,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2641.9
+      "latency_ms": 2641.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_005",
@@ -450,7 +481,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2293.6
+      "latency_ms": 2293.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_006",
@@ -479,7 +512,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2557.3
+      "latency_ms": 2557.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_007",
@@ -508,7 +543,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2634.6
+      "latency_ms": 2634.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_008",
@@ -537,7 +574,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2359.9
+      "latency_ms": 2359.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_009",
@@ -566,7 +605,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2483.2
+      "latency_ms": 2483.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_010",
@@ -595,7 +636,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2482.3
+      "latency_ms": 2482.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_001",
@@ -619,7 +662,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2247.6
+      "latency_ms": 2247.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_002",
@@ -643,7 +688,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2157.5
+      "latency_ms": 2157.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_003",
@@ -668,7 +715,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2247.7
+      "latency_ms": 2247.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_004",
@@ -692,7 +741,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2361.6
+      "latency_ms": 2361.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_005",
@@ -716,7 +767,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2235.1
+      "latency_ms": 2235.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_001",
@@ -740,7 +793,9 @@
         }
       },
       "error": null,
-      "latency_ms": 3175.4
+      "latency_ms": 3175.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_002",
@@ -764,7 +819,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2327.1
+      "latency_ms": 2327.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_003",
@@ -788,7 +845,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2174.2
+      "latency_ms": 2174.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_004",
@@ -812,7 +871,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2228.1
+      "latency_ms": 2228.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_005",
@@ -836,7 +897,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2236.0
+      "latency_ms": 2236.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_001",
@@ -861,7 +924,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2180.3
+      "latency_ms": 2180.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_002",
@@ -886,7 +951,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 2286.6
+      "latency_ms": 2286.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_003",
@@ -911,7 +978,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 2288.9
+      "latency_ms": 2288.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_004",
@@ -936,7 +1005,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2182.3
+      "latency_ms": 2182.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_005",
@@ -961,7 +1032,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2201.2
+      "latency_ms": 2201.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_001",
@@ -986,7 +1059,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2293.4
+      "latency_ms": 2293.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_002",
@@ -1011,7 +1086,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 2320.2
+      "latency_ms": 2320.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_003",
@@ -1036,7 +1113,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 2357.0
+      "latency_ms": 2357.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_004",
@@ -1061,7 +1140,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2324.7
+      "latency_ms": 2324.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_005",
@@ -1086,7 +1167,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2600.6
+      "latency_ms": 2600.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_001",
@@ -1111,7 +1194,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2040.6
+      "latency_ms": 2040.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_002",
@@ -1136,7 +1221,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2016.1
+      "latency_ms": 2016.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_003",
@@ -1161,7 +1248,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2067.7
+      "latency_ms": 2067.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_004",
@@ -1186,7 +1275,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 2090.4
+      "latency_ms": 2090.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_005",
@@ -1211,7 +1302,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 2334.0
+      "latency_ms": 2334.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_006",
@@ -1236,7 +1329,9 @@
         "maxAge": 1800
       },
       "error": null,
-      "latency_ms": 2059.2
+      "latency_ms": 2059.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_007",
@@ -1261,7 +1356,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 2004.5
+      "latency_ms": 2004.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_008",
@@ -1286,7 +1383,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2011.2
+      "latency_ms": 2011.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_001",
@@ -1311,7 +1410,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2119.6
+      "latency_ms": 2119.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_002",
@@ -1336,7 +1437,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2063.3
+      "latency_ms": 2063.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_003",
@@ -1361,7 +1464,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2247.5
+      "latency_ms": 2247.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_004",
@@ -1386,7 +1491,9 @@
         "maxAge": 300
       },
       "error": null,
-      "latency_ms": 2309.9
+      "latency_ms": 2309.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_005",
@@ -1411,7 +1518,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 2346.1
+      "latency_ms": 2346.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_006",
@@ -1436,7 +1545,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2076.4
+      "latency_ms": 2076.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_007",
@@ -1461,7 +1572,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2050.8
+      "latency_ms": 2050.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_001",
@@ -1490,7 +1603,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2389.5
+      "latency_ms": 2389.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_002",
@@ -1519,7 +1634,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2301.0
+      "latency_ms": 2301.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_003",
@@ -1544,7 +1661,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2212.2
+      "latency_ms": 2212.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_004",
@@ -1569,7 +1688,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1935.8
+      "latency_ms": 1935.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_005",
@@ -1594,7 +1715,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2409.6
+      "latency_ms": 2409.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_011",
@@ -1623,7 +1746,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2320.6
+      "latency_ms": 2320.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_012",
@@ -1652,7 +1777,9 @@
         "duration": 1500
       },
       "error": null,
-      "latency_ms": 2361.0
+      "latency_ms": 2361.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_013",
@@ -1681,7 +1808,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2342.8
+      "latency_ms": 2342.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_014",
@@ -1710,7 +1839,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2434.2
+      "latency_ms": 2434.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_015",
@@ -1739,7 +1870,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2430.9
+      "latency_ms": 2430.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_016",
@@ -1768,7 +1901,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2512.1
+      "latency_ms": 2512.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_017",
@@ -1797,7 +1932,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2393.4
+      "latency_ms": 2393.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_018",
@@ -1826,7 +1963,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2718.0
+      "latency_ms": 2718.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_019",
@@ -1855,7 +1994,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2586.9
+      "latency_ms": 2586.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_020",
@@ -1884,7 +2025,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 3064.7
+      "latency_ms": 3064.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_021",
@@ -1913,7 +2056,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2475.8
+      "latency_ms": 2475.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_022",
@@ -1942,7 +2087,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2421.3
+      "latency_ms": 2421.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_023",
@@ -1971,7 +2118,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2565.9
+      "latency_ms": 2565.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_024",
@@ -2004,7 +2153,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2850.8
+      "latency_ms": 2850.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_025",
@@ -2033,7 +2184,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2499.4
+      "latency_ms": 2499.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_026",
@@ -2062,7 +2215,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2463.5
+      "latency_ms": 2463.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_027",
@@ -2091,7 +2246,9 @@
         "duration": 2400
       },
       "error": null,
-      "latency_ms": 2470.9
+      "latency_ms": 2470.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_028",
@@ -2120,7 +2277,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2376.8
+      "latency_ms": 2376.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_029",
@@ -2149,7 +2308,9 @@
         "duration": 2100
       },
       "error": null,
-      "latency_ms": 2467.3
+      "latency_ms": 2467.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_030",
@@ -2178,7 +2339,9 @@
         "duration": 3000
       },
       "error": null,
-      "latency_ms": 2628.0
+      "latency_ms": 2628.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_031",
@@ -2207,7 +2370,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2578.2
+      "latency_ms": 2578.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_032",
@@ -2236,7 +2401,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2489.4
+      "latency_ms": 2489.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_033",
@@ -2265,7 +2432,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2650.2
+      "latency_ms": 2650.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_034",
@@ -2294,7 +2463,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2424.4
+      "latency_ms": 2424.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_035",
@@ -2319,7 +2490,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2321.7
+      "latency_ms": 2321.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_036",
@@ -2348,7 +2521,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2372.8
+      "latency_ms": 2372.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_037",
@@ -2377,7 +2552,9 @@
         "duration": 60
       },
       "error": null,
-      "latency_ms": 2526.2
+      "latency_ms": 2526.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_038",
@@ -2406,7 +2583,9 @@
         "duration": 120
       },
       "error": null,
-      "latency_ms": 2541.4
+      "latency_ms": 2541.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_039",
@@ -2435,7 +2614,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2527.7
+      "latency_ms": 2527.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_040",
@@ -2464,7 +2645,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2499.7
+      "latency_ms": 2499.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_041",
@@ -2493,7 +2676,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2548.8
+      "latency_ms": 2548.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_042",
@@ -2522,7 +2707,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2407.1
+      "latency_ms": 2407.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_043",
@@ -2551,7 +2738,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2378.5
+      "latency_ms": 2378.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_044",
@@ -2580,7 +2769,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2587.4
+      "latency_ms": 2587.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_045",
@@ -2609,7 +2800,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2615.6
+      "latency_ms": 2615.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_046",
@@ -2638,7 +2831,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2767.9
+      "latency_ms": 2767.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_047",
@@ -2667,7 +2862,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2626.8
+      "latency_ms": 2626.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_048",
@@ -2696,7 +2893,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2480.9
+      "latency_ms": 2480.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_049",
@@ -2718,7 +2917,9 @@
         "requestedAdditionalDuration": 2700
       },
       "error": null,
-      "latency_ms": 4507.3
+      "latency_ms": 4507.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_en_050",
@@ -2747,7 +2948,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 3560.7
+      "latency_ms": 3560.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_011",
@@ -2776,7 +2979,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2446.3
+      "latency_ms": 2446.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_012",
@@ -2805,7 +3010,9 @@
         "duration": 1500
       },
       "error": null,
-      "latency_ms": 2511.7
+      "latency_ms": 2511.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_013",
@@ -2834,7 +3041,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2801.0
+      "latency_ms": 2801.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_014",
@@ -2863,7 +3072,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2440.5
+      "latency_ms": 2440.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_015",
@@ -2892,7 +3103,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2548.7
+      "latency_ms": 2548.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_016",
@@ -2921,7 +3134,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2628.5
+      "latency_ms": 2628.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_017",
@@ -2950,7 +3165,9 @@
         "duration": 600
       },
       "error": null,
-      "latency_ms": 2433.5
+      "latency_ms": 2433.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_018",
@@ -2979,7 +3196,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2504.8
+      "latency_ms": 2504.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_019",
@@ -3008,7 +3227,9 @@
         "duration": 900
       },
       "error": null,
-      "latency_ms": 2518.9
+      "latency_ms": 2518.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_020",
@@ -3037,7 +3258,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2650.0
+      "latency_ms": 2650.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_021",
@@ -3066,7 +3289,9 @@
         "duration": 1200
       },
       "error": null,
-      "latency_ms": 2601.2
+      "latency_ms": 2601.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_022",
@@ -3095,7 +3320,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2637.4
+      "latency_ms": 2637.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_023",
@@ -3124,7 +3351,9 @@
         "duration": 5400
       },
       "error": null,
-      "latency_ms": 2673.2
+      "latency_ms": 2673.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_024",
@@ -3157,7 +3386,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2751.7
+      "latency_ms": 2751.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_025",
@@ -3186,7 +3417,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2681.0
+      "latency_ms": 2681.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_026",
@@ -3215,7 +3448,9 @@
         "duration": 2700
       },
       "error": null,
-      "latency_ms": 2496.9
+      "latency_ms": 2496.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_027",
@@ -3244,7 +3479,9 @@
         "duration": 2400
       },
       "error": null,
-      "latency_ms": 2513.5
+      "latency_ms": 2513.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_028",
@@ -3277,7 +3514,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2807.3
+      "latency_ms": 2807.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_029",
@@ -3306,7 +3545,9 @@
         "duration": 2100
       },
       "error": null,
-      "latency_ms": 2476.5
+      "latency_ms": 2476.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_030",
@@ -3335,7 +3576,9 @@
         "duration": 3000
       },
       "error": null,
-      "latency_ms": 2468.3
+      "latency_ms": 2468.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_031",
@@ -3368,7 +3611,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2924.7
+      "latency_ms": 2924.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_032",
@@ -3397,7 +3642,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2427.7
+      "latency_ms": 2427.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_033",
@@ -3426,7 +3673,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2771.2
+      "latency_ms": 2771.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_034",
@@ -3455,7 +3704,9 @@
         "duration": 1800
       },
       "error": null,
-      "latency_ms": 2633.6
+      "latency_ms": 2633.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_035",
@@ -3480,7 +3731,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2577.7
+      "latency_ms": 2577.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_036",
@@ -3509,7 +3762,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 3942.9
+      "latency_ms": 3942.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_037",
@@ -3538,7 +3793,9 @@
         "duration": 60
       },
       "error": null,
-      "latency_ms": 3599.7
+      "latency_ms": 3599.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_038",
@@ -3567,7 +3824,9 @@
         "duration": 120
       },
       "error": null,
-      "latency_ms": 2651.4
+      "latency_ms": 2651.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_039",
@@ -3596,7 +3855,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2550.2
+      "latency_ms": 2550.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_040",
@@ -3620,7 +3881,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2353.6
+      "latency_ms": 2353.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_041",
@@ -3653,7 +3916,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2828.3
+      "latency_ms": 2828.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_042",
@@ -3682,7 +3947,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2864.9
+      "latency_ms": 2864.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_043",
@@ -3711,7 +3978,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2494.2
+      "latency_ms": 2494.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_044",
@@ -3740,7 +4009,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2577.1
+      "latency_ms": 2577.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_045",
@@ -3769,7 +4040,9 @@
         "duration": 300
       },
       "error": null,
-      "latency_ms": 2645.5
+      "latency_ms": 2645.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_046",
@@ -3793,7 +4066,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2401.7
+      "latency_ms": 2401.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_047",
@@ -3822,7 +4097,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2664.5
+      "latency_ms": 2664.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_048",
@@ -3848,7 +4125,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2459.6
+      "latency_ms": 2459.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_049",
@@ -3870,7 +4149,9 @@
         "requestedAdditionalDuration": 1800
       },
       "error": null,
-      "latency_ms": 4185.0
+      "latency_ms": 4185.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "qod_tr_050",
@@ -3895,7 +4176,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2412.8
+      "latency_ms": 2412.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_006",
@@ -3919,7 +4202,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2264.0
+      "latency_ms": 2264.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_007",
@@ -3943,7 +4228,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2246.8
+      "latency_ms": 2246.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_008",
@@ -3967,7 +4254,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2244.2
+      "latency_ms": 2244.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_009",
@@ -3991,7 +4280,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2177.4
+      "latency_ms": 2177.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_010",
@@ -4017,7 +4308,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2473.9
+      "latency_ms": 2473.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_011",
@@ -4041,7 +4334,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2252.9
+      "latency_ms": 2252.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_012",
@@ -4065,7 +4360,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2364.5
+      "latency_ms": 2364.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_013",
@@ -4090,7 +4387,9 @@
         "name": "CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2347.1
+      "latency_ms": 2347.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_014",
@@ -4114,7 +4413,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2472.1
+      "latency_ms": 2472.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_015",
@@ -4138,7 +4439,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2326.3
+      "latency_ms": 2326.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_016",
@@ -4162,7 +4465,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2188.5
+      "latency_ms": 2188.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_017",
@@ -4186,7 +4491,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2311.4
+      "latency_ms": 2311.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_018",
@@ -4210,7 +4517,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2525.5
+      "latency_ms": 2525.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_019",
@@ -4234,7 +4543,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2245.1
+      "latency_ms": 2245.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_020",
@@ -4258,7 +4569,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2416.2
+      "latency_ms": 2416.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_021",
@@ -4282,7 +4595,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2332.4
+      "latency_ms": 2332.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_022",
@@ -4306,7 +4621,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2329.3
+      "latency_ms": 2329.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_023",
@@ -4330,7 +4647,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2363.0
+      "latency_ms": 2363.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_024",
@@ -4354,7 +4673,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2458.2
+      "latency_ms": 2458.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_006",
@@ -4378,7 +4699,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2160.9
+      "latency_ms": 2160.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_007",
@@ -4402,7 +4725,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2304.0
+      "latency_ms": 2304.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_008",
@@ -4426,7 +4751,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2158.7
+      "latency_ms": 2158.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_009",
@@ -4450,7 +4777,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2300.5
+      "latency_ms": 2300.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_010",
@@ -4474,7 +4803,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2176.8
+      "latency_ms": 2176.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_011",
@@ -4498,7 +4829,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2164.4
+      "latency_ms": 2164.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_012",
@@ -4523,7 +4856,9 @@
         "status": "ACTIVE"
       },
       "error": null,
-      "latency_ms": 2803.3
+      "latency_ms": 2803.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_013",
@@ -4548,7 +4883,9 @@
         "name": "CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2343.3
+      "latency_ms": 2343.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_014",
@@ -4572,7 +4909,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2321.1
+      "latency_ms": 2321.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_015",
@@ -4596,7 +4935,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2211.0
+      "latency_ms": 2211.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_016",
@@ -4620,7 +4961,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2175.9
+      "latency_ms": 2175.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_017",
@@ -4644,7 +4987,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2241.9
+      "latency_ms": 2241.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_018",
@@ -4668,7 +5013,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2256.3
+      "latency_ms": 2256.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_019",
@@ -4692,7 +5039,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2204.3
+      "latency_ms": 2204.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_020",
@@ -4716,7 +5065,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2138.7
+      "latency_ms": 2138.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_021",
@@ -4740,7 +5091,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2216.2
+      "latency_ms": 2216.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_022",
@@ -4764,7 +5117,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2125.7
+      "latency_ms": 2125.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_023",
@@ -4788,7 +5143,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2224.1
+      "latency_ms": 2224.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_024",
@@ -4812,7 +5169,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2304.5
+      "latency_ms": 2304.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_006",
@@ -4837,7 +5196,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2406.8
+      "latency_ms": 2406.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_007",
@@ -4862,7 +5223,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2095.8
+      "latency_ms": 2095.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_008",
@@ -4887,7 +5250,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2302.8
+      "latency_ms": 2302.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_009",
@@ -4912,7 +5277,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2495.4
+      "latency_ms": 2495.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_010",
@@ -4937,7 +5304,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 2400.8
+      "latency_ms": 2400.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_011",
@@ -4962,7 +5331,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2273.2
+      "latency_ms": 2273.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_012",
@@ -4987,7 +5358,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2306.2
+      "latency_ms": 2306.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_013",
@@ -5012,7 +5385,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2323.9
+      "latency_ms": 2323.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_014",
@@ -5037,7 +5412,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2458.5
+      "latency_ms": 2458.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_015",
@@ -5062,7 +5439,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2309.5
+      "latency_ms": 2309.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_016",
@@ -5087,7 +5466,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2310.8
+      "latency_ms": 2310.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_017",
@@ -5112,7 +5493,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2406.4
+      "latency_ms": 2406.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_018",
@@ -5137,7 +5520,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2204.3
+      "latency_ms": 2204.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_019",
@@ -5162,7 +5547,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2199.9
+      "latency_ms": 2199.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_020",
@@ -5187,7 +5574,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 2215.0
+      "latency_ms": 2215.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_021",
@@ -5212,7 +5601,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 2325.6
+      "latency_ms": 2325.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_022",
@@ -5237,7 +5628,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2203.2
+      "latency_ms": 2203.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_023",
@@ -5262,7 +5655,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2309.0
+      "latency_ms": 2309.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_024",
@@ -5287,7 +5682,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2407.1
+      "latency_ms": 2407.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_006",
@@ -5312,7 +5709,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2303.7
+      "latency_ms": 2303.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_007",
@@ -5337,7 +5736,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2091.5
+      "latency_ms": 2091.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_008",
@@ -5362,7 +5763,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2346.7
+      "latency_ms": 2346.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_009",
@@ -5387,7 +5790,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2390.1
+      "latency_ms": 2390.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_010",
@@ -5412,7 +5817,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 2484.7
+      "latency_ms": 2484.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_011",
@@ -5437,7 +5844,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2278.3
+      "latency_ms": 2278.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_012",
@@ -5462,7 +5871,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2649.2
+      "latency_ms": 2649.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_013",
@@ -5487,7 +5898,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2425.2
+      "latency_ms": 2425.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_014",
@@ -5512,7 +5925,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2222.9
+      "latency_ms": 2222.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_015",
@@ -5537,7 +5952,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2179.3
+      "latency_ms": 2179.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_016",
@@ -5562,7 +5979,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2461.7
+      "latency_ms": 2461.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_017",
@@ -5587,7 +6006,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2223.3
+      "latency_ms": 2223.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_018",
@@ -5612,7 +6033,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2358.8
+      "latency_ms": 2358.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_019",
@@ -5637,7 +6060,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2313.1
+      "latency_ms": 2313.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_020",
@@ -5662,7 +6087,9 @@
         "qosProfile": "QOS_GAMING"
       },
       "error": null,
-      "latency_ms": 2396.1
+      "latency_ms": 2396.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_021",
@@ -5687,7 +6114,9 @@
         "qosProfile": "QOS_LOW_LATENCY"
       },
       "error": null,
-      "latency_ms": 2272.9
+      "latency_ms": 2272.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_022",
@@ -5712,7 +6141,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 2302.5
+      "latency_ms": 2302.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_023",
@@ -5737,7 +6168,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2644.7
+      "latency_ms": 2644.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_024",
@@ -5762,7 +6195,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2284.7
+      "latency_ms": 2284.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_010",
@@ -5787,7 +6222,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2113.4
+      "latency_ms": 2113.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_011",
@@ -5812,7 +6249,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2105.8
+      "latency_ms": 2105.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_012",
@@ -5837,7 +6276,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2110.5
+      "latency_ms": 2110.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_013",
@@ -5862,7 +6303,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2031.6
+      "latency_ms": 2031.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_014",
@@ -5887,7 +6330,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2004.0
+      "latency_ms": 2004.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_015",
@@ -5912,7 +6357,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2061.2
+      "latency_ms": 2061.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_016",
@@ -5937,7 +6384,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1988.7
+      "latency_ms": 1988.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_017",
@@ -5962,7 +6411,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1976.5
+      "latency_ms": 1976.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_018",
@@ -5987,7 +6438,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2093.6
+      "latency_ms": 2093.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_019",
@@ -6012,7 +6465,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2019.8
+      "latency_ms": 2019.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_020",
@@ -6037,7 +6492,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2152.8
+      "latency_ms": 2152.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_021",
@@ -6062,7 +6519,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2353.3
+      "latency_ms": 2353.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_022",
@@ -6087,7 +6546,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 2091.9
+      "latency_ms": 2091.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_023",
@@ -6112,7 +6573,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2044.0
+      "latency_ms": 2044.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_024",
@@ -6137,7 +6600,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2424.9
+      "latency_ms": 2424.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_025",
@@ -6162,7 +6627,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2095.3
+      "latency_ms": 2095.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_026",
@@ -6187,7 +6654,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2048.3
+      "latency_ms": 2048.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_027",
@@ -6212,7 +6681,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2068.9
+      "latency_ms": 2068.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_028",
@@ -6237,7 +6708,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2213.6
+      "latency_ms": 2213.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_029",
@@ -6262,7 +6735,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2112.2
+      "latency_ms": 2112.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_030",
@@ -6287,7 +6762,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2040.7
+      "latency_ms": 2040.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_031",
@@ -6312,7 +6789,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1979.1
+      "latency_ms": 1979.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_032",
@@ -6337,7 +6816,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2078.5
+      "latency_ms": 2078.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_033",
@@ -6362,7 +6843,9 @@
         "maxAge": 30
       },
       "error": null,
-      "latency_ms": 2248.3
+      "latency_ms": 2248.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_034",
@@ -6387,7 +6870,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2257.0
+      "latency_ms": 2257.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_035",
@@ -6412,7 +6897,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2111.1
+      "latency_ms": 2111.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_036",
@@ -6437,7 +6924,9 @@
         "maxAge": 600
       },
       "error": null,
-      "latency_ms": 2308.7
+      "latency_ms": 2308.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_037",
@@ -6462,7 +6951,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 1944.2
+      "latency_ms": 1944.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_038",
@@ -6487,7 +6978,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2608.5
+      "latency_ms": 2608.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_en_039",
@@ -6512,7 +7005,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2244.3
+      "latency_ms": 2244.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_010",
@@ -6537,7 +7032,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2137.6
+      "latency_ms": 2137.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_011",
@@ -6562,7 +7059,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2267.5
+      "latency_ms": 2267.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_012",
@@ -6587,7 +7086,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2187.5
+      "latency_ms": 2187.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_013",
@@ -6612,7 +7113,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2163.0
+      "latency_ms": 2163.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_014",
@@ -6637,7 +7140,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2154.1
+      "latency_ms": 2154.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_015",
@@ -6662,7 +7167,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2043.6
+      "latency_ms": 2043.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_016",
@@ -6687,7 +7194,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2173.9
+      "latency_ms": 2173.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_017",
@@ -6712,7 +7221,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2273.5
+      "latency_ms": 2273.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_018",
@@ -6737,7 +7248,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2184.4
+      "latency_ms": 2184.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_019",
@@ -6762,7 +7275,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2069.0
+      "latency_ms": 2069.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_020",
@@ -6787,7 +7302,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2190.3
+      "latency_ms": 2190.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_021",
@@ -6812,7 +7329,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2142.8
+      "latency_ms": 2142.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_022",
@@ -6837,7 +7356,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2060.7
+      "latency_ms": 2060.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_023",
@@ -6862,7 +7383,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 2026.8
+      "latency_ms": 2026.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_024",
@@ -6887,7 +7410,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 2051.7
+      "latency_ms": 2051.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_025",
@@ -6912,7 +7437,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2132.9
+      "latency_ms": 2132.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_026",
@@ -6937,7 +7464,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2142.7
+      "latency_ms": 2142.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_027",
@@ -6962,7 +7491,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2076.2
+      "latency_ms": 2076.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_028",
@@ -6987,7 +7518,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2215.5
+      "latency_ms": 2215.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_029",
@@ -7012,7 +7545,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2119.8
+      "latency_ms": 2119.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_030",
@@ -7037,7 +7572,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2003.2
+      "latency_ms": 2003.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_031",
@@ -7062,7 +7599,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2217.5
+      "latency_ms": 2217.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_032",
@@ -7087,7 +7626,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2226.5
+      "latency_ms": 2226.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_033",
@@ -7112,7 +7653,9 @@
         "maxAge": 30
       },
       "error": null,
-      "latency_ms": 2184.1
+      "latency_ms": 2184.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_034",
@@ -7137,7 +7680,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2236.6
+      "latency_ms": 2236.6,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_035",
@@ -7162,7 +7707,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2095.9
+      "latency_ms": 2095.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_036",
@@ -7187,7 +7734,9 @@
         "maxAge": 60
       },
       "error": null,
-      "latency_ms": 2120.9
+      "latency_ms": 2120.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_037",
@@ -7212,7 +7761,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2358.8
+      "latency_ms": 2358.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_038",
@@ -7237,7 +7788,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2097.2
+      "latency_ms": 2097.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "loc_tr_039",
@@ -7262,7 +7815,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2177.7
+      "latency_ms": 2177.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_006",
@@ -7291,7 +7846,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2408.1
+      "latency_ms": 2408.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_007",
@@ -7316,7 +7873,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2227.4
+      "latency_ms": 2227.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_008",
@@ -7345,7 +7904,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 3862.4
+      "latency_ms": 3862.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_009",
@@ -7374,7 +7935,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2424.8
+      "latency_ms": 2424.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_010",
@@ -7399,7 +7962,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2262.3
+      "latency_ms": 2262.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_011",
@@ -7424,7 +7989,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 3304.1
+      "latency_ms": 3304.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_012",
@@ -7453,7 +8020,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2394.4
+      "latency_ms": 2394.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_013",
@@ -7482,7 +8051,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2322.0
+      "latency_ms": 2322.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_014",
@@ -7511,7 +8082,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2699.2
+      "latency_ms": 2699.2,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_en_015",
@@ -7536,7 +8109,9 @@
         "qosProfile": "QOS_E_STREAMING"
       },
       "error": null,
-      "latency_ms": 3916.0
+      "latency_ms": 3916.0,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_006",
@@ -7565,7 +8140,9 @@
         "duration": 30
       },
       "error": null,
-      "latency_ms": 2583.1
+      "latency_ms": 2583.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_007",
@@ -7590,7 +8167,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2155.7
+      "latency_ms": 2155.7,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_008",
@@ -7619,7 +8198,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 3568.1
+      "latency_ms": 3568.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_009",
@@ -7643,7 +8224,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2298.8
+      "latency_ms": 2298.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_010",
@@ -7668,7 +8251,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2281.9
+      "latency_ms": 2281.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_011",
@@ -7693,7 +8278,9 @@
         "maxAge": 3600
       },
       "error": null,
-      "latency_ms": 2150.4
+      "latency_ms": 2150.4,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_012",
@@ -7722,7 +8309,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2605.1
+      "latency_ms": 2605.1,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_013",
@@ -7751,7 +8340,9 @@
         "duration": 3600
       },
       "error": null,
-      "latency_ms": 2465.3
+      "latency_ms": 2465.3,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_014",
@@ -7780,7 +8371,9 @@
         "duration": 7200
       },
       "error": null,
-      "latency_ms": 2593.9
+      "latency_ms": 2593.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "edge_tr_015",
@@ -7809,7 +8402,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2532.9
+      "latency_ms": 2532.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_en_025",
@@ -7833,7 +8428,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2353.8
+      "latency_ms": 2353.8,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "profile_tr_025",
@@ -7857,7 +8454,9 @@
         }
       },
       "error": null,
-      "latency_ms": 2167.5
+      "latency_ms": 2167.5,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_en_025",
@@ -7882,7 +8481,9 @@
         "qosProfile": "QOS_CRITICAL_COMMS"
       },
       "error": null,
-      "latency_ms": 2313.9
+      "latency_ms": 2313.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     },
     {
       "id": "prov_tr_025",
@@ -7907,7 +8508,9 @@
         "qosProfile": "QOS_E"
       },
       "error": null,
-      "latency_ms": 2457.9
+      "latency_ms": 2457.9,
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
     }
   ]
 }

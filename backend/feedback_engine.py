@@ -160,6 +160,7 @@ def run_correction_loop(
                     issues=current_validation.issues,
                     corrected_payload=None,
                     validation_passed=False,
+                    error=f"{type(exc).__name__}: {exc}",
                 )
             )
             # LLM call itself failed — stop loop, return last known state

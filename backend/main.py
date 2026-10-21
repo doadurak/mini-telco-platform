@@ -198,6 +198,15 @@ def orchestrate(request: OrchestrationRequest) -> OrchestrationResponse:
             detail={**validation.model_dump(), "feedback": feedback.model_dump()},
         )
 
+    # L3 passes open when CAPIF is unreachable (registry_checked=false). That is reported for
+    # dry runs, but a live provider call must not go out without the registry check.
+    if not request.dry_run and request.check_registry and not validation.registry_checked:
+        raise HTTPException(
+            status_code=503,
+            detail="CAPIF registry unreachable: L3 could not check the service, live call refused "
+                   "(retry, or send check_registry=false to skip L3 explicitly)",
+        )
+
     # Service cross-check: L1-L3 cannot tell a wrong but registered service (e.g. QoD vs. QoS
     # Provisioning). If the keyword planner picks another service, a live call waits for confirmation.
     crosscheck: dict = {}

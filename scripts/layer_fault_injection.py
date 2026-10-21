@@ -34,7 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import backend.capif.client as capif_client  # noqa: E402
 from backend.feedback_engine import run_correction_loop  # noqa: E402
-from backend.llm_planner import correct_payload_with_feedback, set_llm_provider  # noqa: E402
+from backend.llm_planner import _active_model_name, correct_payload_with_feedback, set_llm_provider  # noqa: E402
 from backend.models import ExecutionStep  # noqa: E402
 from backend.rag_context import get_payload_schema_prompt  # noqa: E402
 from backend.service_catalog import CATALOG  # noqa: E402
@@ -134,6 +134,8 @@ def main() -> None:
                 "detected": not v.valid, "detected_at_target": caught[layer],
                 "registry_checked": v.registry_checked,
                 "repaired": bool(fb and fb.recovered), "iterations": fb.iterations if fb else 0,
+                # a failed correction call (API error) must not be read as "not repairable"
+                "feedback_errors": sum(1 for h in fb.history if h.error) if fb else 0,
                 "validation_ms": round(t_val, 1), "feedback_ms": round(t_fb, 1),
             })
             print(f"{fault:16s} {rec['id']:12s} detected={rows[-1]['detected_at_target']} "
@@ -155,7 +157,8 @@ def main() -> None:
         print(f"{s['layer']} {s['fault']:16s} detected {s['detected_at_target']}/{s['n']}  repaired {s['repaired']}/{s['n']}  "
               f"iters {s['median_iterations']}  feedback {s['median_feedback_ms']} ms  validation {s['median_validation_ms']} ms")
     if args.output:
-        args.output.write_text(json.dumps({"summary": summary, "cases": rows}, indent=2) + "\n", encoding="utf-8")
+        args.output.write_text(json.dumps({"provider": args.provider, "model": _active_model_name(),
+                                           "summary": summary, "cases": rows}, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

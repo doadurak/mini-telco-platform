@@ -81,11 +81,18 @@ class EntryResult:
     error: str | None = None
     latency_ms: float = 0.0
 
+    # Provenance: which planner actually produced the plan
+    provider: str | None = None
+    model: str | None = None
+    used_discovery: bool = False     # Phase 1 saw a live CAPIF discovery result
+
 
 @dataclass
 class EvaluationReport:
     mode: str
     total: int = 0
+    provider: str | None = None
+    model: str | None = None
 
     # Core metric accumulators
     _iwsr_passes: int = 0
@@ -96,6 +103,9 @@ class EvaluationReport:
     # Feedback
     _feedback_attempted: int = 0
     _feedback_recovered: int = 0
+
+    # Entries that ended in an exception (API error, quota, parse failure)
+    _errors: int = 0
 
     # Stratified for SS
     _iwsr_by_difficulty: dict[str, list[bool]] = field(default_factory=dict)
@@ -115,9 +125,13 @@ class EvaluationReport:
                 self._svr_passes += 1
             if not r.service_correct:
                 self._hallucinations += 1
+        else:
+            self._errors += 1
 
-            diff = r.difficulty or "unknown"
-            self._iwsr_by_difficulty.setdefault(diff, []).append(r.iwsr)
+        # Errored entries count as failures here too (they used to be left out, which made
+        # the per-difficulty IWSR of a run with API errors look perfect).
+        diff = r.difficulty or "unknown"
+        self._iwsr_by_difficulty.setdefault(diff, []).append(r.iwsr)
 
         if r.feedback_attempted:
             self._feedback_attempted += 1
@@ -164,7 +178,10 @@ class EvaluationReport:
     def summary(self) -> dict[str, Any]:
         return {
             "mode": self.mode,
+            "provider": self.provider,
+            "model": self.model,
             "total_entries": self.total,
+            "errors": self._errors,
             "metrics": {
                 "IWSR": round(self.iwsr, 4),
                 "SCR": round(self.scr, 4),
@@ -259,6 +276,14 @@ def check_payload_against_ground_truth(
 
 # ─── Single-entry evaluation ─────────────────────────────────────────────────
 
+def planner_identity(mode: str) -> tuple[str, str]:
+    """(provider, model) that a run in this mode uses, recorded with every result."""
+    if mode == "deterministic":
+        return "keyword", "keyword-planner"
+    from backend.llm_planner import _active_model_name, get_active_provider
+    return get_active_provider(), _active_model_name()
+
+
 def evaluate_entry(
     entry: dict[str, Any],
     mode: str,
@@ -287,6 +312,7 @@ def evaluate_entry(
     )
 
     t_start = time.monotonic()
+    result.provider, result.model = planner_identity(mode)
 
     try:
         if mode == "deterministic":
@@ -306,6 +332,8 @@ def evaluate_entry(
                 steps, planner_meta = build_llm_execution_plan(entry["intent"])
             step = steps[0]
             feedback_meta = None
+            result.model = planner_meta.model or result.model
+            result.used_discovery = planner_meta.used_discovery
         else:
             raise ValueError(f"Unknown mode: {mode}")
 
@@ -423,40 +451,47 @@ def run_evaluation(
 
     # Load previously completed entries for resume support
     completed_ids: set[str] = set()
-    report = EvaluationReport(mode=mode)
+    provider, model = planner_identity(mode)
+    report = EvaluationReport(mode=mode, provider=provider, model=model)
 
     if resume_from and resume_from.exists():
-        try:
-            prev = json.loads(resume_from.read_text(encoding="utf-8"))
-            for r in prev.get("results", []):
-                if not r.get("error"):  # only replay successful results
-                    completed_ids.add(r["id"])
-                    # Reconstruct minimal EntryResult for metrics
-                    er = EntryResult(
-                        entry_id=r["id"],
-                        intent=r.get("intent", ""),
-                        language=r.get("language", "en"),
-                        difficulty=r.get("difficulty", "medium"),
-                        category=r.get("category", "unknown"),
-                        mode=r.get("mode", mode),
-                        expected_service_id=r.get("expected_service_id", ""),
-                        expected_operation_id=r.get("expected_operation_id", ""),
-                        actual_service_id=r.get("actual_service_id"),
-                        actual_payload=r.get("actual_payload"),
-                        service_correct=r.get("service_correct", False),
-                        l1_passed=r.get("l1_passed", False),
-                        l2_passed=r.get("l2_passed", False),
-                        l3_passed=r.get("l3_passed", False),
-                        registry_checked=r.get("registry_checked", False),
-                        iwsr=r.get("iwsr", False),
-                        feedback_attempted=r.get("feedback_attempted", False),
-                        feedback_recovered=r.get("feedback_recovered", False),
-                    )
-                    report.add(er)
-            if verbose and completed_ids:
-                print(f"  Resumed: {len(completed_ids)} entries already done, skipping.", flush=True)
-        except Exception:
-            pass  # corrupt resume file — start fresh
+        prev = json.loads(resume_from.read_text(encoding="utf-8"))
+        prev_model = (prev.get("summary") or {}).get("model")
+        # Resuming from another planner's file silently mixes models (how 240 Gemini plans
+        # ended up in a GPT-4o-mini result file). Older files carry no model: refuse those too.
+        if prev_model != model:
+            raise ValueError(f"--resume file was produced by model {prev_model!r}, this run uses {model!r}")
+        for r in prev.get("results", []):
+            if not r.get("error"):  # only replay successful results
+                completed_ids.add(r["id"])
+                # Reconstruct minimal EntryResult for metrics
+                er = EntryResult(
+                    entry_id=r["id"],
+                    intent=r.get("intent", ""),
+                    language=r.get("language", "en"),
+                    difficulty=r.get("difficulty", "medium"),
+                    category=r.get("category", "unknown"),
+                    mode=r.get("mode", mode),
+                    expected_service_id=r.get("expected_service_id", ""),
+                    expected_operation_id=r.get("expected_operation_id", ""),
+                    actual_service_id=r.get("actual_service_id"),
+                    actual_payload=r.get("actual_payload"),
+                    service_correct=r.get("service_correct", False),
+                    l1_passed=r.get("l1_passed", False),
+                    l2_passed=r.get("l2_passed", False),
+                    l3_passed=r.get("l3_passed", False),
+                    registry_checked=r.get("registry_checked", False),
+                    iwsr=r.get("iwsr", False),
+                    feedback_attempted=r.get("feedback_attempted", False),
+                    feedback_recovered=r.get("feedback_recovered", False),
+                    latency_ms=r.get("latency_ms", 0.0),
+                    provider=r.get("provider"),
+                    model=r.get("model"),
+                    used_discovery=r.get("used_discovery", False),
+                )
+                report.add(er)
+        if verbose and completed_ids:
+            print(f"  Resumed: {len(completed_ids)} entries already done, skipping.", flush=True)
 
     pending = [e for e in entries if e["id"] not in completed_ids]
     total = len(entries)
