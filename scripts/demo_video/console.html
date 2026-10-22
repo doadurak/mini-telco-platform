@@ -2,7 +2,7 @@
 <html><head><meta charset="utf-8"><title>mini-telco-platform live console</title>
 <style>
   * { box-sizing: border-box; }
-  body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #111418;
+  body { margin: 0; width: 100vw; height: 100vh; overflow: hidden; background: #111418;
          font-family: "Segoe UI", Arial, sans-serif; }
   #hdr { height: 44px; background: #0b0d10; color: #dfe3e8; display: flex; align-items: center;
          padding: 0 18px; font-size: 18px; gap: 14px; border-bottom: 1px solid #2a2f37; }
@@ -11,14 +11,14 @@
           font-weight: 700; font-size: 18px; visibility: hidden; }
   #hdr .r { margin-left: 18px; color: #8a93a2; font-size: 16px; }
   #main { position: absolute; top: 44px; bottom: 0; left: 0; right: 0; display: flex; }
-  #left { width: 1100px; height: 100%; border-right: 2px solid #2a2f37; background: #fff; }
+  #left { width: 57%; height: 100%; border-right: 2px solid #2a2f37; background: #fff; }
   #left iframe { width: 100%; height: 100%; border: 0; }
-  #right { flex: 1; display: flex; flex-direction: column; padding-bottom: 96px; }
+  #right { flex: 1; display: flex; flex-direction: column; min-width: 0; }
   .pane { display: flex; flex-direction: column; border-bottom: 2px solid #2a2f37; min-height: 0; }
   .pane .t { background: #1c2027; color: #9fb3c8; font: 600 14px "Segoe UI", Arial; padding: 5px 12px; }
-  .pane pre { margin: 0; flex: 1; overflow: hidden; padding: 8px 12px; color: #d7dbe0;
+  .pane pre { margin: 0; flex: 1; min-height: 0; overflow-y: auto; padding: 8px 12px; color: #d7dbe0;
               font: 14px/1.38 Consolas, "Cascadia Mono", monospace; white-space: pre-wrap; word-break: break-all; }
-  #term { flex: 1.45; } #blog { flex: 1; } #nlog { flex: 0.85; }
+  #term { flex: 2.4; } #blog { flex: 0.8; } #nlog { flex: 1; }
   .ok { color: #8fd18f; } .pr { color: #7cc36e; } .hl { color: #ffd166; } .dim { color: #7b8594; }
   #btns { float: right; } #btns button { font: 600 12px "Segoe UI", Arial; margin-left: 4px; padding: 2px 8px;
            background: #2d3440; color: #dfe3e8; border: 1px solid #455063; border-radius: 4px; cursor: pointer; }
@@ -52,10 +52,12 @@ const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const mask = s => s.replace(/\+(\d{5})\d{5}(\d{2})/g, "+$1•••••$2");
 function append(id, html, max) {
   const p = document.getElementById(id);
+  // follow new lines only if the user has not scrolled up to read older output
+  const atBottom = p.scrollHeight - p.scrollTop - p.clientHeight < 40;
   p.insertAdjacentHTML("beforeend", html + "\n");
   const lines = p.innerHTML.split("\n");
   if (lines.length > max) p.innerHTML = lines.slice(lines.length - max).join("\n");
-  p.scrollTop = p.scrollHeight;
+  if (atBottom) p.scrollTop = p.scrollHeight;
 }
 function logLine(line) {
   let s = esc(mask(line)).replace(/^\S+\s+\S+\s+/, "");
@@ -66,8 +68,8 @@ function follow(c, id, max) {
   const es = new EventSource(`/logs?c=${c}`);
   es.addEventListener("line", e => append(id, logLine(JSON.parse(e.data)), max));
 }
-follow("backend", "blogp", 12);
-follow("nefqos", "nlogp", 6);
+follow("backend", "blogp", 300);
+follow("nefqos", "nlogp", 200);
 setInterval(() => document.getElementById("clock").textContent =
   new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC", 500);
 
@@ -78,7 +80,8 @@ document.querySelectorAll("#btns button").forEach(b => b.onclick = () => {
 });
 
 window.demo = {
-  sub(t) { const s = document.getElementById("sub"); s.style.display = t ? "block" : "none"; s.innerHTML = t || ""; },
+  sub(t) { const s = document.getElementById("sub"); s.style.display = t ? "block" : "none"; s.innerHTML = t || "";
+           document.getElementById("right").style.paddingBottom = t ? "96px" : "0"; },
   slide(html) { const s = document.getElementById("slide"); s.style.display = html ? "block" : "none"; s.innerHTML = html || ""; },
   step(t) { const s = document.getElementById("step"); s.style.visibility = t ? "visible" : "hidden"; s.textContent = t || ""; },
   say(lines, durs, gap) {
@@ -91,8 +94,8 @@ window.demo = {
     return new Promise(resolve => {
       const es = new EventSource(`/run?k=${k}`);
       es.addEventListener("cmd", e => append("termp",
-        `<span class="pr">turkad@testbed:~/mini-telco-platform$</span> <b>${esc(JSON.parse(e.data))}</b>`, 26));
-      es.addEventListener("line", e => append("termp", esc(mask(JSON.parse(e.data))), 26));
+        `<span class="pr">turkad@testbed:~/mini-telco-platform$</span> <b>${esc(JSON.parse(e.data))}</b>`, 1000));
+      es.addEventListener("line", e => append("termp", esc(mask(JSON.parse(e.data))), 1000));
       es.addEventListener("end", () => { es.close(); (window.__done ||= {})[k] = true; resolve(); });
     });
   },
