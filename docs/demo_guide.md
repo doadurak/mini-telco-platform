@@ -15,6 +15,8 @@ How to bring the testbed up and walk an audience that does not know the project 
 4. Keep open in other tabs or windows: Fig. 1 (`docs/fig1_architecture.pdf`), the paper PDF, and the
    demo video (`docs/demo_video/wmnc2026_live_demo.mp4`) as a fallback.
 5. Internet is needed only for the LLM APIs. Have a phone hotspot ready.
+6. Keep the laptop plugged in and set Windows sleep to *Never* for the day: if it sleeps, Docker restarts
+   and OpenCAPIF has to be rebuilt with `demo_up.sh` (5–8 minutes).
 
 Quick re-check at any time, without restarting anything: `venv/bin/python scripts/demo_check.py`.
 
@@ -98,7 +100,7 @@ again without a *409 conflict*.
 | Symptom | Do |
 |---|---|
 | A button prints `LLM planning failed` or hangs | Internet: switch to the phone hotspot. Or switch the LLM in Swagger (`POST /config/provider`, `anthropic`). |
-| `L3 … registry_checked: false`, or a live call returns **503** | CAPIF lost its state: run `bash scripts/demo_up.sh` again (5–8 min). Meanwhile show the video. |
+| A button prints `REFUSED … CAPIF registry unreachable`, or the backend log shows **503** (usually after the laptop slept or Docker restarted: the 5G core comes back by itself, OpenCAPIF does not) | CAPIF lost its state: run `bash scripts/demo_up.sh` again (5–8 min). Meanwhile show the video. |
 | S1 live shows `HTTP 409` | A QoD session is still open: press **S1 live** again (it closes the old session first). |
 | Console page blank | `bash scripts/demo_up.sh` restarts it; or open http://localhost:8000/docs (Swagger only). |
 | Nothing works | Play `docs/demo_video/wmnc2026_live_demo.mp4`; the recorded responses are in `docs/live_runs/`. |

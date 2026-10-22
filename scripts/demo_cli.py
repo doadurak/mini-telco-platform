@@ -103,6 +103,11 @@ def cmd_run(a):
     if a.live and ue_ip:
         _close_qod_sessions(PHONE_RE.search(intent).group(), ue_ip)
     d = _orchestrate(intent, a.live, a.confirm)
+    if "validation" not in d:  # the API refused the request (e.g. 503: CAPIF unreachable)
+        print(f"REQUEST     intent: \"{mask(intent)}\"")
+        print(f"REFUSED     {mask(str(d.get('detail', d)))}")
+        print("            fix: bash scripts/demo_up.sh")
+        return
     v, step, ex = d["validation"], d["steps"][0], d["execution_result"]
     print(f"REQUEST     intent: \"{mask(intent)}\"")
     print(f"            dry_run: {str(not a.live).lower()}   mode: llm-assisted")
