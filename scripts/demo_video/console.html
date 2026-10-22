@@ -58,6 +58,7 @@ function append(id, html, max) {
   const lines = p.innerHTML.split("\n");
   if (lines.length > max) p.innerHTML = lines.slice(lines.length - max).join("\n");
   if (atBottom) p.scrollTop = p.scrollHeight;
+  if (id === "termp") saveTerm();
 }
 function logLine(line) {
   let s = esc(mask(line)).replace(/^\S+\s+\S+\s+/, "");
@@ -68,6 +69,15 @@ function follow(c, id, max) {
   const es = new EventSource(`/logs?c=${c}`);
   es.addEventListener("line", e => append(id, logLine(JSON.parse(e.data)), max));
 }
+// keep the terminal output across a page reload (per browser tab; Clear empties it)
+function saveTerm() {
+  try { sessionStorage.setItem("termp", document.getElementById("termp").innerHTML); } catch (e) {}
+}
+try {
+  const saved = sessionStorage.getItem("termp");
+  if (saved) { const t = document.getElementById("termp"); t.innerHTML = saved; t.scrollTop = t.scrollHeight; }
+} catch (e) {}
+
 follow("backend", "blogp", 300);
 follow("nefqos", "nlogp", 200);
 setInterval(() => document.getElementById("clock").textContent =
@@ -89,7 +99,7 @@ window.demo = {
     lines.forEach((l, i) => { setTimeout(() => demo.sub(l), t * 1000); t += durs[i] + gap; });
     setTimeout(() => demo.sub(""), (t - gap + 0.4) * 1000);
   },
-  clearTerm() { document.getElementById("termp").innerHTML = ""; },
+  clearTerm() { document.getElementById("termp").innerHTML = ""; saveTerm(); },
   run(k) {
     return new Promise(resolve => {
       const es = new EventSource(`/run?k=${k}`);
