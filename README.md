@@ -304,6 +304,11 @@ selection errors (`qos-provisioning` chosen instead of `qod`, payloads pass L1/L
 | Per-layer fault injection (140 faults into correct recorded plans, GPT-4o-mini feedback, live L3) | `scripts/layer_fault_injection.py` | `datasets/layer_faults.json` | all caught at the target layer; feedback repairs L1 40/40, L2 79/80 in one iteration (~1.3 s), L3 0/20 (payload-only correction) |
 | Concurrency load test (`dry_run: true`, live L3) | `scripts/load_test.py` | `datasets/load_test.json` | keyword planner ≈160 req/s (p95 156 ms at 20 clients); GPT-4o-mini latency flat at ≈2.6 s, throughput 0.34→3.3 req/s from 1→10 clients |
 
+Re-run on 2026-10-22 with the model recorded (`datasets/load_test_rerun_2026-10-22.json`): the LLM rows are
+GPT-4o-mini (2.8–3.2 s median at 1–10 clients). Its keyword row (54 req/s at 10 clients) was taken right after a
+cold start; measured again on the idle testbed the keyword planner reached 60 / 145 / 149 / 174 req/s at
+1 / 5 / 10 / 20 clients.
+
 The L3 fault is simulated by removing the selected service from the CAPIF discovery response; all other faults are
 mutations of recorded correct payloads.
 

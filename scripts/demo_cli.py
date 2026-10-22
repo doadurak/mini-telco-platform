@@ -91,9 +91,10 @@ def _close_qod_sessions(phone: str, ip: str) -> None:
         pass
 
 
-def _orchestrate(intent: str, live: bool) -> dict:
+def _orchestrate(intent: str, live: bool, confirm: bool = False) -> dict:
     r = requests.post(f"{API}/orchestrate", json={"intent": intent, "dry_run": not live,
-                                                   "orchestration_mode": "llm-assisted"}, timeout=120)
+                                                   "orchestration_mode": "llm-assisted",
+                                                   "confirm_service": confirm}, timeout=120)
     return r.json()
 
 
@@ -101,7 +102,7 @@ def cmd_run(a):
     intent, ue_ip = SCENARIOS[a.scenario]
     if a.live and ue_ip:
         _close_qod_sessions(PHONE_RE.search(intent).group(), ue_ip)
-    d = _orchestrate(intent, a.live)
+    d = _orchestrate(intent, a.live, a.confirm)
     v, step, ex = d["validation"], d["steps"][0], d["execution_result"]
     print(f"REQUEST     intent: \"{mask(intent)}\"")
     print(f"            dry_run: {str(not a.live).lower()}   mode: llm-assisted")
@@ -111,7 +112,14 @@ def cmd_run(a):
     print(f"VALIDATION  L1 schema {ok(v['layer1_schema']['passed'])}   L2 semantic {ok(v['layer2_semantic']['passed'])}"
           f"   L3 CAPIF registry {ok(v['layer3_registry']['passed'])}")
     print(f"            registry_checked: {str(v['registry_checked']).lower()}  (live CAPIF discovery over mTLS)")
-    if ex.get("status") == "dry-run":
+    xc = d.get("service_crosscheck") or {}
+    if xc:
+        agree = "agrees" if xc.get("agrees") else "DISAGREES"
+        print(f"CROSS-CHECK keyword planner selects {xc.get('keyword_planner_service')}: {agree}"
+              + ("  -> live call HELD until confirmed" if xc.get("held") else ""))
+    if ex.get("status") == "held-for-confirmation":
+        print("EXECUTION   held for operator confirmation, provider NOT called")
+    elif ex.get("status") == "dry-run":
         print("EXECUTION   dry-run: plan validated, provider NOT called")
     else:
         p = ex.get("provider", {})
@@ -219,6 +227,7 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     p = sub.add_parser("run"); p.add_argument("scenario", choices=SCENARIOS); p.add_argument("--live", action="store_true")
+    p.add_argument("--confirm", action="store_true", help="confirm the service if the cross-check holds the call")
     p.set_defaults(fn=cmd_run)
     sub.add_parser("core-evidence").set_defaults(fn=cmd_core_evidence)
     p = sub.add_parser("compare"); p.add_argument("scenario", choices=SCENARIOS); p.set_defaults(fn=cmd_compare)

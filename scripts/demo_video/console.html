@@ -20,6 +20,9 @@
               font: 14px/1.38 Consolas, "Cascadia Mono", monospace; white-space: pre-wrap; word-break: break-all; }
   #term { flex: 1.45; } #blog { flex: 1; } #nlog { flex: 0.85; }
   .ok { color: #8fd18f; } .pr { color: #7cc36e; } .hl { color: #ffd166; } .dim { color: #7b8594; }
+  #btns { float: right; } #btns button { font: 600 12px "Segoe UI", Arial; margin-left: 4px; padding: 2px 8px;
+           background: #2d3440; color: #dfe3e8; border: 1px solid #455063; border-radius: 4px; cursor: pointer; }
+  #btns button:hover { background: #0b3d91; }
   #sub { position: absolute; left: 0; right: 0; bottom: 0; min-height: 86px; background: rgba(0,0,0,.82);
          color: #fff; font: 600 27px/1.35 "Segoe UI", Arial; padding: 12px 40px; text-align: center;
          display: none; z-index: 20; }
@@ -32,7 +35,12 @@
 <div id="main">
   <div id="left"><iframe id="swagger" src="http://localhost:8000/docs"></iframe></div>
   <div id="right">
-    <div class="pane" id="term"><div class="t">Terminal</div><pre id="termp"></pre></div>
+    <div class="pane" id="term"><div class="t">Terminal <span id="btns">
+      <button data-k="status">Testbed</button><button data-k="s1">S1 dry run</button>
+      <button data-k="s1live">S1 live</button><button data-k="s2live">S2 live</button>
+      <button data-k="s3live">S3 live</button><button data-k="s3confirm">S3 confirm</button>
+      <button data-k="faults">Faults</button><button data-k="results">Results</button>
+      <button data-k="clear">Clear</button></span></div><pre id="termp"></pre></div>
     <div class="pane" id="blog"><div class="t">docker logs -f mini-telco-backend-capif (orchestration backend)</div><pre id="blogp"></pre></div>
     <div class="pane" id="nlog"><div class="t">docker logs -f nef-qos (NEF AsSessionWithQoS -> Open5GS PCF)</div><pre id="nlogp"></pre></div>
   </div>
@@ -62,6 +70,12 @@ follow("backend", "blogp", 12);
 follow("nefqos", "nlogp", 6);
 setInterval(() => document.getElementById("clock").textContent =
   new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC", 500);
+
+document.querySelectorAll("#btns button").forEach(b => b.onclick = () => {
+  const k = b.dataset.k;
+  if (k === "clear") { demo.clearTerm(); return; }
+  demo.run(k);
+});
 
 window.demo = {
   sub(t) { const s = document.getElementById("sub"); s.style.display = t ? "block" : "none"; s.innerHTML = t || ""; },

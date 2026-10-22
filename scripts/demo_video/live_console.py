@@ -30,6 +30,11 @@ COMMANDS = {
     "faults": f"{CLI} faults --per-fault 1",
     "load": f"{CLI} load --quick",
     "results": f"{CLI} results",
+    "s1": f"{CLI} run s1",
+    "s1live": f"{CLI} run s1 --live",
+    "s2live": f"{CLI} run s2 --live",
+    "s3live": f"{CLI} run s3 --live",
+    "s3confirm": f"{CLI} run s3 --live --confirm",
 }
 # Shown on screen instead of the interpreter path
 SHOWN = {
@@ -38,6 +43,11 @@ SHOWN = {
     "faults": "python scripts/demo_cli.py faults --per-fault 1",
     "load": "python scripts/demo_cli.py load --quick",
     "results": "python scripts/demo_cli.py results",
+    "s1": "python scripts/demo_cli.py run s1",
+    "s1live": "python scripts/demo_cli.py run s1 --live",
+    "s2live": "python scripts/demo_cli.py run s2 --live",
+    "s3live": "python scripts/demo_cli.py run s3 --live",
+    "s3confirm": "python scripts/demo_cli.py run s3 --live --confirm",
 }
 LOGS = {
     "backend": ("mini-telco-backend-capif", None),
