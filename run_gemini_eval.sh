@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-cd /home/turkad/mini-telco-platform
+cd "$(dirname "$0")"
 
 echo "=== Loading .env ==="
 while IFS='=' read -r key value; do

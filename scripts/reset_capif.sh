@@ -8,7 +8,7 @@
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-OPENCAPIF_DIR="${OPENCAPIF_DIR:-/home/turkad/OpenCAPIF/capif/services}"
+OPENCAPIF_DIR="${OPENCAPIF_DIR:-$HOME/OpenCAPIF/capif/services}"
 NEF_DIR="$PROJECT_DIR/providers/NEF"
 NEF_PROVIDER_FOLDER="$NEF_DIR/MonitoringEventAPI/app/provider_onboarding/provider_folder"
 

@@ -22,7 +22,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-OPENCAPIF_DIR="/home/turkad/OpenCAPIF/capif/services"
+OPENCAPIF_DIR="${OPENCAPIF_DIR:-$HOME/OpenCAPIF/capif/services}"  # installed by scripts/setup.sh
 NEF_DIR="$SCRIPT_DIR/providers/NEF"
 NEF_QOS_DIR="$SCRIPT_DIR/providers/NEF-QoS"
 CAMARA_QOD_DIR="$SCRIPT_DIR/providers/camara-QoD"

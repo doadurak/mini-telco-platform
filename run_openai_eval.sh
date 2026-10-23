@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/turkad/mini-telco-platform
+cd "$(dirname "$0")"
 
 # Load .env properly
 while IFS='=' read -r key value; do

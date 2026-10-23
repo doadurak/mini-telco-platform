@@ -1,0 +1,22 @@
+diff --git a/docker-compose.yml b/docker-compose.yml
+new file mode 100644
+index 0000000..608b345
+--- /dev/null
++++ b/docker-compose.yml
+@@ -0,0 +1,16 @@
++services:
++  nef-qos:
++    build:
++      context: .
++    image: front-research-group/nef-qos:local
++    container_name: nef-qos
++    ports:
++      - "8585:8585"
++    environment:
++      NEF_BASE_URL: "http://host.docker.internal:9999"
++      PCF_BASE_URL: "host.docker.internal"   # Open5GS PCF from testbed/open5gs (host port 7777)
++      PCF_PORT: "7777"
++      LOG_LEVEL: "DEBUG"
++    extra_hosts:
++      - "host.docker.internal:host-gateway"
++    restart: unless-stopped

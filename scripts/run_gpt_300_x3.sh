@@ -2,7 +2,7 @@
 # GPT-4o-mini on the 300 intents, three independent runs. Replaces the earlier
 # eval_results_gpt4omini_300.json, whose 240 non-pilot entries were planned by Gemini
 # because the run used LLM_PROVIDER=gpt, which the planner did not recognise.
-cd /home/turkad/mini-telco-platform
+cd "$(dirname "$0")/.."
 mkdir -p datasets/repeats
 for r in 1 2 3; do
   LLM_PROVIDER=openai venv/bin/python scripts/run_evaluation.py --mode llm-assisted --no-registry \

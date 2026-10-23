@@ -2,7 +2,7 @@
 # Two extra runs per LLM on the 300 intents (runs 2 and 3; run 1 is datasets/eval_results_*_300.json)
 # to bound run-to-run variance at temperature 0.1. The providers run in parallel, the runs of one
 # provider in sequence. L3 is skipped: every recorded plan already passed the live registry check.
-cd /home/turkad/mini-telco-platform
+cd "$(dirname "$0")/.."
 mkdir -p datasets/repeats
 run() {  # provider tag delay
   for r in 2 3; do

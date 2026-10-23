@@ -4,7 +4,7 @@
 # Historical (2026-09). --resume now refuses a file without the same "model" in its summary, and the
 # legacy pilot files carry none; see scripts/run_gpt_300_x3.sh and run_repeats_300.sh for current runs.
 
-cd /home/turkad/mini-telco-platform
+cd "$(dirname "$0")/.."
 
 echo "[$(date)] Starting GPT-4o-mini evaluation (240 new entries)..."
 LLM_PROVIDER=openai venv/bin/python scripts/run_evaluation.py \

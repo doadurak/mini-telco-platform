@@ -1,0 +1,66 @@
+diff --git a/.env b/.env
+index 30824c7..fcb5b51 100644
+--- a/.env
++++ b/.env
+@@ -2,7 +2,7 @@ HOST=0.0.0.0
+ PORT=8080
+ LOG_DIRECTORY_PATH=./app/log/
+ LOG_FILENAME_PATH=./app/log/app_logger
+-BASE_URL=http://172.17.0.1:8000
++BASE_URL=http://host.docker.internal:9999
+ SCS_AS_ID=1
+ #set e.g. envelope to resolve to 3gpp-monitoring-event-envelope for NEF Endpoint
+ PROJECT_API_NAME=
+diff --git a/app/invoker_onboarding/invoker_config_sample.json b/app/invoker_onboarding/invoker_config_sample.json
+index 0cc0c50..77492df 100644
+--- a/app/invoker_onboarding/invoker_config_sample.json
++++ b/app/invoker_onboarding/invoker_config_sample.json
+@@ -1,8 +1,8 @@
+ {
+-  "capif_host": "10.220.2.43",
+-  "register_host": "10.220.2.43",
++  "capif_host": "capifcore",
++  "register_host": "register",
+   "capif_https_port": "443",
+-  "capif_register_port": "8084",
++  "capif_register_port": "8080",
+   "capif_username": "camara_user",
+   "capif_password": "camara_user",
+   "debug_mode": "True",
+@@ -39,4 +39,4 @@
+       "service-kpis": ""
+     }
+   }
+-}
+\ No newline at end of file
++}
+diff --git a/docker-compose.yaml b/docker-compose.yaml
+index a361a74..8cddb32 100644
+--- a/docker-compose.yaml
++++ b/docker-compose.yaml
+@@ -6,12 +6,20 @@ services:
+     container_name: camara-location-retrieval
+     ports:
+       - "8003:8080"
++    extra_hosts:
++      - "host.docker.internal:host-gateway"
+     env_file: .env
+     restart: unless-stopped
+     command: ["--host", "${HOST}", "--port", "${PORT}"]
+-#    networks:
+-#      - shared
++    networks:
++      - default
++      - capif-network
++      - nef-network
+ 
+-#networks:
+-#  shared:
+-#    external: true
++networks:
++  capif-network:
++    external: true
++    name: capif-network
++  nef-network:
++    external: true
++    name: nef_nef-network
