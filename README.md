@@ -3,7 +3,21 @@
 > **AI-native, CAPIF-compliant 5G service orchestration platform** for evaluating
 > LLM-based intent-to-API translation reliability in CAMARA service exposure environments.
 >
-> Academic paper: [`docs/nof_2026.tex`](docs/nof_2026.tex) 
+> Demo paper (accepted, IFIP WMNC 2026): [`docs/wmnc_2026_demo.pdf`](docs/wmnc_2026_demo.pdf) ·
+> demo video: <https://youtu.be/RiT6QGwS9Pc>
+
+## Install and run on a new machine
+
+```bash
+git clone --recurse-submodules https://github.com/doadurak/mini-telco-platform.git
+cd mini-telco-platform
+bash scripts/setup.sh        # once: provider repos + patches, OpenCAPIF v4.0.0, venv, .env
+nano .env                    # add OPENAI_API_KEY (optionally ANTHROPIC_API_KEY, GEMINI_API_KEY)
+bash scripts/demo_up.sh      # start everything and check it; ends with DEMO READY
+```
+
+Then open the live console at <http://localhost:8099>. The step-by-step guide, including what every
+API request and every terminal output means, is **[docs/SETUP_AND_USAGE.md](docs/SETUP_AND_USAGE.md)**.
 
 ---
 
