@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+from pathlib import Path
 
 import requests
 
@@ -26,6 +27,12 @@ def check(name: str, fn, fix: str) -> None:
     except Exception as exc:  # report every failure, keep checking the rest
         print(f" {BAD} {name:34s} {exc}")
         failures.append(f"{name}: {fix}")
+
+
+def _env_has(key: str) -> bool:
+    env = Path(__file__).resolve().parents[1] / ".env"
+    lines = env.read_text(encoding="utf-8").splitlines() if env.exists() else []
+    return any(l.startswith(f"{key}=") and l.split("=", 1)[1].strip() for l in lines)
 
 
 def sh(cmd: str) -> str:
@@ -81,7 +88,10 @@ def main() -> None:
     check("OpenCAPIF discovery (L3)", capif, "run: bash scripts/demo_up.sh (rebuilds CAPIF)")
     check("UERANSIM UEs on Open5GS", ues, "bash testbed/open5gs/up.sh")
     check("LLM planner: GPT-4o-mini", lambda: plan("openai"), "check internet / OPENAI_API_KEY")
-    check("LLM planner: Claude Haiku 4.5", lambda: plan("anthropic"), "check internet / ANTHROPIC_API_KEY")
+    if _env_has("ANTHROPIC_API_KEY"):  # optional second LLM
+        check("LLM planner: Claude Haiku 4.5", lambda: plan("anthropic"), "check internet / ANTHROPIC_API_KEY")
+    else:
+        print(f" – {'LLM planner: Claude Haiku 4.5':34s} skipped (no ANTHROPIC_API_KEY in .env)")
     try:
         requests.post(f"{API}/config/provider", json={"provider": "openai"}, timeout=10)
     except requests.RequestException:

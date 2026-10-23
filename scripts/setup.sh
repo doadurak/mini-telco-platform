@@ -28,8 +28,8 @@ echo "2/6 NCSRD provider repositories (git submodules) and our patches"
 git submodule update --init providers/CamaraLocationRetrieval providers/NEF providers/NEF-QoS providers/camara-QoD
 for r in CamaraLocationRetrieval NEF NEF-QoS camara-QoD; do
   p="providers/patches/$r.patch"
-  if git -C "providers/$r" apply --check "../../$p" 2>/dev/null; then
-    git -C "providers/$r" apply "../../$p"; ok "$r: patch applied"
+  if git -C "providers/$r" apply --whitespace=nowarn --check "../../$p" 2>/dev/null; then
+    git -C "providers/$r" apply --whitespace=nowarn "../../$p"; ok "$r: patch applied"
   elif git -C "providers/$r" apply --reverse --check "../../$p" 2>/dev/null; then
     ok "$r: patch already applied"
   else
@@ -43,7 +43,7 @@ if [ -d "$OPENCAPIF_HOME/capif/services" ]; then
   ok "already present"
 else
   mkdir -p "$OPENCAPIF_HOME"
-  git clone --depth 1 --branch "$OPENCAPIF_TAG" "$OPENCAPIF_REPO" "$OPENCAPIF_HOME/capif"
+  git -c advice.detachedHead=false clone -q --depth 1 --branch "$OPENCAPIF_TAG" "$OPENCAPIF_REPO" "$OPENCAPIF_HOME/capif"
   ok "cloned"
 fi
 [ "$OPENCAPIF_HOME" = "$HOME/OpenCAPIF" ] || echo "  ! non-default location: export OPENCAPIF_DIR=$OPENCAPIF_HOME/capif/services before start.sh"

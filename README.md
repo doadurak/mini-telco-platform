@@ -337,6 +337,10 @@ FRONT-research-group NEF's emulated core data source, not from the Open5GS AMF.
 
 ## Quick Start
 
+> **New machine?** Follow [docs/SETUP_AND_USAGE.md](docs/SETUP_AND_USAGE.md): `scripts/setup.sh` installs everything
+> (provider repositories with our patches, OpenCAPIF v4.0.0, venv, `.env`) and `scripts/demo_up.sh` starts and checks the full stack.
+> The guide also explains every API request and every terminal output used in the demo.
+
 ### Local (no Docker)
 
 ```bash
