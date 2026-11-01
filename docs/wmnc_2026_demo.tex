@@ -1,4 +1,5 @@
 \documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -17,19 +18,25 @@
 \setlength{\floatsep}{5pt plus 2pt minus 2pt}
 % Never break these names across lines
 \hyphenation{CAMARA OpenCAPIF UERANSIM AsSessionWithQoS}
+\usepackage{caption}
+\captionsetup{singlelinecheck=true}
 
-\title{(DEMO) From Natural Language to Live 5G API Calls:
-A CAPIF-Compliant, Multi-LLM Intent Orchestration Platform}
+
+\title{(DEMO) From Natural Language to Live 5G API Calls: A CAPIF-Compliant, Multi-LLM Intent Orchestration Platform \vspace{-.2cm}
+}
 \author{
   \IEEEauthorblockN{T\"{u}rkan Do\u{g}a Durak$^{\ast}$,\; Engin Zeydan$^{\ddag}$,\; Luis Blanco$^{\ddag}$}\\
   \IEEEauthorblockA{%
     $^{\ast}$Universitat Polit\`{e}cnica de Catalunya (UPC), Barcelona, Spain.\\
     $^{\ddag}$Centre Tecnol\`{o}gic de Telecomunicacions de Catalunya (CTTC/CERCA), Castelldefels, Spain, 08860.\\
     Email: turkan.doga.durak@estudiantat.upc.edu,\; \{ezeydan, luis.blanco\}@cttc.es}
+
+\thanks{This work is supported by UNITY-6G project, co-funded from European Union’s Horizon Europe Smart Networks and Services Joint Undertaking (SNS JU) research and innovation programme under the Grant Agreement No 101192650 and from the Swiss State Secretariat for Education, Research and Innovation (SERI).}
 }
 
 \begin{document}
 \maketitle
+% IFIP camera-ready rule: copyright notice at the bottom of the first column of page 1
 {\renewcommand{\thefootnote}{}\footnotetext{\copyright\,2026 IFIP}}
 
 \begin{abstract}
@@ -43,7 +50,7 @@ Claude\,Haiku\,4.5 (6.9--8.2\,s with Gemini), of which LLM planning accounts for
 On 300 unique bilingual intents (three runs each), the LLM planners reach an
 Intent-to-API Workflow Success Rate (IWSR) of 95.3--96.6\%, compared with 83.3\% for a
 keyword baseline and 36.0\% for native function calling.
-Code, testbed and data: \url{https://github.com/doadurak/mini-telco-platform}.
+Code, testbed and data: \url{https://github.com/doadurak/mini-telco-platform}
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -67,12 +74,13 @@ to a 3GPP PCF.
 \label{sec:arch}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.90\columnwidth]{fig1_architecture.pdf}
+  \includegraphics[width=0.85\columnwidth]{fig1_architecture.pdf}
   \caption{Platform architecture. Any L1--L3 failure triggers at most three payload
-  corrections; CAPIF-1e runs over mTLS, provider calls over HTTP.}
+  corrections.}%; CAPIF-1e runs over mTLS, provider calls over HTTP.}
   \label{fig:arch}
+  \vspace{-.30cm}
 \end{figure}
-\textit{Planning:} A FastAPI backend exposes \texttt{POST\,/orchestrate}
+\textit{1-) Planning:} A FastAPI backend exposes \texttt{POST\,/orchestrate}
 (Fig.~\ref{fig:arch}). Phase\,1 selects one of four CAMARA services (QoD\,v1.1,
 QoS\,Profiles, QoS\,Provisioning, Location\,Retrieval\,v0.5) from a schema-grounded
 catalog; Phase\,2 generates the payload from the operation's OpenAPI schema, which is
@@ -80,14 +88,14 @@ injected into the prompt~\cite{flowmind2023}. Intent-level QoS classes (e.g.\
 \texttt{QOS\_E\_STREAMING}) are mapped by target bit rate to the operator profiles the
 network enforces (\texttt{QOS\_E/S/M/L}).
 
-\textit{Validation:} L1 checks the payload against its Pydantic schema; L2 enforces
+\textit{2-) Validation:} L1 checks the payload against its Pydantic schema; L2 enforces
 telecom rules (E.164 numbers, QoS profiles that map to an operator profile, durations of
-1--7200\,s, unicast IPv4); L3 queries the live
-CAPIF registry to confirm that the selected service is published. L1--L3 cannot detect a
-registered but wrong service; therefore, a live plan whose service differs from the one
-chosen by the keyword planner is held until the operator confirms it.
+1--7200\,s, unicast IPv4); L3 queries the live CAPIF registry to confirm that the selected
+service is published. L1--L3 cannot detect a registered but wrong service; therefore, a
+live plan whose service differs from the one chosen by the keyword planner is held until
+the operator confirms it.
 
-\textit{Execution:} For QoS, the adapter resolves the phone number to the UE's IP from
+\textit{3-) Execution:} For QoS, the adapter resolves the phone number to the UE's IP from
 the 5GC subscriber database; the CAMARA provider forwards an AsSessionWithQoS
 subscription to the NEF, which creates a PCF application session bound to the UE's PDU
 session. Location uses the NEF Monitoring Event API with emulated core
@@ -104,47 +112,40 @@ implementations~\cite{front_repos}.
 \end{figure}
 The full stack of Fig.~\ref{fig:arch}, including Open5GS~\cite{open5gs} and
 UERANSIM~\cite{ueransim}, runs on one 16\,GB host via \texttt{start.sh}. All
-scenarios run with \texttt{dry\_run:false}, and their responses are in the repository.
-\textbf{S1 (QoD):} \textit{``Activate video-streaming quality for $\langle$MSISDN$\rangle$
+scenarios run with \texttt{dry\_run:false}, and their responses are in the repository. \textit{Step-1 (QoD):} \textit{``Activate video-streaming quality for $\langle$MSISDN$\rangle$
 for the next 30 minutes''} yields \texttt{QOS\_E\_STREAMING}, 1800\,s, enforced as
 \texttt{QOS\_S}; the PCF accepts the session and QoD returns HTTP\,201,
-\texttt{AVAILABLE} (Fig.~\ref{fig:ui}).
-\textbf{S2 (Location):} the NEF returns a WGS-84 area (HTTP\,200).
-\textbf{S3 (ambiguity):} dataset entry \textit{``Provide network quality improvement for
-device $\langle$MSISDN$\rangle$ for a long time''} (ground truth: QoD). All three LLMs
-select QoS\,Provisioning in every run, and the plan passes L1--L3; because the keyword
-planner selects QoD, the cross-check holds the call until it is confirmed, after which
-the PCF accepts it (\texttt{ACTIVE}).
-\textbf{S4 (backend switch):} after each \texttt{POST\,/config/provider} switch, S1
-yields identical CAMARA payloads from all three LLMs. UERANSIM lacks NGAP PDU Session Resource Modify, so the
-dedicated QoS flow is authorized by the core but not enforced on the emulated radio.
+\texttt{AVAILABLE} (Fig.~\ref{fig:ui}). \textit{Step-2 (Location):} the NEF returns a WGS-84 area (HTTP\,200). \textit{Step-3 (ambiguity):} dataset entry \textit{``Provide network quality improvement for device $\langle$MSISDN$\rangle$ for a long time''} (ground truth: QoD). All three LLMs select QoS\,Provisioning in every run, and the plan passes L1--L3; because the keyword planner selects QoD, the cross-check holds the call until it is confirmed, after which the PCF accepts it (\texttt{ACTIVE}). \textit{Step-4 (backend switch):} after each \texttt{POST\,/config/provider} switch, S1
+yields identical CAMARA payloads from all three LLMs. UERANSIM lacks NGAP PDU Session Resource Modify, so the dedicated QoS flow is authorized by the core but not enforced on the emulated radio.
 
 \section{Evaluation}
 \begin{table}[t]
 \centering
-\caption{IWSR and HR (\%), 300 intents; LLMs: mean [range], 3 runs}
+\caption{IWSR and HR (\%); LLMs: mean [range] of 3 runs}
 \label{tab:metrics}
-\footnotesize
+\scriptsize
 \setlength{\tabcolsep}{2.4pt}
 \begin{tabular}{lrrrrr}
 \toprule
 \textbf{Planner} & \textbf{IWSR} & \textbf{Easy} & \textbf{Med.} & \textbf{Hard} & \textbf{HR} \\
 \midrule
 Keyword baseline   & 83.3 & 82.3 & 79.8 & 87.3 & 16.7 \\
-GPT-4o-mini        & \textbf{96.6} {\scriptsize[96.3,\,96.7]} & 100 & 97.2 & \textbf{93.0} & \textbf{3.0} \\
-Claude\,Haiku\,4.5 & 95.3 {\scriptsize[95.3,\,95.3]} & 100 & 100 & 87.3 & 4.0 \\
-Gemini\,2.5\,Flash & 96.0 {\scriptsize[95.7,\,96.3]} & 99.3 & 99.6 & 90.0 & 3.2 \\
+GPT-4o-mini        & \textbf{96.6} {\tiny[96.3,\,96.7]} & 100 & 97.2 & \textbf{93.0} & \textbf{3.0} \\
+Claude\,Haiku\,4.5 & 95.3 {\tiny[95.3,\,95.3]} & 100 & 100 & 87.3 & 4.0 \\
+Gemini\,2.5\,Flash & 96.0 {\tiny[95.7,\,96.3]} & 99.3 & 99.6 & 90.0 & 3.2 \\
 \midrule
 GPT function calling & 36.0 & 37.5 & 42.6 & 29.1 & 5.0 \\
 \;+\,L1--L3 feedback & 96.0 & 100 & 98.9 & 90.0 & 4.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+
 \begin{table}[t]
 \centering
-\caption{Fault injection into correct plans (live L3)}
+\caption{Fault injection into correct plans} % (live L3)
 \label{tab:faults}
-\footnotesize
+\scriptsize
 \setlength{\tabcolsep}{2.6pt}
 \begin{tabular}{llrrr}
 \toprule
@@ -166,7 +167,7 @@ planner ran three times (temperature 0.1) without provider calls; every plan tar
 published service, so L3 never rejects one. The keyword rules were written for a 60-intent
 pilot (100\% there, 79.2\% on the other 240; LLMs 95.4--96.5\%). IWSR varies by at most
 0.6 points across runs; the 10--14 failures per run are mostly QoD vs.\
-QoS\,Provisioning confusions on hard intents (as in S3). Across the nine LLM runs, the
+QoS\,Provisioning confusions on hard intents (as in Step-3). Across the nine LLM runs, the
 cross-check holds 75 of these 92 wrong selections before execution, at the cost of a
 confirmation for 16\% of correct plans.
 \textit{Native function calling} (one tool per CAMARA operation, OpenAPI schema as
@@ -175,12 +176,14 @@ the intent does not state (e.g.\ \texttt{applicationServer}); our feedback loop 
 181 such plans (2--3 per run for the two-phase planner).
 \textit{Fault injection} (Table~\ref{tab:faults}): every fault is caught by its layer;
 GPT-4o-mini feedback repairs L1/L2 faults in one iteration but cannot fix an unpublished
-service. \textit{Scalability and LLM APIs:} with live L3, one backend process serves
+service.
+\textit{Scalability and LLM APIs:} with live L3, one backend process serves
 $\approx$160\,req/s with the keyword planner; with GPT-4o-mini, latency stays at
 $\approx$2.6\,s up to 10 concurrent requests, so the LLM API is the bottleneck. If it
-fails, \texttt{auto} mode uses the keyword planner. As intents (with MSISDNs) reach an external API, production
-use needs pseudonymization or a self-hosted model.
-Finally, a demo video is available at \url{https://youtu.be/RiT6QGwS9Pc}.
+fails, \texttt{auto} mode uses the keyword planner. As intents (with MSISDNs) reach an
+external API, production use needs pseudonymization or a self-hosted model. Finally, a demo video is available at \url{https://youtu.be/RiT6QGwS9Pc}.
+
+
 
 {\footnotesize
 \bibliographystyle{IEEEtran}
