@@ -10,13 +10,103 @@
     "changed_entries": []
   },
   {
-    "file": "eval_results_gpt4omini_300.json",
+    "file": "eval_results_gemini25flash_300.json",
     "mode": "llm-assisted",
     "entries": 300,
     "registry_checked": 300,
     "l3_rejections": 0,
-    "iwsr_recorded": 0.9733,
-    "iwsr_with_live_l3": 0.9733,
+    "iwsr_recorded": 0.96,
+    "iwsr_with_live_l3": 0.96,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gemini25flash_300_run2.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9633,
+    "iwsr_with_live_l3": 0.9633,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gemini25flash_300_run3.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9567,
+    "iwsr_with_live_l3": 0.9567,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gpt4omini_300_run1.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9667,
+    "iwsr_with_live_l3": 0.9667,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gpt4omini_300_run2.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9667,
+    "iwsr_with_live_l3": 0.9667,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gpt4omini_300_run3.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9633,
+    "iwsr_with_live_l3": 0.9633,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gpt4omini_function_calling_300.json",
+    "mode": "llm-function-calling",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.36,
+    "iwsr_with_live_l3": 0.36,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_gpt4omini_function_calling_feedback_300.json",
+    "mode": "llm-function-calling",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.96,
+    "iwsr_with_live_l3": 0.96,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_haiku45_300_run2.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9533,
+    "iwsr_with_live_l3": 0.9533,
+    "changed_entries": []
+  },
+  {
+    "file": "eval_results_haiku45_300_run3.json",
+    "mode": "llm-assisted",
+    "entries": 300,
+    "registry_checked": 300,
+    "l3_rejections": 0,
+    "iwsr_recorded": 0.9533,
+    "iwsr_with_live_l3": 0.9533,
     "changed_entries": []
   },
   {
@@ -27,16 +117,6 @@
     "l3_rejections": 0,
     "iwsr_recorded": 0.9533,
     "iwsr_with_live_l3": 0.9533,
-    "changed_entries": []
-  },
-  {
-    "file": "eval_results_gemini25flash_300.json",
-    "mode": "llm-assisted",
-    "entries": 300,
-    "registry_checked": 300,
-    "l3_rejections": 0,
-    "iwsr_recorded": 0.96,
-    "iwsr_with_live_l3": 0.96,
     "changed_entries": []
   }
 ]

@@ -33,13 +33,14 @@ Every button and panel of the console is marked on screenshots in **[docs/CONSOL
 7. [Evaluation Results](#evaluation-results)
 8. [Quick Start](#quick-start)
 9. [Full Stack Startup](#full-stack-startup)
-10. [OpenCAPIF UIs](#opencapif-uis)
-11. [Environment Variables](#environment-variables)
-12. [API Reference](#api-reference)
-13. [Running Evaluations](#running-evaluations)
-14. [Demo Script](#demo-script)
-15. [Known Issues](#known-issues)
-16. [Project Structure](#project-structure)
+10. [URL Reference Map](#url-reference-map)
+11. [OpenCAPIF UIs](#opencapif-uis--detailed-reference)
+12. [Environment Variables](#environment-variables)
+13. [API Reference](#api-reference)
+14. [Running Evaluations](#running-evaluations)
+15. [Demo](#demo)
+16. [Known Issues](#known-issues)
+17. [Project Structure](#project-structure)
 
 ---
 
@@ -70,7 +71,7 @@ and deterministic telecom enforcement:
         ↕ all layers feed into ↕
 ┌─────────────────────────────────────────┐
 │         RELIABILITY MONITORING          │
-│  IWSR | SCR | SVR | HR | SS | RRF     │
+│  IWSR | SCR | SVR | HR | RRF          │
 └─────────────────────────────────────────┘
 ```
 
@@ -148,7 +149,7 @@ Full 3GPP CAPIF (TS 23.222) API Invoker lifecycle backed by **OpenCAPIF**:
 
 **CAPIF data stores:**
 - **Vault** (port 8200) — PKI engine issues all mTLS certificates (`pki/`, `pki_int/`)
-- **MongoDB CCF** (port 8082) — `serviceapidescriptions` (5 CAMARA APIs), `certs` (23 TLS certs)
+- **MongoDB CCF** (port 8082) — `serviceapidescriptions` (5 CAMARA APIs), `certs` (TLS certificates)
 - **MongoDB Register** (port 8083) — `capif_users` database with invoker onboarding records
 
 ---
@@ -173,7 +174,12 @@ out-of-range values.
 ### Layer 3 — CAPIF Registry (HR metric)
 - Queries live CAPIF discovery endpoint
 - Verifies selected service exists in registry
-- Non-blocking: if CAPIF unreachable, skips with `registry_checked: false`
+- If CAPIF is unreachable, a `dry_run: true` request or an offline evaluation passes L3 with `registry_checked: false`;
+  a live request (`dry_run: false`) is refused with HTTP 503
+
+### Service cross-check
+L1–L3 cannot detect a wrong but registered service. A live LLM plan whose service differs from the keyword planner's
+is held (`held-for-confirmation`) until it is resent with `confirm_service: true`.
 
 ### Feedback Engine (RRF metric)
 When LLM payload fails validation:
@@ -192,11 +198,11 @@ When LLM payload fails validation:
 | **SCR** | `l1_passes / total_plans` | JSON schema compliance |
 | **SVR** | `l2_passes / l1_passes` | Telecom semantic correctness |
 | **HR** | `wrong_service / total_plans` | Service selection that differs from the ground truth (incl. non-existent services) |
-| **SS** | `1 - stdev(IWSR_easy, IWSR_medium, IWSR_hard)` | Robustness across difficulty strata (not run-to-run repeatability) |
-
-Run-to-run repeatability is measured separately by `scripts/run_stability_test.py`
-(`1 - (distinct_outputs-1)/runs` over repeated runs); the SS values in the tables below are the stratified definition.
 | **RRF** | `feedback_recovered / feedback_attempted` | Correction loop effectiveness |
+
+The result files also contain **SS** (`1 - stdev(IWSR_easy, IWSR_medium, IWSR_hard)`). It measures spread across
+difficulty levels, not repeatability, so it is reported only in the archived pilot table below. Run-to-run
+repeatability comes from the three runs per planner in the main results.
 
 ---
 
@@ -244,16 +250,13 @@ L1–L2. With the L1–L3 feedback loop it reaches 96.0%, after repairing 181 pl
 `confirm_service: true`. On the nine LLM runs above this holds 75 of the 92 wrong service selections before
 execution, and 16% of the correct plans.
 
-The SS column of earlier README revisions (`1 - stdev` of IWSR across difficulty levels) is no longer reported;
-the per-difficulty IWSR is shown instead.
-
-
-**Re-run of 11 multi-intent entries (2026-10-11).** Prompts with two requests (e.g. *"Tell me where +81312345678 is
-and also list its available QoS profiles"*) originally ended in `LlmPlanningError: expected JSON object, got list`
-because Phase 1 returned one plan per request. The planner now accepts a list (one execution step per plan, the
-first-stated request is primary) and `scripts/rerun_failed_entries.py` re-evaluated exactly those entries
-(GPT-4o-mini 5, Claude Haiku 4.5 2, Gemini 2.5 Flash 4); all 11 now select the ground-truth primary service.
-Re-run records carry `"rerun"` and `"previous_error"` fields. Before the re-run, IWSR was 0.957 / 0.947 / 0.947.
+**Re-run of multi-intent entries in run 1 of Claude and Gemini (2026-10-11).** Prompts with two requests (e.g. *"Tell
+me where +81312345678 is and also list its available QoS profiles"*) originally ended in
+`LlmPlanningError: expected JSON object, got list` because Phase 1 returned one plan per request. The planner now
+accepts a list (one execution step per plan, the first-stated request is primary) and
+`scripts/rerun_failed_entries.py` re-evaluated exactly those entries (Claude Haiku 4.5 2, Gemini 2.5 Flash 4). These
+records carry `"rerun"` and `"previous_error"` fields; before the re-run, IWSR was 0.947 for both. All other runs in
+the table, including the three GPT-4o-mini runs, were made with the corrected planner.
 
 ### Scope of the evaluation (what IWSR measures)
 
@@ -262,10 +265,12 @@ The offline benchmark (`scripts/run_evaluation.py`) never calls providers. It me
 plus the bounded feedback loop. L3 is on by default (`--no-registry` disables it) and every result records
 `l3_passed` and `registry_checked`.
 
-The 300-entry result files above were produced before L3 was decoupled from dry-run mode, i.e. with L1+L2 only.
-`scripts/rescore_l3.py` re-validated every recorded plan against the live CAPIF registry
-([`datasets/l3_rescore_300.json`](datasets/l3_rescore_300.json)): all 1,200 plans were checked, L3 rejected none,
-and IWSR is unchanged for all four planners. (The 11 re-run entries were evaluated with live L3 directly.)
+The runs in the main results table were made with `--no-registry`, i.e. with L1+L2 only, so their records show
+`registry_checked: false`. `scripts/rescore_l3.py` then re-validated the recorded plans against the live CAPIF
+registry ([`datasets/l3_rescore_300.json`](datasets/l3_rescore_300.json), 2026-11-05): all 3,600 plans in the 12
+result files were checked, L3 rejected none, and no IWSR changed. Because the feedback loop ran without L3 in these
+runs, this shows that L3 would not have triggered a correction. The single-call and no-schema ablations and the
+fault injection below ran with live L3 directly.
 
 L3 confirms that the selected service is published in CAPIF; it cannot detect a wrong-but-registered service.
 Such errors count against IWSR/HR through the ground-truth `service_id`. Live CAPIF onboarding/discovery (mTLS)
@@ -288,8 +293,9 @@ to 0.833 on the full set while the LLM planners stay ≥ 0.953. **The 300-entry 
 | Gemini 2.5 Flash | 0.933 | 0.983 | 0.983 | 0.050 | 0.885 | — (0 attempts) | `legacy_pilot_60/eval_results_gemini25flash.json` |
 
 > An earlier README revision listed Gemini as a partial 6/60 run; that run was later completed (60/60, numbers above)
-> and then extended to 300 entries. The 300-entry LLM runs reuse the 60 pilot results via `--resume`
-> (`scripts/run_eval_300_all.sh`) and evaluate the 240 new entries.
+> and then extended to 300 entries. Run 1 of Claude and Gemini reuses the 60 pilot results via `--resume`
+> (`scripts/run_eval_300_all.sh`, historical) and evaluates the 240 new entries; the three GPT-4o-mini runs and
+> runs 2–3 of Claude and Gemini plan all 300 entries from scratch.
 
 ### Evaluation timeline
 
@@ -300,6 +306,8 @@ to 0.833 on the full set while the LLM planners stay ≥ 0.953. **The 300-entry 
 | 2026-06-07/08 | 60-entry pilot: GPT-4o-mini (committed in `ab5f296`); Gemini 2.5 Flash partial 6/60 |
 | 2026-06-10 → 2026-09-02 | Gemini 2.5 Flash pilot completed to 60/60 (free-tier quota), committed in `ae8b64b` |
 | 2026-06 → 2026-09 | Dataset extended to 300 entries; 300-entry runs for all four planners (committed 2026-09-02, `ae8b64b`, `baba97d`) |
+| 2026-10 | Provider-name bug found (see Correction): GPT-4o-mini re-run three times; runs 2–3 of Claude and Gemini; native function-calling baseline |
+| 2026-11-05 | All 12 result files of the main table re-validated against the live CAPIF registry |
 
 Dates are taken from git history and result-file timestamps. The 240 new entries of every 300-entry run, the full
 300-entry deterministic run, and the GPT-4o-mini/Gemini pilots were produced with code that includes all three fixes.
@@ -309,7 +317,7 @@ no "N seconds" intent produced a duration of N×60, and no entry has an error or
 No pilot entry is affected; the 3 Haiku pilot failures (`qod_en_007`, `qod_tr_005`, `edge_003`) are all service
 selection errors (`qos-provisioning` chosen instead of `qod`, payloads pass L1/L2), unrelated to these fixes.
 
-### Ablations, fault injection and load test (2026-10-13)
+### Ablation, fault injection and load test (2026-10-13)
 
 | Experiment | Script | Result file | Outcome |
 |---|---|---|---|
@@ -341,7 +349,7 @@ Recorded runs:
 
 | Folder | State of the system | Use |
 |---|---|---|
-| `docs/live_runs/2026-10-11-5gc/` | Open5GS PCF attached, profile mapping and UE-IP resolution in place | Reported in the WMNC 2026 paper (Fig. 2, S1–S4) |
+| `docs/live_runs/2026-10-11-5gc/` | Open5GS PCF attached, profile mapping and UE-IP resolution in place | Reported in the WMNC 2026 paper (Fig. 2, Step-1 to Step-4) |
 
 Limits of the testbed: UERANSIM does not implement NGAP *PDU Session Resource Modify*, so the dedicated QoS flow is
 authorized and signalled by the core but not enforced on the emulated radio; location data comes from the
@@ -399,6 +407,9 @@ curl -X POST http://localhost:8000/capif/invokers/onboard \
 
 ## Full Stack Startup
 
+For the demo use `bash scripts/demo_up.sh`: it rebuilds CAPIF, starts the platform and the live console, and checks
+everything. `start.sh` starts the services only:
+
 ```bash
 chmod +x start.sh
 ./start.sh           # Start everything (OpenCAPIF + NEF + providers + backend)
@@ -428,9 +439,9 @@ chmod +x start.sh
 | MongoDB Express (CCF) | 8082 | http://localhost:8082 (admin/admin) |
 | MongoDB Express (Register) | 8083 | http://localhost:8083 (admin/admin) |
 | HashiCorp Vault | 8200 | http://localhost:8200/ui (dev-only-token) |
-| robot_sim (Streamlit) | 8501 | http://localhost:8501 |
 | NEF-QoS | 8585 | http://localhost:8585/docs |
 | NEF Monitoring | 9999 | http://localhost:9999/docs |
+| Live console (started by `demo_up.sh`) | 8099 | http://localhost:8099 |
 
 ---
 
@@ -443,9 +454,8 @@ Complete map of all live interfaces when the full stack is running.
 | URL | Status | What it shows | Credentials |
 |---|---|---|---|
 | `http://localhost:8200/ui` | ✅ Working | **Vault Web UI** — PKI engine, mTLS certificates (pki/, pki_int/, secret/) | Token: `dev-only-token` |
-| `http://localhost:8082` | ✅ Working | **MongoDB Express (CAPIF CCF)** — serviceapidescriptions (5 APIs), certs (23 TLS certs) | admin / admin |
+| `http://localhost:8082` | ✅ Working | **MongoDB Express (CAPIF CCF)** — serviceapidescriptions (5 APIs), certs (TLS certificates) | admin / admin |
 | `http://localhost:8083` | ✅ Working | **MongoDB Express (Register)** — capif_users DB, onboarded invoker records | admin / admin |
-| `http://localhost:8501` | ✅ Working | **robot_sim Streamlit** — OpenCAPIF conformance test dashboard | — |
 | `https://localhost:8084` | ✅ Working | **OpenCAPIF Register API** — invoker onboarding HTTP endpoint | admin / password123 |
 
 **Vault details (`http://localhost:8200/ui`):**
@@ -455,11 +465,11 @@ Complete map of all live interfaces when the full stack is running.
 
 **MongoDB CCF details (`http://localhost:8082` → DB: `capif`):**
 - `serviceapidescriptions` — 5 registered CAMARA APIs (quality-on-demand, 3gpp-monitoring-event, qos-profiles, qos-provisioning, location-retrieval)
-- `certs` — 23 TLS certificates (roles: invoker, AMF, AEF, APF)
+- `certs` — TLS certificates (roles: invoker, AMF, AEF, APF)
 - `RegisteredInvokers` — list of onboarded invokers
 
 **MongoDB Register details (`http://localhost:8083` → DB: `capif_users`):**
-- `capif_users` — platform invoker record (INVa0745b...)
+- `capif_users` — platform invoker record
 
 ---
 
@@ -479,9 +489,10 @@ Complete map of all live interfaces when the full stack is running.
 | URL | Status | What it shows |
 |---|---|---|
 | `http://localhost:8000/docs` | ✅ Working | **⭐ Main Swagger UI** — `/orchestrate`, `/capif/*`, `/catalog/services` |
-| `http://localhost:8000/health` | ✅ Working | `{ "status": "ok", "mockMode": false }` |
+| `http://localhost:8099` | ✅ Working | **Live console** — demo buttons, terminal and live logs (see [docs/CONSOLE_GUIDE.md](docs/CONSOLE_GUIDE.md)) |
+| `http://localhost:8000/health` | ✅ Working | `{ "status": "ok", "environment": "development", ... }` |
 | `http://localhost:8000/catalog/services` | ✅ Working | CAMARA service catalog parsed from YAML files at startup |
-| `http://localhost:8000/capif/status` | ⚠️ Requires CAPIF network | `invokerOnboarded: true` + cert path + invoker ID |
+| `http://localhost:8000/capif/status` | ⚠️ Requires CAPIF network | Connection probes to OpenCAPIF and certificate checks |
 | `http://localhost:8000/capif/discover` | ⚠️ Requires CAPIF network | Live API discovery from CAPIF registry (serviceAPIDescriptions) |
 
 > **⚠️ Note:** `/capif/status` and `/capif/discover` only work when started with `docker-compose.capif.yml`
@@ -504,16 +515,13 @@ Credentials: `admin` / `admin`
 
 Database `capif`, key collections:
 - `serviceapidescriptions` — 5 registered CAMARA APIs (quality-on-demand, 3gpp-monitoring-event, qos-profiles, qos-provisioning, location-retrieval)
-- `certs` — 23 TLS certificates for all CAPIF roles (invoker, AMF, AEF, APF)
+- `certs` — TLS certificates for all CAPIF roles (invoker, AMF, AEF, APF)
 - `RegisteredInvokers` — onboarded invoker list
 
 ### MongoDB Express — Register `http://localhost:8083`
 Credentials: `admin` / `admin`
 
 Database `capif_users` — CAPIF user accounts and onboarded invoker records (our platform's invoker ID stored here).
-
-### robot_sim — `http://localhost:8501`
-Streamlit dashboard. OpenCAPIF conformance test runner — simulates a robot/invoker going through the full CAPIF onboarding flow and API discovery cycle.
 
 ### NEF-QoS Swagger — `http://localhost:8585/docs`
 3GPP AsSessionWithQoS API v0.109.0 (OAS 3.1).
@@ -534,7 +542,6 @@ Endpoints: `GET/POST/DELETE /3gpp-as-session-with-qos/v1/{scsAsId}/subscriptions
 | `OPENAI_BASE_URL` | `https://api.openai.com/v1` | OpenAI-compatible base URL |
 | `ANTHROPIC_API_KEY` | — | Anthropic API key |
 | `ANTHROPIC_MODEL` | `claude-haiku-4-5-20251001` | Anthropic model name |
-| `MOCK_MODE` | `false` | `true` = no live provider calls |
 | `ORCHESTRATION_DEFAULT_MODE` | `auto` | Default mode for `auto` requests |
 | `LLM_TEMPERATURE` | `0.1` | LLM generation temperature |
 | `LLM_TIMEOUT_SECONDS` | `30` | LLM request timeout |
@@ -598,7 +605,14 @@ GET /catalog/services
 
 ```http
 GET /health
-→ { "status": "ok", "mockMode": false, "environment": "development" }
+→ { "status": "ok", "environment": "development", "frontend": "/app", "swaggerUi": "/docs", "capifBaseUrl": "..." }
+```
+
+### LLM backend
+
+```http
+GET  /config/provider                          # Active LLM
+POST /config/provider  {"provider": "openai"}  # Switch: openai, anthropic or gemini
 ```
 
 ### CAPIF Discovery
@@ -608,7 +622,7 @@ GET /capif/discover
 → { "status": "discovered", "services": { "serviceAPIDescriptions": [...] } }
 
 GET /capif/status
-→ { "capif_connected": true, "invoker_id": "INVa0745b...", ... }
+→ { "capifBaseUrl": "https://nginx", "dockerNetworkMode": true, "httpProbe": { "reachable": true, ... }, ... }
 ```
 
 ---
@@ -622,9 +636,6 @@ source venv/bin/activate
 python scripts/run_evaluation.py \
   --mode deterministic \
   --output datasets/eval_results_deterministic_300.json
-
-# Full 300-entry run for all three LLM providers (resumes from the 60-entry pilot files)
-bash scripts/run_eval_300_all.sh
 
 # Three runs of GPT-4o-mini plus the native function-calling baseline; extra runs of Claude and Gemini
 bash scripts/run_gpt_300_x3.sh
@@ -651,8 +662,10 @@ LLM_PROVIDER=gemini GEMINI_MODEL=gemini-2.5-flash \
   --output datasets/eval_results_gemini25flash_300.json \
   --resume datasets/eval_results_gemini25flash_300.json
 
-# Re-validate recorded plans against the live CAPIF registry (inside the backend container)
-# python scripts/rescore_l3.py datasets/eval_results_*_300.json --output datasets/l3_rescore_300.json
+# The repeat scripts above use --no-registry. Re-validate their plans against the live CAPIF registry
+# (no LLM or provider calls). The script and the result files must first be copied into the backend
+# container, because it holds the CAPIF certificates; then, inside the container with PYTHONPATH=/app:
+# python rescore_l3.py <result files> --output l3_rescore_300.json
 
 # Live dry_run=false scenarios on the 5G core testbed
 bash scripts/run_live_scenarios.sh
@@ -665,24 +678,24 @@ python scripts/analyze_results.py datasets/repeats/eval_results_gpt4omini_300_ru
 
 ---
 
-## Demo Script
+## Demo
 
-A full end-to-end demo script shows all system components live:
+After `bash scripts/demo_up.sh`, open the live console at <http://localhost:8099>. Each button runs one command of
+`scripts/demo_cli.py`, which can also be used directly:
 
 ```bash
-bash scripts/demo_full_system.sh         # full demo with pauses
-bash scripts/demo_full_system.sh --fast  # skip pauses (video recording)
+venv/bin/python scripts/demo_cli.py status                  # containers, CAPIF discovery, UE addresses
+venv/bin/python scripts/demo_cli.py run s1                  # S1 dry run: plans and validates, sends nothing
+venv/bin/python scripts/demo_cli.py run s1 --live           # QoD through NEF-QoS to the Open5GS PCF
+venv/bin/python scripts/demo_cli.py run s2 --live           # location through the NEF (emulated data)
+venv/bin/python scripts/demo_cli.py run s3 --live           # ambiguous request: held by the cross-check
+venv/bin/python scripts/demo_cli.py run s3 --live --confirm # confirmed by the operator, reaches the PCF
+venv/bin/python scripts/demo_cli.py faults --per-fault 1    # fault injection per validator layer
+venv/bin/python scripts/demo_cli.py results                 # stored 300-intent results
 ```
 
-**Phases covered:**
-- Phase 0: `docker ps` — all running containers
-- Phase 1: OpenCAPIF (Vault, MongoDB, robot_sim, CAPIF status/discover)
-- Phase 2: CAMARA providers (QoD :8002, Location :8003, NEF-QoS :8585, NEF :9999)
-- Phase 3: Backend health + service catalog
-- Phase 4: Deterministic orchestration (EN + TR intents)
-- Phase 5: LLM-assisted orchestration (GPT-4o-mini)
-- Phase 6: Validator rejection demo (invalid payload)
-- Phase 7: Multi-LLM evaluation results table
+Recorded demo: <https://youtu.be/RiT6QGwS9Pc>. Every button and output is explained in
+[docs/CONSOLE_GUIDE.md](docs/CONSOLE_GUIDE.md).
 
 ---
 
@@ -695,7 +708,7 @@ bash scripts/demo_full_system.sh --fast  # skip pauses (video recording)
 | Multi-intent prompts: Phase-1 LLM returned a JSON list, planner rejected it | Fixed | Multi-step plans; the 11 affected entries were re-run |
 | `auto` mode tried the LLM only when a Gemini key was set (ignored OpenAI/Anthropic) | Fixed | Checks the active provider's key; on LLM errors it falls back to the keyword planner |
 | UERANSIM gNB ignores NGAP PDU Session Resource Modify | Testbed limit | QoS is authorized/signalled by the core, not enforced on the emulated radio |
-| Vault (dev mode) loses PKI after Docker/WSL restart | Operational | `bash scripts/reset_capif.sh` |
+| Vault (dev mode) loses PKI after Docker/WSL restart or sleep | Operational | `bash scripts/demo_up.sh` (runs `scripts/reset_capif.sh`) |
 | Gemini free tier: 250 RPD limit | Operational | Use `--delay 12 --resume` across days |
 | CAPIF cert expiry after 180 days | Operational | Delete invoker cache, re-onboard |
 | `maxAgeSeconds` (old field name) rejected | Fixed | All layers now use `maxAge` |
@@ -735,8 +748,10 @@ mini-telco-platform/
 │   ├── l3_rescore_300.json                            # live-L3 re-validation of the recorded plans
 │   └── legacy_pilot_60/                               # 60-entry pilot (superseded)
 ├── docs/
-│   ├── wmnc_2026_demo.tex   # WMNC 2026 demo paper (LaTeX)
+│   ├── wmnc_2026_demo.tex   # WMNC 2026 demo paper (LaTeX, PDF next to it)
 │   ├── SETUP_AND_USAGE.md   # Install on a new machine, use the API and the console
+│   ├── CONSOLE_GUIDE.md     # Every console button and panel, marked on screenshots
+│   ├── demo_video/          # Recorded demo
 │   └── live_runs/           # Recorded dry_run=false responses (scripts/run_live_scenarios.sh)
 ├── testbed/open5gs/         # Open5GS 5GC + UERANSIM gNB/UEs behind NEF-QoS
 ├── providers/
@@ -745,16 +760,23 @@ mini-telco-platform/
 │   ├── NEF-QoS/             # AsSessionWithQoS provider (port 8585)
 │   └── NEF/                 # NEF Monitoring (port 9999)
 ├── scripts/
+│   ├── setup.sh             # One-time install on a new machine
+│   ├── demo_up.sh           # Start and check the full stack and the console
+│   ├── demo_cli.py          # Commands behind the console buttons
+│   ├── demo_check.py        # Health check used by demo_up.sh
+│   ├── demo_video/          # Live console and recording tools
 │   ├── run_evaluation.py    # Multi-LLM evaluation harness
-│   ├── analyze_results.py   # Metrics analysis + comparison
-│   ├── demo_full_system.sh  # Full-stack video demo script
-│   └── run_stability_test.py
+│   ├── summarize_runs.py    # Mean and range over the runs (Table I)
+│   ├── rescore_l3.py        # Re-validate recorded plans against live CAPIF
+│   ├── layer_fault_injection.py
+│   ├── load_test.py
+│   └── analyze_results.py   # Metrics analysis + comparison
 ├── frontend/index.html      # Landing page
 ├── docker-compose.yml
 ├── docker-compose.capif.yml # CAPIF-network variant
 ├── Dockerfile
-├── .env                     # Environment configuration
-└── start.sh                 # Full-stack startup automation
+├── .env.example             # Copied to .env by setup.sh
+└── start.sh                 # Starts the services (OpenCAPIF, NEF, providers, backend)
 ```
 
 ---
