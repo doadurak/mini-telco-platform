@@ -613,7 +613,13 @@ def _function_calling_tools() -> tuple[list[dict[str, Any]], dict[str, tuple[str
             if op.method == "GET":
                 params = {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]}
             else:
-                params = _to_json_schema(ops.get(op.operation_id, {}).get("requestSchema", {"type": "object"}))
+                context_op = ops.get(op.operation_id, {})
+                schema = context_op.get("requestSchema")
+                if schema is None and "requestBody" in context_op:
+                    # Location has a hand-written context (requestBody), not one extracted from a YAML spec.
+                    body = context_op["requestBody"]
+                    schema = {"type": "object", "properties": body["schema"], "required": body["required_fields"]}
+                params = _to_json_schema(schema or {"type": "object"})
                 # CAMARA leaves qosProfile a free string; give the operator's profile names, which the
                 # two-phase planner also sees in its schema context.
                 if "qosProfile" in params.get("properties", {}):
