@@ -18,6 +18,7 @@ bash scripts/demo_up.sh      # start everything and check it; ends with DEMO REA
 
 Then open the live console at <http://localhost:8099>. The step-by-step guide, including what every
 API request and every terminal output means, is **[docs/SETUP_AND_USAGE.md](docs/SETUP_AND_USAGE.md)**.
+Every button and panel of the console is marked on screenshots in **[docs/CONSOLE_GUIDE.md](docs/CONSOLE_GUIDE.md)**.
 
 ---
 

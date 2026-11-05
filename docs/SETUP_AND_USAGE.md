@@ -283,6 +283,8 @@ curl -s -X POST http://localhost:8000/orchestrate -H 'Content-Type: application/
 
 ### 7.1 The live console (http://localhost:8099)
 
+Screenshots with every button and panel marked: [CONSOLE_GUIDE.md](CONSOLE_GUIDE.md).
+
 | Area | Content |
 |---|---|
 | Left | The Swagger page of the backend (section 6). |
