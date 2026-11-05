@@ -341,7 +341,6 @@ Recorded runs:
 | Folder | State of the system | Use |
 |---|---|---|
 | `docs/live_runs/2026-10-11-5gc/` | Open5GS PCF attached, profile mapping and UE-IP resolution in place | Reported in the WMNC 2026 paper (Fig. 2, S1–S4) |
-| `docs/live_runs/2026-10-10/` | **Before** these fixes: no PCF (QoD `qosStatus: UNAVAILABLE`), semantic profiles such as `QOS_E_STREAMING` rejected by NEF-QoS (HTTP 500), S3 used a non-dataset intent | Kept unedited as the baseline that motivated the fixes; not reported as a result |
 
 Limits of the testbed: UERANSIM does not implement NGAP *PDU Session Resource Modify*, so the dedicated QoS flow is
 authorized and signalled by the core but not enforced on the emulated radio; location data comes from the
@@ -736,7 +735,7 @@ mini-telco-platform/
 │   └── legacy_pilot_60/                               # 60-entry pilot (superseded)
 ├── docs/
 │   ├── wmnc_2026_demo.tex   # WMNC 2026 demo paper (LaTeX)
-│   ├── nof_2026.tex         # IEEE NoF 2026 paper (LaTeX)
+│   ├── SETUP_AND_USAGE.md   # Install on a new machine, use the API and the console
 │   └── live_runs/           # Recorded dry_run=false responses (scripts/run_live_scenarios.sh)
 ├── testbed/open5gs/         # Open5GS 5GC + UERANSIM gNB/UEs behind NEF-QoS
 ├── providers/

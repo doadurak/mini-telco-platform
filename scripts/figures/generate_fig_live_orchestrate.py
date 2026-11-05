@@ -3,7 +3,7 @@
 
 Usage:
   python scripts/figures/generate_fig_live_orchestrate.py \
-      docs/live_runs/2026-10-10/S1_openai.json docs/fig2_live_orchestrate.png
+      docs/live_runs/2026-10-11-5gc/S1_openai.json docs/fig2_live_orchestrate.png
 """
 import json
 import sys
