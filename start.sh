@@ -102,7 +102,9 @@ fi
 # 3. NEF stack
 info "Starting NEF stack (mongo, nef-monitoring, test_server, core_crowler)..."
 if docker ps --format '{{.Names}}' | grep -q "^nef$"; then
-    log "NEF stack already running — skipping"
+    # reset_capif.sh recreates only nef; also start mongo, test_server and core_crowler if they are stopped.
+    (cd "$NEF_DIR" && docker compose -f docker-compose.yaml -f docker-compose.auth.yaml up -d --no-recreate 2>&1 | tail -5) \
+        && log "NEF stack running" || warn "NEF stack start had issues"
 else
     (cd "$NEF_DIR" && docker compose up -d 2>&1 | tail -5) && log "NEF stack started" || warn "NEF stack start had issues"
 fi
@@ -138,13 +140,19 @@ info "Starting CamaraLocationRetrieval provider (port 8003)..."
 if docker ps --format '{{.Names}}' | grep -q "^camara-location-retrieval$"; then
     log "CamaraLocationRetrieval already running — skipping"
 else
-    (cd "$CAMARA_LOC_DIR" && docker compose up -d 2>&1 | tail -5) && log "CamaraLocationRetrieval started" || warn "CamaraLocationRetrieval start had issues"
+    # A stopped container keeps the ID of the old capif-network, which reset_capif.sh may have recreated.
+    (cd "$CAMARA_LOC_DIR" && docker compose up -d --force-recreate 2>&1 | tail -5) && log "CamaraLocationRetrieval started" || warn "CamaraLocationRetrieval start had issues"
 fi
 wait_for_port "CamaraLocationRetrieval" localhost 8003
 
 # 7. Our backend
 info "Building and starting mini-telco-backend (port 8000)..."
-(cd "$BACKEND_DIR" && docker compose -f docker-compose.capif.yml up -d --build 2>&1 | tail -5) && log "mini-telco-backend started" || error "Backend failed to start!"
+# A stopped backend also keeps the old capif-network ID; a running one blocks its removal.
+BACKEND_RECREATE=""
+if ! docker ps --format '{{.Names}}' | grep -q "^mini-telco-backend-capif$"; then
+    BACKEND_RECREATE="--force-recreate"
+fi
+(cd "$BACKEND_DIR" && docker compose -f docker-compose.capif.yml up -d --build $BACKEND_RECREATE 2>&1 | tail -5) && log "mini-telco-backend started" || error "Backend failed to start!"
 wait_for_port "mini-telco-backend" localhost 8000
 
 # ─── Step 8: CAPIF automated setup ───────────────────────────────────────────

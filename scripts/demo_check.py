@@ -41,8 +41,8 @@ def sh(cmd: str) -> str:
 
 def containers() -> str:
     names = set(sh("docker ps --format '{{.Names}}'").split())
-    need = {"mini-telco-backend-capif", "register", "nef", "nef-qos", "camara-qod",
-            "camara-location-retrieval", "pcf", "smf", "upf", "amf", "gnb", "ues"}
+    need = {"mini-telco-backend-capif", "register", "nef", "mongo", "core_crowler", "test_server", "nef-qos",
+            "camara-qod", "camara-location-retrieval", "mongo5g", "pcf", "smf", "upf", "amf", "gnb", "ues"}
     missing = sorted(need - names)
     if missing:
         raise RuntimeError(f"not running: {', '.join(missing)}")
@@ -69,6 +69,16 @@ def ues() -> str:
     return ", ".join(sorted(ips))
 
 
+def location() -> str:
+    r = requests.post("http://localhost:8003/location-retrieval/v0.5/retrieve",
+                      json={"device": {"phoneNumber": "+905551112233"}, "maxAge": 3600}, timeout=60)
+    r.raise_for_status()
+    area = r.json().get("area") or {}
+    if not area.get("boundary"):
+        raise RuntimeError(f"no location area in the answer: {r.text[:120]}")
+    return f"provider -> NEF: {area.get('areaType')} with {len(area['boundary'])} points (emulated data)"
+
+
 def plan(provider: str) -> str:
     requests.post(f"{API}/config/provider", json={"provider": provider}, timeout=10).raise_for_status()
     r = requests.post(f"{API}/orchestrate", json={"intent": S1, "dry_run": True,
@@ -87,6 +97,7 @@ def main() -> None:
     check("Backend API", backend, "docker restart mini-telco-backend-capif")
     check("OpenCAPIF discovery (L3)", capif, "run: bash scripts/demo_up.sh (rebuilds CAPIF)")
     check("UERANSIM UEs on Open5GS", ues, "bash testbed/open5gs/up.sh")
+    check("Location path", location, "run: bash scripts/demo_up.sh")
     check("LLM planner: GPT-4o-mini", lambda: plan("openai"), "check internet / OPENAI_API_KEY")
     if _env_has("ANTHROPIC_API_KEY"):  # optional second LLM
         check("LLM planner: Claude Haiku 4.5", lambda: plan("anthropic"), "check internet / ANTHROPIC_API_KEY")
